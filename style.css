@@ -22,6 +22,7 @@ img {
 /*Estilos Header*/
 .main-header {
   padding: 0 20px;
+  font-style: none;
 }
 .main-header-title {
   text-align: center;
@@ -29,7 +30,7 @@ img {
   margin: 10px 0;
   color: #ff4e00;
   font-family: 'Poppins';
-}
+text-decoration: none;}
 .main-header-title .word1 {
   color: #454546;
 }
