@@ -419,3 +419,40 @@ text-decoration: none;}
     text-align: center;
   }
 }
+
+/*Estilos de la pagina de un juego*/
+.main-game-page{
+  display: inline-block;
+width: 75%;
+background: #ff4e00;}
+.game-title{margin:0;background: #009dff; padding: 0;}
+.game-developer{background:yellow; margin: 0;}
+.game-images{
+  width: 50%;}
+.side-bar{float: right;
+width: 25%;
+background-color: #02d244;
+padding: 24px;
+}
+.game-thumb{width: 100%;}
+.buy-card{background: red;
+margin:0;
+
+}
+.buy-card p{ font-size: 16px;font-weight: 400;font-family: 'tangerine';padding: 0;
+margin: 0;color: #151515;display: inline;}
+.game-plataforms-price{background: pink;border: #009dff solid 2px;display: flex;justify-content: space-between;margin: 0;}
+.game-plataforms{
+background: #009dff;
+
+}
+.game-price{ background: #02d244;
+
+}
+.buy-button-container{display: flex;justify-content: center;}
+.buy-button{text-decoration: none;
+color: #151515;
+border: #ff4e00 1px solid;
+padding: 10px 20px;
+margin: 14px;
+}
