@@ -30,7 +30,8 @@ img {
   margin: 10px 0;
   color: #ff4e00;
   font-family: 'Poppins';
-text-decoration: none;}
+  text-decoration: none;
+}
 .main-header-title .word1 {
   color: #454546;
 }
@@ -421,38 +422,116 @@ text-decoration: none;}
 }
 
 /*Estilos de la pagina de un juego*/
-.main-game-page{
+.main-game-page {
   display: inline-block;
-width: 75%;
-background: #ff4e00;}
-.game-title{margin:0;background: #009dff; padding: 0;}
-.game-developer{background:yellow; margin: 0;}
-.game-images{
-  width: 50%;}
-.side-bar{float: right;
-width: 25%;
-background-color: #02d244;
-padding: 24px;
+  width: 75%;
+  border:1px solid #ff4e00;
 }
-.game-thumb{width: 100%;}
-.buy-card{background: red;
-margin:0;
 
+.main-game-page .game-title {
+  margin: 24px 40px 0 40px;
+  margin-top: 24px;
+  border:1px solid #009dff;
+  padding: 0;
+  font-size: 32px;
 }
-.buy-card p{ font-size: 16px;font-weight: 400;font-family: 'tangerine';padding: 0;
-margin: 0;color: #151515;display: inline;}
-.game-plataforms-price{background: pink;border: #009dff solid 2px;display: flex;justify-content: space-between;margin: 0;}
-.game-plataforms{
-background: #009dff;
 
+.main-game-page .game-images {
+  margin: 16px 40px;
 }
-.game-price{ background: #02d244;
+.main-game-page .game-images img {
+}
 
+.main-game-page .game-section {
+  border:1px solid goldenrod;
+  display: block;
+  margin: 16px 40px;
+  padding: 8;
 }
-.buy-button-container{display: flex;justify-content: center;}
-.buy-button{text-decoration: none;
-color: #151515;
-border: #ff4e00 1px solid;
-padding: 10px 20px;
-margin: 14px;
+.main-game-page .section-title {
+ border:1px solid palevioletred;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.main-game-page .game-description {
+  border:1px solid cyan;
+  text-align: justify;
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+.main-game-page .requirements-title {
+  border:1px solid palevioletred;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.main-game-page .requirements-list {
+  font-size: 14px;
+  margin: 12px 12px;
+  padding: 0;
+}
+.side-bar {
+  float: right;
+  width: 25%;
+  border:1px solid #02d244;
+  margin-top: 76px;
+}
+.game-thumb {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+.buy-card {
+  border:1px solid red;
+  margin-right: 16px;
+  padding: 0;
+  border-radius: 10px;
+}
+.buy-card p {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Tangerine';
+  padding: 0;
+  margin: 0;
+  color: #151515;
+  display: inline;
+}
+.game-plataforms-price {
+  border:1px solid pink;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+.buy-card .game-plataforms {
+  margin: 12px;
+  border:1px solid #000dff;
+  display: flex;
+  gap: 8px;
+}
+.buy-card .game-plataforms i {
+  font-size: 24px;
+}
+.buy-card .game-price {
+  border:1px solid #02d244;
+  margin: auto 12px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.buy-button-container {
+  display: flex;
+  justify-content: center;
+}
+.buy-button {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #ff4e00;
+  border: #ff4e00 1px solid;
+  width: 100%;
+  text-align: center;
+  padding: 8px 0;
+  margin: 12px;
+  border-radius: 10px;
 }
