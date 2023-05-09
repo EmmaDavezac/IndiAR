@@ -424,8 +424,10 @@ img {
 /*Estilos de la pagina de un juego*/
 .main-game-page {
   display: inline-block;
-  width: 75%;
+  width: 73%;
   border:1px solid #ff4e00;
+  padding: 0;
+  margin: 1%;
 }
 
 .main-game-page .game-title {
