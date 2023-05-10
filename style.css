@@ -536,3 +536,16 @@ display: block;
   margin: 12px;
   border-radius: 10px;
 }
+/*Estilo pagina de Contacto*/
+.header {
+    color: #36A0FF;
+    font-size: 27px;
+    padding: 10px;
+}
+.legend {
+    text-align:center;
+}
+.bigicon {
+    font-size: 35px;
+    color: #36A0FF;
+}
