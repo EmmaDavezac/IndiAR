@@ -7,7 +7,7 @@
       content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <title>Bienvenidos a IndiAR</title>
-    <!--<link rel="stylesheet" href="style.css" />-->
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -35,12 +35,13 @@
         padding: 10px;
       }
       .bigicon {
-        font-size: 35px;
+        font-size: 30px;
         color: #36a0ff;
       }
       .input-group-text i {
         font-size: 1.5em;
         line-height: 1;
+        width: 20px;
       }
       
     </style>
@@ -78,19 +79,27 @@
         </div>
       </div>
     </header>
-    <!--<div class="container">
+    <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="well well-sm">
+          <div class="well well-sm ">
             <form class="form-horizontal" method="post">
               <fieldset>
-                <legend class="text-center header">Contactanos</legend>
-                <div class="form-group">
-                  <span class="col-md-1 col-md-offset-2 text-center"
-                    ><i class="fa fa-user bigicon"></i
-                  ></span>
+                <legend class="text-center header">Contactenos</legend>
+
+                <!--Esta seccion -->
+                <div class="input-group my-4">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      style="border-radius: 5px 0 0 5px"
+                    >
+                      <i class="fa fa-user bigicon"></i
+                    ></span>
+                  </div>
                   <div class="col-md-8">
                     <input
+                      style="border-radius: 0 5px 5px 0"
                       id="fname"
                       name="name"
                       type="text"
@@ -99,12 +108,20 @@
                     />
                   </div>
                 </div>
-                <div class="form-group">
-                  <span class="col-md-1 col-md-offset-2 text-center"
-                    ><i class="fa fa-user bigicon"></i
-                  ></span>
+
+                <!---->
+                <div class="input-group my-4">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      style="border-radius: 5px 0 0 5px"
+                    >
+                      <i class="fa fa-user bigicon"></i
+                    ></span>
+                  </div>
                   <div class="col-md-8">
                     <input
+                      style="border-radius: 0 5px 5px 0"
                       id="lname"
                       name="name"
                       type="text"
@@ -114,12 +131,19 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <span class="col-md-1 col-md-offset-2 text-center"
-                    ><i class="fa fa-envelope-o bigicon"></i
-                  ></span>
+                <!---->
+                <div class="input-group my-4">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      style="border-radius: 5px 0 0 5px"
+                    >
+                      <i class="fa fa-envelope bigicon"></i
+                    ></span>
+                  </div>
                   <div class="col-md-8">
                     <input
+                      style="border-radius: 0 5px 5px 0"
                       id="email"
                       name="email"
                       type="text"
@@ -129,12 +153,19 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <span class="col-md-1 col-md-offset-2 text-right"
-                    ><i class="fa fa-phone-square bigicon"></i
-                  ></span>
+                <!---->
+                <div class="input-group my-4">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      style="border-radius: 5px 0 0 5px"
+                    >
+                      <i class="fa fa-phone bigicon"></i
+                    ></span>
+                  </div>
                   <div class="col-md-8">
                     <input
+                      style="border-radius: 0 5px 5px 0"
                       id="phone"
                       name="phone"
                       type="text"
@@ -144,23 +175,30 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <span class="col-md-1 col-md-offset-2 text-center"
-                    ><i class="fa fa-pencil-square-o bigicon"></i
-                  ></span>
+                <div class="input-group my-4">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      style="border-radius: 5px 0 0 5px"
+                    >
+                      <i class="fa fa-pencil bigicon"></i
+                    ></span>
+                  </div>
                   <div class="col-md-8">
                     <textarea
+                      style="border-radius: 0 5px 5px 0"
                       class="form-control"
                       id="message"
                       name="message"
-                      placeholder="Enter your massage for us here. We will get back to you within 2 business days."
+                      placeholder="Ingrese su mensaje aquí."
                       rows="7"
-                    ></textarea>
+                  ></textarea>
                   </div>
                 </div>
+                
 
                 <div class="form-group">
-                  <div class="col-md-12 text-center">
+                  <div class="col-md-8 text-center">
                     <button type="submit" class="btn btn-primary btn-lg">
                       Submit
                     </button>
@@ -171,18 +209,8 @@
           </div>
         </div>
       </div>
-    </div>-->
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fa fa-user"></i> <!-- Icono -->
-          </span>
-        </div>
-        <input type="text" class="form-control" placeholder="Nombre de usuario"> <!-- Campo de entrada -->
-      </div>
     </div>
-    
+
     <footer class="main-footer">
       <div class="footer-sections">
         <section class="footer-section">
