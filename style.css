@@ -465,6 +465,8 @@ font: normal;
 }
 .main-game-page .main-img{
   border-radius: 25px;
+  width: 630px;
+  height: 354.38px;
 }
 .game-thumbs{display: flex; 
   margin: 5px 0;}
