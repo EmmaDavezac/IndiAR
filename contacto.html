@@ -43,7 +43,14 @@
         line-height: 1;
         width: 20px;
       }
-      
+      #form-contact {
+        border: 1px black solid;
+      }
+      #form-contact .input-group{
+      margin-left: 40px;
+      margin-right: 50px;
+      width: 700px;
+      }
     </style>
   </head>
   <body>
@@ -81,9 +88,9 @@
     </header>
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <div class="well well-sm ">
-            <form class="form-horizontal" method="post">
+        
+          <div class="well well-sm">
+            <form class="form-horizontal" method="post" id="form-contact">
               <fieldset>
                 <legend class="text-center header">Contactenos</legend>
 
@@ -97,9 +104,9 @@
                       <i class="fa fa-user bigicon"></i
                     ></span>
                   </div>
-                  <div class="col-md-8">
+                  <div class="">
                     <input
-                      style="border-radius: 0 5px 5px 0"
+                      style="border-radius: 0 5px 5px 0;width: 300%;"
                       id="fname"
                       name="name"
                       type="text"
@@ -110,7 +117,7 @@
                 </div>
 
                 <!---->
-                <div class="input-group my-4">
+                <div class="input-group my-4" id="form-contact">
                   <div class="input-group-prepend">
                     <span
                       class="input-group-text"
@@ -119,9 +126,9 @@
                       <i class="fa fa-user bigicon"></i
                     ></span>
                   </div>
-                  <div class="col-md-8">
+                  <div class="">
                     <input
-                      style="border-radius: 0 5px 5px 0"
+                      style="border-radius: 0 5px 5px 0;width: 300%;"
                       id="lname"
                       name="name"
                       type="text"
@@ -141,9 +148,9 @@
                       <i class="fa fa-envelope bigicon"></i
                     ></span>
                   </div>
-                  <div class="col-md-8">
+                  <div class="">
                     <input
-                      style="border-radius: 0 5px 5px 0"
+                      style="border-radius: 0 5px 5px 0;width: 300%;"
                       id="email"
                       name="email"
                       type="text"
@@ -163,9 +170,9 @@
                       <i class="fa fa-phone bigicon"></i
                     ></span>
                   </div>
-                  <div class="col-md-8">
+                  <div class="form-contract">
                     <input
-                      style="border-radius: 0 5px 5px 0"
+                      style="border-radius: 0 5px 5px 0;width: 300%;"
                       id="phone"
                       name="phone"
                       type="text"
@@ -184,20 +191,20 @@
                       <i class="fa fa-pencil bigicon"></i
                     ></span>
                   </div>
-                  <div class="col-md-8">
+                  <div class="">
                     <textarea
-                      style="border-radius: 0 5px 5px 0"
+                      style="border-radius: 0 5px 5px 0; resize:none;width: 330%;"
                       class="form-control"
                       id="message"
                       name="message"
                       placeholder="Ingrese su mensaje aquí."
                       rows="7"
-                  ></textarea>
+                      
+                    ></textarea>
                   </div>
                 </div>
-                
 
-                <div class="form-group">
+                <div class="form-group my-4">
                   <div class="col-md-8 text-center">
                     <button type="submit" class="btn btn-primary btn-lg">
                       Submit
@@ -207,7 +214,7 @@
               </fieldset>
             </form>
           </div>
-        </div>
+        
       </div>
     </div>
 
