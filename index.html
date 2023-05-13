@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css"
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
    
@@ -21,7 +21,8 @@
     <header class="main-header">
       <div class="container container-flex">
         <div class="main-header-container">
-           <a class="main-header-title" href="#"><span class="word1">Indi</span><span class="word2">AR</span></a>
+
+           <a class="main-header-title" href="#"></i><span class="word1">Indi</span><span class="word2">AR</span></a>
         <span class="icon-menu " id="btn-menu"><i class="fas fa-bars"></i></span>
          <nav class="main-nav" id="main-nav" >
           <ul class="menu" >
@@ -30,9 +31,10 @@
           </ul>
          </nav>   
         </div>
-        <div class="main-header-container"><i class="fas fa-user icon-user"></i>
-            <a href="carrito.html" class="main-header-btn">Carrito<i class="fa-solid fa-cart-shopping"></i></a>
-            <input type="search" class="main-header-input" placeholder="Buscar juegos" id=""><i class="fas fa-search"></i>
+        <div class="main-header-container">
+            <a href="carrito.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+            <a href="carrito.html" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
+            <input type="search" class="main-header-input" placeholder="Buscar juegos" id=""><a href="" class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
         </div>
       </div>
     </header>
@@ -40,21 +42,24 @@
         <div class="slider" id="slider">
             <div class="slider-section"><img src="img/game1.jpg" class="slider-img" alt="">
             <div class="slider-content">
-                <h2 class="slider-title">Stellar Odyssey: In Search of a New Home</h2>
-                <p class="slider-txt">lorem ipsum lorem ipsum lorem ipsum</p>
+                <div class="slider-title">
+                <h2 class="title">Stellar Odyssey: In Search of a New Home</h2>
+                </div>
                 <a class="slider-link" href="juego1.html">VER</a>
             </div>
         </div>
             <div class="slider-section"><img src="img/game2.jpg" class="slider-img" alt="">
             <div class="slider-content">
-            <h2 class="slider-title">Interdimensional Odyssey: Journey Across the Multiverse</h2>
-            <p class="slider-txt">lorem ipsum lorem ipsum lorem ipsum</p>
+            <div class="slider-title">
+            <h2 class="title">Interdimensional Odyssey: Journey Across the Multiverse</h2>
+            </div>
             <a class="slider-link" href="">VER</a>
             </div></div>
             <div class="slider-section"><img src="img/game3.jpg" class="slider-img" alt="">
             <div class="slider-content">
-            <h2 class="slider-title">Dystopian Chronicles: The Quest for Freedom</h2>
-            <p class="slider-txt">lorem ipsum lorem ipsum lorem ipsum</p>
+                <div class="slider-title">
+            <h2 class="title">Dystopian Chronicles: The Quest for Freedom</h2>
+            </div>
             <a class="slider-link" href="">VER</a>
             </div></div>
         </div>
@@ -62,9 +67,9 @@
         <div class="slider-btn slider-btn-left" id="btn-left" >&#60;</div>
     </div>
     <main class="main">
-        <div class="container">
+        <section class="container">
             <h2 class="main-title">Nuevos Lanzamientos para tí</h2>
-        <section class="container-games">
+        <div class="container-games">
             <div class="game game-new">
                 <a href="juego1.html"><img  src="img/game1.jpg" alt="" class="game-img"></a>
                 <div class="game-description">
@@ -83,10 +88,10 @@
             
             
             <div class="game game-new">
-                <img src="img/game2.jpg" alt="" class="game-img">
+                <a href=""><img src="img/game2.jpg" alt="" class="game-img"></a>
                 <div class="game-description">
                     <div class="game-title">
-                <h3 class="title">Interdimensional Odyssey: Journey Across the Multiverse</h3>
+                <a href="" class="title">Interdimensional Odyssey: Journey Across the Multiverse</a>
 
                     </div>
                  <div class="game-plataforms-price">
@@ -163,11 +168,11 @@
                 </div>
             </div>        
          </div>
-        </section>
         </div>
-        <div class="container">
-            <h2 class="main-title">Mas Vendidos</h2>
-              <section class="container-games">
+    </section>
+        <section class="container">
+            <h2 class="main-title">Más Vendidos</h2>
+              <div class="container-games">
             <div class="game game-bestseller">
                 <a href="juego1.html"><img  src="img/game1.jpg" alt="" class="game-img"></a>
                 <div class="game-description">
@@ -266,11 +271,11 @@
                 </div>
             </div>        
          </div>
-        </section>
         </div>
-        <div class="container">
+        </section>
+        <section class="container">
             <h2 class="main-title">Ofertas</h2>
-              <section class="container-games">
+              <div class="container-games">
             <div class="game game-onsale">
                 <a href="juego1.html"><img  src="img/game1.jpg" alt="" class="game-img"></a>
                 <div class="game-description">
@@ -309,10 +314,8 @@
                 <img src="img/game3.jpg" alt="" class="game-img">
                 <div class="game-description">
                 <div class="game-title">
-
                     <h3 class="title">Dystopian Chronicles: The Quest for Freedom</h3>
                 </div>
-                
                  <div class="game-plataforms-price">
     <div class="game-plataforms">
     <i class="fa-brands fa-windows"></i>
@@ -335,7 +338,6 @@
     </div>
     <p class="game-price">$19.99</p>
     </div>
-                
                 </div>
             </div>     
             <div class="game game-onsale">
@@ -369,8 +371,8 @@
                 </div>
             </div>        
          </div>
-        </section>
         </div>
+    </section>
         <section class="tips">
             <h2 class="tips-title">¿Razones para usar INDIAR?</h2>
             <div class="container-tips">
@@ -394,24 +396,20 @@
     </main>
   
   <footer class="main-footer">
-   <div class="footer-sections">
-     <section class="footer-section">
-        <h2 class="footer-title">Acerca de IndiAR</h2>
-        <p class="footer-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, debitis, quisquam eaque harum molestiae itaque cum dolore illum labore unde sed! Iusto maxime dicta fuga ipsam nobis reprehenderit delectus! Recusandae?</p>
-    </section>
-    <section class="footer-section">
-        <h2 class="footer-title">Soporte</h2>
-        <p class="footer-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis earum, sapiente mollitia exercitationem natus deleniti aspernatur sint voluptatem architecto eius neque sit alias aut fugit perspiciatis eaque porro soluta quae!</p>
-    </section>
-    <section class="footer-section">
-        <h2 class="footer-title">Terminos y condiciones</h2>
-        <p class="footer-txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos tenetur quaerat qui pariatur minus amet itaque, numquam voluptatibus! Velit sunt ipsa maiores placeat! Facilis ut ab, totam deserunt quibusdam mollitia!</p>
-    </section>
-    <section class="footer-section">
-        <h2 class="footer-title">Politicas de privacidad</h2>
-        <p class="footer-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus saepe esse quasi obcaecati fuga molestiae blanditiis, tempora nemo perferendis maxime impedit distinctio soluta vero adipisci voluptas reprehenderit officia beatae nam!</p>
-    </section>
-   </div>
+<div class="link-sections">
+      <ul class="footer-link-container">
+    <li class="footer-link-container-item"><a class="footer-link" href="">Compañía</a></li>
+    <li class="footer-link-container-item"><a class="footer-link"  href="">Ayuda</a></li>
+    <li class="footer-link-container-item"><a class="footer-link"  href="">Terminos de servicio</a></li>
+    <li class="footer-link-container-item"><a class="footer-link"  href="">Politicas de privacidad</a></li>
+  </ul>
+  <ul class="footer-social-link-container">
+     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-youtube"></i></a></li>
+     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-facebook"></i></a></li>
+     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-twitter"></i></a></li>
+     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-steam"></i></a></li>
+  </ul>
+</div>
     <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
   </footer>
     
