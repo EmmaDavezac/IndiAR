@@ -32,7 +32,6 @@
       }
       .fielset {
         border: px solid #000000;
-        padding: 10px;
       }
       .bigicon {
         font-size: 30px;
@@ -46,10 +45,13 @@
       #form-contact {
         border: 1px black solid;
       }
-      #form-contact .input-group{
-      margin-left: 40px;
-      margin-right: 50px;
-      width: 700px;
+      #form-contact .input-group {
+        margin-left: 40px;
+        margin-right: 50px;
+        width: 500px;
+      }
+      .container-fluid {
+        margin:0 188px
       }
     </style>
   </head>
@@ -65,7 +67,9 @@
           ></span>
           <nav class="main-nav" id="main-nav">
             <ul class="menu">
-              <li class="menu-item"><a href="" class="menu-link">TIENDA</a></li>
+              <li class="menu-item">
+                <a href="index.html" class="menu-link">TIENDA</a>
+              </li>
               <li class="menu-item">
                 <a href="" class="menu-link">CONTACTO</a>
               </li>
@@ -86,135 +90,140 @@
         </div>
       </div>
     </header>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        
-          <div class="well well-sm">
-            <form class="form-horizontal" method="post" id="form-contact">
-              <fieldset>
-                <legend class="text-center header">Contactenos</legend>
+        <div class="">
+          <form class="form-horizontal" method="post" id="form-contact">
+            <fieldset>
+              <legend class="text-center header">Contactenos</legend>
 
-                <!--Esta seccion -->
-                <div class="input-group my-4">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      style="border-radius: 5px 0 0 5px"
-                    >
-                      <i class="fa fa-user bigicon"></i
-                    ></span>
-                  </div>
-                  <div class="">
-                    <input
-                      style="border-radius: 0 5px 5px 0;width: 300%;"
-                      id="fname"
-                      name="name"
-                      type="text"
-                      placeholder="Nombre"
-                      class="form-control"
-                    />
-                  </div>
+              <!--Esta seccion -->
+              <div class="input-group my-4">
+                <div class="input-group-prepend">
+                  <span
+                    class="input-group-text"
+                    style="border-radius: 5px 0 0 5px"
+                  >
+                    <i class="fa fa-user bigicon"></i
+                  ></span>
                 </div>
+                <div class="">
+                  <input
+                    style="border-radius: 0 5px 5px 0; width: 300%"
+                    id="fname"
+                    name="name"
+                    type="text"
+                    placeholder="Nombre"
+                    class="form-control"
+                  />
+                </div>
+              </div>
 
-                <!---->
-                <div class="input-group my-4" id="form-contact">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      style="border-radius: 5px 0 0 5px"
-                    >
-                      <i class="fa fa-user bigicon"></i
-                    ></span>
-                  </div>
-                  <div class="">
-                    <input
-                      style="border-radius: 0 5px 5px 0;width: 300%;"
-                      id="lname"
-                      name="name"
-                      type="text"
-                      placeholder="Apellido"
-                      class="form-control"
-                    />
-                  </div>
+              <!---->
+              <div
+                class="input-group my-4"
+                id="form-contact"
+                style="width: fit-content"
+              >
+                <div class="input-group-prepend">
+                  <span
+                    class="input-group-text"
+                    style="border-radius: 5px 0 0 5px"
+                  >
+                    <i class="fa fa-user bigicon"></i
+                  ></span>
                 </div>
+                <div class="">
+                  <input
+                    style="border-radius: 0 5px 5px 0"
+                    id="lname"
+                    name="name"
+                    type="text"
+                    placeholder="Apellido"
+                    class="form-control"
+                  />
+                </div>
+              </div>
 
-                <!---->
-                <div class="input-group my-4">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      style="border-radius: 5px 0 0 5px"
-                    >
-                      <i class="fa fa-envelope bigicon"></i
-                    ></span>
-                  </div>
-                  <div class="">
-                    <input
-                      style="border-radius: 0 5px 5px 0;width: 300%;"
-                      id="email"
-                      name="email"
-                      type="text"
-                      placeholder="Dirección Email"
-                      class="form-control"
-                    />
-                  </div>
+              <!---->
+              <div class="input-group my-4">
+                <div class="input-group-prepend">
+                  <span
+                    class="input-group-text"
+                    style="border-radius: 5px 0 0 5px"
+                  >
+                    <i class="fa fa-envelope bigicon"></i
+                  ></span>
                 </div>
+                <div class="">
+                  <input
+                    style="border-radius: 0 5px 5px 0"
+                    id="email"
+                    name="email"
+                    type="text"
+                    placeholder="Dirección Email"
+                    class="form-control"
+                  />
+                </div>
+              </div>
 
-                <!---->
-                <div class="input-group my-4">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      style="border-radius: 5px 0 0 5px"
-                    >
-                      <i class="fa fa-phone bigicon"></i
-                    ></span>
-                  </div>
-                  <div class="form-contract">
-                    <input
-                      style="border-radius: 0 5px 5px 0;width: 300%;"
-                      id="phone"
-                      name="phone"
-                      type="text"
-                      placeholder="Teléfono"
-                      class="form-control"
-                    />
-                  </div>
+              <!---->
+              <div class="input-group my-4">
+                <div class="input-group-prepend">
+                  <span
+                    class="input-group-text"
+                    style="border-radius: 5px 0 0 5px"
+                  >
+                    <i class="fa fa-phone bigicon"></i
+                  ></span>
                 </div>
+                <div class="">
+                  <input
+                    style="border-radius: 0 5px 5px 0; width: 300%"
+                    id="phone"
+                    name="phone"
+                    type="text"
+                    placeholder="Teléfono"
+                    class="form-control"
+                  />
+                </div>
+              </div>
 
-                <div class="input-group my-4">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      style="border-radius: 5px 0 0 5px"
-                    >
-                      <i class="fa fa-pencil bigicon"></i
-                    ></span>
-                  </div>
-                  <div class="">
-                    <textarea
-                      style="border-radius: 0 5px 5px 0; resize:none;width: 330%;"
-                      class="form-control"
-                      id="message"
-                      name="message"
-                      placeholder="Ingrese su mensaje aquí."
-                      rows="7"
-                      
-                    ></textarea>
-                  </div>
+              <div class="input-group my-4">
+                <div class="input-group-prepend">
+                  <span
+                    class="input-group-text"
+                    style="border-radius: 5px 0 0 5px"
+                  >
+                    <i class="fa fa-pencil bigicon"></i
+                  ></span>
                 </div>
+                <div class="">
+                  <textarea
+                    style="
+                      border-radius: 0 5px 5px 0;
+                      resize: none;
+                      width: 330%;
+                    "
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    placeholder="Ingrese su mensaje aquí."
+                    rows="7"
+                  ></textarea>
+                </div>
+              </div>
 
-                <div class="form-group my-4">
-                  <div class="col-md-8 text-center">
-                    <button type="submit" class="btn btn-primary btn-lg">
-                      Submit
-                    </button>
-                  </div>
+              <div class="form-group my-4">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Submit
+                  </button>
                 </div>
-              </fieldset>
-            </form>
-          </div>
-        
+              </div>
+            </fieldset>
+          </form>
+        </div>
       </div>
     </div>
 
