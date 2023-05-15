@@ -15,7 +15,6 @@
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
    
 
-
   </head>
   <body>
     <header class="main-header">
@@ -48,12 +47,17 @@
 
    
     <div class="game-images">
-        <iframe class="main-img"  src="https://www.youtube.com/embed/-UaeVy-tutU?controls=0&autoplay=1"  frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+      <div class="main-picture">
+        <iframe id="main-game-video"  src="https://www.youtube.com/embed/-UaeVy-tutU?color=white&autoplay=1"  frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+        <img src="" id="main-game-img" alt="">
+      </div>
         <div class="game-thumbs">
-          <img  class="game-thumb" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8870_2.jpg?v=2.451943935885127056" alt="">
-          <img  class="game-thumb" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8870_1.jpg?v=2.451943935885127056" alt="">
-          <img  class="game-thumb" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8850_1.jpg?v=2.451943935885127056" alt="">
-          <img  class="game-thumb" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8850_1.jpg?v=2.451943935885127056" alt="">
+          <img  class="game-thumb" id="game-thumb-1" src="img/bioshockVideoThumb.png" alt="">
+
+          <img  class="game-thumb" id="game-thumb-2" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8870_2.jpg?v=2.451943935885127056" alt="">
+          <img  class="game-thumb" id="game-thumb-3" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8870_1.jpg?v=2.451943935885127056" alt="">
+          <img  class="game-thumb" id="game-thumb-4" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_8850_1.jpg?v=2.451943935885127056" alt="">
+          <img  class="game-thumb" id="game-thumb-5" src="https://www.indiegalacdn.com/store-img_game/games/screenshots/screen_7670_1.jpg?v=2.452048830146738536" alt="">
         </div>
     </div>
  <div class="game-section">
@@ -124,4 +128,7 @@ VR Support:	N/A</p>
     
   </body>
   <script src="script.js"></script>
+  <script src="script-game-page.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+
 </html>
