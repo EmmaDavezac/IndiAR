@@ -13,6 +13,8 @@
 body {
   font-family: 'Tangerine', sans-serif;
   margin: 0;
+  margin-top: 91px;
+
   padding: 0;
 }
 
@@ -22,8 +24,16 @@ img {
 }
 /*Estilos Header*/
 .main-header {
-  margin: 24px 188px ;
+  margin: 0;
+  top: 0;
+  width: 100%;
+  background:white;
+  border-bottom: 1px solid #ccc;
+  padding: 24px 188px ;
   font-style: none;
+  position: fixed;
+  z-index: 99999;
+  
 }
 .logo{display: inline-block;
   margin: auto 0;
@@ -466,16 +476,32 @@ font: normal;
 
 .main-game-page .game-images {
 }
-.main-game-page .main-img{
+.main-game-page .main-picture{
+}
+#main-game-video{
+  width: 100%;
   border-radius: 25px;
   width: 630px;
   height: 354.38px;
 }
+#main-game-img{
+  display: none;
+  width: 100%;
+  border-radius: 25px;
+  width: 630px;
+  height: 354.38px;
+  object-fit: cover;
+}
 .game-thumbs{display: flex; 
-  margin: 5px 0;}
+  margin: 5px 0;
+  padding-bottom: 5px;
+    width: 630px;
+overflow-x: scroll;}
 .game-thumb{ display: inline-block;width: 150px;
   height: 84.9px;object-fit: cover; border-radius: 25px;
-margin-right: 10px;}
+margin-right: 10px;
+border: 3px solid white;
+transition: all 0.3s;}
 
 .main-game-page .game-section {
   display: block;
@@ -514,6 +540,7 @@ margin-right: 10px;}
   color: #333;
   border-left: #3331 1px solid;
     border-right: #3331 1px solid;
+   
 
 }
 .main-game-page .requirements-list b {
