@@ -14,7 +14,7 @@
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
     
-    />
+    
     <style>
       * {
         box-sizing: border-box;
@@ -24,17 +24,18 @@
       .input-container {
         display: flex;
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
 
       /* Style the form icons */
-      .iconi {
+      .icon {
         padding: 10px;
         background: dodgerblue;
         color: white;
         min-width: 50px;
         text-align: center;
         border-radius: 10px 0 0 10px ;
+       
       }
 
       /* Style the input fields */
@@ -52,13 +53,15 @@
 
       /* Set a style for the submit button */
       .btn {
-        background-color: dodgerblue;
+        background: dodgerblue;
         color: white;
         padding: 15px 20px;
         border: none;
         cursor: pointer;
         width: 100%;
         opacity: 0.9;
+  border-radius: 10px;
+
       }
 
       .btn:hover {
@@ -68,13 +71,16 @@
         resize:none;
       }
       .container {
-        padding:0px;
+        margin: auto;
+        width: 600px;
+        padding:20px;
         background-color: #ffff;
-        
+        border-radius: 6px 6px 6px 6px;
+        box-shadow: 0 5px 5px 0 rgba(0,0,0,.1), 0 -2px 5px 0 rgba(0,0,0,.1);
       }
     </style>
   </head>
-  <body style="background:#f4f4f4;">    
+  <body style="background:#EDEDED;">    
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
@@ -152,52 +158,29 @@
            </textarea>
           </div>
           <div>
-            <input type="submit" value="Submit" />
+            <input class="btn" type="submit" value="Submit" />
           </div>
         </form>
       </div>
   
   </main>
-    <!--<div class="footer-sections">
-        <section class="footer-section">
-          <h2 class="footer-title">Acerca de IndiAR</h2>
-          <p class="footer-txt">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-            debitis, quisquam eaque harum molestiae itaque cum dolore illum
-            labore unde sed! Iusto maxime dicta fuga ipsam nobis reprehenderit
-            delectus! Recusandae?
-          </p>
-        </section>
-        <section class="footer-section">
-          <h2 class="footer-title">Soporte</h2>
-          <p class="footer-txt">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-            earum, sapiente mollitia exercitationem natus deleniti aspernatur
-            sint voluptatem architecto eius neque sit alias aut fugit
-            perspiciatis eaque porro soluta quae!
-          </p>
-        </section>
-        <section class="footer-section">
-          <h2 class="footer-title">Terminos y condiciones</h2>
-          <p class="footer-txt">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-            tenetur quaerat qui pariatur minus amet itaque, numquam
-            voluptatibus! Velit sunt ipsa maiores placeat! Facilis ut ab, totam
-            deserunt quibusdam mollitia!
-          </p>
-        </section>
-        <section class="footer-section">
-          <h2 class="footer-title">Politicas de privacidad</h2>
-          <p class="footer-txt">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-            saepe esse quasi obcaecati fuga molestiae blanditiis, tempora nemo
-            perferendis maxime impedit distinctio soluta vero adipisci voluptas
-            reprehenderit officia beatae nam!
-          </p>
-        </section>
-      </div>
-      <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
-    </footer>-->
+  <footer class="main-footer">
+    <div class="link-sections">
+          <ul class="footer-link-container">
+        <li class="footer-link-container-item"><a class="footer-link" href="">Compañía</a></li>
+        <li class="footer-link-container-item"><a class="footer-link"  href="">Ayuda</a></li>
+        <li class="footer-link-container-item"><a class="footer-link"  href="">Terminos de servicio</a></li>
+        <li class="footer-link-container-item"><a class="footer-link"  href="">Politicas de privacidad</a></li>
+      </ul>
+      <ul class="footer-social-link-container">
+         <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-youtube"></i></a></li>
+         <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-facebook"></i></a></li>
+         <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-twitter"></i></a></li>
+         <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-steam"></i></a></li>
+      </ul>
+    </div>
+        <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+      </footer>
   </body>
   <script src="script.js"></script>
 </html>
