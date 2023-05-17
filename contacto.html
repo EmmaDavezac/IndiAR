@@ -130,7 +130,7 @@
     <!--Aquí comienza el Main-->
     <main class="main">
       <div class="container">
-        <form action="/action_page.php" method="post">
+        <form action="/action_page.php" method="post" onsubmit="return validarFormulario();">
           <div><h1>Contactenos</h1></div>
 
           <!--Este es el campo "Nombre/s"-->
@@ -142,7 +142,7 @@
               id="fname"
               name="firstname"
               placeholder="Nombre/s"
-              required
+              
             />
           </div>
 
@@ -155,7 +155,7 @@
               id="lname"
               name="lastname"
               placeholder="Apellido/s"
-              required
+              
             />
           </div>
 
@@ -168,7 +168,7 @@
               id="email"
               name="email"
               placeholder="Dirección Email"
-              required
+              
             />
           </div>
 
@@ -194,7 +194,7 @@
               id="message"
               name="message"
               placeholder="Ingrese su mensaje"
-              required
+              
             ></textarea>
           </div>
 
@@ -247,7 +247,8 @@
       </div>
       <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
     </footer>
-    
+    <script>src="contacto.js"</script>
+    <script>src="script.js"</script>
   </body>
-  <script src="script.js"></script>
+ 
 </html>
