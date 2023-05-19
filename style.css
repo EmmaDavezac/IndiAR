@@ -4,12 +4,14 @@
   src: url('./fonts/Poppins-Bold.ttf');
 }
 @font-face {
-  font-family: 'Tangerine';
-  src: url('http.//fonts.googleapis.com/cssamily=Tangerine');
+  font-family: 'Roboto';
+  src: url('./fonts/Roboto.ttf');
 }
-
+* {
+  box-sizing: border-box;
+}
 body {
-  font-family: 'Tangerine', sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   margin-top: 91px;
 
