@@ -83,8 +83,14 @@
         text-align: center;
         color: dodgerblue;
       }
+      .warnings {
+        margin-bottom: auto;
+        text-align: center;
+        color: #B06AB3;
+      }
     </style>
   </head>
+  <script src="contacto.js"></script>
   <body style="background: #ededed">
 
     
@@ -130,7 +136,7 @@
     <!--Aquí comienza el Main-->
     <main class="main">
       <div class="container">
-        <form action="/action_page.php" method="post" onsubmit="return validarFormulario();">
+        <form action="/action_page.php" method="post" onsubmit="return validarFormulario()">
           <div><h1>Contactenos</h1></div>
 
           <!--Este es el campo "Nombre/s"-->
@@ -142,7 +148,7 @@
               id="fname"
               name="firstname"
               placeholder="Nombre/s"
-              
+              required
             />
           </div>
 
@@ -155,7 +161,7 @@
               id="lname"
               name="lastname"
               placeholder="Apellido/s"
-              
+              required
             />
           </div>
 
@@ -168,7 +174,7 @@
               id="email"
               name="email"
               placeholder="Dirección Email"
-              
+              required
             />
           </div>
 
@@ -181,6 +187,7 @@
               id="phone"
               name="phone"
               placeholder="Teléfono"
+              required
             />
           </div>
 
@@ -194,12 +201,14 @@
               id="message"
               name="message"
               placeholder="Ingrese su mensaje"
-              
+              required
             ></textarea>
           </div>
 
           <div>
             <input class="btn" type="submit" value="Enviar" />
+            <p class = "warnings" id = "warnings">
+            </p>
           </div>
         </form>
       </div>
@@ -250,5 +259,4 @@
    
   </body>
   
-  <script src="contacto.js"></script>
 </html>
