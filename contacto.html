@@ -83,17 +83,15 @@
         text-align: center;
         color: dodgerblue;
       }
-      .warnings {
+      .warningParagraph {
         margin-bottom: auto;
         text-align: center;
-        color: #B06AB3;
+        color: #bd1d1d;
       }
     </style>
   </head>
   <script src="contacto.js"></script>
   <body style="background: #ededed">
-
-    
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
@@ -136,11 +134,16 @@
     <!--Aquí comienza el Main-->
     <main class="main">
       <div class="container">
-        <form action="/action_page.php" method="post" onsubmit="return validarFormulario()">
+        <form
+          id = "form"
+          action="contacto.html"
+          method="post"
+          onsubmit="return validateForm()"
+        >
           <div><h1>Contactenos</h1></div>
 
           <!--Este es el campo "Nombre/s"-->
-          <div class="input-container" >
+          <div class="input-container">
             <i class="fa fa-user icon"> </i>
             <input
               class="input-field"
@@ -207,8 +210,7 @@
 
           <div>
             <input class="btn" type="submit" value="Enviar" />
-            <p class = "warnings" id = "warnings">
-            </p>
+            <p class="warningParagraph" id="warningParagraph"></p>
           </div>
         </form>
       </div>
@@ -256,7 +258,5 @@
       </div>
       <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
     </footer>
-   
   </body>
-  
 </html>
