@@ -547,6 +547,10 @@ margin: 12px 0;
 }
 
 /*Estilo de input*/
+.form-title{
+color: #ff4e00;
+text-align: center;
+}
 .input-field {
   width: 100%;
   padding: 5px;
@@ -557,19 +561,19 @@ margin: 12px 0;
 }
 
 .input-field:focus {
-  border: 2px solid dodgerblue;
+  border: 2px solid #ff4e00;
 }
 .icon-form-input {
   padding: 10px;
-  background: dodgerblue;
-  color: white;
+  background: #ff4e00;
+  color: #fff;
   min-width: 50px;
   text-align: center;
   border-radius: 10px 0 0 10px;
 }
 /*Estilo de boton de formulario*/
 .btn {
-  background: dodgerblue;
+  background: #ff4e00;
   color: white;
   padding: 15px 20px;
   border: none;
@@ -588,7 +592,7 @@ margin: 12px 0;
 
 .form-container {
   margin: auto;
-  width: 600px;
+  width: 640px;
   height: 100%;
   padding: 20px;
   padding-top: 8px;
@@ -602,6 +606,7 @@ margin: 12px 0;
   margin-bottom: auto;
   text-align: center;
   color: #bd1d1d;
+  height: 80px;
 }
 
 
