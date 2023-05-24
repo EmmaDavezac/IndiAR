@@ -1,20 +1,18 @@
-
 @font-face {
-  font-family: 'Poppins';
-  src: url('./fonts/Poppins-Bold.ttf');
+  font-family: "Poppins";
+  src: url("./fonts/Poppins-Bold.ttf");
 }
 @font-face {
-  font-family: 'Roboto';
-  src: url('./fonts/Roboto-Regular.ttf');
+  font-family: "Roboto-Regular";
+  src: url("./fonts/Roboto-Regular.ttf");
 }
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto-Regular", sans-serif;
   margin: 0;
   margin-top: 91px;
-
   padding: 0;
 }
 
@@ -27,44 +25,42 @@ img {
   margin: 0;
   top: 0;
   width: 100%;
-  background:white;
+  background: white;
   border-bottom: 1px solid #ccc;
-  padding: 24px 188px ;
+  padding: 24px 188px;
   font-style: none;
   position: fixed;
   z-index: 99999;
-  
 }
-.logo{display: inline-block;
+.logo {
+  display: inline-block;
   margin: auto 0;
   margin-right: 8px;
   padding: 0;
-    font-size: 40px;
-  }
+  font-size: 40px;
+}
 .main-header-title {
   text-align: center;
   font-size: 28px;
   margin: 0;
   padding: 0;
   color: #ff4e00;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   text-decoration: none;
   display: flex;
   margin: auto;
-
 }
 
 .main-header-title .word1 {
   color: #454546;
 }
-  .main-header .container-flex {
-    display: flex;
-    justify-content: space-between;
-  }
+.main-header .container-flex {
+  display: flex;
+  justify-content: space-between;
+}
 .main-header-container {
   display: flex;
   align-items: center;
-
 }
 
 /*estilos menu*/
@@ -73,9 +69,8 @@ img {
   visibility: visible;
   transition: all 0.3s;
   z-index: 999999;
-    width: 100%;
-    margin-left: 40px;
-
+  width: 100%;
+  margin-left: 40px;
 }
 .menu {
   position: static;
@@ -83,29 +78,27 @@ img {
   left: 0;
   background: #212121;
   display: flex;
-    background: none;
+  background: none;
   width: 100%;
   list-style: none;
   padding: 0px;
   margin: 0;
-  
 }
 .menu-item {
   text-align: center;
   margin: auto;
- 
 }
 .menu-link {
   padding: 0 20px;
-  color:#454546;
+  color: #454546;
   text-decoration: none;
   display: block;
   font-weight: 500;
-  transition:all 0.3s;
+  transition: all 0.3s;
   font-size: 16px;
 }
 .menu-link:hover {
-  color:#ff4e00;
+  color: #ff4e00;
 }
 .mostrar {
   opacity: 1;
@@ -117,16 +110,18 @@ img {
   font-size: 1.5rem;
   border-radius: 2%;
   cursor: pointer;
-  margin:0;
+  margin: 0;
 }
-.icon-header,.icon-search {
-  margin:0 ;
+.icon-header,
+.icon-search {
+  margin: 0;
   padding: 10px;
   font-size: 16px;
   color: #454546;
   transition: all 0.3s;
 }
-.icon-header:hover,.icon-search:hover{
+.icon-header:hover,
+.icon-search:hover {
   color: #ff4e00;
 }
 .main-header-btn {
@@ -136,7 +131,6 @@ img {
   text-decoration: none;
   padding: 0;
   margin: 0 4px;
-
 }
 
 .main-header-input {
@@ -155,7 +149,6 @@ img {
   padding: 0 40px;
   padding-top: 20px;
   border-radius: 25px;
-
 }
 /*Estilos Slider*/
 .container-slider {
@@ -172,7 +165,7 @@ img {
   position: relative;
 }
 .slider::before {
-  content: '';
+  content: "";
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -189,7 +182,7 @@ img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit:cover;
+  object-fit: cover;
 }
 .slider-btn {
   z-index: 1;
@@ -229,12 +222,11 @@ img {
 }
 
 .slider-title {
- 
   margin: 0;
- height: 80px;
+  height: 80px;
 }
 
- .slider-title .title{ 
+.slider-title .title {
   font-size: 36px;
 }
 
@@ -254,7 +246,7 @@ img {
   background: rgba(255, 255, 255, 0.3);
 }
 
- section {
+section {
   width: 100%;
   position: relative;
   margin: 64px 0;
@@ -270,13 +262,13 @@ img {
 .game {
   border: 1px solid #ccc;
   border-radius: 10px;
-  padding: 0 ;
+  padding: 0;
   text-align: center;
   position: relative;
   transition: all 0.3s;
 }
 .game-new::before {
-  content: 'New';
+  content: "New";
   background: #ff4e00;
   text-align: center;
   padding: 6px 10px;
@@ -287,7 +279,7 @@ img {
   color: white;
 }
 .game-bestseller::before {
-  content: 'Most Sold';
+  content: "Most Sold";
   background: #009dff;
   text-align: center;
   padding: 0px 10px;
@@ -298,7 +290,7 @@ img {
   color: white;
 }
 .game-onsale::before {
-  content: 'On Sale';
+  content: "On Sale";
   background: #02d244;
   text-align: center;
   padding: 6px 10px;
@@ -308,35 +300,33 @@ img {
   right: 8px;
   color: white;
 }
-.game:hover{background:rgba(0, 0,0, 0.05)
+.game:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 .game-img {
   width: 100%;
   height: 120px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
-
 }
-.game-title{
-margin: 12px;
-height: 44.8px;
+.game-title {
+  margin: 12px;
+  height: 44.8px;
 }
 .game-title .title {
-   display: block; /* Convertir el enlace en un bloque para que tenga un ancho definido */
+  display: block; /* Convertir el enlace en un bloque para que tenga un ancho definido */
   font-size: 1em; /* Tamaño de fuente similar al de un h3 */
   font-weight: bold; /* Hacer el texto en negrita */
   text-decoration: none;
-  
-  text-align: left;
-  color:#151515;
-  
-}
 
+  text-align: left;
+  color: #151515;
+}
 
 .game-plataforms-price {
   display: flex;
   justify-content: space-between;
-  margin:20px  12px ;
+  margin: 20px 12px;
 }
 .game-plataforms {
   margin: 0;
@@ -353,21 +343,18 @@ height: 44.8px;
   color: #ff4e00;
   font-weight: bold;
   font-size: 20px;
-  
 }
 
-
 .tips-title {
-  
   margin: 30px auto;
   text-align: center;
   color: #212121;
   font-size: 2em;
 }
 .container-tips {
-   display:flex;
-   justify-content: space-between;
-   margin: 64px 0px;
+  display: flex;
+  justify-content: space-between;
+  margin: 64px 0px;
 }
 
 .tip {
@@ -380,19 +367,16 @@ height: 44.8px;
   height: 300px;
 }
 .tip-icon {
-   font-size: 56px;
+  font-size: 56px;
   margin: auto;
   display: block;
   color: #ff4e00;
 }
 
-  
-
 .tip-title {
-   display: block;
-   font-size: 24px;
+  display: block;
+  font-size: 24px;
   font-weight: 600;
-  
 }
 
 .tip-txt {
@@ -401,11 +385,8 @@ height: 44.8px;
   font-weight: 500;
   margin: 0;
   margin-bottom: 0;
-  color:#454546
-  
+  color: #454546;
 }
-
-
 
 /*estilos del footer*/
 .main-footer {
@@ -413,31 +394,55 @@ height: 44.8px;
   padding: 0;
   margin: 0;
 }
-.link-sections{display: flex;
-justify-content: space-between;margin: 0 auto; padding: 0 188px;}
-.footer-link-container{margin: 0;padding: 0; }
-.footer-link-container-item{list-style: none; display: inline-block;margin-right: 15px;}
-.footer-link{text-decoration: none;
+.link-sections {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 188px;
+}
+.footer-link-container {
+  margin: 0;
+  padding: 0;
+}
+.footer-link-container-item {
+  list-style: none;
+  display: inline-block;
+  margin-right: 15px;
+}
+.footer-link {
+  text-decoration: none;
   color: white;
   font-size: 14px;
   line-height: 55px;
-font: normal;
+  font: normal;
   opacity: 0.75;
   transition: all 0.3s;
 }
-.footer-link:hover{opacity: 1;}
+.footer-link:hover {
+  opacity: 1;
+}
 
-.footer-social-link-container{margin: 0;padding: 0;}
-.footer-social-link-container-item{list-style: none;display: inline-block;margin-left: 15px;}
-.footer-social-link{text-decoration: none;
+.footer-social-link-container {
+  margin: 0;
+  padding: 0;
+}
+.footer-social-link-container-item {
+  list-style: none;
+  display: inline-block;
+  margin-left: 15px;
+}
+.footer-social-link {
+  text-decoration: none;
   color: white;
-font-size: 22px;
-line-height: 55px;
-font: normal;
+  font-size: 22px;
+  line-height: 55px;
+  font: normal;
   opacity: 0.75;
   transition: all 0.3s;
 }
-.footer-social-link:hover{opacity: 1;}
+.footer-social-link:hover {
+  opacity: 1;
+}
 .copy {
   margin: 0;
   padding: 15px 0;
@@ -447,43 +452,43 @@ font: normal;
   line-height: 25px;
   font-size: 12px;
 }
- 
+
 /*estilos para tablet*/
 
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 768px) {
   .slider {
     height: 400px;
   }
 }
 
-
 /*Estilos de la pagina de un juego*/
-.game-page-container{display: flex;
+.game-page-container {
+  display: flex;
   justify-content: space-between;
   gap: 32px;
 }
-.game-page-container{
+.game-page-container {
 }
 
 .main-game-page .game-title {
   margin: 0;
   padding: 0;
   font-size: 32px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   margin-bottom: 40px;
 }
 
 .main-game-page .game-images {
 }
-.main-game-page .main-picture{
+.main-game-page .main-picture {
 }
-#main-game-video{
+#main-game-video {
   width: 100%;
   border-radius: 25px;
   width: 630px;
   height: 354.38px;
 }
-#main-game-img{
+#main-game-img {
   display: none;
   width: 100%;
   border-radius: 25px;
@@ -491,16 +496,23 @@ font: normal;
   height: 354.38px;
   object-fit: cover;
 }
-.game-thumbs{display: flex; 
+.game-thumbs {
+  display: flex;
   margin: 5px 0;
   padding-bottom: 5px;
-    width: 630px;
-overflow-x: scroll;}
-.game-thumb{ display: inline-block;width: 150px;
-  height: 84.9px;object-fit: cover; border-radius: 25px;
-margin-right: 10px;
-border: 3px solid white;
-transition: all 0.3s;}
+  width: 630px;
+  overflow-x: scroll;
+}
+.game-thumb {
+  display: inline-block;
+  width: 150px;
+  height: 84.9px;
+  object-fit: cover;
+  border-radius: 25px;
+  margin-right: 10px;
+  border: 3px solid white;
+  transition: all 0.3s;
+}
 
 .main-game-page .game-section {
   display: block;
@@ -512,8 +524,7 @@ transition: all 0.3s;}
   padding: 0;
   font-size: 16px;
   font-weight: 700;
-  font-family: 'Poppins';
-
+  font-family: "Poppins";
 }
 .main-game-page .game-description {
   margin: 12px 0;
@@ -528,24 +539,19 @@ transition: all 0.3s;}
   padding: 0;
   font-size: 16px;
   font-weight: 700;
-
 }
 .main-game-page .requirements-list {
-  padding: 0 12px ;
+  padding: 0 12px;
   margin: 12px 0;
   font-size: 14px;
   line-height: 1.5;
   font-weight: 400;
   color: #333;
   border-left: #3331 1px solid;
-    border-right: #3331 1px solid;
-   
-
+  border-right: #3331 1px solid;
 }
 .main-game-page .requirements-list b {
-
-font-weight: 600;
-
+  font-weight: 600;
 }
 
 .buy-card-thumb {
@@ -557,12 +563,9 @@ font-weight: 600;
   padding: 0;
   border-radius: 25px;
   width: 350px;
-
 }
 .buy-card .game-price {
-
   color: #333;
-
 }
 
 .buy-button-container {
@@ -583,3 +586,65 @@ font-weight: 600;
   border-radius: 10px;
 }
 
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/*Estilo de input*/
+.input-field {
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #ccc;
+  
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+.icon-form-input {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+  border-radius: 10px 0 0 10px;
+}
+/*Estilo de boton de formulario*/
+.btn {
+  background: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.form-container {
+  margin: auto;
+  width: 600px;
+  height: 100%;
+  padding: 20px;
+  background-color: #ffff;
+  border-radius: 6px 6px 6px 6px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.warningSection {
+  margin-bottom: auto;
+  text-align: center;
+  color: #bd1d1d;
+}
+
+.textarea {
+  
+}

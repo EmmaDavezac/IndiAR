@@ -35,8 +35,8 @@ function validateForm() {
     email = document.getElementById("email").value;
     phone = document.getElementById("phone").value;
     message = document.getElementById("message").value;
-    warningParagraph = document.getElementById("warningParagraph");
-    warningParagraph.innerHTML = ""; 
+    warningSection = document.getElementById("warningSection");
+    warningSection.innerHTML = ""; 
     //A partir de aquí se comprueba si cada campo es correcto
     if (fname === "" || lname === "" || email === "" || phone === "" || message === "") {
         warning += `Todos los campos son obligatorios <br>`;
@@ -60,13 +60,13 @@ function validateForm() {
     }
     //Si accepted tiene valor true, se devuelven los errores y no se envía el formulario.
     if (accepted) { 
-        warningParagraph.innerHTML = warning; //Devuelve todos los mensajes en un solo parrafo.
+        warningSection.innerHTML = warning; //Devuelve todos los mensajes en un solo parrafo.
         return false;
     }
     //Si accepted tiene valor false, se envía el formulario.
     else {
-        warningParagraph.style.color = "green";
-        warningParagraph.innerHTML = "Enviado";
+        warningSection.style.color = "green";
+        warningSection.innerHTML = "Enviado";
     }
 
 }

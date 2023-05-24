@@ -13,6 +13,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
+    <style>
+      
+    </style>
   </head>
 
   <body style="background: #ededed">
@@ -57,20 +60,11 @@
 
     <!--Inicio del Main-->
     <main class="main">
-      <div class="form-container">
-        <form
-          id="form"
-          action=""
-          method="post"
-          onsubmit="return validateForm()"
-        >
-          <div>
-            <h1 style="text-align: center; color: dodgerblue">Contactenos</h1>
-          </div>
-
-          <!--Este es el campo "Nombre/s"-->
+      <div class="container">
+        <form action="">
+            <!--Este es el campo "Usuario"-->
           <div class="input-container">
-            <i class="fa fa-user icon-form-input"> </i>
+            <i class="fa fa-user icon"> </i>
             <input
               class="input-field"
               type="text"
@@ -79,65 +73,6 @@
               placeholder="Nombre/s"
               required
             />
-          </div>
-
-          <!--Este es el campo "Apellido/s"-->
-          <div class="input-container">
-            <span> <i class="fa fa-user icon-form-input"></i> </span>
-            <input
-              class="input-field"
-              type="text"
-              id="lname"
-              name="lastname"
-              placeholder="Apellido/s"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Email"-->
-          <div class="input-container">
-            <i class="fa fa-envelope icon-form-input"></i>
-            <input
-              class="input-field"
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Dirección Email"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Teléfono"-->
-          <div class="input-container">
-            <i class="fa fa-phone icon-form-input"></i>
-            <input
-              class="input-field"
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="Teléfono"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Mensaje"-->
-          <div class="input-container">
-            <span> <i class="fa fa-pencil icon-form-input"></i> </span>
-            <textarea
-              class="input-field"
-              type="text"
-              rows="16"
-              id="message"
-              name="message"
-              placeholder="Ingrese su mensaje"
-              style="resize: none"
-              required
-            ></textarea>
-          </div>
-
-          <div>
-            <input class="btn" type="submit" value="Enviar" />
-            <p class="warningSection" id="warningSection"></p>
           </div>
         </form>
       </div>
