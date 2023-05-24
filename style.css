@@ -599,7 +599,7 @@ section {
   outline: none;
   border-radius: 0 10px 10px 0;
   border: 1px solid #ccc;
-  
+  font-family: "Roboto-regular", sans-serif;
 }
 
 .input-field:focus {
@@ -620,9 +620,12 @@ section {
   padding: 15px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   opacity: 0.9;
   border-radius: 10px;
+  font-size: 16px;
+  margin: 0 auto;
+  display: block;
 }
 
 .btn:hover {
@@ -634,6 +637,8 @@ section {
   width: 600px;
   height: 100%;
   padding: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   background-color: #ffff;
   border-radius: 6px 6px 6px 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);

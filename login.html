@@ -13,9 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
-    <style>
-      
-    </style>
+    <style></style>
   </head>
 
   <body style="background: #ededed">
@@ -40,10 +38,10 @@
           </nav>
         </div>
         <div class="main-header-container">
-          <a href="carrito.html" class="main-header-btn"
+          <a href="login.html" class="main-header-btn"
             ><i class="fas fa-user icon-header"></i
           ></a>
-          <a href="carrito.html" class="main-header-btn"
+          <a href=".html" class="main-header-btn"
             ><i class="fa-solid fa-cart-shopping icon-header"></i
           ></a>
           <input
@@ -60,17 +58,41 @@
 
     <!--Inicio del Main-->
     <main class="main">
-      <div class="container">
-        <form action="">
-            <!--Este es el campo "Usuario"-->
+      <div class="form-container">
+        <form id="form" action="" method="post" onsubmit="">
+          <div>
+            <h1
+              style="
+                text-align: center;
+                color: dodgerblue;
+                font-family: Arial, Helvetica, sans-serif;
+              "
+            >
+              Login
+            </h1>
+          </div>
+
+          <!--Este es el campo "Usuario"-->
           <div class="input-container">
-            <i class="fa fa-user icon"> </i>
+            <i class="fa fa-user icon-form-input"> </i>
             <input
               class="input-field"
               type="text"
-              id="fname"
-              name="firstname"
-              placeholder="Nombre/s"
+              id="user"
+              name="user"
+              placeholder="Usuario o Email"
+              required
+            />
+          </div>
+          <!--Este es el campo "Usuario"-->
+          <div class="input-container">
+            <i class="fa fa-lock icon-form-input"> </i>
+            <input
+              class="input-field"
+              type="password"
+              id="pass"
+              name="password"
+              placeholder="Contraseña"
               required
             />
           </div>
