@@ -609,4 +609,6 @@ text-align: center;
   height: 80px;
 }
 
+#login-footer{ position: fixed; bottom: 0; width: 100%;}
+
 
