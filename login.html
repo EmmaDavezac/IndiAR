@@ -59,7 +59,7 @@
     <!--Inicio del Main-->
     <main class="main">
       <div class="form-container">
-        <form id="form" class="form-title" action="" method="post" onsubmit="">
+        <form id="form" class="form-title" action="" method="post" onsubmit="return validateLoginForm()">
           <div>
             <h1
             >
@@ -67,19 +67,19 @@
             </h1>
           </div>
 
-          <!--Este es el campo "Usuario"-->
+          <!--Este es el campo "Email"-->
           <div class="input-container">
-            <i class="fa fa-user icon-form-input"> </i>
+            <i class="fa fa-envelope icon-form-input"> </i>
             <input
               class="input-field"
               type="text"
-              id="user"
-              name="user"
-              placeholder="Usuario o Email"
+              id="email"
+              name="email"
+              placeholder="Email"
               required
             />
           </div>
-          <!--Este es el campo "Usuario"-->
+          <!--Este es el campo "Contraseña"-->
           <div class="input-container">
             <i class="fa fa-lock icon-form-input"> </i>
             <input
