@@ -89,11 +89,12 @@ img {
   margin: auto;
 }
 .menu-link {
+  font-family: "Poppins";
   padding: 0 20px;
   color:#333;
   text-decoration: none;
   display: block;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 0.3s;
   font-size: 16px;
 }
