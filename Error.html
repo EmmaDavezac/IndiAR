@@ -13,9 +13,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
+    
   </head>
 
-  <body style="background: #ededed">
+  <body >
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
@@ -31,7 +32,7 @@
                 <a href="." class="menu-link">TIENDA</a>
               </li>
               <li class="menu-item">
-                <a href="" class="menu-link menu-link-active">CONTACTO</a>
+                <a href="contacto.html" class="menu-link">CONTACTO</a>
               </li>
             </ul>
           </nav>
@@ -57,95 +58,16 @@
 
     <!--Inicio del Main-->
     <main class="main">
-      <div class="form-container">
-        <form
-          id="form"
-          action=""
-          method="post"
-          onsubmit="return validateContactForm()"
-        >
-          <div>
-            <h1 class="form-title">Contactenos</h1>
-          </div>
+ <div class="contruction-message-container">
+<svg xmlns="http://www.w3.org/2000/svg" class="contruction-message-icon"viewBox="0 0 24 24"><path fill="currentColor" d="M12 15c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4M8 9a4 4 0 0 0 4 4a4 4 0 0 0 4-4m-4.5-7c-.3 0-.5.21-.5.5v3h-1V3s-2.25.86-2.25 3.75c0 0-.75.14-.75 1.25h10c-.05-1.11-.75-1.25-.75-1.25C16.25 3.86 14 3 14 3v2.5h-1v-3c0-.29-.19-.5-.5-.5h-1Z"/></svg>
+<p id="contruction-message"> <b>¡Error! </b><br> Sitio En Construccion</p>
+ </div>
+    </script>
 
-          <!--Este es el campo "Nombre/s"-->
-          <div class="input-container">
-            <i class="fa fa-user icon-form-input"> </i>
-            <input
-              class="input-field"
-              type="text"
-              id="fname"
-              name="firstname"
-              placeholder="Nombre/s"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Apellido/s"-->
-          <div class="input-container">
-            <span> <i class="fa fa-user icon-form-input"></i> </span>
-            <input
-              class="input-field"
-              type="text"
-              id="lname"
-              name="lastname"
-              placeholder="Apellido/s"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Email"-->
-          <div class="input-container">
-            <i class="fa fa-envelope icon-form-input"></i>
-            <input
-              class="input-field"
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Dirección Email"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Teléfono"-->
-          <div class="input-container">
-            <i class="fa fa-phone icon-form-input"></i>
-            <input
-              class="input-field"
-              type="text"
-              id="phone"
-              name="phone"
-              placeholder="Teléfono"
-              required
-            />
-          </div>
-
-          <!--Este es el campo "Mensaje"-->
-          <div class="input-container">
-            <span> <i class="fa fa-pencil icon-form-input"></i> </span>
-            <textarea
-              class="input-field"
-              type="text"
-              rows="6"
-              id="message"
-              name="message"
-              placeholder="Ingrese su mensaje"
-              style="resize: none"
-              style="border-radius: 0 10px 10px 10px"
-              required
-            ></textarea>
-          </div>
-
-          <div>
-            <input class="btn" type="submit" value="Enviar" />
-          </div>
-          <div><p class="warningSection" id="warningSection"></p></div>
-        </form>
-      </div>
     </main>
 
     <!--Aquí comienza el Footer-->
-    <footer class="main-footer">
+    <footer class="main-footer bottom-footer">
       <div class="link-sections">
         <ul class="footer-link-container">
           <li class="footer-link-container-item">
@@ -187,5 +109,5 @@
       <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
     </footer>
   </body>
-  <script src="validation-scripts.js"></script>
+
 </html>
