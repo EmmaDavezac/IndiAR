@@ -10,6 +10,7 @@
   box-sizing: border-box;
 }
 body {
+  background: #ededed;
   font-family: "Roboto-Regular", sans-serif;
   margin: 0;
   margin-top: 91px;
@@ -22,6 +23,67 @@ img {
 }
 /*Estilos Header*/
 .main-header {
+ 
+}
+.logo {
+
+}
+.main-header-title {
+  
+}
+
+.main-header-title .word1 {
+}
+.main-header .container-flex {
+}
+.main-header-container {
+
+}
+
+/*estilos menu*/
+.main-nav {
+ 
+}
+.menu {
+  
+}
+.menu-item {
+  
+}
+.menu-link {
+
+}
+.menu-link:hover {
+}
+.menu-link-active{opacity: 1;}
+.mostrar {
+ 
+}
+
+.icon-menu {
+
+}
+.icon-header,
+.icon-search {
+ 
+}
+.icon-header:hover,
+.icon-search:hover {
+
+}
+.main-header-btn {
+  
+}
+
+.main-header-input {
+
+}
+
+.main {
+ 
+}
+@media screen and (min-width: 1200px){
+  .main-header {
   margin: 0;
   top: 0;
   width: 100%;
@@ -153,6 +215,7 @@ img {
   padding-top: 20px;
   border-radius: 25px;
 }
+}
 /*Estilos Slider*/
 .container-slider {
   margin: 20px auto;
@@ -266,6 +329,8 @@ section {
 }
 
 .game {
+  background: #fff;
+
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 0;
@@ -332,9 +397,11 @@ section {
   display: flex;
   justify-content: space-between;
   margin: 64px 0px;
+  
 }
 
 .tip {
+  background: #fff;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 2%;
@@ -372,14 +439,15 @@ section {
   padding: 0;
   margin: 0;
 }
-.link-sections{display: flex;
-justify-content: space-between;margin: 0 auto; padding: 0 188px;}
-.footer-link-container{margin: 0;padding: 0; }
-.footer-link-container-item{list-style: none; display: inline-block;margin-right: 15px;}
-.footer-link{text-decoration: none;
+.link-sections{margin: 0 auto; padding: 0 18px;}
+.footer-link-container{text-align: center;}
+.footer-link-container-item{ display: block;margin-right: 15px;}
+
+.footer-link{
+  text-decoration: none;
   color: #fff;
   font-size: 14px;
-  line-height: 55px;
+  line-height: 20px;
   font: normal;
   opacity: 0.75;
   transition: all 0.3s;
@@ -387,13 +455,13 @@ justify-content: space-between;margin: 0 auto; padding: 0 188px;}
 .footer-link:hover {
   opacity: 1;
 }
-
-.footer-social-link-container{margin: 0;padding: 0;}
-.footer-social-link-container-item{list-style: none;display: inline-block;margin-left: 15px;}
-.footer-social-link{text-decoration: none;
+.footer-social-link-container{display: flex;justify-content: space-around;}
+.footer-social-link-container-item{ list-style: none;display: inline-block;}
+.footer-social-link{
+text-decoration: none;
   color: #fff;
-font-size: 22px;
-line-height: 55px;
+font-size: 20px;
+line-height: 20px;
 font: normal;
   opacity: 0.75;
   transition: all 0.3s;
@@ -402,21 +470,40 @@ font: normal;
   opacity: 1;
 }
 .copy {
-  margin: 0;
-  padding: 15px 0;
+   margin: 0;
+  padding: 8px 0;
   color: #fff;
   opacity: 0.75;
   text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 1200px){
+
+.link-sections{display: flex;
+justify-content: space-between; padding: 0 188px;}
+.footer-link-container{margin: 0;padding: 0; }
+.footer-link-container-item{ display: inline-block;}
+.footer-link{
+  line-height: 55px;
+
+}
+
+
+.footer-social-link-container{margin: 0;padding: 0; display: block;}
+.footer-social-link-container-item{margin-left: 15px;}
+.footer-social-link{
+font-size: 22px;
+line-height: 55px;
+}
+
+.copy {
+  padding: 15px 0;
   line-height: 25px;
   font-size: 12px;
 }
 
-/*estilos para tablet*/
-
-@media screen and (max-width: 768px) {
-  .slider {
-    height: 400px;
-  }
 }
 
 /*Estilos de la pagina de un juego*/
@@ -424,8 +511,13 @@ font: normal;
   display: flex;
   justify-content: space-between;
   gap: 32px;
+  
 }
+.main-game-page{
+  margin-top: 128px;
+background: #fff;
 
+}
 
 .main-game-page .game-title {
   margin: 0;
@@ -433,6 +525,7 @@ font: normal;
   font-size: 32px;
   font-family: "Poppins";
   margin-bottom: 40px;
+  
 }
 
 
@@ -504,6 +597,7 @@ transition: all 0.3s;}
   border-radius: 25px 25px 0 0;
 }
 .buy-card {
+background: #fff;
   border: #ccc 1px solid;
   display: inline-block;
   padding: 0;
@@ -613,10 +707,13 @@ text-align: center;
 }
 
 .bottom-footer{ position: fixed; bottom: 0; width: 100%;}
-.contruction-message-container{
-  
+#contruction-message-container{
+ border: #ccc 1px solid; 
   
  text-align: center;
+ border-radius: 8px;
+ background: #fff;
+ padding: 40px;
 }
     @keyframes glitch {
       0%, 20%, 40%, 60%, 80%, 100% {
