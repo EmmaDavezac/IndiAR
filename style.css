@@ -226,7 +226,7 @@ img {
 .slider {
   display: flex;
   width: 300%;
-  height: 500px;
+  height: 300px;
   margin-left: -100%;
   position: relative;
 }
@@ -316,6 +316,7 @@ img {
 }
 
 section {
+
   width: 100%;
   position: relative;
   margin: 64px 0;
@@ -387,28 +388,27 @@ section {
   font-size: 20px;
 }
 
+/*Estilos de la seccion de los tips*/
 .tips-title {
   margin: 30px auto;
   text-align: center;
   color: #333;
-  font-size: 2em;
+  font-size: 20px;
 }
 .container-tips {
-  display: flex;
-  justify-content: space-between;
-  margin: 64px 0px;
-  
 }
 
 .tip {
+  display: block;
   background: #fff;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 2%;
   padding: 20px;
-  margin: 0;
-  width: 300px;
-  height: 300px;
+  margin: auto;
+  margin-bottom: 32px;
+  width: 280px;
+  height: 280px;
 }
 .tip-icon {
   font-size: 56px;
@@ -425,7 +425,7 @@ section {
 
 .tip-txt {
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   margin: 0;
   margin-bottom: 0;
@@ -433,21 +433,71 @@ section {
   
 }
 
+@media screen and (min-width: 1200px){
+.tips-title {
+  margin: 30px auto;
+  font-size: 24px;
+
+}
+.container-tips {
+  
+  border: #bd1d1d solid 1px;
+  display: flex;
+  justify-content: space-between;
+  
+  
+}
+
+.tip {
+
+
+
+
+  margin: 0;
+  width: 264px;
+  height: 264px;
+}
+.tip-icon {
+  
+}
+
+.tip-title {
+}
+
+.tip-txt {
+
+  
+}
+
+}
+
 /*estilos del footer*/
 .main-footer {
   background: #333;
   padding: 0;
   margin: 0;
+  border: #bd1d1d 1px solid;
 }
-.link-sections{margin: 0 auto; padding: 0 18px;}
-.footer-link-container{text-align: center;}
-.footer-link-container-item{ display: block;margin-right: 15px;}
+.link-sections{margin: 0 auto; padding: 0 18px;
+border: red 1px solid;
+  margin: 0;
+  padding: 0;}
+.footer-link-container{
+  
+  margin: 20px 0;
+  padding: 0;
+}
+.footer-link-container-item{ display: block;
+  text-align: center;
+  border: blue 1px solid;
+  
+}
 
 .footer-link{
   text-decoration: none;
   color: #fff;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 24px;
   font: normal;
   opacity: 0.75;
   transition: all 0.3s;
@@ -455,13 +505,20 @@ section {
 .footer-link:hover {
   opacity: 1;
 }
-.footer-social-link-container{display: flex;justify-content: space-around;}
-.footer-social-link-container-item{ list-style: none;display: inline-block;}
+.footer-social-link-container{
+  border: #fff 1px solid;
+  display: flex;
+margin: 0 96px;padding: 0;
+justify-content: space-between;
+}
+.footer-social-link-container-item{ list-style: none;display: inline-block;
+  border: green 1px solid;
+ }
 .footer-social-link{
 text-decoration: none;
   color: #fff;
-font-size: 20px;
-line-height: 20px;
+font-size: 32px;
+line-height: 32px;
 font: normal;
   opacity: 0.75;
   transition: all 0.3s;
@@ -470,8 +527,9 @@ font: normal;
   opacity: 1;
 }
 .copy {
-   margin: 0;
-  padding: 8px 0;
+  border: pink solid 1px;
+   margin: 20px solid;
+  padding: 0;
   color: #fff;
   opacity: 0.75;
   text-align: center;
@@ -480,28 +538,32 @@ font: normal;
 }
 
 @media screen and (min-width: 1200px){
-
 .link-sections{display: flex;
-justify-content: space-between; padding: 0 188px;}
-.footer-link-container{margin: 0;padding: 0; }
-.footer-link-container-item{ display: inline-block;}
+justify-content: space-between;margin: 8px 188px; }
+.footer-link-container{margin: 0;padding: 0; border: 1px orange solid;;}
+.footer-link-container-item{ display: inline-block;margin-right: 12px;padding: 0;
+}
 .footer-link{
-  line-height: 55px;
+  font-size: 14px;
+  line-height: 32px;
 
 }
 
 
 .footer-social-link-container{margin: 0;padding: 0; display: block;}
-.footer-social-link-container-item{margin-left: 15px;}
+.footer-social-link-container-item{margin-left: 12px;padding: 0;
+}
 .footer-social-link{
-font-size: 22px;
-line-height: 55px;
+  margin: 0;padding: 0;
+font-size: 20px;
+line-height: 32px;
 }
 
 .copy {
-  padding: 15px 0;
-  line-height: 25px;
-  font-size: 12px;
+  margin: 0;
+
+  line-height: 24px;
+  font-size: 14px;
 }
 
 }
