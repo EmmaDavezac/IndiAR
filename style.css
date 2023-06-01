@@ -749,6 +749,7 @@ transition: all 0.3s;}
 }
 
 .buy-card-thumb {
+  width: 100%;
   border-radius: 25px 25px 0 0;
 }
 .buy-card {
