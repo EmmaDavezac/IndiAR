@@ -50,7 +50,9 @@ let gameThumb2=document.getElementById("game-thumb-2");
 let gameThumb3=document.getElementById("game-thumb-3");
 let gameThumb4=document.getElementById("game-thumb-4");
 let gameThumb5=document.getElementById("game-thumb-5");
+let gameThumb6=document.getElementById("game-thumb-6");
 let imgChange=document.getElementById("main-game-img");
+let videoChange=document.getElementById("main-game-video");
 let colorBorde="#ff4e00"
 
 function eliminarBordes()
@@ -90,15 +92,12 @@ eliminarBordes();
 gameThumb5.style.borderColor=colorBorde;
 imgChange.src=gameThumb5.src;
 }
+gameThumb6.onclick=function(){
+  eliminarBordes();
+  gameThumb6.style.borderColor=colorBorde;
+  imgChange.style.display="none";
+  videoChange.style.display="block";
+}
 //eliminamos el de resaltado de todas las imagenes y resaltamos la primera imagen
 eliminarBordes();
 gameThumb1.style.borderColor=colorBorde;
-
-
-
-  
-  
-
-
-
-
