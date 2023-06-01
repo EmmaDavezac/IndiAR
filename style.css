@@ -681,7 +681,6 @@ background: #fff;
 }
 
 
-
 #main-game-img{
   display: block;
   width: 100%;
@@ -701,14 +700,12 @@ background: #fff;
 #movie-play-button-container{
   position: relative;
   padding: 0;
-  
 }
 #movie-play-button{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
 }
 
 .game-thumbs {
