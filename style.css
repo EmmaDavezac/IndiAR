@@ -9,9 +9,7 @@
 * {
   box-sizing: border-box;
 }
-::-webkit-scrollbar {
-    display: none;
-}
+
 body {
   background: #ededed;
   font-family: "Roboto-Regular", sans-serif;
@@ -123,7 +121,7 @@ justify-content: space-between;
   
 }
 }
-/*estilos menu*/
+/*estilos navbar*/
 .main-nav {
   display: none;
   visibility: visible;
@@ -132,25 +130,25 @@ justify-content: space-between;
   width: 100%;
   margin-left: 40px;
 }
-.menu {
+.nav {
   
   position: static;
   top: 188px;
   left: 0;
   background: #212121;
-  display: flex;
+  display: block;
   background: none;
   width: 100%;
   list-style: none;
   padding: 0px;
   margin: 0;
 }
-.menu-item {
+.nav-item {
   
   text-align: center;
   margin: auto;
 }
-.menu-link {
+.nav-link {
   
   font-family: "Poppins";
   padding: 0 20px;
@@ -162,10 +160,10 @@ justify-content: space-between;
   font-size: 16px;
   opacity: 0.9;
 }
-.menu-link:hover {
+.nav-link:hover {
   color: #ff4e00;
 }
-.menu-link-active{opacity: 1;}
+.nav-link-active{opacity: 1;}
 
 .icon-menu {
   display: block;
@@ -211,12 +209,8 @@ justify-content: space-between;
 @media screen and (min-width: 1200px){
   .main-nav {
  display: block;
-  transition: all 0.3s;
-  z-index: 999999;
-  width: 100%;
-  margin-left: 40px;
 }
-.menu {
+.nav {
   position: static;
   top: 188px;
   left: 0;
@@ -228,11 +222,11 @@ justify-content: space-between;
   padding: 0px;
   margin: 0;
 }
-.menu-item {
+.nav-item {
   text-align: center;
   margin: auto;
 }
-.menu-link {
+.nav-link {
   font-family: "Poppins";
   padding: 0 20px;
   color:#333;
@@ -243,10 +237,10 @@ justify-content: space-between;
   font-size: 16px;
   opacity: 0.9;
 }
-.menu-link:hover {
+.nav-link:hover {
   color: #ff4e00;
 }
-.menu-link-active{opacity: 1;}
+.nav-link-active{opacity: 1;}
 .mostrar {
   opacity: 1;
   visibility: visible;
@@ -410,6 +404,7 @@ justify-content: space-between;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
+  overflow-y: hidden;
 }
 
 .game {
@@ -478,17 +473,17 @@ justify-content: space-between;
 .game {
   margin: auto;
   border-radius: 10px;
-  width: 256px;
-  height: 256px;
+  width: 216px;
+  height: 216px;
 }
 
 .game-img {
-  height: 136px;
+  height: 112px;
   border-radius: 10px 10px 0 0;
 }
 .game-title {
   margin: 12px;
-  height: 48px;
+  height: 36px;
 }
 
 
