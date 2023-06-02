@@ -50,7 +50,10 @@ let gameThumb2=document.getElementById("game-thumb-2");
 let gameThumb3=document.getElementById("game-thumb-3");
 let gameThumb4=document.getElementById("game-thumb-4");
 let gameThumb5=document.getElementById("game-thumb-5");
+let gameThumb6=document.getElementById("game-thumb-6");
 let imgChange=document.getElementById("main-game-img");
+let videoChange=document.getElementById("main-game-video");
+let playButton=document.getElementById("movie-play-button")
 let colorBorde="#ff4e00"
 
 function eliminarBordes()
@@ -64,41 +67,56 @@ let elementos=document.getElementsByClassName("game-thumb");
 gameThumb1.onclick=function(){
 eliminarBordes();
 gameThumb1.style.borderColor=colorBorde;
+videoChange.style.display="none";
+imgChange.style.display="block";
 imgChange.src=gameThumb1.src;
 }
 
 gameThumb2.onclick=function(){
 eliminarBordes();
 gameThumb2.style.borderColor=colorBorde;
+videoChange.style.display="none";
+imgChange.style.display="block";
 imgChange.src=gameThumb2.src;
 }
 
 gameThumb3.onclick=function(){
 eliminarBordes();
 gameThumb3.style.borderColor=colorBorde;
+videoChange.style.display="none";
+imgChange.style.display="block";
 imgChange.src=gameThumb3.src;
 }
 
 gameThumb4.onclick=function(){
 eliminarBordes();
 gameThumb4.style.borderColor=colorBorde;
+videoChange.style.display="none";
+imgChange.style.display="block";
 imgChange.src=gameThumb4.src;
 }
 
 gameThumb5.onclick=function(){
 eliminarBordes();
 gameThumb5.style.borderColor=colorBorde;
+videoChange.style.display="none";
+imgChange.style.display="block";
 imgChange.src=gameThumb5.src;
 }
-//eliminamos el de resaltado de todas las imagenes y resaltamos la primera imagen
+
+gameThumb6.onclick=function(){
+  eliminarBordes();
+  gameThumb6.style.borderColor=colorBorde;
+  imgChange.style.display="none";
+  videoChange.style.display="block";
+}
+
+playButton.onclick=function(){
+  eliminarBordes();
+  gameThumb6.style.borderColor=colorBorde;
+  imgChange.style.display="none";
+  videoChange.style.display="block";}
+
+//Eliminamos el de resaltado de todas las imagenes y resaltamos la primera imagen
 eliminarBordes();
 gameThumb1.style.borderColor=colorBorde;
-
-
-
-  
-  
-
-
-
-
