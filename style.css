@@ -1101,13 +1101,18 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
-  .bottom-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-}
 
+  }
+
+
+@media screen and (min-width: 1800px){
+    .bottom-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+}
+/*Estilos del HTML "ERROR" O SITIO EN CONSTRUCCION*/
 #contruction-message-container {
   border: #ccc 1px solid;
   text-align: center;
@@ -1115,7 +1120,6 @@ body {
   background: #fff;
   padding: 40px;
 }
-
 @keyframes glitch {
 
   0%,
