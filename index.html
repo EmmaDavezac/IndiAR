@@ -1,560 +1,641 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport"
-        content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
     <title>Bienvenidos a IndiAR</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css" />
-    <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.css"
+    />
+    <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
+  </head>
 
-
-
-</head>
-
-<body>
+  <body>
     <header class="main-header">
-        <div class="container-flex">
-            <div class="main-header-container">
-                 <span class="icon-menu " id="btn-menu"><i class="fas fa-bars"></i></span>
-                <a class="main-header-title" href=""><span class="word1">Indi</span><span
-                    
-                        class="word2">AR</span></a>
-               
-                <nav class="main-nav" id="main-nav">
-                    <ul class="nav">
-                        <li class="nav-item"><a href="" class="nav-link nav-link-active" >TIENDA</a></li>
-                        <li class="nav-item"><a href="contacto.html" class="nav-link">CONTACTO</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="main-header-container">
-                <a href="login.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
-                <a href="Error.html" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
-                <input type="search" class="main-header-input" placeholder="Buscar juegos" id="">
-                <a href="Error.html"class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
-            </div>
-        </div>
-        <div  id="menu-container" class=" menu-oculto ">
-            <ul class="menu">
-                 <li class="menu-item"><a href="" class="menu-link menu-link-active" >TIENDA</a></li>
-                        <li class="menu-item"><a href="contacto.html" class="menu-link">CONTACTO</a></li>
+      <div class="container-flex">
+        <div class="main-header-container">
+          <span class="icon-menu" id="btn-menu"
+            ><i class="fas fa-bars"></i
+          ></span>
+          <a class="main-header-title" href=""
+            ><span class="word1">Indi</span><span class="word2">AR</span></a
+          >
+          <nav class="main-nav" id="main-nav">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="" class="nav-link nav-link-active">TIENDA</a>
+              </li>
+              <li class="nav-item">
+                <a href="contacto.html" class="nav-link">CONTACTO</a>
+              </li>
             </ul>
+          </nav>
         </div>
+        <div class="main-header-container">
+          <a href="login.html" class="main-header-btn"
+            ><i class="fas fa-user icon-header"></i
+          ></a>
+          <a href="Error.html" class="main-header-btn"
+            ><i class="fa-solid fa-cart-shopping icon-header"></i
+          ></a>
+          <input
+            type="search"
+            class="main-header-input"
+            placeholder="Buscar juegos"
+            id=""
+          />
+          <a href="Error.html" class="main-header-btn"
+            ><i class="fas fa-search icon-search"></i
+          ></a>
+        </div>
+      </div>
+      <div id="menu-container" class="menu-oculto">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="" class="menu-link menu-link-active">TIENDA</a>
+          </li>
+          <li class="menu-item">
+            <a href="contacto.html" class="menu-link">CONTACTO</a>
+          </li>
+        </ul>
+      </div>
     </header>
+
     <div class="container-slider">
-        <div class="slider" id="slider">
-            <div class="slider-section"><img src="" class="slider-img" id="slider-img1" alt="">
-                <div class="slider-content">
-                    <div class="slider-title">
-                        <h2 class="title" id="slider-title1">Elden Ring</h2>
-                    </div>
-                    <a class="slider-link" href="Elden-Ring.html">VER</a>
-                </div>
+      <div class="slider" id="slider">
+        <div class="slider-section">
+          <img src="" class="slider-img" id="slider-img1" alt="" />
+          <div class="slider-content">
+            <div class="slider-title">
+              <h2 class="title" id="slider-title1">Elden Ring</h2>
             </div>
-            <div class="slider-section"><img src="" class="slider-img" id="slider-img2" alt="">
-                <div class="slider-content">
-                    <div class="slider-title">
-                        <h2 class="title" id="slider-title2">Assassins Creed Mirage</h2>
-                    </div>
-                    <a class="slider-link" href="Assassins-Creed-Mirage.html">VER</a>
-                </div>
-            </div>
-            <div class="slider-section"><img src="" class="slider-img" id="slider-img3" alt="">
-                <div class="slider-content">
-                    <div class="slider-title">
-                        <h2 class="title" id="slider-title3">Hogwarts Legacy</h2>
-                    </div>
-                    <a class="slider-link" href="Hogwarts-Legacy.html">VER</a>
-                </div>
-            </div>
+            <a class="slider-link" href="Elden-Ring.html">VER</a>
+          </div>
         </div>
-        <div class="slider-btn slider-btn-right" id="btn-right">&#62;</div>
-        <div class="slider-btn slider-btn-left" id="btn-left">&#60;</div>
+        <div class="slider-section">
+          <img src="" class="slider-img" id="slider-img2" alt="" />
+          <div class="slider-content">
+            <div class="slider-title">
+              <h2 class="title" id="slider-title2">Assassins Creed Mirage</h2>
+            </div>
+            <a class="slider-link" href="Assassins-Creed-Mirage.html">VER</a>
+          </div>
+        </div>
+        <div class="slider-section">
+          <img src="" class="slider-img" id="slider-img3" alt="" />
+          <div class="slider-content">
+            <div class="slider-title">
+              <h2 class="title" id="slider-title3">Hogwarts Legacy</h2>
+            </div>
+            <a class="slider-link" href="Hogwarts-Legacy.html">VER</a>
+          </div>
+        </div>
+      </div>
+      <div class="slider-btn slider-btn-right" id="btn-right">&#62;</div>
+      <div class="slider-btn slider-btn-left" id="btn-left">&#60;</div>
     </div>
+    
     <main class="main">
-        <section class="home-section">
-            <h2 class="main-title">Nuevos Lanzamientos para tí</h2>
-            <div class="container-games">
-                <div class="game game-new">
-                    <a href="Resident-Evil-4-2023.html"><img src="" alt="" class="game-img" id="game-img1"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a class="title" href="Resident-Evil-4-2023.html">Resident Evil 4 2023</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
+      <section class="home-section">
+        <h2 class="main-title">Nuevos Lanzamientos para tí</h2>
+        <div class="container-games">
+          <div class="game game-new">
+            <a href="Resident-Evil-4-2023.html"
+              ><img src="" alt="" class="game-img" id="game-img1"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a class="title" href="Resident-Evil-4-2023.html"
+                  >Resident Evil 4 2023</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
                 </div>
-
-
-                <div class="game ">
-                    <a href="Dont-starve-together.html"><img src="" alt="" class="game-img" id="game-img2"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Dont-starve-together.html" class="title">Dont Starve Together</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Assassins-Creed-Mirage.html"><img src="" alt="" class="game-img" id="game-img3"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Assassins-Creed-Mirage.html" class="title">Assassins Creed Mirage</a>
-                        </div>
-
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hogwarts-Legacy.html"><img src="" alt="" class="game-img" id="game-img4"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="star-wars-jedi-survivor.html"><img src="" alt="" class="game-img" id="game-img5"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="star-wars-jedi-survivor.html" class="title">Star Wars Jedi Survivor</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Elden-Ring.html"><img src="" alt="" class="game-img" id="game-img6"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Elden-Ring.html" class="title">Elden Ring</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="sherlock-holmes-the-awakened-2.html"><img src="" alt="" class="game-img"
-                            id="game-img7"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="sherlock-holmes-the-awakened-2.html" class="title">Sherlock Holmes The Awakened
-                                2</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hollow-Knight-Silksong.html"><img src="" alt="" class="game-img" id="game-img8"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hollow-Knight-Silksong.html" class="title">Hollow Knight Silksong</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-
+                <p class="game-price">$19.99</p>
+              </div>
             </div>
-
-        </section>
-        <section class="home-section">
-            <h2 class="main-title">Más Vendidos</h2>
-            <div class="container-games">
-                <div class="game game-new">
-                    <a href="Resident-Evil-4-2023.html"><img src="" alt="" class="game-img" id="game-img9"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a class="title" href="Resident-Evil-4-2023.html">Resident Evil 4 2023</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
+          </div>
+          <div class="game">
+            <a href="Dont-starve-together.html"
+              ><img src="" alt="" class="game-img" id="game-img2"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Dont-starve-together.html" class="title"
+                  >Dont Starve Together</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
                 </div>
-
-
-                <div class="game ">
-                    <a href="Dont-starve-together.html"><img src="" alt="" class="game-img" id="game-img10"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Dont-starve-together.html" class="title">Dont Starve Together</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Assassins-Creed-Mirage.html"><img src="" alt="" class="game-img" id="game-img11"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Assassins-Creed-Mirage.html" class="title">Assassins Creed Mirage</a>
-                        </div>
-
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hogwarts-Legacy.html"><img src="" alt="" class="game-img" id="game-img12"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="star-wars-jedi-survivor.html"><img src="" alt="" class="game-img" id="game-img13"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="star-wars-jedi-survivor.html" class="title">Star Wars Jedi Survivor</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Elden-Ring.html"><img src="" alt="" class="game-img" id="game-img14"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Elden-Ring.html" class="title">Elden Ring</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="sherlock-holmes-the-awakened-2.html"><img src="" alt="" class="game-img"
-                            id="game-img15"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="sherlock-holmes-the-awakened-2.html" class="title">Sherlock Holmes The Awakened
-                                2</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hollow-Knight-Silksong.html"><img src="" alt="" class="game-img" id="game-img16"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hollow-Knight-Silksong.html" class="title">Hollow Knight Silksong</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-
+                <p class="game-price">$19.99</p>
+              </div>
             </div>
-
-        </section>
-        <section class="home-section">
-            <h2 class="main-title">Ofertas</h2>
-            <div class="container-games">
-                <div class="game game-new">
-                    <a href="Resident-Evil-4-2023.html"><img src="" alt="" class="game-img" id="game-img17"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a class="title" href="Resident-Evil-4-2023.html">Resident Evil 4 2023</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
+          </div>
+          <div class="game">
+            <a href="Assassins-Creed-Mirage.html"
+              ><img src="" alt="" class="game-img" id="game-img3"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Assassins-Creed-Mirage.html" class="title"
+                  >Assassins Creed Mirage</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
                 </div>
-
-
-                <div class="game ">
-                    <a href="Dont-starve-together.html"><img src="" alt="" class="game-img" id="game-img18"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Dont-starve-together.html" class="title">Dont Starve Together</a>
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Assassins-Creed-Mirage.html"><img src="" alt="" class="game-img" id="game-img19"></a>
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Assassins-Creed-Mirage.html" class="title">Assassins Creed Mirage</a>
-                        </div>
-
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hogwarts-Legacy.html"><img src="" alt="" class="game-img" id="game-img20"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="star-wars-jedi-survivor.html"><img src="" alt="" class="game-img" id="game-img21"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="star-wars-jedi-survivor.html" class="title">Star Wars Jedi Survivor</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Elden-Ring.html"><img src="" alt="" class="game-img" id="game-img22"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Elden-Ring.html" class="title">Elden Ring</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="sherlock-holmes-the-awakened-2.html"><img src="" alt="" class="game-img"
-                            id="game-img23"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="sherlock-holmes-the-awakened-2.html" class="title">Sherlock Holmes The Awakened
-                                2</a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="game ">
-                    <a href="Hollow-Knight-Silksong.html"><img src="" alt="" class="game-img" id="game-img24"></a>
-
-                    <div class="game-description">
-                        <div class="game-title">
-                            <a href="Hollow-Knight-Silksong.html" class="title">Hollow Knight Silksong <br>Hollow Knight Silksong </a>
-
-                        </div>
-                        <div class="game-plataforms-price">
-                            <div class="game-plataforms">
-                                <i class="fa-brands fa-windows"></i>
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <p class="game-price">$19.99</p>
-                        </div>
-                    </div>
-                </div>
-
+                <p class="game-price">$19.99</p>
+              </div>
             </div>
-
-        </section>
-        <section class="home-section">
-            <h2 class="tips-title">¿Razones para usar INDIAR?</h2>
-            <div class="container-tips">
-                <div class="tip">
-                    <i class="fa-solid fa-money-bill-1-wave tip-icon"></i>
-                    <h2 class="tip-title">Garantía</h2>
-                    <p class="tip-txt">Ofrecemos una garantía de devolución de dinero, así que puedes comprar con
-                        confianza sabiendo que si no estás satisfecho, puedes devolverlo y recibir un reembolso.</p>
+          </div>
+          <div class="game">
+            <a href="Hogwarts-Legacy.html"
+              ><img src="" alt="" class="game-img" id="game-img4"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
                 </div>
-                <div class="tip">
-                    <i class="fas fa-gamepad tip-icon"></i>
-                    <h2 class="tip-title">Facil de usar</h2>
-                    <p class="tip-txt">Nuestra tienda en línea es fácil de usar y puedes encontrar rápidamente los
-                        juegos que estás buscando. ¡No pierdas tiempo buscando en otro lugar!</p>
-                </div>
-                <div class="tip">
-                    <i class="fa fa-headset tip-icon"></i>
-                    <h2 class="tip-title">Soporte</h2>
-                    <p class="tip-txt">Nuestro servicio de soporte es excepcional y siempre estamos aquí para ayudarte
-                        con cualquier problema que puedas tener con tu compra</p>
-                </div>
+                <p class="game-price">$19.99</p>
+              </div>
             </div>
-        </section>
+          </div>
+          <div class="game">
+            <a href="star-wars-jedi-survivor.html"
+              ><img src="" alt="" class="game-img" id="game-img5"
+            /></a>
+
+            <div class="game-description">
+              <div class="game-title">
+                <a href="star-wars-jedi-survivor.html" class="title"
+                  >Star Wars Jedi Survivor</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Elden-Ring.html"
+              ><img src="" alt="" class="game-img" id="game-img6"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Elden-Ring.html" class="title">Elden Ring</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="sherlock-holmes-the-awakened-2.html"
+              ><img src="" alt="" class="game-img" id="game-img7"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="sherlock-holmes-the-awakened-2.html" class="title"
+                  >Sherlock Holmes The Awakened 2</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Hollow-Knight-Silksong.html"
+              ><img src="" alt="" class="game-img" id="game-img8"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hollow-Knight-Silksong.html" class="title"
+                  >Hollow Knight Silksong</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="home-section">
+        <h2 class="main-title">Más Vendidos</h2>
+        <div class="container-games">
+          <div class="game game-new">
+            <a href="Resident-Evil-4-2023.html"
+              ><img src="" alt="" class="game-img" id="game-img9"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a class="title" href="Resident-Evil-4-2023.html"
+                  >Resident Evil 4 2023</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Dont-starve-together.html"
+              ><img src="" alt="" class="game-img" id="game-img10"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Dont-starve-together.html" class="title"
+                  >Dont Starve Together</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Assassins-Creed-Mirage.html"
+              ><img src="" alt="" class="game-img" id="game-img11"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Assassins-Creed-Mirage.html" class="title"
+                  >Assassins Creed Mirage</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Hogwarts-Legacy.html"
+              ><img src="" alt="" class="game-img" id="game-img12"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="star-wars-jedi-survivor.html"
+              ><img src="" alt="" class="game-img" id="game-img13"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="star-wars-jedi-survivor.html" class="title"
+                  >Star Wars Jedi Survivor</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Elden-Ring.html"
+              ><img src="" alt="" class="game-img" id="game-img14"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Elden-Ring.html" class="title">Elden Ring</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="sherlock-holmes-the-awakened-2.html"
+              ><img src="" alt="" class="game-img" id="game-img15"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="sherlock-holmes-the-awakened-2.html" class="title"
+                  >Sherlock Holmes The Awakened 2</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Hollow-Knight-Silksong.html"
+              ><img src="" alt="" class="game-img" id="game-img16"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hollow-Knight-Silksong.html" class="title"
+                  >Hollow Knight Silksong</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="home-section">
+        <h2 class="main-title">Ofertas</h2>
+        <div class="container-games">
+          <div class="game game-new">
+            <a href="Resident-Evil-4-2023.html"
+              ><img src="" alt="" class="game-img" id="game-img17"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a class="title" href="Resident-Evil-4-2023.html"
+                  >Resident Evil 4 2023</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Dont-starve-together.html"
+              ><img src="" alt="" class="game-img" id="game-img18"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Dont-starve-together.html" class="title"
+                  >Dont Starve Together</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Assassins-Creed-Mirage.html"
+              ><img src="" alt="" class="game-img" id="game-img19"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Assassins-Creed-Mirage.html" class="title"
+                  >Assassins Creed Mirage</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Hogwarts-Legacy.html"
+              ><img src="" alt="" class="game-img" id="game-img20"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hogwarts-Legacy.html" class="title">Hogwarts Legacy</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="star-wars-jedi-survivor.html"
+              ><img src="" alt="" class="game-img" id="game-img21"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="star-wars-jedi-survivor.html" class="title"
+                  >Star Wars Jedi Survivor</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Elden-Ring.html"
+              ><img src="" alt="" class="game-img" id="game-img22"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Elden-Ring.html" class="title">Elden Ring</a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="sherlock-holmes-the-awakened-2.html"
+              ><img src="" alt="" class="game-img" id="game-img23"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="sherlock-holmes-the-awakened-2.html" class="title"
+                  >Sherlock Holmes The Awakened 2</a
+                >
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+          <div class="game">
+            <a href="Hollow-Knight-Silksong.html"
+              ><img src="" alt="" class="game-img" id="game-img24"
+            /></a>
+            <div class="game-description">
+              <div class="game-title">
+                <a href="Hollow-Knight-Silksong.html" class="title"
+                  >Hollow Knight Silksong <br />Hollow Knight Silksong
+                </a>
+              </div>
+              <div class="game-plataforms-price">
+                <div class="game-plataforms">
+                  <i class="fa-brands fa-windows"></i>
+                  <i class="fa-brands fa-linux"></i>
+                </div>
+                <p class="game-price">$19.99</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="home-section">
+        <h2 class="tips-title">¿Razones para usar INDIAR?</h2>
+        <div class="container-tips">
+          <div class="tip">
+            <i class="fa-solid fa-money-bill-1-wave tip-icon"></i>
+            <h2 class="tip-title">Garantía</h2>
+            <p class="tip-txt">
+              Ofrecemos una garantía de devolución de dinero, así que puedes
+              comprar con confianza sabiendo que si no estás satisfecho, puedes
+              devolverlo y recibir un reembolso.
+            </p>
+          </div>
+          <div class="tip">
+            <i class="fas fa-gamepad tip-icon"></i>
+            <h2 class="tip-title">Facil de usar</h2>
+            <p class="tip-txt">
+              Nuestra tienda en línea es fácil de usar y puedes encontrar
+              rápidamente los juegos que estás buscando. ¡No pierdas tiempo
+              buscando en otro lugar!
+            </p>
+          </div>
+          <div class="tip">
+            <i class="fa fa-headset tip-icon"></i>
+            <h2 class="tip-title">Soporte</h2>
+            <p class="tip-txt">
+              Nuestro servicio de soporte es excepcional y siempre estamos aquí
+              para ayudarte con cualquier problema que puedas tener con tu
+              compra
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="main-footer">
-        <div class="link-sections">
-            <ul class="footer-link-container">
-                <li class="footer-link-container-item"><a class="footer-link" href="">Compañía</a></li>
-                <li class="footer-link-container-item"><a class="footer-link" href="">Ayuda</a></li>
-                <li class="footer-link-container-item"><a class="footer-link" href="">Terminos de servicio</a></li>
-                <li class="footer-link-container-item"><a class="footer-link" href="">Politicas de privacidad</a></li>
-            </ul>
-            <ul class="footer-social-link-container">
-                <li class="footer-social-link-container-item"><a href="" class="footer-social-link"><i
-                            class="fa-brands fa-square-youtube"></i></a></li>
-                <li class="footer-social-link-container-item"><a href="" class="footer-social-link"><i
-                            class="fa-brands fa-square-facebook"></i></a></li>
-                <li class="footer-social-link-container-item"><a href="" class="footer-social-link"><i
-                            class="fa-brands fa-square-twitter"></i></a></li>
-                <li class="footer-social-link-container-item"><a href="" class="footer-social-link"><i
-                            class="fa-brands fa-square-steam"></i></a></li>
-            </ul>
-        </div>
-        <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+      <div class="link-sections">
+        <ul class="footer-link-container">
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Compañía</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Ayuda</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Terminos de servicio</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Politicas de privacidad</a>
+          </li>
+        </ul>
+        <ul class="footer-social-link-container">
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-youtube"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-facebook"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-twitter"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-steam"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
     </footer>
-
-</body>
-<script src="script-home-page.js"></script>
-
+  </body>
+  <script src="script-home-page.js"></script>
 </html>

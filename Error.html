@@ -13,26 +13,25 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
-    
   </head>
 
-  <body >
+  <body>
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
-          <a class="main-header-title" href="."
-            ><span class="word1">Indi</span><span class="word2">AR</span></a
-          >
           <span class="icon-menu" id="btn-menu"
             ><i class="fas fa-bars"></i
           ></span>
+          <a class="main-header-title" href=""
+            ><span class="word1">Indi</span><span class="word2">AR</span></a
+          >
           <nav class="main-nav" id="main-nav">
-            <ul class="menu">
-              <li class="menu-item">
-                <a href="." class="menu-link">TIENDA</a>
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="" class="nav-link nav-link-active">TIENDA</a>
               </li>
-              <li class="menu-item">
-                <a href="contacto.html" class="menu-link">CONTACTO</a>
+              <li class="nav-item">
+                <a href="contacto.html" class="nav-link">CONTACTO</a>
               </li>
             </ul>
           </nav>
@@ -41,7 +40,7 @@
           <a href="login.html" class="main-header-btn"
             ><i class="fas fa-user icon-header"></i
           ></a>
-          <a href="" class="main-header-btn"
+          <a href="Error.html" class="main-header-btn"
             ><i class="fa-solid fa-cart-shopping icon-header"></i
           ></a>
           <input
@@ -49,21 +48,42 @@
             class="main-header-input"
             placeholder="Buscar juegos"
             id=""
-          /><a href="" class="main-header-btn"
+          />
+          <a href="Error.html" class="main-header-btn"
             ><i class="fas fa-search icon-search"></i
           ></a>
         </div>
+      </div>
+      <div id="menu-container" class="menu-oculto">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="" class="menu-link menu-link-active">TIENDA</a>
+          </li>
+          <li class="menu-item">
+            <a href="contacto.html" class="menu-link">CONTACTO</a>
+          </li>
+        </ul>
       </div>
     </header>
 
     <!--Inicio del Main-->
     <main class="main">
- <div id="contruction-message-container">
-<svg xmlns="http://www.w3.org/2000/svg" class="contruction-message-icon"viewBox="0 0 24 24"><path fill="currentColor" d="M12 15c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4M8 9a4 4 0 0 0 4 4a4 4 0 0 0 4-4m-4.5-7c-.3 0-.5.21-.5.5v3h-1V3s-2.25.86-2.25 3.75c0 0-.75.14-.75 1.25h10c-.05-1.11-.75-1.25-.75-1.25C16.25 3.86 14 3 14 3v2.5h-1v-3c0-.29-.19-.5-.5-.5h-1Z"/></svg>
-<p id="contruction-message"> <b>¡Error! </b><br> Sitio En Construccion</p>
- </div>
-    </script>
-
+      <div id="contruction-message-container">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="contruction-message-icon"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M12 15c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4M8 9a4 4 0 0 0 4 4a4 4 0 0 0 4-4m-4.5-7c-.3 0-.5.21-.5.5v3h-1V3s-2.25.86-2.25 3.75c0 0-.75.14-.75 1.25h10c-.05-1.11-.75-1.25-.75-1.25C16.25 3.86 14 3 14 3v2.5h-1v-3c0-.29-.19-.5-.5-.5h-1Z"
+          />
+        </svg>
+        <p id="contruction-message">
+          <b>¡Error! </b><br />
+          Sitio En Construccion
+        </p>
+      </div>
     </main>
 
     <!--Aquí comienza el Footer-->
@@ -109,5 +129,4 @@
       <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
     </footer>
   </body>
-
 </html>

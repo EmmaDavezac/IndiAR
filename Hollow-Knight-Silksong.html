@@ -14,23 +14,24 @@
     />
     <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
   </head>
+
   <body>
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
-          <a class="main-header-title" href="."
-            ><span class="word1">Indi</span><span class="word2">AR</span></a
-          >
           <span class="icon-menu" id="btn-menu"
             ><i class="fas fa-bars"></i
           ></span>
+          <a class="main-header-title" href=""
+            ><span class="word1">Indi</span><span class="word2">AR</span></a
+          >
           <nav class="main-nav" id="main-nav">
-            <ul class="menu">
-              <li class="menu-item">
-                <a href="." class="menu-link">TIENDA</a>
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="" class="nav-link nav-link-active">TIENDA</a>
               </li>
-              <li class="menu-item">
-                <a href="contacto.html" class="menu-link">CONTACTO</a>
+              <li class="nav-item">
+                <a href="contacto.html" class="nav-link">CONTACTO</a>
               </li>
             </ul>
           </nav>
@@ -47,12 +48,24 @@
             class="main-header-input"
             placeholder="Buscar juegos"
             id=""
-          /><a href="" class="main-header-btn"
+          />
+          <a href="Error.html" class="main-header-btn"
             ><i class="fas fa-search icon-search"></i
           ></a>
         </div>
       </div>
+      <div id="menu-container" class="menu-oculto">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="" class="menu-link menu-link-active">TIENDA</a>
+          </li>
+          <li class="menu-item">
+            <a href="contacto.html" class="menu-link">CONTACTO</a>
+          </li>
+        </ul>
+      </div>
     </header>
+
     <main class="main main-game-page">
       <h1 class="game-title" id="game-title"></h1>
       <div class="game-page-container">
@@ -93,7 +106,6 @@
             <p class="section-title"><b>Descripción</b></p>
             <p class="game-description" id="game-description"></p>
           </div>
-
           <div class="game-section">
             <p class="section-title"><b>Requisitos</b></p>
             <div class="requirements-list">
@@ -124,7 +136,6 @@
             </div>
           </div>
         </div>
-
         <div buy-card-container>
           <div class="buy-card">
             <img class="buy-card-thumb" id="buy-card-thumb" src="" alt="" />
@@ -144,7 +155,6 @@
                 <p class="category-title">Desarrollador:</p>
                 <p id="game-developer"></p>
               </div>
-
               <div class="game-info-category">
                 <p class="category-title">Lanzamiento:</p>
                 <p id="release-date"></p>
@@ -157,6 +167,7 @@
         </div>
       </div>
     </main>
+
     <footer class="main-footer">
       <div class="link-sections">
         <ul class="footer-link-container">

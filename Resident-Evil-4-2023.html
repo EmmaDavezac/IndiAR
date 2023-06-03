@@ -12,159 +12,206 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
-    <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
-   
-
+    <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
   </head>
+
   <body>
     <header class="main-header">
       <div class="container-flex">
         <div class="main-header-container">
-
-           <a class="main-header-title" href="."></i><span class="word1">Indi</span><span class="word2">AR</span></a>
-        <span class="icon-menu " id="btn-menu"><i class="fas fa-bars"></i></span>
-         <nav class="main-nav" id="main-nav" >
-          <ul class="menu" >
-            <li class="menu-item"><a href="." class="menu-link">TIENDA</a></li>
-            <li class="menu-item"><a href="contacto.html" class="menu-link">CONTACTO</a></li>
-          </ul>
-         </nav>   
+          <span class="icon-menu" id="btn-menu"
+            ><i class="fas fa-bars"></i
+          ></span>
+          <a class="main-header-title" href=""
+            ><span class="word1">Indi</span><span class="word2">AR</span></a
+          >
+          <nav class="main-nav" id="main-nav">
+            <ul class="nav">
+              <li class="nav-item">
+                <a href="" class="nav-link nav-link-active">TIENDA</a>
+              </li>
+              <li class="nav-item">
+                <a href="contacto.html" class="nav-link">CONTACTO</a>
+              </li>
+            </ul>
+          </nav>
         </div>
         <div class="main-header-container">
-            <a href="login.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
-            <a href="Error.html" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
-            <input type="search" class="main-header-input" placeholder="Buscar juegos" id=""><a href="" class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
+          <a href="login.html" class="main-header-btn"
+            ><i class="fas fa-user icon-header"></i
+          ></a>
+          <a href="Error.html" class="main-header-btn"
+            ><i class="fa-solid fa-cart-shopping icon-header"></i
+          ></a>
+          <input
+            type="search"
+            class="main-header-input"
+            placeholder="Buscar juegos"
+            id=""
+          />
+          <a href="Error.html" class="main-header-btn"
+            ><i class="fas fa-search icon-search"></i
+          ></a>
         </div>
+      </div>
+      <div id="menu-container" class="menu-oculto">
+        <ul class="menu">
+          <li class="menu-item">
+            <a href="" class="menu-link menu-link-active">TIENDA</a>
+          </li>
+          <li class="menu-item">
+            <a href="contacto.html" class="menu-link">CONTACTO</a>
+          </li>
+        </ul>
       </div>
     </header>
-<main class="main  main-game-page"> 
-  <h1 class="game-title" id="game-title"></h1>
-<div class="game-page-container">
-  
- <div class="game-page">
 
-       
-
-   
-    <div class="game-images">
-      <div class="game-images">
-        <div class="main-picture">
-          <img src="" id="main-game-img" alt="" />
-          <iframe
-            src="https://cdn.akamai.steamstatic.com/steam/apps/256938326/movie480_vp9.webm?t=1684904136"
-            frameborder="0"
-            id="main-game-video"
-          ></iframe>
-        </div>
-        <div class="game-thumbs">
-          <div id="movie-play-button-container">
-            <img
-              class="game-thumb"
-              id="game-thumb-6"
-              src="https://cdn.akamai.steamstatic.com/steam/apps/256938326/movie.184x123.jpg?t=1684904136"
-              alt=""
-            />
-            <img
-              src="https://store.cloudflare.steamstatic.com/public/images/v5/ico_game_highlight_video.png"
-              id="movie-play-button"
-              alt=""
-            />
+    <main class="main main-game-page">
+      <h1 class="game-title" id="game-title"></h1>
+      <div class="game-page-container">
+        <div class="game-page">
+          <div class="game-images">
+            <div class="game-images">
+              <div class="main-picture">
+                <img src="" id="main-game-img" alt="" />
+                <iframe
+                  src="https://cdn.akamai.steamstatic.com/steam/apps/256938326/movie480_vp9.webm?t=1684904136"
+                  frameborder="0"
+                  id="main-game-video"
+                ></iframe>
+              </div>
+              <div class="game-thumbs">
+                <div id="movie-play-button-container">
+                  <img
+                    class="game-thumb"
+                    id="game-thumb-6"
+                    src="https://cdn.akamai.steamstatic.com/steam/apps/256938326/movie.184x123.jpg?t=1684904136"
+                    alt=""
+                  />
+                  <img
+                    src="https://store.cloudflare.steamstatic.com/public/images/v5/ico_game_highlight_video.png"
+                    id="movie-play-button"
+                    alt=""
+                  />
+                </div>
+                <img class="game-thumb" id="game-thumb-1" src="" alt="" />
+                <img class="game-thumb" id="game-thumb-2" src="" alt="" />
+                <img class="game-thumb" id="game-thumb-3" src="" alt="" />
+                <img class="game-thumb" id="game-thumb-4" src="" alt="" />
+                <img class="game-thumb" id="game-thumb-5" src="" alt="" />
+              </div>
+            </div>
           </div>
-          <img class="game-thumb" id="game-thumb-1" src="" alt="" />
-          <img class="game-thumb" id="game-thumb-2" src="" alt="" />
-          <img class="game-thumb" id="game-thumb-3" src="" alt="" />
-          <img class="game-thumb" id="game-thumb-4" src="" alt="" />
-          <img class="game-thumb" id="game-thumb-5" src="" alt="" />
+          <div class="game-section">
+            <p class="section-title"><b>Descripción</b></p>
+            <p class="game-description" id="game-description"></p>
+          </div>
+          <div class="game-section">
+            <p class="section-title"><b>Requisitos</b></p>
+            <div class="requirements-list">
+              <p>
+                <b>REQUISITOS MINIMOS</b> <br />
+                OS: 64-bit Windows 10 <br />
+                Processor: AMD Ryzen 5 5600X (6 * 3700) or equivalent or Intel
+                Core i9-9900k (8 * 3600) or equivalent <br />
+                Memory: 12 GB RAM <br />
+                Graphics: Radeon RX 6800 XT (16384 MB) or GeForce RTX 2070 Super
+                (8192 MB) <br />
+                DirectX: Version 12 <br />
+                Sound Card: Any <br />
+                VR Support: N/A
+              </p>
+              <p>
+                <b>REQUISITOS RECOMENDADOS</b> <br />
+                OS: 64-bit Windows 10 <br />
+                Processor: AMD Ryzen 5 5600X (6 * 3700) or equivalent or Intel
+                Core i9-9900k (8 * 3600) or equivalent <br />
+                Memory: 12 GB RAM <br />
+                Graphics: Radeon RX 6800 XT (16384 MB) or GeForce RTX 2070 Super
+                (8192 MB) <br />
+                DirectX: Version 12 <br />
+                Sound Card: Any <br />
+                VR Support: N/A
+              </p>
+            </div>
+          </div>
+        </div>
+        <div buy-card-container>
+          <div class="buy-card">
+            <img class="buy-card-thumb" id="buy-card-thumb" src="" alt="" />
+            <div class="game-plataforms-price">
+              <div class="game-plataforms">
+                <i class="fa-brands fa-windows"></i>
+                <i class="fa-brands fa-linux"></i>
+              </div>
+              <p class="game-price">$19.99</p>
+            </div>
+            <div class="game-info">
+              <div class="game-info-category">
+                <p class="category-title">Distribuidor:</p>
+                <p id="game-publisher"></p>
+              </div>
+              <div class="game-info-category">
+                <p class="category-title">Desarrollador:</p>
+                <p id="game-developer"></p>
+              </div>
+
+              <div class="game-info-category">
+                <p class="category-title">Lanzamiento:</p>
+                <p id="release-date"></p>
+              </div>
+            </div>
+            <div class="buy-button-container">
+              <a class="buy-button" href="Error.html">Comprar</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
- <div class="game-section">
-       <p class="section-title"><b>Descripción</b> </p>
- <p   class="game-description" id="game-description"></p>
- </div>
-       
-   
-    <div class="game-section">
-        <p class="section-title"><b>Requisitos</b> </p>
-<div class="requirements-list">
-  <p>
-<B>REQUISITOS MINIMOS</B> <br>
-OS:	64-bit Windows 10 <br>
-Processor:	AMD Ryzen 5 5600X (6 * 3700) or equivalent or Intel Core i9-9900k (8 * 3600) or equivalent <br>
-Memory:	12 GB RAM <br>
-Graphics:	Radeon RX 6800 XT (16384 MB) or GeForce RTX 2070 Super (8192 MB) <br>
-DirectX:	Version 12 <br>
-Sound Card:	Any <br>
-VR Support:	N/A</p>
-<p>
-<B>REQUISITOS RECOMENDADOS</B> <br>
-OS:	64-bit Windows 10 <br>
-Processor:	AMD Ryzen 5 5600X (6 * 3700) or equivalent or Intel Core i9-9900k (8 * 3600) or equivalent <br>
-Memory:	12 GB RAM <br>
-Graphics:	Radeon RX 6800 XT (16384 MB) or GeForce RTX 2070 Super (8192 MB) <br>
-DirectX:	Version 12 <br>
-Sound Card:	Any <br>
-VR Support:	N/A</p>
-</div>
-</div>
-</div>
+    </main>
 
-<div buy-card-container> 
-  <div class="buy-card">
-    <img  class="buy-card-thumb" id="buy-card-thumb" src="" alt="">
-    <div class="game-plataforms-price">
-    <div class="game-plataforms">
-    <i class="fa-brands fa-windows"></i>
-    <i class="fa-brands fa-linux"></i>
-    </div>
-    <p class="game-price">$19.99</p>
-    </div>
-    <div class="game-info">
-       <div class="game-info-category">
-        <p class="category-title">Distribuidor:</p>
-        <p id="game-publisher"></p>
-
+    <footer class="main-footer">
+      <div class="link-sections">
+        <ul class="footer-link-container">
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Compañía</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Ayuda</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Terminos de servicio</a>
+          </li>
+          <li class="footer-link-container-item">
+            <a class="footer-link" href="">Politicas de privacidad</a>
+          </li>
+        </ul>
+        <ul class="footer-social-link-container">
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-youtube"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-facebook"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-twitter"></i
+            ></a>
+          </li>
+          <li class="footer-social-link-container-item">
+            <a href="" class="footer-social-link"
+              ><i class="fa-brands fa-square-steam"></i
+            ></a>
+          </li>
+        </ul>
       </div>
-      <div class="game-info-category">
-        <p class="category-title">Desarrollador:</p>
-        <p id="game-developer"></p>
-
-      </div>
-        
-      <div class="game-info-category">
-        <p class="category-title">Lanzamiento:</p>
-        <p id="release-date"></p>
-
-      </div>
-
-    </div>
- <div class="buy-button-container">
-    <a class="buy-button" href="Error.html">Comprar</a>
- </div>
- </div></div>
-</div>
-</main>
-   <footer class="main-footer">
-<div class="link-sections">
-      <ul class="footer-link-container">
-    <li class="footer-link-container-item"><a class="footer-link" href="">Compañía</a></li>
-    <li class="footer-link-container-item"><a class="footer-link"  href="">Ayuda</a></li>
-    <li class="footer-link-container-item"><a class="footer-link"  href="">Terminos de servicio</a></li>
-    <li class="footer-link-container-item"><a class="footer-link"  href="">Politicas de privacidad</a></li>
-  </ul>
-  <ul class="footer-social-link-container">
-     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-youtube"></i></a></li>
-     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-facebook"></i></a></li>
-     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-twitter"></i></a></li>
-     <li class="footer-social-link-container-item"><a href="" class="footer-social-link" ><i class="fa-brands fa-square-steam"></i></a></li>
-  </ul>
-</div>
-    <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
-  </footer>
-    
+      <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+    </footer>
   </body>
   <script src="script.js"></script>
   <script src="script-game-page.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
-
 </html>
