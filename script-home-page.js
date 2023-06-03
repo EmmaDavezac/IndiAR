@@ -39,9 +39,9 @@ setInterval(function(){Next();},5000);
 
 //Funcionalidades para el boton del menu
 let btnMenu=document.getElementById('btn-menu');
-let mainNav=document.getElementById('main-nav');
+let menuContainer=document.getElementById('menu-container');
 btnMenu.addEventListener('click',function(){
-mainNav.classList.toggle('mostrar');});
+menuContainer.classList.toggle('menu-oculto');});
 
 //Funcionalidades para cargar todas las imagenes desde la API
 
