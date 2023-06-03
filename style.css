@@ -1082,13 +1082,12 @@ body {
 }
 
 .form-container {
-  margin: auto;
-  margin: 80px;
+  margin: 128px auto;
   width: 640px;
   height: 100%;
   padding: 8px 20px;
   background-color: #ffff;
-  border-radius:  6px;
+  border-radius: 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 .bottom-footer {
@@ -1105,9 +1104,11 @@ body {
 
 @media screen and (min-width: 1200px) {
   .form-container{margin-bottom: 188px;}
-
+.bottom-footer {
+    bottom: 0;
+    width: 100%;
   }
-
+}
 
 @media screen and (min-width: 1800px){
    
