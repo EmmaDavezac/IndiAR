@@ -1082,8 +1082,7 @@ body {
 }
 
 .form-container {
-  margin: auto;
-  margin-bottom: 80px;
+  margin: 128px auto;
   width: 640px;
   height: 100%;
   padding: 20px;
@@ -1102,7 +1101,6 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
-  .form-container{margin-bottom: 188px;}
 .bottom-footer {
     bottom: 0;
     width: 100%;
