@@ -1083,6 +1083,7 @@ body {
 
 .form-container {
   margin: auto;
+  margin-bottom: 80px;
   width: 640px;
   height: 100%;
   padding: 20px;
@@ -1101,16 +1102,16 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
-
+  .form-container{margin-bottom: 188px;}
+.bottom-footer {
+    bottom: 0;
+    width: 100%;
+  }
   }
 
 
 @media screen and (min-width: 1800px){
-    .bottom-footer {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-      }
+   
 }
 /*Estilos del HTML "ERROR" O SITIO EN CONSTRUCCION*/
 #contruction-message-container {
