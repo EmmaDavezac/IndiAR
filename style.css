@@ -1090,7 +1090,11 @@ body {
   border-radius: 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
 }
-
+.bottom-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 .warningSection {
   margin-bottom: auto;
   text-align: center;
@@ -1099,11 +1103,11 @@ body {
 }
 
 @media screen and (min-width: 1200px) {
+  .form-container{margin-bottom: 188px;}
 .bottom-footer {
     bottom: 0;
     width: 100%;
   }
-}
 
 
 @media screen and (min-width: 1800px){
