@@ -18,6 +18,7 @@ body {
   margin: 0;
   margin-top: 91px;
   padding: 0;
+  font-size: 10px;
 }
 
 .main {
@@ -1014,6 +1015,7 @@ body {
 .buy-button {
   text-decoration: none;
   color: #fff;
+
   font-size: 16px;
   font-weight: 600;
   background-color: #ff4e00;
@@ -1027,12 +1029,11 @@ body {
  /*Estilo formulario*/
 
 .form-container {
+  background: #fff;
   position: relative;
-  margin: 128px auto;
-  width: 80%;
-  height: 80vh;
-  padding: 8px 20px;
-  background-color: #ffff;
+  margin: 20vh auto;
+  width: 95%;
+  height: 90vh;
   border-radius: 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
 }
@@ -1047,20 +1048,32 @@ form {
 .input-container {
   display: flex;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
+  height: 6vh;
+}
+.form-title-container{
+color: #ff4e00;
+  margin-top: 0;
+ margin-bottom: 2vh ;
+ height: 8vh;
+ display: flex;
 }
 .form-title {
-  color: #ff4e00;
+  margin: auto;
+font-size: 2rem;
   text-align: center;
+  font-weight: 600;
 }
 
 .input-field {
+  height: 6vh;
   width: 100%;
   padding: 5px;
   outline: none;
   border-radius: 0 10px 10px 0;
   border: 1px solid #ccc;
   font-family: "Roboto-regular", sans-serif;
+  font-size: 1rem;
 }
 
 .input-field:focus {
@@ -1068,27 +1081,28 @@ form {
 }
 
 .icon-form-input {
+  height: 6vh;
   padding: 10px;
   background: #ff4e00;
   color: #fff;
-  min-width: 50px;
+  font-size: 2em;
   text-align: center;
   border-radius: 10px 0 0 10px;
 }
-
 /*Estilo de boton de formulario*/
 .btn {
   background: #ff4e00;
   color: #fff;
-  padding: 15px 20px;
+  padding: 1vh 1vh;
   border: none;
   cursor: pointer;
   width: 50%;
-  opacity: 0.9;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 1em;
   margin: 0 auto;
   display: block;
+  height: 7vh;
+  font-size: 1.4rem;
 }
 
 .btn:hover {
@@ -1104,16 +1118,15 @@ form {
   margin-bottom: 0;
 }
 .warningSection {
-  margin-bottom: auto;
+  margin:2vh auto;
   text-align: center;
   color: #bd1d1d;
-  height: 80px;
+  height: 12vh;
 }
 
 @media screen and (min-width: 1200px) {
   .form-container{margin-bottom: 188px;width: 60%}
 .bottom-footer {
-  position: fixed;
     bottom: 0;
     width: 100%;
   }
