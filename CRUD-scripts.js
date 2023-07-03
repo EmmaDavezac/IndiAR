@@ -1,7 +1,7 @@
 
 //CRUD de Usuarios
 
-// Función para cargar la lista de usuarios desde la API
+//Función para cargar la lista de usuarios desde la API
 function cargarUsuarios() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios")
         .then((response) => response.json())
@@ -51,37 +51,42 @@ function cargarUsuarios() {
         });
 }
 
-// Función para crear un nuevo usuario
-function crearUsuario(){
-    const nombre = document.getElementById("nombre").value;
-    const correo = document.getElementById("correo").value;
-    const psw = document.getElementById("password").value;
-    let admin = "0";
-    if (document.getElementById("admin").checked) {
-        admin = "1";
-    }
-    fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            Nombre: nombre,
-            Email: correo,
-            Password: psw,
-            es_Admin: admin,
-        }),
+//Función para crear un nuevo usuario
+let crearUsuario = document.getElementById("crear-form-usuario");
+if (crearUsuario) {
+    crearUsuario.addEventListener("submit", e => {
+        e.preventDefault();
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correo").value;
+        const psw = document.getElementById("password").value;
+        let admin = "0";
+        if (document.getElementById("admin").checked) {
+            admin = "1";
+        }
+        fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                Nombre: nombre,
+                Email: correo,
+                Password: psw,
+                es_Admin: admin,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarUsuarios();
+                document.getElementById("nombre").value = "";
+                document.getElementById("correo").value = "";
+                document.getElementById("password").value = "";
+                document.getElementById("admin").value = "";
+            });
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarUsuarios();
-            document.getElementById("nombre").value = "";
-            document.getElementById("correo").value = "";
-            document.getElementById("password").value = "";
-            document.getElementById("admin").value = "";
-        });
 }
 
-// Función para eliminar un usuario
+
+//Función para eliminar un usuario
 function eliminarUsuario(id) {
     if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
         fetch(`https://lucianodavezac.pythonanywhere.com/api/usuarios/${id}`, {
@@ -95,42 +100,45 @@ function eliminarUsuario(id) {
     }
 }
 
-// Función para editar un usuario
-function editarUsuario(){
-    const nombre = document.getElementById("nombre2").value;
-    const correo = document.getElementById("correo2").value;
-    const psw = document.getElementById("password2").value;
-    const id = document.getElementById("id").value;
-    let admin = "0";
-    if (document.getElementById("admin2").checked) {
-        admin = "1";
-    }
-    fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios/" + id, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            Nombre: nombre,
-            Email: correo,
-            Password: psw,
-            es_Admin: admin,
-        }),
+//Función para editar un usuario
+let editarUsuario = document.getElementById('editar-form-usuario');
+if (editarUsuario) {
+    editarUsuario.addEventListener("submit", e => {
+        e.preventDefault();
+        const nombre = document.getElementById("nombre2").value;
+        const correo = document.getElementById("correo2").value;
+        const psw = document.getElementById("password2").value;
+        const id = document.getElementById("id").value;
+        let admin = "0";
+        if (document.getElementById("admin2").checked) {
+            admin = "1";
+        }
+        fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios/" + id, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                Nombre: nombre,
+                Email: correo,
+                Password: psw,
+                es_Admin: admin,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarUsuarios();
+                document.getElementById("id").value = "";
+                document.getElementById("nombre2").value = "";
+                document.getElementById("correo2").value = "";
+                document.getElementById("password2").value = "";
+                document.getElementById("admin2").value = "";
+            })
+
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarUsuarios();
-            document.getElementById("id").value = "";
-            document.getElementById("nombre2").value = "";
-            document.getElementById("correo2").value = "";
-            document.getElementById("password2").value = "";
-            document.getElementById("admin2").value = "";
-        });
 }
 
-
 //CRUD de Juegos
-
-// Función para cargar la lista de juegos desde la API
+//Función para cargar la lista de juegos desde la API
 function cargarJuegos() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/juegos")
         .then((response) => response.json())
@@ -195,43 +203,48 @@ function cargarJuegos() {
         });
 }
 
+
 // Función para crear un nuevo juego
-function crearJuego(){
-    const titulo = document.getElementById("titulo").value;
-    const distribuidor = document.getElementById("distribuidor").value;
-    const desarrollador = document.getElementById("desarrollador").value;
-    const lanzamiento = document.getElementById("lanzamiento").value;
-    const descripcion = document.getElementById("descripcion").value;
-    const precio = document.getElementById("precio").value;
-    const requisitosID = document.getElementById("requisitosID").value;
-    const img_principal = document.getElementById("img_principal").value;
-    fetch("https://lucianodavezac.pythonanywhere.com/api/juegos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            titulo: titulo,
-            distribuidor: distribuidor,
-            desarrollador: desarrollador,
-            lanzamiento: lanzamiento,
-            descripcion: descripcion,
-            precio: precio,
-            requisitosID: requisitosID,
-            img_principal: img_principal,
-        }),
+let crearJuego = document.getElementById('crear-form-juego');
+if (crearJuego) {
+    crearJuego.addEventListener("submit", e => {
+        e.preventDefault();
+        const titulo = document.getElementById("titulo").value;
+        const distribuidor = document.getElementById("distribuidor").value;
+        const desarrollador = document.getElementById("desarrollador").value;
+        const lanzamiento = document.getElementById("lanzamiento").value;
+        const descripcion = document.getElementById("descripcion").value;
+        const precio = document.getElementById("precio").value;
+        const requisitosID = document.getElementById("requisitosID").value;
+        const img_principal = document.getElementById("img_principal").value;
+        fetch("https://lucianodavezac.pythonanywhere.com/api/juegos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                titulo: titulo,
+                distribuidor: distribuidor,
+                desarrollador: desarrollador,
+                lanzamiento: lanzamiento,
+                descripcion: descripcion,
+                precio: precio,
+                requisitosID: requisitosID,
+                img_principal: img_principal,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarJuegos();
+                document.getElementById("titulo").value = "";
+                document.getElementById("distribuidor").value = "";
+                document.getElementById("desarrollador").value = "";
+                document.getElementById("lanzamiento").value = "";
+                document.getElementById("descripcion").value = "";
+                document.getElementById("precio").value = "";
+                document.getElementById("requisitosID").value = "";
+                document.getElementById("img_principal").value = "";
+            })
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarJuegos();
-            document.getElementById("titulo").value = "";
-            document.getElementById("distribuidor").value = "";
-            document.getElementById("desarrollador").value = "";
-            document.getElementById("lanzamiento").value = "";
-            document.getElementById("descripcion").value = "";
-            document.getElementById("precio").value = "";
-            document.getElementById("requisitosID").value = "";
-            document.getElementById("img_principal").value = "";
-        });
 }
 
 // Función para eliminar un juego
@@ -249,49 +262,54 @@ function eliminarjuego(id) {
 }
 
 // Función para editar un juego
-function editarJuego(){
-    const titulo = document.getElementById("titulo2").value;
-    const distribuidor = document.getElementById("distribuidor2").value;
-    const desarrollador = document.getElementById("desarrollador2").value;
-    const lanzamiento = document.getElementById("lanzamiento2").value;
-    const descripcion = document.getElementById("descripcion2").value;
-    const precio = document.getElementById("precio2").value;
-    const requisitosID = document.getElementById("requisitosID2").value;
-    const img_principal = document.getElementById("img_principal2").value;
-    const id = document.getElementById("ID").value;
-    fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/" + id, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            titulo: titulo,
-            distribuidor: distribuidor,
-            desarrollador: desarrollador,
-            lanzamiento: lanzamiento,
-            descripcion: descripcion,
-            precio: precio,
-            requisitosID: requisitosID,
-            img_principal: img_principal,
-        }),
+let editarJuego = document.getElementById('editar-form-juego');
+if (editarJuego) {
+    editarJuego.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const titulo = document.getElementById("titulo2").value;
+        const distribuidor = document.getElementById("distribuidor2").value;
+        const desarrollador = document.getElementById("desarrollador2").value;
+        const lanzamiento = document.getElementById("lanzamiento2").value;
+        const descripcion = document.getElementById("descripcion2").value;
+        const precio = document.getElementById("precio2").value;
+        const requisitosID = document.getElementById("requisitosID2").value;
+        const img_principal = document.getElementById("img_principal2").value;
+        const id = document.getElementById("ID").value;
+        fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/" + id, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                titulo: titulo,
+                distribuidor: distribuidor,
+                desarrollador: desarrollador,
+                lanzamiento: lanzamiento,
+                descripcion: descripcion,
+                precio: precio,
+                requisitosID: requisitosID,
+                img_principal: img_principal,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarJuegos();
+                document.getElementById("ID").value = "";
+                document.getElementById("titulo2").value = "";
+                document.getElementById("distribuidor2").value = "";
+                document.getElementById("desarrollador2").value = "";
+                document.getElementById("lanzamiento2").value = "";
+                document.getElementById("descripcion2").value = "";
+                document.getElementById("precio2").value = "";
+                document.getElementById("requisitosID2").value = "";
+                document.getElementById("img_principal2").value = "";
+            })
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarJuegos();
-            document.getElementById("ID").value = "";
-            document.getElementById("titulo2").value = "";
-            document.getElementById("distribuidor2").value = "";
-            document.getElementById("desarrollador2").value = "";
-            document.getElementById("lanzamiento2").value = "";
-            document.getElementById("descripcion2").value = "";
-            document.getElementById("precio2").value = "";
-            document.getElementById("requisitosID2").value = "";
-            document.getElementById("img_principal2").value = "";
-        });
 }
 
 //CRUD de Requisitos
 
-// Función para cargar la lista de requisitos desde la API
+//Función para cargar la lista de requisitos desde la API
 function cargarRequisitos() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos")
         .then((response) => response.json())
@@ -365,48 +383,52 @@ function cargarRequisitos() {
         });
 }
 
-// Función para crear un nuevo requisito
-function crearRequisito(){
-    const so_min = document.getElementById("so_min").value;
-    const procesador_min = document.getElementById("procesador_min").value;
-    const ram_min = document.getElementById("ram_min").value;
-    const GPU_min = document.getElementById("gpu_min").value;
-    const directx_min = document.getElementById("directx_min").value;
-    const so_rec = document.getElementById("so_rec").value;
-    const procesador_rec = document.getElementById("procesador_rec").value;
-    const ram_rec = document.getElementById("ram_rec").value;
-    const GPU_rec = document.getElementById("gpu_rec").value;
-    const directx_rec = document.getElementById("directx_rec").value;
-    fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            so_min: so_min,
-            procesador_min: procesador_min,
-            ram_min: ram_min,
-            GPU_min: GPU_min,
-            directx_min: directx_min,
-            so_rec: so_rec,
-            procesador_rec: procesador_rec,
-            ram_rec: ram_rec,
-            GPU_rec: GPU_rec,
-            directx_rec: directx_rec,
-        }),
+//Función para crear un nuevo requisito
+let craerRequisito = document.getElementById("crear-form-requisito");
+if (craerRequisito) {
+    craerRequisito.addEventListener("submit", e => {
+        e.preventDefault();
+        const so_min = document.getElementById("so_min").value;
+        const procesador_min = document.getElementById("procesador_min").value;
+        const ram_min = document.getElementById("ram_min").value;
+        const GPU_min = document.getElementById("gpu_min").value;
+        const directx_min = document.getElementById("directx_min").value;
+        const so_rec = document.getElementById("so_rec").value;
+        const procesador_rec = document.getElementById("procesador_rec").value;
+        const ram_rec = document.getElementById("ram_rec").value;
+        const GPU_rec = document.getElementById("gpu_rec").value;
+        const directx_rec = document.getElementById("directx_rec").value;
+        fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                so_min: so_min,
+                procesador_min: procesador_min,
+                ram_min: ram_min,
+                GPU_min: GPU_min,
+                directx_min: directx_min,
+                so_rec: so_rec,
+                procesador_rec: procesador_rec,
+                ram_rec: ram_rec,
+                GPU_rec: GPU_rec,
+                directx_rec: directx_rec,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarRequisitos();
+                document.getElementById("procesador_min").value = "";
+                document.getElementById("ram_min").value = "";
+                document.getElementById("gpu_min").value = "";
+                document.getElementById("directx_min").value = "";
+                document.getElementById("so_rec").value = "";
+                document.getElementById("procesador_rec").value = "";
+                document.getElementById("ram_rec").value = "";
+                document.getElementById("gpu_rec").value = "";
+                document.getElementById("directx_rec").value = "";
+            })
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarRequisitos();
-            document.getElementById("procesador_min").value = "";
-            document.getElementById("ram_min").value = "";
-            document.getElementById("gpu_min").value = "";
-            document.getElementById("directx_min").value = "";
-            document.getElementById("so_rec").value = "";
-            document.getElementById("procesador_rec").value = "";
-            document.getElementById("ram_rec").value = "";
-            document.getElementById("gpu_rec").value = "";
-            document.getElementById("directx_rec").value = "";
-        });
 }
 
 //Función para eliminar un requisito
@@ -424,55 +446,58 @@ function eliminarrequisito(id) {
 }
 
 //Función para editar un requisito
-function editarRequisito(){
-    const so_min = document.getElementById("so_min2").value;
-    const procesador_min = document.getElementById("procesador_min2").value;
-    const ram_min = document.getElementById("ram_min2").value;
-    const GPU_min = document.getElementById("gpu_min2").value;
-    const directx_min = document.getElementById("directx_min2").value;
-    const so_rec = document.getElementById("so_rec2").value;
-    const procesador_rec = document.getElementById("procesador_rec2").value;
-    const ram_rec = document.getElementById("ram_rec2").value;
-    const GPU_rec = document.getElementById("gpu_rec2").value;
-    const directx_rec = document.getElementById("directx_rec2").value;
-    const id = document.getElementById("id").value;
-    fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos/" + id, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            so_min: so_min,
-            procesador_min: procesador_min,
-            ram_min: ram_min,
-            GPU_min: GPU_min,
-            directx_min: directx_min,
-            so_rec: so_rec,
-            procesador_rec: procesador_rec,
-            ram_rec: ram_rec,
-            GPU_rec: GPU_rec,
-            directx_rec: directx_rec,
-        }),
+let editarRequisito = document.getElementById('editar-form-requisito');
+if (editarRequisito) {
+    editarRequisito.addEventListener("submit", e => {
+        e.preventDefault();
+        const so_min = document.getElementById("so_min2").value;
+        const procesador_min = document.getElementById("procesador_min2").value;
+        const ram_min = document.getElementById("ram_min2").value;
+        const GPU_min = document.getElementById("gpu_min2").value;
+        const directx_min = document.getElementById("directx_min2").value;
+        const so_rec = document.getElementById("so_rec2").value;
+        const procesador_rec = document.getElementById("procesador_rec2").value;
+        const ram_rec = document.getElementById("ram_rec2").value;
+        const GPU_rec = document.getElementById("gpu_rec2").value;
+        const directx_rec = document.getElementById("directx_rec2").value;
+        const id = document.getElementById("id").value;
+        fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos/" + id, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                so_min: so_min,
+                procesador_min: procesador_min,
+                ram_min: ram_min,
+                GPU_min: GPU_min,
+                directx_min: directx_min,
+                so_rec: so_rec,
+                procesador_rec: procesador_rec,
+                ram_rec: ram_rec,
+                GPU_rec: GPU_rec,
+                directx_rec: directx_rec,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                alert(data.mensaje);
+                cargarRequisitos();
+                document.getElementById("id").value = "";
+                document.getElementById("procesador_min").value = "";
+                document.getElementById("ram_min").value = "";
+                document.getElementById("gpu_min").value = "";
+                document.getElementById("directx_min").value = "";
+                document.getElementById("so_rec").value = "";
+                document.getElementById("procesador_rec").value = "";
+                document.getElementById("ram_rec").value = "";
+                document.getElementById("gpu_rec").value = "";
+                document.getElementById("directx_rec").value = "";
+            })
     })
-        .then((response) => response.json())
-        .then((data) => {
-            alert(data.mensaje);
-            cargarRequisitos();
-            document.getElementById("id").value = "";
-            document.getElementById("procesador_min").value = "";
-            document.getElementById("ram_min").value = "";
-            document.getElementById("gpu_min").value = "";
-            document.getElementById("directx_min").value = "";
-            document.getElementById("so_rec").value = "";
-            document.getElementById("procesador_rec").value = "";
-            document.getElementById("ram_rec").value = "";
-            document.getElementById("gpu_rec").value = "";
-            document.getElementById("directx_rec").value = "";
-        });
 }
 
 
 //CRUD de Imagenes
-
-// Función para cargar la lista de imagenes desde la API
+//Función para cargar la lista de imagenes desde la API
 function cargarImagenes() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes")
         .then(response => response.json())
@@ -503,28 +528,32 @@ function cargarImagenes() {
         });
 }
 
-// Función para crear una nueva imagen
-function crearImagen(){
-    const url = document.getElementById('url').value;
-    const juego = document.getElementById('juego').value;
-    fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "url": url,
-            "juego_ID": juego
+//Función para crear una nueva imagen
+let crearImagen = document.getElementById('crear-form-imagen');
+if (crearImagen) {
+    crearImagen.addEventListener("submit", e => {
+        e.preventDefault();
+        const url = document.getElementById('url').value;
+        const juego = document.getElementById('juego').value;
+        fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "url": url,
+                "juego_ID": juego
+            })
         })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.mensaje);
+                cargarImagenes();
+                document.getElementById('url').value = '';
+                document.getElementById('juego').value = '';
+            })
     })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.mensaje);
-            cargarImagenes();
-            document.getElementById('url').value = '';
-            document.getElementById('juego').value = '';
-        });
 }
 
-// Función para eliminar una imagen
+//Función para eliminar una imagen
 function eliminarImagen(id) {
     if (confirm('¿Estás seguro de qué deseas eliminar esta imagen?')) {
         fetch(`https://lucianodavezac.pythonanywhere.com/api/imagenes/${id}`, {
@@ -538,22 +567,26 @@ function eliminarImagen(id) {
     }
 }
 
-// Función para editar una imagen
-function editarImagen(){
-    const url = document.getElementById('url2').value;
-    const juego = document.getElementById('juego2').value;
-    const id = document.getElementById('id').value;
-    fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes/' + id, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "url": url, "juego_ID": juego })
+//Función para editar una imagen
+let editarImagen = document.getElementById('editar-form-usuario');
+if (editarUsuario) {
+    editarUsuario.addEventListener("submit", e => {
+        e.preventDefault();
+        const url = document.getElementById('url2').value;
+        const juego = document.getElementById('juego2').value;
+        const id = document.getElementById('id').value;
+        fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes/' + id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "url": url, "juego_ID": juego })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.mensaje);
+                cargarImagenes();
+                document.getElementById('id').value = '';
+                document.getElementById('url2').value = '';
+                document.getElementById('juego2').value = '';
+            })
     })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.mensaje);
-            cargarImagenes();
-            document.getElementById('id').value = '';
-            document.getElementById('url2').value = '';
-            document.getElementById('juego2').value = '';
-        });
 }

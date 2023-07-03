@@ -16,8 +16,8 @@
         <!-- Formulario para crear una nueva imagen -->
         <div class="row">
             <div class="col-md-5 mx-auto" id="crear-div">
-                <h2>Crar Imagen</h2>
-                <form id="crear-form-imagen" onsubmit="crearImagen()">
+                <h2>Crear Imagen</h2>
+                <form id="crear-form-imagen">
                     <div class="mb-3">
                         <label for="url" class="form-label">URL:</label>
                         <input type="url" id="url" name="url" class="form-control" required>
@@ -35,7 +35,7 @@
             <!-- Formulario para editar una imagen  -->
             <div class="col-md-5 mx-auto" id="editar-div">
                 <h2>Editar Imagen</h2>
-                <form id="editar-form-imagen" onsubmit="editarImagen()">
+                <form id="editar-form-imagen">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
                         <input type="number" id="id" name="id" class="form-control" readonly>
@@ -64,6 +64,7 @@
                         <th>ID</th>
                         <th>URL</th>
                         <th>Juego</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
