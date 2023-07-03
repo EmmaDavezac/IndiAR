@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Imagenes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">CRUD de Imagenes</h1>
+
+        <!-- Formulario para crear una nueva imagen -->
+        <div class="row">
+            <div class="col-md-5 mx-auto" id="crear-div">
+                <h2>Crar Imagen</h2>
+                <form id="crear-form">
+                    <div class="mb-3">
+                        <label for="url" class="form-label">URL:</label>
+                        <input type="url" id="url" name="url" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="juego" class="form-label">Juego:</label>
+                        <input type="number" id="juego" name="juego" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario para editar una imagen  -->
+            <div class="col-md-5 mx-auto" id="editar-div">
+                <h2>Editar Imagen</h2>
+                <form id="editar-form">
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <input type="number" id="id" name="id" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="url2" class="form-label">URL:</label>
+                        <input type="url" id="url2" name="url2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="juego2" class="form-label">Juego:</label>
+                        <input type="number" id="juego2" name="juego2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" id="btn-editar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de Imagenes -->
+        <div class="my-5" id="usuarios-div">
+            <h2>Lista de Imagenes</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>URL</th>
+                        <th>Juego</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>src="CRUD-scripts.js"</script>
+</html>

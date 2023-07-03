@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Requisitos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center my-5">CRUD de Requisitos</h1>
+
+        <!-- Formulario para crear un nuevo requisito -->
+        
+            <div class="mb-5" id="crear-div">
+            <h2>Crear requisito</h2>
+            <form id="crear-form">
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="so_min" class="form-label">SO Mínimo:</label>
+                    <input type="text" id="so_min" name="so_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="so_rec" class="form-label">SO recomendado:</label>
+                    <input type="text" id="so_rec" name="so_rec" class="form-control" required>
+                </div>
+              </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
+                    <input type="text" id="procesador_min" name="procesador_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
+                    <input type="text" id="procesador_rec" name="procesador_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="ram_min" class="form-label">RAM mínimo:</label>
+                    <input type="text" id="ram_min" name="ram__min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="ram_rec" class="form-label">RAM recomendado:</label>
+                    <input type="text" id="ram_rec" name="ram_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="gpu_min" class="form-label">GPU mínimo:</label>
+                    <input type="text" id="gpu_min" name="gpu_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="gpu_rec" class="form-label">GPU recomendado:</label>
+                    <input type="text" id="gpu_rec" name="gpu_rec" class="form-control" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="directx_min" class="form-label">Directx mínimo:</label>
+                    <input type="nubmer" id="directx_min" name="directx_min" class="form-control" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="directx_rec" class="form-label">Directx recomendado:</label>
+                    <input type="number" id="directx_rec" name="directx_rec" class="form-control" required>
+                </div>
+                </div>
+                <div>
+                    <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                </div>
+                </form>
+        </div>
+
+            <!-- Formulario para editar un requisito  -->
+            <div class="mb-5" id="editar-div">
+                <h2>Editar requisito</h2>
+                <form id="editar-form">
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="id" class="form-label">ID:</label>
+                            <input type="number" id="id" name="id" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                       
+                        <div class="col-md-5 mb-3">
+                            <label for="so_min" class="form-label">SO Mínimo:</label>
+                            <input type="text" id="so_min2" name="so_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="so_rec" class="form-label">SO recomendado:</label>
+                            <input type="text" id="so_rec2" name="so_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
+                            <input type="text" id="procesador_min2" name="procesador_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
+                            <input type="text" id="procesador_rec2" name="procesador_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="ram_min" class="form-label">RAM mínimo:</label>
+                            <input type="text" id="ram_min2" name="ram__min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="ram_rec" class="form-label">RAM recomendado:</label>
+                            <input type="text" id="ram_rec2" name="ram_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="gpu_min" class="form-label">GPU mínimo:</label>
+                            <input type="text" id="gpu_min2" name="gpu_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="gpu_rec" class="form-label">GPU recomendado:</label>
+                            <input type="text" id="gpu_rec2" name="gpu_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="directx_min" class="form-label">Directx mínimo:</label>
+                            <input type="number" id="directx_min2" name="directx_min" class="form-control" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label for="directx_rec" class="form-label">Directx recomendado:</label>
+                            <input type="number" id="directx_rec2" name="directx_rec" class="form-control" required>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" id="btn-editar" class="btn btn-primary">Editar</button>
+                    </div>
+                </form>
+            </div>
+        
+
+        <!-- Lista de requisitos -->
+        <div class="my-5" id="requisitos-div">
+            <h2>Lista de requisitos</h2>
+            <table class="table table-light mt-4 ">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>SO Minimo</th>
+                        <th>Procesador Minimo</th>
+                        <th>RAM Minima</th>
+                        <th>GPU Minima</th>
+                        <th>DirectX Minimo</th>
+                        <th>SO Recomendado</th>
+                        <th>Procesador Recomendado</th>
+                        <th>RAM Recomendada</th>
+                        <th>GPU Recomendada</th>
+                        <th>DirectX Recomendado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Script JavaScript para manejar las operaciones CRUD -->
+    <script>
+        
+    </script>
+</body>
+
+</html>
