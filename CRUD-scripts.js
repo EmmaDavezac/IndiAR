@@ -1,3 +1,4 @@
+
 //CRUD de Usuarios
 
 // Función para cargar la lista de usuarios desde la API
@@ -51,8 +52,7 @@ function cargarUsuarios() {
 }
 
 // Función para crear un nuevo usuario
-document.getElementById("crear-form-usuario").addEventListener("submit", (event) => {
-    event.preventDefault();
+function crearUsuario(){
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
     const psw = document.getElementById("password").value;
@@ -79,7 +79,7 @@ document.getElementById("crear-form-usuario").addEventListener("submit", (event)
             document.getElementById("password").value = "";
             document.getElementById("admin").value = "";
         });
-});
+}
 
 // Función para eliminar un usuario
 function eliminarUsuario(id) {
@@ -96,8 +96,7 @@ function eliminarUsuario(id) {
 }
 
 // Función para editar un usuario
-document.getElementById("editar-form-usuario").addEventListener("submit", (event) => {
-    event.preventDefault();
+function editarUsuario(){
     const nombre = document.getElementById("nombre2").value;
     const correo = document.getElementById("correo2").value;
     const psw = document.getElementById("password2").value;
@@ -126,7 +125,8 @@ document.getElementById("editar-form-usuario").addEventListener("submit", (event
             document.getElementById("password2").value = "";
             document.getElementById("admin2").value = "";
         });
-});
+}
+
 
 //CRUD de Juegos
 
@@ -196,8 +196,7 @@ function cargarJuegos() {
 }
 
 // Función para crear un nuevo juego
-document.getElementById("crear-form-juego").addEventListener("submit", (event) => {
-    event.preventDefault();
+function crearJuego(){
     const titulo = document.getElementById("titulo").value;
     const distribuidor = document.getElementById("distribuidor").value;
     const desarrollador = document.getElementById("desarrollador").value;
@@ -233,7 +232,7 @@ document.getElementById("crear-form-juego").addEventListener("submit", (event) =
             document.getElementById("requisitosID").value = "";
             document.getElementById("img_principal").value = "";
         });
-});
+}
 
 // Función para eliminar un juego
 function eliminarjuego(id) {
@@ -250,8 +249,7 @@ function eliminarjuego(id) {
 }
 
 // Función para editar un juego
-document.getElementById("editar-form-juego").addEventListener("submit", (event) => {
-    event.preventDefault();
+function editarJuego(){
     const titulo = document.getElementById("titulo2").value;
     const distribuidor = document.getElementById("distribuidor2").value;
     const desarrollador = document.getElementById("desarrollador2").value;
@@ -289,7 +287,7 @@ document.getElementById("editar-form-juego").addEventListener("submit", (event) 
             document.getElementById("requisitosID2").value = "";
             document.getElementById("img_principal2").value = "";
         });
-});
+}
 
 //CRUD de Requisitos
 
@@ -368,8 +366,7 @@ function cargarRequisitos() {
 }
 
 // Función para crear un nuevo requisito
-document.getElementById("crear-form-requisito").addEventListener("submit", (event) => {
-    event.preventDefault();
+function crearRequisito(){
     const so_min = document.getElementById("so_min").value;
     const procesador_min = document.getElementById("procesador_min").value;
     const ram_min = document.getElementById("ram_min").value;
@@ -410,7 +407,7 @@ document.getElementById("crear-form-requisito").addEventListener("submit", (even
             document.getElementById("gpu_rec").value = "";
             document.getElementById("directx_rec").value = "";
         });
-});
+}
 
 //Función para eliminar un requisito
 function eliminarrequisito(id) {
@@ -427,8 +424,7 @@ function eliminarrequisito(id) {
 }
 
 //Función para editar un requisito
-document.getElementById("editar-form-requisito").addEventListener("submit", (event) => {
-    event.preventDefault();
+function editarRequisito(){
     const so_min = document.getElementById("so_min2").value;
     const procesador_min = document.getElementById("procesador_min2").value;
     const ram_min = document.getElementById("ram_min2").value;
@@ -471,7 +467,7 @@ document.getElementById("editar-form-requisito").addEventListener("submit", (eve
             document.getElementById("gpu_rec").value = "";
             document.getElementById("directx_rec").value = "";
         });
-});
+}
 
 
 //CRUD de Imagenes
@@ -508,8 +504,7 @@ function cargarImagenes() {
 }
 
 // Función para crear una nueva imagen
-document.getElementById('crear-form-imagen').addEventListener('submit', event => {
-    event.preventDefault();
+function crearImagen(){
     const url = document.getElementById('url').value;
     const juego = document.getElementById('juego').value;
     fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes", {
@@ -527,7 +522,7 @@ document.getElementById('crear-form-imagen').addEventListener('submit', event =>
             document.getElementById('url').value = '';
             document.getElementById('juego').value = '';
         });
-});
+}
 
 // Función para eliminar una imagen
 function eliminarImagen(id) {
@@ -544,8 +539,7 @@ function eliminarImagen(id) {
 }
 
 // Función para editar una imagen
-document.getElementById('editar-form-imagen').addEventListener('submit', event => {
-    event.preventDefault();
+function editarImagen(){
     const url = document.getElementById('url2').value;
     const juego = document.getElementById('juego2').value;
     const id = document.getElementById('id').value;
@@ -562,4 +556,4 @@ document.getElementById('editar-form-imagen').addEventListener('submit', event =
             document.getElementById('url2').value = '';
             document.getElementById('juego2').value = '';
         });
-});
+}
