@@ -1,10 +1,5 @@
 //CRUD de Usuarios
 
-// Función para cargar la lista de usuarios al cargar la página
-window.onload = function () {
-    cargarUsuarios();
-};
-
 // Función para cargar la lista de usuarios desde la API
 function cargarUsuarios() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios")
@@ -28,7 +23,6 @@ function cargarUsuarios() {
                     "</td>";
                 const filaAcciones = document.createElement("td");
                 fila.appendChild(filaAcciones);
-
                 const editarBtn = document.createElement("button");
                 editarBtn.innerText = "Editar";
                 editarBtn.classList.add("btn");
@@ -42,7 +36,6 @@ function cargarUsuarios() {
                     document.getElementById("admin2").value = usuario[4];
                 });
                 filaAcciones.appendChild(editarBtn);
-
                 const eliminarBtn = document.createElement("button");
                 eliminarBtn.innerText = "Eliminar";
                 eliminarBtn.classList.add("btn");
@@ -50,7 +43,6 @@ function cargarUsuarios() {
                 eliminarBtn.addEventListener("click", () =>
                     eliminarUsuario(usuario[0])
                 );
-
                 filaAcciones.appendChild(eliminarBtn);
                 tbody = document.getElementById("tbody");
                 tbody.appendChild(fila);
@@ -59,7 +51,7 @@ function cargarUsuarios() {
 }
 
 // Función para crear un nuevo usuario
-document.getElementById("crear-form").addEventListener("submit", (event) => {
+document.getElementById("crear-form-usuario").addEventListener("submit", (event) => {
     event.preventDefault();
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
@@ -104,7 +96,7 @@ function eliminarUsuario(id) {
 }
 
 // Función para editar un usuario
-document.getElementById("editar-form").addEventListener("submit", (event) => {
+document.getElementById("editar-form-usuario").addEventListener("submit", (event) => {
     event.preventDefault();
     const nombre = document.getElementById("nombre2").value;
     const correo = document.getElementById("correo2").value;
@@ -138,13 +130,8 @@ document.getElementById("editar-form").addEventListener("submit", (event) => {
 
 //CRUD de Juegos
 
-// Función para cargar la lista de juegos al cargar la página
-window.onload = function () {
-    cargarjuegos();
-};
-
 // Función para cargar la lista de juegos desde la API
-function cargarjuegos() {
+function cargarJuegos() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/juegos")
         .then((response) => response.json())
         .then((data) => {
@@ -209,7 +196,7 @@ function cargarjuegos() {
 }
 
 // Función para crear un nuevo juego
-document.getElementById("crear-form").addEventListener("submit", (event) => {
+document.getElementById("crear-form-juego").addEventListener("submit", (event) => {
     event.preventDefault();
     const titulo = document.getElementById("titulo").value;
     const distribuidor = document.getElementById("distribuidor").value;
@@ -236,7 +223,7 @@ document.getElementById("crear-form").addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
             alert(data.mensaje);
-            cargarjuegos();
+            cargarJuegos();
             document.getElementById("titulo").value = "";
             document.getElementById("distribuidor").value = "";
             document.getElementById("desarrollador").value = "";
@@ -257,13 +244,13 @@ function eliminarjuego(id) {
             .then((response) => response.json())
             .then((data) => {
                 alert(data.mensaje);
-                cargarjuegos();
+                cargarJuegos();
             });
     }
 }
 
 // Función para editar un juego
-document.getElementById("editar-form").addEventListener("submit", (event) => {
+document.getElementById("editar-form-juego").addEventListener("submit", (event) => {
     event.preventDefault();
     const titulo = document.getElementById("titulo2").value;
     const distribuidor = document.getElementById("distribuidor2").value;
@@ -291,7 +278,7 @@ document.getElementById("editar-form").addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
             alert(data.mensaje);
-            cargarjuegos();
+            cargarJuegos();
             document.getElementById("ID").value = "";
             document.getElementById("titulo2").value = "";
             document.getElementById("distribuidor2").value = "";
@@ -306,13 +293,8 @@ document.getElementById("editar-form").addEventListener("submit", (event) => {
 
 //CRUD de Requisitos
 
-// Función para cargar la lista de requisitos al cargar la página
-window.onload = function () {
-    cargarrequisitos();
-};
-
 // Función para cargar la lista de requisitos desde la API
-function cargarrequisitos() {
+function cargarRequisitos() {
     fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos")
         .then((response) => response.json())
         .then((data) => {
@@ -386,7 +368,7 @@ function cargarrequisitos() {
 }
 
 // Función para crear un nuevo requisito
-document.getElementById("crear-form").addEventListener("submit", (event) => {
+document.getElementById("crear-form-requisito").addEventListener("submit", (event) => {
     event.preventDefault();
     const so_min = document.getElementById("so_min").value;
     const procesador_min = document.getElementById("procesador_min").value;
@@ -417,7 +399,7 @@ document.getElementById("crear-form").addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
             alert(data.mensaje);
-            cargarrequisitos();
+            cargarRequisitos();
             document.getElementById("procesador_min").value = "";
             document.getElementById("ram_min").value = "";
             document.getElementById("gpu_min").value = "";
@@ -439,13 +421,13 @@ function eliminarrequisito(id) {
             .then((response) => response.json())
             .then((data) => {
                 alert(data, mensaje);
-                cargarrequisitos();
+                cargarRequisitos();
             });
     }
 }
 
 //Función para editar un requisito
-document.getElementById("editar-form").addEventListener("submit", (event) => {
+document.getElementById("editar-form-requisito").addEventListener("submit", (event) => {
     event.preventDefault();
     const so_min = document.getElementById("so_min2").value;
     const procesador_min = document.getElementById("procesador_min2").value;
@@ -477,7 +459,7 @@ document.getElementById("editar-form").addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
             alert(data.mensaje);
-            cargarrequisitos();
+            cargarRequisitos();
             document.getElementById("id").value = "";
             document.getElementById("procesador_min").value = "";
             document.getElementById("ram_min").value = "";
@@ -493,11 +475,6 @@ document.getElementById("editar-form").addEventListener("submit", (event) => {
 
 
 //CRUD de Imagenes
-
-// Función para cargar la lista de imagenes al cargar la página
-window.onload = function () {
-    cargarImagenes();
-};
 
 // Función para cargar la lista de imagenes desde la API
 function cargarImagenes() {
@@ -531,7 +508,7 @@ function cargarImagenes() {
 }
 
 // Función para crear una nueva imagen
-document.getElementById('crear-form').addEventListener('submit', event => {
+document.getElementById('crear-form-imagen').addEventListener('submit', event => {
     event.preventDefault();
     const url = document.getElementById('url').value;
     const juego = document.getElementById('juego').value;
@@ -567,7 +544,7 @@ function eliminarImagen(id) {
 }
 
 // Función para editar una imagen
-document.getElementById('editar-form').addEventListener('submit', event => {
+document.getElementById('editar-form-imagen').addEventListener('submit', event => {
     event.preventDefault();
     const url = document.getElementById('url2').value;
     const juego = document.getElementById('juego2').value;

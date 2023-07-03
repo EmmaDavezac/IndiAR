@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-5 mx-auto" id="crear-div">
                 <h2>Crar Imagen</h2>
-                <form id="crear-form">
+                <form id="crear-form-imagen">
                     <div class="mb-3">
                         <label for="url" class="form-label">URL:</label>
                         <input type="url" id="url" name="url" class="form-control" required>
@@ -27,7 +27,7 @@
                         <input type="number" id="juego" name="juego" class="form-control" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-crear" class="btn btn-primary">Crear</button>
+                        <button type="submit" id="btn-crear" class="btn btn-primary" onsubmit="">Crear</button>
                     </div>
                 </form>
             </div>
@@ -35,7 +35,7 @@
             <!-- Formulario para editar una imagen  -->
             <div class="col-md-5 mx-auto" id="editar-div">
                 <h2>Editar Imagen</h2>
-                <form id="editar-form">
+                <form id="editar-form-imagen">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
                         <input type="number" id="id" name="id" class="form-control" readonly>
@@ -71,6 +71,11 @@
             </table>
         </div>
     </div>
+    <script src="CRUD-scripts.js"></script>
+        <script>
+            // Función para cargar la lista de imagenes al cargar la página
+            window.onload = function () { cargarImagenes(); }
+        </script>
 </body>
-<script>src="CRUD-scripts.js"</script>
+
 </html>

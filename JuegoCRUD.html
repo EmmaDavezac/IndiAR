@@ -15,7 +15,7 @@
         <!-- Formulario para crear un nuevo juego -->
         <div class="mb-5" id="crear-div">
             <h2>Crear juego</h2>
-            <form id="crear-form">
+            <form id="crear-form-juego">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="titulo" class="form-label">Titulo:</label>
@@ -65,7 +65,7 @@
         <!-- Formulario para editar un juego  -->
         <div class="mb-5" id="editar-div">
             <h2>Editar juego</h2>
-            <form id="editar-form">
+            <form id="editar-form-juego">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="ID" class="form-label">ID:</label>
@@ -141,6 +141,11 @@
             </table>
         </div>
     </div>
+    <script src="CRUD-scripts.js"></script>
+    <script>
+            // Función para cargar la lista de juegos al cargar la página
+            window.onload = function () { cargarJuegos(); }
+    </script>
 </body>
 
 </html>
