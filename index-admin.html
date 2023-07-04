@@ -7,11 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    <template><div>
     <ul>
         <li><a href="/RequisitoCRUD.html"> Requisitos</a></li>
         <li><a href="/UsuarioCRUD.html">Usuarios</a></li>
         <li><a href="/JuegoCRUD.html">Juegos</a></li>
         <li><a href="/ImagenCRUD.html">Imagenes</a></li>
     </ul>
+</div></template>
 </body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    import Header from './cComponentes/Header.vue';
+    
+    export default {
+      name: 'Page',
+      components: {
+        Header,
+      },
+    };
+    </script>
+    
 </html>
