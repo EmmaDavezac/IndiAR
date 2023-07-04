@@ -91,31 +91,52 @@ function validateContactForm() {
   }
 }
 
-function validateLoginForm() {
-  event.preventDefault();
-  let accepted = false;
-  let warning = "";
-  let email, pass;
-  email = document.getElementById("email").value;
-  pass = document.getElementById("pass").value;
-  warningSection = document.getElementById("warningSection");
-  warningSection.innerHTML = "";
-  //A partir de aquí se comprueba si cada campo es correcto
-  if (email === "" || pass === "") {
-    warning += `Todos los campos son obligatorios <br>`;
-    accepted = true;
-  }
-  if (validateEmail(email) === false) {
-    warning += `El "Email" ingresado no es valido <br>`;
-    accepted = true;
-  }
-  if (validatePassword(pass) === false) {
-    warning += `La "Contraseña" ingresada no es valida <br>`;
-    accepted = true;
-  }
-  //Si accepted tiene valor true, se devuelven los errores y no se envía el formulario.
-  if (accepted) {
-    warningSection.innerHTML = warning; //Devuelve todos los mensajes en un solo parrafo.
-    return false;
-  }
+let UserLogin = document.getElementById("form-login-user");
+if (UserLogin) {
+  UserLogin.addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const psw = document.getElementById("password").value;
+    fetch("https://lucianodavezac.pythonanywhere.com/api/user-auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "Email": email,
+        "Password": psw,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.mensaje);
+        document.getElementById("password").value = "";
+        if (data.mensaje == "Acceso exitoso") {
+          window.location.href = "index.html";
+        }
+      })
+  })
+}
+
+let AdminLogin = document.getElementById("form-login-admin");
+if (AdminLogin) {
+  AdminLogin.addEventListener("submit", e => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const psw = document.getElementById("password").value;
+    fetch("https://lucianodavezac.pythonanywhere.com/api/admin-auth", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "Email": email,
+        "Password": psw,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data.mensaje);
+        document.getElementById("password").value = "";
+        if (data.mensaje == "Acceso exitoso") {
+          window.location.href = "index-admin.html";
+        }
+      })
+  })
 }
