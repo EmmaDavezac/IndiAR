@@ -3,7 +3,7 @@ let apiKey = "fb0a1f24f60743148908dba199441e4d";
 let TituloDelJuego = window.location.pathname.split('/').pop().split('.')[0];
 
 window.addEventListener("load", e => {
-  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos"), {
+/*  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos"), {
     method: "GET",
     headers: { "Content-Type": "aplication/json" },
     body: JSON.stringify({
@@ -30,7 +30,7 @@ window.addEventListener("load", e => {
     let buyCardThumb = document.getElementById("buy-card-thumb");
     buyCardThumb.src = data.background_image;
 })
-
+*/
 
 // Realizar una solicitud a la API para obtener información de un juego
 fetch("https://api.rawg.io/api/games/" + TituloDelJuego + "?key=" + apiKey)
