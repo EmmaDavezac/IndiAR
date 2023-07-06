@@ -2,6 +2,36 @@
 let apiKey = "fb0a1f24f60743148908dba199441e4d";
 let TituloDelJuego = window.location.pathname.split('/').pop().split('.')[0];
 
+window.addEventListener("load", e => {
+  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos"), {
+    method: "GET",
+    headers: { "Content-Type": "aplication/json" },
+    body: JSON.stringify({
+      titulo: TituloDelJuego,
+    })
+  })
+  
+  .then((response) => response.json())
+})
+.then((data) => {
+  console.log(data);
+    let gameTitle = document.getElementById("game-title");
+    gameTitle.textContent = juego[1];
+    let gamePublisher = document.getElementById("game-publisher");
+    gamePublisher.textContent = juego[2];
+    let gameDeveloper = document.getElementById("game-developer");
+    gameDeveloper.textContent = juego[3];
+    let releaseDate = document.getElementById("release-date");
+    releaseDate.textContent = juego[4];
+    let gameDescription = document.getElementById("game-description");
+    gameDescription.textContent = juego[5];
+    let gamePrice = document.getElementById("game-price");
+    gamePrice.textContent = juego[6];
+    let buyCardThumb = document.getElementById("buy-card-thumb");
+    buyCardThumb.src = data.background_image;
+})
+
+
 // Realizar una solicitud a la API para obtener información de un juego
 fetch("https://api.rawg.io/api/games/" + TituloDelJuego + "?key=" + apiKey)
   .then(response => response.json())
@@ -18,6 +48,7 @@ fetch("https://api.rawg.io/api/games/" + TituloDelJuego + "?key=" + apiKey)
     gameTitle.textContent = data.name;
     let gameDescription = document.getElementById("game-description");
     gameDescription.textContent = data.description_raw;
+
     let buyCardThumb = document.getElementById("buy-card-thumb");
     buyCardThumb.src = data.background_image;
   })
@@ -120,3 +151,5 @@ playButton.onclick = function () {
 //Eliminamos el resaltado de todas las imagenes y resaltamos la primera imagen
 eliminarBordes();
 gameThumb1.style.borderColor = colorBorde;
+
+
