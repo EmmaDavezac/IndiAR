@@ -1,5 +1,4 @@
 import mysql.connector
-import http.cookies
 from mysql.connector import Error
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -16,7 +15,7 @@ try:
     print('conectado')
 except Error as e:
     print(f'Error al conectarse a la base de datos {e}')
-
+F
 # CRUD EN DB para usuarios
 
 
@@ -54,7 +53,7 @@ def get_usuario_en_db_por_email(email):
             return usuario
     except Error as e:
         print(f'Error al obtener usuario de la base de datos {e}')
-        
+
 def crear_usuario_en_db(Nombre, Email, Password, es_Admin):
     try:
         if connection.is_connected():
@@ -94,7 +93,7 @@ def delete_usuario_en_db(id):
             return True
     except Error as e:
         print(f'Error al eliminar usuario de la base de datos {e}')
-            
+
 
 # CRUD EN DB para requisitos
 
@@ -181,6 +180,17 @@ def get_imagenes_en_db():
     except Error as e:
         print(f'Error al obtener lista de imagenes de la base de datos {e}')
 
+def get_imagenes_en_db_por_juego(juego_ID):
+    try:
+        if connection.is_connected():
+            cursor = connection.cursor()
+            sql_query = "SELECT url FROM Imagenes WHERE juego_ID = juego_ID"
+            cursor.execute(sql_query)
+            imagenes = cursor.fetchall()
+            cursor.close()
+            return imagenes
+    except Error as e:
+        print(f'Error al obtener lista de imagenes de la base de datos {e}')
 
 def get_imagen_en_db(id):
     try:
@@ -258,6 +268,17 @@ def get_juego_en_db(id):
             cursor.execute(sql_query, (id,))
             juegos = cursor.fetchone()
             return juegos
+    except Error as e:
+        print(f'Error al obtener el juegos de la base de datos {e}')
+
+def get_juego_en_db_por_titulo(titulo):
+    try:
+         if connection.is_connected():
+            cursor = connection.cursor()
+            sql_query = "SELECT * FROM Juegos WHERE titulo = %s"
+            cursor.execute(sql_query, (titulo,))
+            juego = cursor.fetchone()
+            return juego
     except Error as e:
         print(f'Error al obtener el juegos de la base de datos {e}')
 
@@ -464,6 +485,13 @@ def get_imagenes():
     else:
         return jsonify({'mensaje': 'No se encontraron imagenes'})
 
+@app.route('/api/imagenes/<int:juego_ID>', methods=['GET'])
+def get_imagenes_por_juego(juego_ID):
+    imagenes = get_imagenes_en_db_por_juego(juego_ID)
+    if imagenes:
+        return jsonify(imagenes)
+    else:
+        return jsonify({'mensaje': 'No se encontraron imagenes'})
 
 @app.route('/api/imagenes', methods=['POST'])
 def crear_imagen():
@@ -520,6 +548,13 @@ def get_juegos():
     else:
         return jsonify({'mensaje': 'No se encontraron juegos'})
 
+@app.route('/api/juegos/<titulo>', methods=['GET'])
+def get_juego_por_titulo(titulo):
+    juego = get_juego_en_db_por_titulo(titulo)
+    if juego:
+        return jsonify(juego)
+    else:
+        return jsonify({'mensaje': 'No se encuentra el juego'})
 
 @app.route('/api/juegos', methods=['POST'])
 def crear_juego():
@@ -576,10 +611,6 @@ def delete_juego(id):
         return jsonify({'mensaje': 'Error al eliminar juego'})
 
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-
-
 #API-REST AUTENTICACIÓN
 
 @app.route('/api/user-auth', methods=['POST'])
@@ -589,9 +620,9 @@ def login_user():
     password = credenciales.get('Password')
     if email and password:
         usuario = get_usuario_en_db_por_email(email)
-        if (usuario): 
-            if (usuario[3]==password and usuario[4]=="0"):
-                return jsonify({'mensaje': 'Acceso correcto'})
+        if (usuario):
+            if (usuario[3]==password and usuario[4]==False):
+                return jsonify({'mensaje': 'Acceso exitoso',})
             else:
                 return jsonify({'mensaje': 'Contraseña incorrecta'})
         else:
@@ -606,13 +637,17 @@ def login_admin():
     password = credenciales.get('Password')
     if email and password:
         usuario = get_usuario_en_db_por_email(email)
-        if (usuario): 
-            if (usuario[3]==password and usuario[4]=="1"):
-                return jsonify({'mensaje': 'Acceso correcto'})
+        if (usuario):
+            if (usuario[3]==password and usuario[4]==True):
+                return jsonify({'mensaje': 'Acceso exitoso'})
             else:
                 return jsonify({'mensaje': 'Credenciales incorrectas'})
         else:
             return jsonify({'mensaje': 'No existe usuario con el email ingresado'})
     else:
         return jsonify({'mensaje': 'Datos de acceso incompletos'})
-    
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
+
+
