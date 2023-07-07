@@ -1,14 +1,15 @@
 //cargamos toda la info del juego desde la api 
-let apiKey = "fb0a1f24f60743148908dba199441e4d";
-let TituloDelJuego = window.location.pathname.split('/').pop().split('.')[0].split("-").join(" ");
-let juego_ID=8;
+let TituloDelJuego = window.location.pathname.split('/').pop().split('.')[0].split('-').join(" ");
+alert(TituloDelJuego);
+let juego_ID;
+
 // Realizar una solicitud a la API para obtener información de un juego
 window.addEventListener("load", e => {
   fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/"+ TituloDelJuego)
   .then((response) => response.json())
-    .then((data) => {
+    .then((data)=> {
       console.log(data);
-      //juego_ID = data[0];
+      juego_ID = data[0];
       let gameTitle = document.getElementById("game-title");
       gameTitle.textContent = data[1];
       let gamePublisher = document.getElementById("game-publisher");
@@ -20,33 +21,39 @@ window.addEventListener("load", e => {
       let gameDescription = document.getElementById("game-description");
       gameDescription.textContent = data[5];
       let gamePrice = document.getElementById("game-price");
-      gamePrice.textContent = data[6];
+      //gamePrice.textContent = data[6];
       let buyCardThumb = document.getElementById("buy-card-thumb");
       buyCardThumb.src = data[8];
+      cargarImagenes(juego_ID);
     })
     .catch(error => {
       // Manejar errores de la solicitud
       console.log('Error:', error);
-    })})
+    })
 
+});
+
+function cargarImagenes(juego_ID)
+{
 // Realizar una solicitud a la API para obtener imagenes del juego
-/*fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes/" + juego_ID)
-  .then(response => response.json())
-  .then(data => {
-    // Manejar los datos de respuesta
-    console.log("imagenes");
-    console.log(data);
-    gameThumb1.src = data[0];
-    gameThumb2.src = data[1];
-    gameThumb3.src = data[2];
-    gameThumb4.src = data[3];
-    gameThumb5.src = data[4];
-    imgChange.src = gameThumb1.src;
-  })
-  .catch(error => {
-    // Manejar errores de la solicitud
-    console.log('Error:', error);
-  })});*/
+fetch("https://lucianodavezac.pythonanywhere.com/api/imagenes/juego/" + juego_ID)
+.then((response) => response.json())
+.then((data) => {
+  // Manejar los datos de respuesta
+  console.log("imagenes");
+  console.log(data);
+  gameThumb1.src = data[0];
+  gameThumb2.src = data[1];
+  gameThumb3.src = data[2];
+  gameThumb4.src = data[3];
+  gameThumb5.src = data[4];
+  imgChange.src = gameThumb1.src;
+})
+.catch(error => {
+  // Manejar errores de la solicitud
+  console.log('Error:', error);
+})
+};
 
 //Interacciones para cambiar de imagen
 let gameThumb1 = document.getElementById("game-thumb-1");

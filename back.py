@@ -5,28 +5,32 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-try:
-    connection = mysql.connector.connect(
-        host='lucianodavezac.mysql.pythonanywhere-services.com',
-        database='lucianodavezac$IndiARDB',
-        user='lucianodavezac',
-        password='root1234',
-        port='3306')
-    print('conectado')
-except Error as e:
-    print(f'Error al conectarse a la base de datos {e}')
-F
+def create_connection():
+    try:
+        connection = mysql.connector.connect(
+            host='lucianodavezac.mysql.pythonanywhere-services.com',
+            database='lucianodavezac$IndiARDB',
+            user='lucianodavezac',
+            password='root1234',
+            port='3306')
+        print('conectado')
+        return connection
+    except Error as e:
+        print(f'Error al conectarse a la base de datos {e}')
+
 # CRUD EN DB para usuarios
 
 
 def get_usuarios_en_db():
-    try:
+    try: 
+        connection=create_connection()
         if connection.is_connected():
             cursor = connection.cursor()
             sql_query = "SELECT * FROM Usuarios"
             cursor.execute(sql_query)
             usuarios = cursor.fetchall()
             cursor.close()
+            connection.close()
             return usuarios
     except Error as e:
         print(f'Error al obtener lista de usuarios de la base de datos {e}')
@@ -34,11 +38,14 @@ def get_usuarios_en_db():
 
 def get_usuario_en_db(id):
     try:
+        connection=create_connection()
         if connection.is_connected():
             cursor = connection.cursor()
             sql_query = "SELECT * FROM Usuarios WHERE ID = %s"
             cursor.execute(sql_query, (id,))
             usuario = cursor.fetchone()
+            cursor.close()
+            connection.close()
             return usuario
     except Error as e:
         print(f'Error al obtener usuario de la base de datos {e}')
@@ -63,6 +70,8 @@ def crear_usuario_en_db(Nombre, Email, Password, es_Admin):
             cursor.execute(sql_query, values)
             connection.commit()
             cursor.close()
+            connection.close()
+
             return True
     except Error as e:
         print(f'Error al crear el usuario en la base de datos: {e}')
@@ -184,8 +193,8 @@ def get_imagenes_en_db_por_juego(juego_ID):
     try:
         if connection.is_connected():
             cursor = connection.cursor()
-            sql_query = "SELECT url FROM Imagenes WHERE juego_ID = juego_ID"
-            cursor.execute(sql_query)
+            sql_query = "SELECT url FROM Imagenes WHERE juego_ID = %s"
+            cursor.execute(sql_query,(juego_ID,))
             imagenes = cursor.fetchall()
             cursor.close()
             return imagenes
@@ -485,7 +494,7 @@ def get_imagenes():
     else:
         return jsonify({'mensaje': 'No se encontraron imagenes'})
 
-@app.route('/api/imagenes/<int:juego_ID>', methods=['GET'])
+@app.route('/api/imagenes/juego/<juego_ID>', methods=['GET'])
 def get_imagenes_por_juego(juego_ID):
     imagenes = get_imagenes_en_db_por_juego(juego_ID)
     if imagenes:
