@@ -202,7 +202,7 @@ function cargarJuegos() {
                 eliminarBtn.classList.add("btn-danger");
                 eliminarBtn.classList.add("col-md-12");
                 eliminarBtn.classList.add("my-1");
-                eliminarBtn.addEventListener("click", () => eliminarjuego(juego[0]));
+                eliminarBtn.addEventListener("click", () => eliminarjuego(juego.ID));
                 filaAcciones.appendChild(eliminarBtn);
                 tbody = document.getElementById("tbody");
                 tbody.appendChild(fila);
@@ -327,30 +327,30 @@ function cargarRequisitos() {
                 let fila = document.createElement("tr");
                 fila.innerHTML =
                     "<td>" +
-                    requisito[0] +
+                    requisito.ID +
                     "</td> <td>" +
-                    requisito[1] +
+                    requisito.so_min +
                     "</td> <td>" +
-                    requisito[2] +
+                    requisito.procesador_min +
                     "</td> <td>" +
-                    requisito[3] +
+                    requisito.ram_min +
                     "</td>" +
                     "</td> <td>" +
-                    requisito[4] +
+                    requisito.gpu_min +
                     "</td> <td>" +
-                    requisito[5] +
+                    requisito.directx_min +
                     "</td>" +
                     "<td>" +
-                    requisito[6] +
+                    requisito.so_rec +
                     "</td> <td>" +
-                    requisito[7] +
+                    requisito.procesador_rec +
                     "</td> <td>" +
-                    requisito[8] +
+                    requisito.ram_rec +
                     "</td> <td>" +
-                    requisito[9] +
+                    requisito.gpu_rec +
                     "</td>" +
                     "</td> <td>" +
-                    requisito[10] +
+                    requisito.directx_rec +
                     "</td>";
                 const filaAcciones = document.createElement("td");
                 fila.appendChild(filaAcciones);
@@ -361,17 +361,17 @@ function cargarRequisitos() {
                 editarBtn.classList.add("col-md-12");
                 editarBtn.classList.add("my-1");
                 editarBtn.addEventListener("click", () => {
-                    document.getElementById("id").value = requisito[0];
-                    document.getElementById("so_min2").value = requisito[1];
-                    document.getElementById("procesador_min2").value = requisito[2];
-                    document.getElementById("ram_min2").value = requisito[3];
-                    document.getElementById("gpu_min2").value = requisito[4];
-                    document.getElementById("directx_min2").value = requisito[5];
-                    document.getElementById("so_rec2").value = requisito[6];
-                    document.getElementById("procesador_rec2").value = requisito[7];
-                    document.getElementById("ram_rec2").value = requisito[8];
-                    document.getElementById("gpu_rec2").value = requisito[9];
-                    document.getElementById("directx_rec2").value = requisito[10];
+                    document.getElementById("id").value = requisito.ID;
+                    document.getElementById("so_min2").value = requisito.so_min;
+                    document.getElementById("procesador_min2").value = requisito.procesador_min;
+                    document.getElementById("ram_min2").value = requisito.ram_min;
+                    document.getElementById("gpu_min2").value = requisito.gpu_min;
+                    document.getElementById("directx_min2").value = requisito.directx_min;
+                    document.getElementById("so_rec2").value = requisito.so_rec;
+                    document.getElementById("procesador_rec2").value = requisito.procesador_rec;
+                    document.getElementById("ram_rec2").value = requisito.ram_rec;
+                    document.getElementById("gpu_rec2").value = requisito.gpu_rec;
+                    document.getElementById("directx_rec2").value = requisito.directx_min;
                 });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement("button");
@@ -381,7 +381,7 @@ function cargarRequisitos() {
                 eliminarBtn.classList.add("col-md-12");
                 eliminarBtn.classList.add("my-1");
                 eliminarBtn.addEventListener("click", () =>
-                    eliminarrequisito(requisito[0])
+                    eliminarrequisito(requisito.ID)
                 );
                 filaAcciones.appendChild(eliminarBtn);
                 tbody = document.getElementById("tbody");
@@ -398,12 +398,12 @@ if (craerRequisito) {
         const so_min = document.getElementById("so_min").value;
         const procesador_min = document.getElementById("procesador_min").value;
         const ram_min = document.getElementById("ram_min").value;
-        const GPU_min = document.getElementById("gpu_min").value;
+        const gpu_min = document.getElementById("gpu_min").value;
         const directx_min = document.getElementById("directx_min").value;
         const so_rec = document.getElementById("so_rec").value;
         const procesador_rec = document.getElementById("procesador_rec").value;
         const ram_rec = document.getElementById("ram_rec").value;
-        const GPU_rec = document.getElementById("gpu_rec").value;
+        const gpu_rec = document.getElementById("gpu_rec").value;
         const directx_rec = document.getElementById("directx_rec").value;
         fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos", {
             method: "POST",
@@ -412,12 +412,12 @@ if (craerRequisito) {
                 so_min: so_min,
                 procesador_min: procesador_min,
                 ram_min: ram_min,
-                GPU_min: GPU_min,
+                gpu_min: gpu_min,
                 directx_min: directx_min,
                 so_rec: so_rec,
                 procesador_rec: procesador_rec,
                 ram_rec: ram_rec,
-                GPU_rec: GPU_rec,
+                gpu_rec: gpu_rec,
                 directx_rec: directx_rec,
             }),
         })
@@ -460,12 +460,12 @@ if (editarRequisito) {
         const so_min = document.getElementById("so_min2").value;
         const procesador_min = document.getElementById("procesador_min2").value;
         const ram_min = document.getElementById("ram_min2").value;
-        const GPU_min = document.getElementById("gpu_min2").value;
+        const gpu_min = document.getElementById("gpu_min2").value;
         const directx_min = document.getElementById("directx_min2").value;
         const so_rec = document.getElementById("so_rec2").value;
         const procesador_rec = document.getElementById("procesador_rec2").value;
         const ram_rec = document.getElementById("ram_rec2").value;
-        const GPU_rec = document.getElementById("gpu_rec2").value;
+        const gpu_rec = document.getElementById("gpu_rec2").value;
         const directx_rec = document.getElementById("directx_rec2").value;
         const id = document.getElementById("id").value;
         fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos/" + id, {
@@ -475,12 +475,12 @@ if (editarRequisito) {
                 so_min: so_min,
                 procesador_min: procesador_min,
                 ram_min: ram_min,
-                GPU_min: GPU_min,
+                gpu_min: gpu_min,
                 directx_min: directx_min,
                 so_rec: so_rec,
                 procesador_rec: procesador_rec,
                 ram_rec: ram_rec,
-                GPU_rec: GPU_rec,
+                gpu_rec: gpu_rec,
                 directx_rec: directx_rec,
             }),
         })
@@ -513,7 +513,7 @@ function cargarImagenes() {
             tbody.innerHTML = "";
             data.forEach(imagen => {
                 let fila = document.createElement('tr');
-                fila.innerHTML = '<td>' + imagen[0] + '</td> <td>' + imagen[1] + '</td> <td>' + imagen[2] + '</td> <td>';
+                fila.innerHTML = '<td>'+ imagen.ID + `</td> <td> <img src="${imagen.url}" style= "width:10%" /> </td> <td>` + imagen.juego_ID + '</td> <td>';
                 const filaAcciones = document.createElement('td');
                 fila.appendChild(filaAcciones);
                 const editarBtn = document.createElement('button');

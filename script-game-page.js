@@ -49,7 +49,7 @@ function cargarImagenes(juego_ID) {
       gameThumb3.src = data[2].url;
       gameThumb4.src = data[3].url;
       gameThumb5.src = data[4].url;
-      //imgChange.src = gameThumb1.src;
+      imgChange.src = gameThumb1.src;
     })
     .catch((error) => {
       // Manejar errores de la solicitud
