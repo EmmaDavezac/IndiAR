@@ -47,13 +47,32 @@ function cargarImagenes(juego_ID)
   )
     .then((response) => response.json())
     .then((data) => {
-      // Manejar los datos de respuesta
-      gameThumb1.src = data[0].url;
-      gameThumb2.src = data[1].url;
-      gameThumb3.src = data[2].url;
-      gameThumb4.src = data[3].url;
-      gameThumb5.src = data[4].url;
-      //imgChange.src = gameThumb1.src;
+      container = document.getElementById('img-thumbs-container');
+      var i=1;
+      data.forEach((imagen) => {
+        let thumb = document.createElement("img");
+        thumb.src = imagen.url;
+        thumb.id=('img-thumb-'+i);
+        thumb.classList.add("game-thumb");
+        thumb.addEventListener('click', () => {
+          eliminarBordes();
+          thumb.style.borderColor = colorBorde;
+          videoChange.style.display = "none";
+          imgChange.style.display = "block";
+          imgChange.src = thumb.src;
+});
+        container.appendChild(thumb);
+        if (i = 1) {
+          eliminarBordes();
+          thumb.style.borderColor = colorBorde;
+          videoChange.style.display = "none";
+          imgChange.style.display = "block";
+          imgChange.src = thumb.src;
+}
+        i = i + 1;
+
+      });
+      //imgChange.src = container.
     })
     .catch((error) => {
       // Manejar errores de la solicitud
