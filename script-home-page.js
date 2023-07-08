@@ -40,11 +40,11 @@ setInterval(function () { Next(); }, 5000);
 
 //Funcionalidades para cargar todas las imagenes desde la API
 
-
 function AsignarImagenAElemento(idImg, tituloDelJuego) {
-  let apiKey = "fb0a1f24f60743148908dba199441e4d";
+  tituloDelJuego = tituloDelJuego.split("-").join(" ");
   let element = document.getElementById(idImg);
-  fetch("https://api.rawg.io/api/games/" + tituloDelJuego + "?key=" + apiKey)
+  console.log(tituloDelJuego);
+  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/titulo" + tituloDelJuego)
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -57,31 +57,31 @@ function AsignarImagenAElemento(idImg, tituloDelJuego) {
 }
 
 AsignarImagenAElemento("slider-img1", "Elden-Ring");
-AsignarImagenAElemento("slider-img2", "Assassins-Creed-Mirage");
+AsignarImagenAElemento("slider-img2", "Assassin's-Creed-Mirage");
 AsignarImagenAElemento("slider-img3", "Hogwarts-Legacy");
 AsignarImagenAElemento("game-img1", "Resident-Evil-4-2023");
-AsignarImagenAElemento("game-img2", "Dont-Starve-Together");
-AsignarImagenAElemento("game-img3", "Assassins-Creed-Mirage");
+AsignarImagenAElemento("game-img2", "Don't-Starve-Together");
+AsignarImagenAElemento("game-img3", "Assassin's-Creed-Mirage");
 AsignarImagenAElemento("game-img4", "Hogwarts-Legacy");
 AsignarImagenAElemento("game-img5", "Star-Wars-Jedi-Survivor");
 AsignarImagenAElemento("game-img6", "Elden-Ring");
-AsignarImagenAElemento("game-img7", "Sherlock-Holmes-The-Awakened-2");
+AsignarImagenAElemento("game-img7", "Sherlock-Holmes-The-Awakened");
 AsignarImagenAElemento("game-img8", "Hollow-Knight-Silksong");
 AsignarImagenAElemento("game-img9", "Resident-Evil-4-2023");
-AsignarImagenAElemento("game-img10", "Dont-Starve-Together");
-AsignarImagenAElemento("game-img11", "Assassins-Creed-Mirage");
+AsignarImagenAElemento("game-img10", "Don't-Starve-Together");
+AsignarImagenAElemento("game-img11", "Assassin's-Creed-Mirage");
 AsignarImagenAElemento("game-img12", "Hogwarts-Legacy");
 AsignarImagenAElemento("game-img13", "Star-Wars-Jedi-Survivor");
 AsignarImagenAElemento("game-img14", "Elden-Ring");
-AsignarImagenAElemento("game-img15", "Sherlock-Holmes-The-Awakened-2");
+AsignarImagenAElemento("game-img15", "Sherlock-Holmes-The-Awakened");
 AsignarImagenAElemento("game-img16", "Hollow-Knight-Silksong");
 AsignarImagenAElemento("game-img17", "Resident-Evil-4-2023");
-AsignarImagenAElemento("game-img18", "Dont-Starve-Together");
-AsignarImagenAElemento("game-img19", "Assassins-Creed-Mirage");
+AsignarImagenAElemento("game-img18", "Don't-Starve-Together");
+AsignarImagenAElemento("game-img19", "Assassin's-Creed-Mirage");
 AsignarImagenAElemento("game-img20", "Hogwarts-Legacy");
 AsignarImagenAElemento("game-img21", "Star-Wars-Jedi-Survivor");
 AsignarImagenAElemento("game-img22", "Elden-Ring");
-AsignarImagenAElemento("game-img23", "Sherlock-Holmes-The-Awakened-2");
+AsignarImagenAElemento("game-img23", "Sherlock-Holmes-The-Awakened");
 AsignarImagenAElemento("game-img24", "Hollow-Knight-Silksong");
 
 

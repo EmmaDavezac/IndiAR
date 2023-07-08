@@ -50,7 +50,7 @@ function cargarUsuarios() {
                 eliminarBtn.classList.add("btn");
                 eliminarBtn.classList.add("btn-danger");
                 eliminarBtn.addEventListener("click", () =>
-                    eliminarUsuario(usuario[0])
+                    eliminarUsuario(usuario.ID)
                 );
                 filaAcciones.appendChild(eliminarBtn);
                 tbody = document.getElementById("tbody");
@@ -166,7 +166,7 @@ function cargarJuegos() {
                     juego.desarrollador +
                     "</td> <td>" +
                     juego.lanzamiento +
-                    `</td> <td> <div style="height:110px; overflow-y: scroll">`  +
+                    `</td> <td> <div style="height:106px; overflow-y: scroll" class="overflow-auto">` +
                     juego.descripcion +
                     " </div> </td> <td>" +
                     juego.precio +
@@ -521,13 +521,18 @@ function cargarImagenes() {
                 editarBtn.classList.add("btn");
                 editarBtn.classList.add("btn-primary");
                 editarBtn.classList.add("me-2");
-                editarBtn.addEventListener('click', () => { document.getElementById('id').value = imagen[0]; document.getElementById('url2').value = imagen[1]; document.getElementById('juego2').value = imagen[2]; });
+                editarBtn.addEventListener('click', () => { 
+                    document.getElementById('id').value = imagen.ID; 
+                    document.getElementById('url2').value = imagen.url; 
+                    document.getElementById('juego2').value = imagen.juego_ID; 
+                });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement('button');
                 eliminarBtn.innerText = 'Eliminar';
                 eliminarBtn.classList.add("btn");
                 eliminarBtn.classList.add("btn-danger");
-                eliminarBtn.addEventListener('click', () => eliminarImagen(imagen[0]));
+                eliminarBtn.addEventListener('click', () => 
+                    eliminarImagen(imagen.ID));
                 filaAcciones.appendChild(eliminarBtn);
                 tbody = document.getElementById("tbody");
                 tbody.appendChild(fila);
