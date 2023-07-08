@@ -918,8 +918,12 @@ font:"Roboto-Regular"}
   width: 100%;
   overflow-x: scroll;
 }
+#img-thumbs-container {
+  display: flex;
+}
 
 .game-thumb {
+  cursor: pointer;
   display: inline-block;
   width: 150px;
   height: 84.9px;
