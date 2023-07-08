@@ -9,14 +9,14 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="mx-5 px-5" >
         <h1 class="text-center my-5">CRUD de Juegos</h1>
 
         <!-- Formulario para crear un nuevo juego -->
         <div class="mb-5" id="crear-div">
             <h2>Crear juego</h2>
             <form id="crear-form-juego">
-                <div class="row">
+                <div class="row ">
                     <div class="col-md-5 mb-3">
                         <label for="titulo" class="form-label">Titulo:</label>
                         <input type="text" id="titulo" name="titulo" class="form-control" required>
@@ -38,8 +38,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
-                        <label for="descripcion" class="form-label">Descripcion:</label>
-                        <input type="text" id="descripcion" name="descripcion" class="form-control" required>
+                    <label for="img_principal" class="form-label">URL imagen principal:</label>
+                    <input type="url" id="img_principal" name="img_principal" class="form-control" required>
                     </div>
                     <div class="col-md-5 mb-3">
                         <label for="lanzamiento" class="form-label">Lanzamiento:</label>
@@ -52,8 +52,9 @@
                         <input type="number" id="requisitosID" name="requisitosID" class="form-control" required>
                     </div>
                     <div class="col-md-5 mb-3">
-                        <label for="img_principal" class="form-label">Img Principal:</label>
-                        <input type="url" id="img_principal" name="img_principal" class="form-control" required>
+                        
+                        <label for="descripcion" class="form-label">Descripcion:</label>
+                        <textarea name="descripcion" id="descripcion" class="form-control" cols="30" rows="1" style="resize: none;"></textarea>
                     </div>
                 </div>
                 <div>
@@ -94,8 +95,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
-                        <label for="descripcion2" class="form-label">Descripcion:</label>
-                        <input type="text" id="descripcion2" name="descripcion2" class="form-control" required>
+                        <label for="img_principal2" class="form-label">URL imagen principal:</label>
+                        <input type="url" id="img_principal2" name="img_principal2" class="form-control" required>
                     </div>
                     <div class="col-md-5 mb-3">
                         <label for="lanzamiento2" class="form-label">Lanzamiento:</label>
@@ -108,8 +109,9 @@
                         <input type="number" id="requisitosID2" name="requisitosID2" class="form-control" required>
                     </div>
                     <div class="col-md-5 mb-3">
-                        <label for="img_principal2" class="form-label">Img Principal:</label>
-                        <input type="url" id="img_principal2" name="img_principal2" class="form-control" required>
+                       
+                        <label for="descripcion2" class="form-label">Descripcion:</label>
+                        <textarea name="descripcion" id="descripcion2" class="form-control" cols="30" rows="1" style="resize: none;"></textarea>
                     </div>
                 </div>
                 <div>
@@ -119,9 +121,9 @@
         </div>
 
         <!-- Lista de juegos -->
-        <div class="my-5" id="juegos-div">
+        <div class="my-5 " id="juegos-div">
             <h2>Lista de juegos</h2>
-            <table class="table table-light mt-4 ">
+            <table class="table table-light mt-4">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
@@ -140,7 +142,9 @@
                 </tbody>
             </table>
         </div>
+      
     </div>
+    
     <script src="CRUD-scripts.js"></script>
     <script>
             // Función para cargar la lista de juegos al cargar la página

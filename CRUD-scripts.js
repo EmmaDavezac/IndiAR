@@ -42,6 +42,7 @@ function cargarUsuarios() {
                         document.getElementById("admin2").checked = true
                     else
                         document.getElementById("admin2").checked = false;
+                document.getElementById("nombre2").focus();    
                 });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement("button");
@@ -155,27 +156,25 @@ function cargarJuegos() {
             data.forEach((juego) => {
                 let fila = document.createElement("tr");
                 fila.innerHTML =
-                    "<td>" +
-                    juego[0] +
+                    "<td >" +
+                    juego.ID +
                     "</td> <td>" +
-                    juego[1] +
+                    juego.titulo +
                     "</td> <td>" +
-                    juego[2] +
+                    juego.distribuidor +
                     "</td> <td>" +
-                    juego[3] +
-                    "</td>" +
+                    juego.desarrollador +
                     "</td> <td>" +
-                    juego[4] +
+                    juego.lanzamiento+
                     "</td> <td>" +
-                    juego[5] +
-                    "</td>" +
-                    "<td>" +
-                    juego[6] +
+                    juego.descripcion +
                     "</td> <td>" +
-                    juego[7] +
+                    juego.precio +
                     "</td> <td>" +
-                    juego[8] +
-                    "</td> ";
+                    juego.requisitosID +
+                    "</td> <td>" +
+                    juego.img_principal+
+                    "</td>" 
                 const filaAcciones = document.createElement("td");
                 fila.appendChild(filaAcciones);
                 const editarBtn = document.createElement("button");
@@ -185,15 +184,16 @@ function cargarJuegos() {
                 editarBtn.classList.add("col-md-12");
                 editarBtn.classList.add("my-1");
                 editarBtn.addEventListener("click", () => {
-                    document.getElementById("ID").value = juego[0];
-                    document.getElementById("titulo2").value = juego[1];
-                    document.getElementById("distribuidor2").value = juego[2];
-                    document.getElementById("desarrollador2").value = juego[3];
-                    document.getElementById("lanzamiento2").value = juego[4];
-                    document.getElementById("descripcion2").value = juego[5];
-                    document.getElementById("precio2").value = juego[6];
-                    document.getElementById("requisitosID2").value = juego[7];
-                    document.getElementById("img_principal2").value = juego[8];
+                    document.getElementById("ID").value = juego.ID;
+                    document.getElementById("titulo2").value = juego.titulo;
+                    document.getElementById("distribuidor2").value = juego.distribuidor;
+                    document.getElementById("desarrollador2").value = juego.desarrollador;
+                    document.getElementById("lanzamiento2").value = juego.lanzamiento;
+                    document.getElementById("descripcion2").value = juego.descripcion;
+                    document.getElementById("precio2").value = juego.precio;
+                    document.getElementById("requisitosID2").value = juego.requisitosID;
+                    document.getElementById("img_principal2").value = juego.img_principal;
+                    document.getElementById('titulo2').focus();
                 });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement("button");
