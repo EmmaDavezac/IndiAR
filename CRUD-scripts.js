@@ -10,17 +10,21 @@ function cargarUsuarios() {
             tbody.innerHTML = "";
             data.forEach((usuario) => {
                 let fila = document.createElement("tr");
+                es_admin_text = '';
+                if (usuario.es_Admin)
+                    es_admin_text = 'Sí'
+                else es_admin_text = 'No';
                 fila.innerHTML =
                     "<td>" +
-                    usuario[0] +
+                    usuario.ID +
                     "</td> <td>" +
-                    usuario[1] +
+                    usuario.nombre +
                     "</td> <td>" +
-                    usuario[2] +
+                    usuario.Email +
                     "</td> <td>" +
-                    usuario[3] +
+                    usuario.Password +
                     "</td> <td>" +
-                    usuario[4] +
+                    es_admin_text +
                     "</td>";
                 const filaAcciones = document.createElement("td");
                 fila.appendChild(filaAcciones);
@@ -30,11 +34,14 @@ function cargarUsuarios() {
                 editarBtn.classList.add("btn-primary");
                 editarBtn.classList.add("me-2");
                 editarBtn.addEventListener("click", () => {
-                    document.getElementById("id").value = usuario[0];
-                    document.getElementById("nombre2").value = usuario[1];
-                    document.getElementById("correo2").value = usuario[2];
-                    document.getElementById("password2").value = usuario[3];
-                    document.getElementById("admin2").value = usuario[4];
+                    document.getElementById("id").value = usuario.ID;
+                    document.getElementById("nombre2").value = usuario.nombre;
+                    document.getElementById("correo2").value = usuario.Email;
+                    document.getElementById("password2").value = usuario.Password;
+                    if (usuario.es_Admin)
+                        document.getElementById("admin2").checked = true
+                    else
+                        document.getElementById("admin2").checked = false;
                 });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement("button");
@@ -568,8 +575,9 @@ function eliminarImagen(id) {
 }
 
 //Función para editar una imagen
-let editarImagen = document.getElementById('editar-form-usuario');
-if (editarUsuario) {
+let editarImagen = document.getElementById('editar-form-imagen');
+if (editarImagen) 
+{
     editarUsuario.addEventListener("submit", e => {
         e.preventDefault();
         const url = document.getElementById('url2').value;
