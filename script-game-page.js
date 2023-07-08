@@ -48,7 +48,7 @@ function cargarImagenes(juego_ID)
     .then((response) => response.json())
     .then((data) => {
       container = document.getElementById('img-thumbs-container');
-      var i=1;
+      let i=1;
       data.forEach((imagen) => {
         let thumb = document.createElement("img");
         thumb.src = imagen.url;
@@ -62,7 +62,7 @@ function cargarImagenes(juego_ID)
           imgChange.src = thumb.src;
 });
         container.appendChild(thumb);
-        if (i = 1) {
+        if (i == 1) {
           eliminarBordes();
           thumb.style.borderColor = colorBorde;
           videoChange.style.display = "none";
@@ -70,6 +70,7 @@ function cargarImagenes(juego_ID)
           imgChange.src = thumb.src;
 }
         i = i + 1;
+
 
       });
       //imgChange.src = container.
