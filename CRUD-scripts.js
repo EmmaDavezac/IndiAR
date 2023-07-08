@@ -42,7 +42,7 @@ function cargarUsuarios() {
                         document.getElementById("admin2").checked = true
                     else
                         document.getElementById("admin2").checked = false;
-                document.getElementById("nombre2").focus();    
+                    document.getElementById("nombre2").focus();
                 });
                 filaAcciones.appendChild(editarBtn);
                 const eliminarBtn = document.createElement("button");
@@ -165,16 +165,16 @@ function cargarJuegos() {
                     "</td> <td>" +
                     juego.desarrollador +
                     "</td> <td>" +
-                    juego.lanzamiento+
-                    "</td> <td>" +
+                    juego.lanzamiento +
+                    `</td> <td> <div style="height:110px; overflow-y: scroll">`  +
                     juego.descripcion +
-                    "</td> <td>" +
+                    " </div> </td> <td>" +
                     juego.precio +
                     "</td> <td>" +
                     juego.requisitosID +
                     "</td> <td>" +
-                    juego.img_principal+
-                    "</td>" 
+                    juego.img_principal +
+                    "</td>"
                 const filaAcciones = document.createElement("td");
                 fila.appendChild(filaAcciones);
                 const editarBtn = document.createElement("button");
@@ -513,7 +513,7 @@ function cargarImagenes() {
             tbody.innerHTML = "";
             data.forEach(imagen => {
                 let fila = document.createElement('tr');
-                fila.innerHTML = '<td>'+ imagen.ID + `</td> <td> <img src="${imagen.url}" style= "width:10%" /> </td> <td>` + imagen.juego_ID + '</td> <td>';
+                fila.innerHTML = '<td>' + imagen.ID + `</td> <td style="px-5"> <img src="${imagen.url}" style= "width:128px" /> </td> <td>` + imagen.juego_ID + '</td> <td>';
                 const filaAcciones = document.createElement('td');
                 fila.appendChild(filaAcciones);
                 const editarBtn = document.createElement('button');
@@ -576,8 +576,7 @@ function eliminarImagen(id) {
 
 //Función para editar una imagen
 let editarImagen = document.getElementById('editar-form-imagen');
-if (editarImagen) 
-{
+if (editarImagen) {
     editarUsuario.addEventListener("submit", e => {
         e.preventDefault();
         const url = document.getElementById('url2').value;
