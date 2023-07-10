@@ -20,8 +20,11 @@ body {
   padding: 0;
   font-size: 10px;
 }
+
 @media screen and (min-width: 1200px) {
-  body{font-size: 14px;}
+  body {
+    font-size: 14px;
+  }
 }
 
 .main {
@@ -433,10 +436,12 @@ body {
 }
 
 /*Estilo Seccion*/
-.main-title{
+.main-title {
   font-size: 1.5rem;
-font-weight: bold;
-font:"Roboto-Regular"}
+  font-weight: bold;
+  font: "Roboto-Regular"
+}
+
 .home-section {
   width: 100%;
   position: relative;
@@ -488,7 +493,7 @@ font:"Roboto-Regular"}
 }
 
 .game-title .title {
-    font-size: 1rem;
+  font-size: 1rem;
   display: block;
   font-weight: bold;
   text-decoration: none;
@@ -645,10 +650,10 @@ font:"Roboto-Regular"}
     font-size: 24px;
   }
 
-.container-tips {
-  display: flex;
-  justify-content: space-around;
-}
+  .container-tips {
+    display: flex;
+    justify-content: space-around;
+  }
 
   .tip {
     margin: 0;
@@ -661,7 +666,7 @@ font:"Roboto-Regular"}
     font-size: 32px;
   }
 
-  
+
 
   .tip {
     padding: 20px;
@@ -918,6 +923,7 @@ font:"Roboto-Regular"}
   width: 100%;
   overflow-x: scroll;
 }
+
 #img-thumbs-container {
   display: flex;
 }
@@ -977,10 +983,12 @@ font:"Roboto-Regular"}
 .main-game-page .requirements-list b {
   font-weight: 600;
 }
+
 /*BUY CARD */
-.buy-card-container{
+.buy-card-container {
   width: 30%;
 }
+
 .buy-card-thumb {
   width: 100%;
   border-radius: 25px 25px 0 0;
@@ -1039,7 +1047,8 @@ font:"Roboto-Regular"}
   margin: 12px;
   border-radius: 10px;
 }
- /*Estilo formulario*/
+
+/*Estilo formulario*/
 
 .form-container {
   background: #fff;
@@ -1050,6 +1059,7 @@ font:"Roboto-Regular"}
   border-radius: 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
 }
+
 form {
   width: 90%;
   position: absolute;
@@ -1057,6 +1067,7 @@ form {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 /*Estilo de input*/
 .input-container {
   display: flex;
@@ -1064,16 +1075,18 @@ form {
   margin-bottom: 2vh;
   height: 6vh;
 }
-.form-title-container{
-color: #ff4e00;
+
+.form-title-container {
+  color: #ff4e00;
   margin-top: 0;
- margin-bottom: 2vh ;
- height: 8vh;
- display: flex;
+  margin-bottom: 2vh;
+  height: 8vh;
+  display: flex;
 }
+
 .form-title {
   margin: auto;
-font-size: 2rem;
+  font-size: 2rem;
   text-align: center;
   font-weight: 600;
 }
@@ -1102,6 +1115,7 @@ font-size: 2rem;
   text-align: center;
   border-radius: 10px 0 0 10px;
 }
+
 /*Estilo de boton de formulario*/
 .btn {
   background: #ff4e00;
@@ -1130,27 +1144,32 @@ font-size: 2rem;
   width: 100%;
   margin-bottom: 0;
 }
+
 .warningSection {
-  margin:2vh auto;
+  margin: 2vh auto;
   text-align: center;
   color: #bd1d1d;
   height: 12vh;
 }
 
 @media screen and (min-width: 1200px) {
-  .form-container{margin-bottom: 188px;width: 60%}
-.bottom-footer {
+  .form-container {
+    margin-bottom: 188px;
+    width: 60%
+  }
+
+  .bottom-footer {
     bottom: 0;
     width: 100%;
   }
 }
 
-@media screen and (min-width: 1800px){
+@media screen and (min-width: 1800px) {
   .form-container {
-      
-      width: 50%
-    }
+    width: 75%
+  }
 }
+
 /*Estilos del HTML "ERROR" O SITIO EN CONSTRUCCION*/
 #contruction-message-container {
   border: #ccc 1px solid;
@@ -1159,6 +1178,7 @@ font-size: 2rem;
   background: #fff;
   padding: 40px;
 }
+
 @keyframes glitch {
 
   0%,
@@ -1207,4 +1227,42 @@ font-size: 2rem;
   font-family: "Poppins";
   font-size: 24px;
   color: #333;
+}
+
+/*Estilos de CRUD */
+.crud-index {
+  background: #fff;
+  position: relative;
+  margin: 12vh auto;
+  width: 95%;
+  height: 90vh;
+  border-radius: 6px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.crud-index-title {
+  color: #ff4e00;
+  padding-top: 10vh;
+  margin-bottom: 2vh;
+  height: 8vh;
+  display: flex;
+  text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .crud-index {
+    margin-bottom: 188px;
+    width: 60%
+  }
+
+  .bottom-footer {
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+  .crud-index {
+    width: 75%
+  }
 }
