@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Juegos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -44,8 +45,9 @@
           </ul>
         </div>
       </header>
+
     <div class="mx-5 px-5" id="main-container">
-        <h1 class="text-center my-5 ">CRUD de Juegos</h1>
+       
 
         <!-- Formulario para crear un nuevo juego -->
         <div class="mx-auto " id="crear-div" v-if="formCrear" @submit.prevent="crearJuego">
@@ -177,11 +179,8 @@
 
         <!-- Lista de juegos -->
         <div class="my-5 " id="juegos-div" v-if="!formCrear & !juegoSeleccionado">
-            <h2>Lista de juegos</h2>
-            <div class="text-end ">
-                <button @click="mostrarFormCrear()" class="btn btn-primary my-2 me-2">Añadir</button>
-
-            </div>
+            <div class="d-flex align-items-center justify-content-between" style="padding-top: 5vh;"> <h2 >Lista de juegos</h2><button @click="mostrarFormCrear()" class="btn btn-success my-2 me-2 mb-3" style="width: 105.98px;"><i class="fa-solid fa-plus"></i></button></div>
+           
             <div class="table-responsive">
                 <table class="table table-light table-bordered">
                     <thead class="table-dark">
@@ -211,9 +210,9 @@
                             <td class="centered"><img :src="juego.img_principal" style= "height:92px;" alt=""></td>
                             <td>
                                 <button @click="cargarEditarJuego(juego)"
-                                    class="btn btn-primary col-md-12 mb-3">Editar</button>
+                                    class="btn btn-primary col-md-12 mb-3"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <button @click="eliminarUsuario(usuario.id)"
-                                    class="btn btn-danger col-md-12">Eliminar</button>
+                                    class="btn btn-danger col-md-12"><i class="fa-sharp fa-solid fa-trash"></i></button>
                             </td>
 
                         </tr>
