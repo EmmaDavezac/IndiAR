@@ -1,8 +1,8 @@
-const { createApp } = Vue
+/*const { createApp } = Vue
             createApp({
                 data() {
                     return {
-                        usuarios: [], usuarioSeleccionado: null, formCrear: null, usuarioNuevo: { nombre:'',Email:'',es_Admin:false, Password:'' }, checkedEditar:false, checkedCrear:false
+                        usuarios: [], usuarioSeleccionado: null, formCrear: null, usuarioNuevo: { nombre:'',Email:'',es_Admin:false, Password:'' }, checkedEditar:false, checkedCrear:false,
                     };
                 },
                 mounted() {
@@ -36,7 +36,7 @@ const { createApp } = Vue
                             });
                     },
                     crearUsuario() {
-                        {   if(this.checkedCrear){this.usuarioNuevo.es_Admin=1;}else {this.usuarioNuevo.es_Admin=0;}
+                        {   if(this.checkedCrear){this.usuarioNuevo.es_Admin=1;}else {this.usuarioNuevo.es_Admin=0;};
                             fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
@@ -104,4 +104,4 @@ const { createApp } = Vue
                         }
                     },
                 }
-            }).mount('#main-container');
+            }).mount('#main-container');/*
