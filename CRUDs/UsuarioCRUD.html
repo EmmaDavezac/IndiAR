@@ -9,74 +9,81 @@
 </head>
 
 <body>
-    <div class="mx-5 px-5">
+    <div class="mx-5 px-5" id="main-container">
         <h1 class="text-center my-5">CRUD de Usuarios</h1>
 
         <!-- Formulario para crear un nuevo usuario -->
-        <div class="row">
-            <div class="col-md-5 " id="crear-div">
+        <div class="row"  >
+            <div class="col-md-6 mx-auto"  id="crear-div" v-if="formCrear">
                 <h2>Crear Usuario</h2>
-                <form id="crear-form-usuario">
+                <form id="crear-form-usuario" @submit.prevent="crearUsuario">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" required />
+                        <input type="text" id="nombre" name="nombre" class="form-control" v-model="usuarioNuevo.nombre" required />
                     </div>
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo:</label>
-                        <input type="email" id="correo" name="correo" class="form-control" required />
+                        <input type="email" id="correo" name="correo" class="form-control" v-model="usuarioNuevo.Email" required />
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="text" id="password" name="password" class="form-control" required />
+                        <input type="text" id="password" name="password" class="form-control" v-model="usuarioNuevo.Password" required />
                     </div>
-                    <div class="mb-3, form-check form-switch">
+                    <div class="mb-3 form-check form-switch">
                         <label for="admin" class="form-check-label">Administrador</label>
-                        <input type="checkbox" id="admin" name="admin" class="form-check-input" />
+                        <input type="checkbox" id="admin" name="admin" class="form-check-input" v-model="checkedCrear" />
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-crear" class="btn btn-primary" value="crear-usuario">
+                        <button type="submit" id="btn-crear" class="btn btn-primary me-3" value="crear-usuario">
                             Crear
                         </button>
+                    <button @click="ocultarFormCrear" class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
             </div>
 
             <!-- Formulario para editar un usuario  -->
-            <div class="col-md-5 mx-auto" id="editar-div">
+            <div class="col-md-6 mx-auto" id="editar-div" v-if="usuarioSeleccionado">
                 <h2>Editar Usuario</h2>
-                <form id="editar-form-usuario">
+                <form id="editar-form-usuario" @submit.prevent="actualizarUsuario">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="number" id="id" name="id" class="form-control" readonly />
+                        <input type="number" id="id" name="id" class="form-control"  v-model="usuarioSeleccionado.ID" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="nombre2" class="form-label">Nombre:</label>
-                        <input type="text" id="nombre2" name="nombre2" class="form-control" required />
+                        <input type="text" id="nombre2" name="nombre2" class="form-control" v-model="usuarioSeleccionado.nombre" required />
                     </div>
                     <div class="mb-3">
                         <label for="correo2" class="form-label">Correo:</label>
-                        <input type="email" id="correo2" name="correo2" class="form-control" required />
+                        <input type="email" id="correo2" name="correo2" class="form-control" v-model="usuarioSeleccionado.Email" required />
                     </div>
                     <div class="mb-3">
                         <label for="password2" class="form-label">Password:</label>
-                        <input type="text" id="password2" name="password2" class="form-control" required />
+                        <input type="text" id="password2" name="password2" class="form-control"  v-model="usuarioSeleccionado.Password"required />
                     </div>
-                    <div class="mb-3, form-check form-switch">
+                    <div class="mb-3 form-check form-switch">
                         <label for="admin2" class="form-check-label">Administrador</label>
-                        <input type="checkbox" id="admin2" name="admin2" class="form-check-input" />
+                        <input type="checkbox" id="admin2" name="admin2" class="form-check-input" v-model="checkedEditar"  />
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-editar" class="btn btn-primary">
+                        <button type="submit" id="btn-editar" class="btn btn-primary me-3">
                             Guardar
                         </button>
+                    <button @click="cancelarEdicion" class="btn btn-danger">Cancelar</button>
+
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- Lista de usuarios -->
-        <div class="my-5" id="usuarios-div">
+        <div class="" id="usuarios-div" v-if="!formCrear & !usuarioSeleccionado">
             <h2>Lista de Usuarios</h2>
+            <div class="text-end ">
+                <button @click="mostrarFormCrear" class="btn btn-primary my-2 me-2">Añadir</button>
+            
+            </div>
             <table class="table table-light mt-4">
                 <thead class="table-dark">
                     <tr>
@@ -88,14 +95,126 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tbody"></tbody>
+                <tbody id="tbody">
+                    <tr v-for="usuario in usuarios" :key="usuario.ID">
+                        <td>{{ usuario.ID }}</td>
+                        <td>{{ usuario.nombre }}</td>
+                        <td>{{ usuario.Email }}</td>
+                        <td>{{ usuario.Password }}</td>
+                        <td v-if="usuario.es_Admin">SÍ</td>
+                        <td v-else="usuario.es_Admin">No</td>
+
+
+                        
+                        <td>
+                            <button @click="cargarEditarUsuario(usuario)" class="btn btn-primary col-md-12 mb-3">Editar</button>
+                            <button @click="eliminarUsuario(usuario.id)" class="btn btn-danger col-md-12">Eliminar</button>
+                        </td>
+                
+                    </tr>
+                </tbody>
             </table>
         </div>
-        <script src="CRUD-scripts.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script>
-            // Función para cargar la lista de usuarios al cargar la página
-            window.onload = function () { cargarUsuarios(); }
-        </script>
+
+            const { createApp } = Vue
+            createApp({
+                data() {
+                    return {
+                        usuarios: [], usuarioSeleccionado: null, formCrear: null, usuarioNuevo: { nombre:'',Email:'',es_Admin:false, Password:'' }, checkedEditar:false, checkedCrear:false
+                    };
+                },
+                mounted() {
+                    this.obtenerListado();
+                },
+                methods: {
+                   
+
+                    cargarEditarUsuario(usuario) {
+                        this.usuarioSeleccionado = {...usuario}; // Copia los datos del usuario seleccionado
+                        if (this.usuarioSeleccionado.es_Admin==1)
+                       { this.checkedEditar=true} else  this.checkedEditar = false;
+                    },
+                    cancelarEdicion() {
+                        this.usuarioSeleccionado = null;
+                    },
+                    mostrarFormCrear() {
+                        this.formCrear = true;
+                    },
+                    ocultarFormCrear() {
+                        this.formCrear = null;
+                    },
+                    obtenerListado() {
+                        fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios')
+                            .then(response => response.json())
+                            .then(data => {
+                                this.usuarios = data; // Asigna los datos obtenidos a la propiedad usuarios
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            });
+                    },
+                    crearUsuario() {
+                        {   if(this.checkedCrear){this.usuarioNuevo.es_Admin=1;}else {this.usuarioNuevo.es_Admin=0;}
+                            fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                    Nombre: this.usuarioNuevo.nombre,
+                                    Email: this.usuarioNuevo.Email,
+                                    Password: this.usuarioNuevo.Password,
+                                    es_Admin:this.usuarioNuevo.es_Admin
+                                }),
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Lógica después de guardar los cambios exitosamente
+                                    alert(data.mensaje);
+                
+                                    this.usuarioNuevo = {  nombre: '', Email: '', es_Admin: false, Password: '' }; // Reinicia el usuario seleccionado después de guardar los cambios
+                                    this.formCrear = null;
+                                    this.checkedCrear=false;
+                                    this.obtenerListado();
+                                })
+                                .catch(error => {
+                                    // Lógica en caso de error al guardar los cambios
+                                    alert('Error al guardar los cambios:', error);
+                                });
+                        }
+                    },
+                    actualizarUsuario() {
+                       if (this.checkedEditar) { this.usuarioSeleccionado.es_Admin = '1'; } else { this.usuarioSeleccionado.es_Admin = '0'; }
+
+                        fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios/' + this.usuarioSeleccionado.ID, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                Nombre: this.usuarioSeleccionado.nombre,
+                                Email: this.usuarioSeleccionado.Email,
+                                Password: this.usuarioSeleccionado.Password,
+                                es_Admin:this.usuarioSeleccionado.es_Admin
+
+                            }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Lógica después de guardar los cambios exitosamente
+                                alert(data.mensaje);
+                                this.usuarioSeleccionado = null; // Reinicia el usuario seleccionado después de guardar los cambios
+                                this.obtenerListado();
+                            })
+                            .catch(error => {
+                                // Lógica en caso de error al guardar los cambios
+                                alert('Error al guardar los cambios:', error);
+                            });
+                    },
+                }
+            }).mount('#main-container');
+
+    </script>
 </body>
 
 </html>

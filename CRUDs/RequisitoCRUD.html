@@ -10,141 +10,146 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="mx-5 px-5" id="main-container">
         <h1 class="text-center my-5">CRUD de Requisitos</h1>
 
         <!-- Formulario para crear un nuevo requisito -->
 
-        <div class="mb-5" id="crear-div">
+        <div class="mb-5" id="crear-div" v-if="formCrear" >
             <h2>Crear requisito</h2>
-            <form id="crear-form-requisito">
+            <form id="crear-form-requisito" @submit.prevent="crearRequisito">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="so_min" class="form-label">SO Mínimo:</label>
-                        <input type="text" id="so_min" name="so_min" class="form-control" required>
+                        <input type="text" id="so_min" name="so_min" class="form-control"  v-model="requisitoNuevo.so_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="so_rec" class="form-label">SO recomendado:</label>
-                        <input type="text" id="so_rec" name="so_rec" class="form-control" required>
+                        <input type="text" id="so_rec" name="so_rec" class="form-control" v-model="requisitoNuevo.so_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
-                        <input type="text" id="procesador_min" name="procesador_min" class="form-control" required>
+                        <input type="text" id="procesador_min" name="procesador_min" class="form-control"  v-model="requisitoNuevo.procesador_min"required>
                     </div>
                     <div class="col-md-5">
                         <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
-                        <input type="text" id="procesador_rec" name="procesador_rec" class="form-control" required>
+                        <input type="text" id="procesador_rec" name="procesador_rec" class="form-control" v-model="requisitoNuevo.procesador_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="ram_min" class="form-label">RAM mínimo:</label>
-                        <input type="text" id="ram_min" name="ram__min" class="form-control" required>
+                        <input type="text" id="ram_min" name="ram__min" class="form-control"v-model="requisitoNuevo.ram_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="ram_rec" class="form-label">RAM recomendado:</label>
-                        <input type="text" id="ram_rec" name="ram_rec" class="form-control" required>
+                        <input type="text" id="ram_rec" name="ram_rec" class="form-control" v-model="requisitoNuevo.ram_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="gpu_min" class="form-label">GPU mínimo:</label>
-                        <input type="text" id="gpu_min" name="gpu_min" class="form-control" required>
+                        <input type="text" id="gpu_min" name="gpu_min" class="form-control" v-model="requisitoNuevo.gpu_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="gpu_rec" class="form-label">GPU recomendado:</label>
-                        <input type="text" id="gpu_rec" name="gpu_rec" class="form-control" required>
+                        <input type="text" id="gpu_rec" name="gpu_rec" class="form-control" v-model="requisitoNuevo.gpu_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="directx_min" class="form-label">Directx mínimo:</label>
-                        <input type="nubmer" id="directx_min" name="directx_min" class="form-control" required>
+                        <input type="text" id="directx_min" name="directx_min" class="form-control" v-model="requisitoNuevo.directx_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="directx_rec" class="form-label">Directx recomendado:</label>
-                        <input type="number" id="directx_rec" name="directx_rec" class="form-control" required>
+                        <input type="text" id="directx_rec" name="directx_rec" class="form-control" v-model="requisitoNuevo.directx_rec" required>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" id="btn-crear" class="btn btn-primary" value="crear-requisito">Crear</button>
+                <div class="mb-3">
+                    <button type="submit" id="btn-crear" class="btn btn-primary me-3">Crear</button>
+                    <button @click="ocultarFormCrear" class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
         </div>
 
         <!-- Formulario para editar un requisito  -->
-        <div class="mb-5" id="editar-div">
+        <div class="mb-5" id="editar-div" v-if="requisitoSeleccionado">
             <h2>Editar requisito</h2>
-            <form id="editar-form-requisito">
+            <form id="editar-form-requisito" @submit.prevent="actualizarRequisito">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="number" id="id" name="id" class="form-control" readonly>
+                        <input type="number" id="id" name="id" class="form-control" v-model="requisitoSeleccionado.ID" readonly>
                     </div>
                 </div>
                 <div class="row">
 
                     <div class="col-md-5 mb-3">
                         <label for="so_min" class="form-label">SO Mínimo:</label>
-                        <input type="text" id="so_min2" name="so_min" class="form-control" required>
+                        <input type="text" id="so_min2" name="so_min" class="form-control" v-model="requisitoSeleccionado.so_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="so_rec" class="form-label">SO recomendado:</label>
-                        <input type="text" id="so_rec2" name="so_rec" class="form-control" required>
+                        <input type="text" id="so_rec2" name="so_rec" class="form-control" v-model="requisitoSeleccionado.so_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="procesador_min" class="form-label">Procesador Mínimo:</label>
-                        <input type="text" id="procesador_min2" name="procesador_min" class="form-control" required>
+                        <input type="text" id="procesador_min2" name="procesador_min" class="form-control" v-model="requisitoSeleccionado.procesador_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="procesador_rec" class="form-label">Procesador recomendado:</label>
-                        <input type="text" id="procesador_rec2" name="procesador_rec" class="form-control" required>
+                        <input type="text" id="procesador_rec2" name="procesador_rec" class="form-control" v-model="requisitoSeleccionado.procesador_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="ram_min" class="form-label">RAM mínimo:</label>
-                        <input type="text" id="ram_min2" name="ram__min" class="form-control" required>
+                        <input type="text" id="ram_min2" name="ram__min" class="form-control" v-model="requisitoSeleccionado.ram_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="ram_rec" class="form-label">RAM recomendado:</label>
-                        <input type="text" id="ram_rec2" name="ram_rec" class="form-control" required>
+                        <input type="text" id="ram_rec2" name="ram_rec" class="form-control" v-model="requisitoSeleccionado.ram_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="gpu_min" class="form-label">GPU mínimo:</label>
-                        <input type="text" id="gpu_min2" name="gpu_min" class="form-control" required>
+                        <input type="text" id="gpu_min2" name="gpu_min" class="form-control" v-model="requisitoSeleccionado.gpu_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="gpu_rec" class="form-label">GPU recomendado:</label>
-                        <input type="text" id="gpu_rec2" name="gpu_rec" class="form-control" required>
+                        <input type="text" id="gpu_rec2" name="gpu_rec" class="form-control" v-model="requisitoSeleccionado.gpu_rec" required>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="directx_min" class="form-label">Directx mínimo:</label>
-                        <input type="number" id="directx_min2" name="directx_min" class="form-control" required>
+                        <input type="text" id="directx_min2" name="directx_min" class="form-control"  v-model="requisitoSeleccionado.directx_min" required>
                     </div>
                     <div class="col-md-5">
                         <label for="directx_rec" class="form-label">Directx recomendado:</label>
-                        <input type="number" id="directx_rec2" name="directx_rec" class="form-control" required>
+                        <input type="text" id="directx_rec2" name="directx_rec" class="form-control" v-model="requisitoSeleccionado.directx_rec" required>
                     </div>
                 </div>
-                <div>
-                    <button type="submit" id="btn-editar" class="btn btn-primary">Editar</button>
+                <div class="mb-3">
+                    <button type="submit" id="btn-editar" class="btn btn-primary me-3">Guardar</button>
+                    <button @click="cancelarEdicion" class="btn btn-danger">Cancelar</button>
                 </div>
             </form>
         </div>
 
 
         <!-- Lista de requisitos -->
-        <div class="my-5" id="requisitos-div">
+        <div class="" id="requisitos-div" v-if="!formCrear & !requisitoSeleccionado">
             <h2>Lista de requisitos</h2>
+            <div class="text-end ">
+                <button @click="mostrarFormCrear" class="btn btn-primary my-2 me-2">Añadir</button>
+            </div>
             <table class="table table-light mt-4 ">
                 <thead class="table-dark">
                     <tr>
@@ -163,16 +168,142 @@
                     </tr>
                 </thead>
                 <tbody id="tbody">
+                    <tr v-for="requisito in requisitos" :key="requisito.ID">
+                        <td>{{ requisito.ID }}</td>
+                        <td>{{ requisito.so_min }}</td>
+                        <td>{{ requisito.procesador_min }}</td>
+                        <td>{{ requisito.ram_min }}</td>
+                        <td>{{ requisito.gpu_min }}</td>
+                        <td>{{ requisito.directx_min }}</td>
+                        <td>{{ requisito.so_rec }}</td>
+                        <td>{{ requisito.procesador_rec }}</td>
+                        <td>{{ requisito.ram_rec }}</td>
+                        <td>{{ requisito.gpu_rec }}</td>
+                        <td>{{ requisito.directx_rec }}</td>
+                        <td>
+                            <button @click="cargarEditarRequisito(requisito)" class="btn btn-primary col-md-12 mb-3">Editar</button>
+                            <button @click="eliminarUsuario(requisito.id)" class="btn btn-danger col-md-12">Eliminar</button>
+                        </td>
+                
+                    </tr>
                 </tbody>
             </table>
 
         </div>
     </div>
-    <script src="CRUD-scripts.js"></script>
-        <script>
-            // Función para cargar la lista de requisitos al cargar la página
-            window.onload = function () { cargarRequisitos(); }
-        </script>
+       <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+
+
+
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    requisitos: [], requisitoSeleccionado: null, formCrear: null, requisitoNuevo: { so_min:'',procesador_min:'',ram_min:'',gpu_min:'',directx_min:'', so_rec: '', procesador_rec: '', ram_rec: '', gpu_rec: '', directx_rec: '' }
+                };
+            },
+            mounted() {
+                this.obtenerListado();
+            },
+            methods: {
+
+                cargarEditarRequisito(requisito) {
+                    this.requisitoSeleccionado = { ...requisito }; // Copia los datos del imagen seleccionado
+                },
+                cancelarEdicion() {
+                    this.requisitoSeleccionado = null
+                },
+                mostrarFormCrear() {
+                    this.formCrear = true
+                },
+                ocultarFormCrear() {
+                    this.formCrear = null
+                },
+                obtenerListado() {
+                    fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.requisitos = data; // Asigna los datos obtenidos a la propiedad requisitos
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                },
+                crearRequisito() {
+                    {
+                        fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                so_min: this.requisitoNuevo.so_min,
+                                procesador_min: this.requisitoNuevo.procesador_min,
+                                ram_min: this.requisitoNuevo.ram_min,
+                                GPU_min: this.requisitoNuevo.gpu_min,
+                                directx_min: this.requisitoNuevo.directx_min,
+                                so_rec: this.requisitoNuevo.so_rec,
+                                procesador_rec: this.requisitoNuevo.procesador_rec,
+                                ram_rec: this.requisitoNuevo.ram_rec,
+                                GPU_rec: this.requisitoNuevo.gpu_rec,
+                                directx_rec: this.requisitoNuevo.directx_rec,
+                            }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Lógica después de guardar los cambios exitosamente
+                                alert(data.mensaje);
+                                this.requisitoNuevo = {  so_min: '', procesador_min: '', ram_min: '', gpu_min: '', directx_min: '', so_rec: '', procesador_rec: '', ram_rec: '', gpu_rec: '', directx_rec: '' };
+                                this.formCrear = null;
+                                this.obtenerListado();
+
+
+                            })
+                            .catch(error => {
+                                // Lógica en caso de error al guardar los cambios
+                                alert('Error al guardar los cambios:', error);
+                            });
+                    }
+                },
+                actualizarRequisito() {
+                    fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos/' + this.requisitoSeleccionado.ID, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            so_min: this.requisitoSeleccionado.so_min,
+                            procesador_min: this.requisitoSeleccionado.procesador_min,
+                            ram_min: this.requisitoSeleccionado.ram_min,
+                            GPU_min: this.requisitoSeleccionado.gpu_min,
+                            directx_min: this.requisitoSeleccionado.directx_min,
+                            so_rec: this.requisitoSeleccionado.so_rec,
+                            procesador_rec: this.requisitoSeleccionado.procesador_rec,
+                            ram_rec: this.requisitoSeleccionado.ram_rec,
+                            GPU_rec: this.requisitoSeleccionado.gpu_rec,
+                            directx_rec: this.requisitoSeleccionado.directx_rec
+                        }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Lógica después de guardar los cambios exitosamente
+                            alert(data.mensaje);
+                            this.requisitoSeleccionado = null; // Reinicia el usuario seleccionado después de guardar los cambios
+                            this.obtenerListado();
+
+
+
+                        })
+                        .catch(error => {
+                            // Lógica en caso de error al guardar los cambios
+                            alert('Error al guardar los cambios:', error);
+                        });
+                },
+            }
+        }).mount('#main-container');
+
+    </script>
 </body>
 
 </html>
