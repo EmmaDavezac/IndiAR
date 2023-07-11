@@ -10,7 +10,7 @@
 
 <body>
     <div class="mx-5 px-5" id="main-container">
-        <h1 class="text-center my-5">CRUD de Juegos</h1>
+        <h1 class="text-center ">CRUD de Juegos</h1>
 
         <!-- Formulario para crear un nuevo juego -->
         <div class="mx-auto " id="crear-div" v-if="formCrear" @submit.prevent="crearJuego">
@@ -90,7 +90,7 @@
                         <input type="text" id="titulo2" name="titulo2" class="form-control"
                             v-model="juegoSeleccionado.titulo" required>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-3">
                         <label for="precio2" class="form-label">Precio:</label>
                         <input type="text" id="precio2" name="precio2" class="form-control"
                             v-model="juegoSeleccionado.precio" required>
@@ -141,7 +141,7 @@
         </div>
 
         <!-- Lista de juegos -->
-        <div class="my-5 " id="juegos-div" v-if="!formCrear & !juegoSeleccionado">
+        <div class="" id="juegos-div" v-if="!formCrear & !juegoSeleccionado">
             <h2>Lista de juegos</h2>
             <div class="text-end ">
                 <button @click="mostrarFormCrear()" class="btn btn-primary my-2 me-2">Añadir</button>
@@ -190,7 +190,6 @@
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./CRUD-scripts.js"></script>
     <script>
 
 

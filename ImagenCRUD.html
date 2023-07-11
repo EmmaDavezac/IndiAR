@@ -10,72 +10,185 @@
 </head>
 
 <body>
-    <div class="mx-5 px-5">
+    <div class="mx-5 px-5" id="main-container">
         <h1 class="text-center my-5">CRUD de Imagenes</h1>
 
         <!-- Formulario para crear una nueva imagen -->
         <div class="row">
-            <div class="col-md-5 " id="crear-div">
+            <div class="col-md-6 mx-auto" id="crear-div" v-if="formCrear">
                 <h2>Crear Imagen</h2>
-                <form id="crear-form-imagen">
+                <form id="crear-form-imagen" @submit.prevent="crearJuego">
                     <div class="mb-3">
                         <label for="url" class="form-label">URL:</label>
-                        <input type="url" id="url" name="url" class="form-control" required>
+                        <input type="url" id="url" name="url" class="form-control" v-model="imagenNueva.url" required>
                     </div>
                     <div class="mb-3">
-                        <label for="juego" class="form-label">Juego:</label>
-                        <input type="number" id="juego" name="juego" class="form-control" required>
+                        <label for="imagen" class="form-label">Juego:</label>
+                        <input type="number" id="imagen" name="imagen" class="form-control" v-model="imagenNueva.juego_ID" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-crear" class="btn btn-primary" >Crear</button>
+                        <button type="submit" id="btn-crear" class="btn btn-primary me-3" >Crear</button>
+                    <button @click="ocultarFormCrear" class="btn btn-danger">Cancelar</button>
+
+
                     </div>
                 </form>
             </div>
 
             <!-- Formulario para editar una imagen  -->
-            <div class="col-md-5 mx-auto" id="editar-div">
+            <div class="col-md-6 mx-auto" id="editar-div" v-if="imagenSeleccionada">
                 <h2>Editar Imagen</h2>
-                <form id="editar-form-imagen">
+                <form id="editar-form-imagen" @submit.prevent="actualizarJuego">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="number" id="id" name="id" class="form-control" readonly>
+                        <input type="number" id="id" name="id" class="form-control" v-model="imagenSeleccionada.ID" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="url2" class="form-label">URL:</label>
-                        <input type="url" id="url2" name="url2" class="form-control" required>
+                        <input type="url" id="url2" name="url2" class="form-control" v-model="imagenSeleccionada.url" required>
                     </div>
                     <div class="mb-3">
                         <label for="juego2" class="form-label">Juego:</label>
-                        <input type="number" id="juego2" name="juego2" class="form-control" required>
+                        <input type="number" id="juego2" name="juego2" class="form-control" v-model="imagenSeleccionada.juego_ID" required>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" id="btn-editar" class="btn btn-primary">Guardar</button>
+                        <button type="submit" id="btn-editar" class="btn btn-primary me-3">Guardar</button>
+                    <button @click="cancelarEdicion" class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- Lista de Imagenes -->
-        <div class="my-5" id="usuarios-div">
+        <div class="" id="imagenes-div" v-if="!formCrear & !imagenSeleccionada">
+
             <h2>Lista de Imagenes</h2>
+            <div class="text-end ">
+                <button @click="mostrarFormCrear" class="btn btn-primary my-2 me-2">Añadir</button>
+            
+            </div>
             <table class="table table-light mt-4 ">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>URL</th>
+                        <th>Imagen</th>
                         <th>Juego</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
+                    <tr v-for="imagen in imagenes" :key="imagen.ID">
+                        <td>{{ imagen.ID }}</td>
+                        <td>{{ imagen.url }}</td>
+                        <td> <img v-bind:src="imagen.url" style= "width:128px; border-radius: 5%;"> </td>
+                        <td>{{ imagen.juego_ID }}</td>
+                        <td>
+                            <button @click="cargarEditarImagen(imagen)" class="btn btn-primary col-md-12 mb-3">Editar</button>
+                            <button @click="eliminarimagen(imagen.id)" class="btn btn-danger col-md-12">Eliminar</button>
+                        </td>
+                
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="CRUD-scripts.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-    //Función para cargar la lista de imagenes al cargar la página
-        window.onload = function () { cargarImagenes(); }
+
+
+
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    imagenes: [], imagenSeleccionada: null, formCrear: null, imagenNueva: { url:'',juego_ID:''}
+                };
+            },
+            mounted() {
+                this.obtenerListado();
+            },
+            methods: {
+
+                cargarEditarImagen(imagen) {
+                    this.imagenSeleccionada = { ...imagen }; // Copia los datos del imagen seleccionado
+                },
+                cancelarEdicion() {
+                    this.imagenSeleccionada = null
+                },
+                mostrarFormCrear() {
+                    this.formCrear = true
+                },
+                ocultarFormCrear() {
+                    this.formCrear = null
+                },
+                obtenerListado() {
+                    fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.imagenes = data; // Asigna los datos obtenidos a la propiedad imagenes
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                },
+                crearJuego() {
+                    {
+                        fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                url:this.imagenNueva.url,
+                                juego_ID:this.imagenNueva.juego_ID
+                            }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Lógica después de guardar los cambios exitosamente
+                                alert(data.mensaje);
+                                this.imagenNueva={url:'',juego_ID:''};
+                                this.formCrear = null;
+                                this.obtenerListado();
+
+
+                            })
+                            .catch(error => {
+                                // Lógica en caso de error al guardar los cambios
+                                alert('Error al guardar los cambios:', error);
+                            });
+                    }
+                },
+                actualizarJuego() {
+                    fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes/' + this.imagenSeleccionada.ID, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            url:this.imagenSeleccionada.url,
+                            juego_ID:this.imagenSeleccionada.juego_ID
+                        }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Lógica después de guardar los cambios exitosamente
+                            alert(data.mensaje);
+                            this.imagenSeleccionada = null; // Reinicia el usuario seleccionado después de guardar los cambios
+                            this.obtenerListado();
+
+
+
+                        })
+                        .catch(error => {
+                            // Lógica en caso de error al guardar los cambios
+                            alert('Error al guardar los cambios:', error);
+                        });
+                },
+            }
+        }).mount('#main-container');
+
     </script>
 </body>
 
