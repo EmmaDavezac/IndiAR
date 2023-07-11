@@ -8,47 +8,50 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
     <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="../icon.svg" type="image/x-icon" />
 </head>
 
 <body>
     <header class="main-header">
         <div class="container-flex">
-          <div class="main-header-container">
-            <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
-            <a class="main-header-title" href="."><span class="word1">Indi</span><span class="word2">AR</span></a>
-            <nav class="main-nav" id="main-nav">
-              <ul class="nav">
-                
-                <li class="dropdown">
-                  <a href="" class="drop-btn">CRUD</a>
-                  <div class="dropdown-content" drop>
-                    <a href="CRUDs/UsuarioCRUD.html" class="drop-link"><i class="fa-solid fa-user  nav-icon"></i>Usuarios</a>
-                    <a href="CRUDs/JuegoCRUD.html" class="drop-link"><i class="fa-solid fa-gamepad fa-xs nav-icon"></i>Juegos</a>
-                    <a href="CRUDs/RequisitoCRUD.html" class="drop-link"><i class="fa-solid fa-wrench nav-icon"></i>Requisitos</a>
-                    <a href="CRUDs/ImagenCRUD.html" class="drop-link"><i class="fa-solid fa-image nav-icon"></i>Imagenes</a>
-                  </div>
-                </li>
-                <li></li>
-              </ul>
-            </nav>
-          </div>
-          <div class="main-header-container">
-            <input type="search" class="main-header-input" placeholder="Buscar juegos" id="" />
-          
-          </div>
+            <div class="main-header-container">
+                <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                <a class="main-header-title" href="."><span class="word1">Indi</span><span class="word2">AR</span></a>
+                <nav class="main-nav" id="main-nav">
+                    <ul class="nav">
+
+                        <li class="dropdown">
+                            <a href="" class="drop-btn">CRUD</a>
+                            <div class="dropdown-content" drop>
+                                <a href="CRUDs/UsuarioCRUD.html" class="drop-link"><i
+                                        class="fa-solid fa-user  nav-icon"></i>Usuarios</a>
+                                <a href="CRUDs/JuegoCRUD.html" class="drop-link"><i
+                                        class="fa-solid fa-gamepad fa-xs nav-icon"></i>Juegos</a>
+                                <a href="CRUDs/RequisitoCRUD.html" class="drop-link"><i
+                                        class="fa-solid fa-wrench nav-icon"></i>Requisitos</a>
+                                <a href="CRUDs/ImagenCRUD.html" class="drop-link"><i
+                                        class="fa-solid fa-image nav-icon"></i>Imagenes</a>
+                            </div>
+                        </li>
+                        <li></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="main-header-container">
+                <input type="search" class="main-header-input" placeholder="Buscar juegos" id="" />
+
+            </div>
         </div>
         <div id="menu-container" class="menu-oculto">
-          <ul class="menu">
-            <li class="menu-item">
-              <a href="." class="menu-link ">TIENDA</a>
-            
-          </ul>
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="." class="menu-link ">TIENDA</a>
+
+            </ul>
         </div>
-      </header>
+    </header>
 
     <div class="mx-5 px-5" id="main-container">
-       
-
         <!-- Formulario para crear un nuevo juego -->
         <div class="mx-auto " id="crear-div" v-if="formCrear" @submit.prevent="crearJuego">
             <h2>Crear juego</h2>
@@ -179,8 +182,11 @@
 
         <!-- Lista de juegos -->
         <div class="my-5 " id="juegos-div" v-if="!formCrear & !juegoSeleccionado">
-            <div class="d-flex align-items-center justify-content-between" style="padding-top: 5vh;"> <h2 >Lista de juegos</h2><button @click="mostrarFormCrear()" class="btn btn-success my-2 me-2 mb-3" style="width: 105.98px;"><i class="fa-solid fa-plus"></i></button></div>
-           
+            <div class="d-flex align-items-center justify-content-between" style="padding-top: 5vh;">
+                <h2>Lista de Juegos</h2><button @click="mostrarFormCrear()" class="btn btn-success my-2 me-2 mb-3"
+                    style="width: 105.98px;"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-light table-bordered">
                     <thead class="table-dark">
@@ -204,29 +210,24 @@
                             <td class="centered">{{ juego.distribuidor }}</td>
                             <td class="centered">{{ juego.desarrollador }}</td>
                             <td class="centered">{{ juego.lanzamiento }}</td>
-                            <td style="width: 250px"><div style="height: 90px ; overflow-y: scroll;">{{ juego.descripcion }}</div></td>
+                            <td style="width: 250px">
+                                <div style="height: 90px ; overflow-y: scroll;">{{ juego.descripcion }}</div>
+                            </td>
                             <td class="centered ">${{ juego.precio }}</td>
                             <td class="centered">{{ juego.requisitosID }}</td>
-                            <td class="centered"><img :src="juego.img_principal" style= "height:92px;" alt=""></td>
+                            <td class="centered"><img :src="juego.img_principal" style="height:92px; border-radius: 5%" alt=""></td>
                             <td>
-                                <button @click="cargarEditarJuego(juego)"
-                                    class="btn btn-primary col-md-12 mb-3"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button @click="eliminarUsuario(usuario.id)"
-                                    class="btn btn-danger col-md-12"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                                <button @click="cargarEditarJuego(juego)" class="btn btn-primary col-md-12 mb-3"><i
+                                        class="fa-solid fa-pen-to-square"></i></button>
+                                <button @click="eliminarJuego(juego)" class="btn btn-danger col-md-12"><i
+                                        class="fa-sharp fa-solid fa-trash"></i></button>
                             </td>
-
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
-
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="Juego-scripts.js"></script>
-    <script>
-       
-
-    </script>
 </body>
