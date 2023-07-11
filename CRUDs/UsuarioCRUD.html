@@ -199,7 +199,7 @@
                 },
                 crearUsuario() {
                     {
-                        if (this.checkedCrear) { this.usuarioNuevo.es_Admin = 1; } else { this.usuarioNuevo.es_Admin = 0; };
+                        if (!this.checkedCrear) { this.usuarioNuevo.es_Admin = '0'; }  else { this.usuarioNuevo.es_Admin = 1; }
                         fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
