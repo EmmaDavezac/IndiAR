@@ -1,16 +1,11 @@
 //cargamos toda la info del juego desde la api
-let TituloDelJuego = window.location.pathname
-  .split("/")
-  .pop()
-  .split(".")[0]
-  .split("-")
-  .join(" ");
+let TituloDelJuego = location.href.split('/').pop().split('.')[0].split('-').join(' ');
+console.log(TituloDelJuego);
 
 // Realizar una solicitud a la API para obtener información de un juego
 window.addEventListener("load", (e) => {
-  fetch(
-    "https://lucianodavezac.pythonanywhere.com/api/juegos/" + TituloDelJuego
-  )
+  e.preventDefault();
+  fetch('https://lucianodavezac.pythonanywhere.com/api/juegos/titulo/'+TituloDelJuego)
     .then((response) => response.json())
     .then((data) => {
       let juego_ID = data.ID;
@@ -28,8 +23,8 @@ window.addEventListener("load", (e) => {
       gamePrice.textContent = "$" + data.precio;
       let buyCardThumb = document.getElementById("buy-card-thumb");
       buyCardThumb.src = data.img_principal;
-      cargarImagenes(juego_ID);
-      
+      //cargarImagenes(juego_ID);
+
     })
     .catch((error) => {
       // Manejar errores de la solicitud
@@ -40,19 +35,18 @@ window.addEventListener("load", (e) => {
 // Realizar una solicitud a la API para obtener imagenes del juego
 
 
-function cargarImagenes(juego_ID)
-{
+function cargarImagenes(juego_ID) {
   fetch(
     "https://lucianodavezac.pythonanywhere.com/api/imagenes/juego/" + juego_ID
   )
     .then((response) => response.json())
     .then((data) => {
       container = document.getElementById('img-thumbs-container');
-      let i=1;
+      let i = 1;
       data.forEach((imagen) => {
         let thumb = document.createElement("img");
         thumb.src = imagen.url;
-        thumb.id=('img-thumb-'+i);
+        thumb.id = ('img-thumb-' + i);
         thumb.classList.add("game-thumb");
         thumb.addEventListener('click', () => {
           eliminarBordes();
@@ -60,7 +54,7 @@ function cargarImagenes(juego_ID)
           videoChange.style.display = "none";
           imgChange.style.display = "block";
           imgChange.src = thumb.src;
-});
+        });
         container.appendChild(thumb);
         if (i == 1) {
           eliminarBordes();
@@ -68,7 +62,7 @@ function cargarImagenes(juego_ID)
           videoChange.style.display = "none";
           imgChange.style.display = "block";
           imgChange.src = thumb.src;
-}
+        }
         i = i + 1;
 
 
@@ -94,16 +88,16 @@ function eliminarBordes() {
   for (var i = 0; i < elementos.length; i++) {
     elementos[i].style.borderColor = "white";
   }
-  } 
+}
 
-
+/*
 playButton.onclick = function () {
   eliminarBordes();
   gameThumb6.style.borderColor = colorBorde;
   imgChange.style.display = "none";
   videoChange.style.display = "block";
 };
-
+*/
 
 //Eliminamos el resaltado de todas las imagenes y resaltamos la primera imagen
 

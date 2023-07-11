@@ -14,7 +14,7 @@ def create_connection():
             user='lucianodavezac',
             password='root1234',
             port='3306')
-        
+
     except Error as e:
         print(f'Error al conectarse a la base de datos {e}')
 
@@ -203,7 +203,7 @@ def get_imagenes_en_db():
     try:
         connection = create_connection()
         if connection.is_connected():
-            cursor = connection.cursor()
+            cursor = connection.cursor(dictionary=True)
             sql_query = "SELECT * FROM Imagenes"
             cursor.execute(sql_query)
             imagenes = cursor.fetchall()
@@ -612,9 +612,10 @@ def get_juegos():
         return jsonify({'mensaje': 'No se encontraron juegos'})
 
 
-@app.route('/api/juegos/<titulo>', methods=['GET'])
-def get_juego_por_titulo(titulo):
-    juego = get_juego_en_db_por_titulo(titulo)
+@app.route('/api/juegos/titulo/<titulo_de_juego>', methods=['GET'])
+def get_juego_por_titulo(titulo_de_juego):
+    titulo_de_juego.replace('-', ' ')
+    juego = get_juego_en_db_por_titulo(titulo_de_juego)
     if juego:
         return jsonify(juego)
     else:

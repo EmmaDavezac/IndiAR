@@ -41,14 +41,17 @@ setInterval(function () { Next(); }, 5000);
 //Funcionalidades para cargar todas las imagenes desde la API
 
 function AsignarImagenAElemento(idImg, tituloDelJuego) {
-  tituloDelJuego = tituloDelJuego.split("-").join(" ");
-  let element = document.getElementById(idImg);
-  console.log(tituloDelJuego);
-  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/titulo" + tituloDelJuego)
+  tituloDelJuego = tituloDelJuego.split('-').join(' ');
+  let juego = document.getElementById(idImg);
+  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/titulo/" + tituloDelJuego)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      element.src = data.background_image;
+      let gameTitle = juego.getElementsByClassName("title");
+      gameTitle[0].textContent = data.titulo;
+      let gamePrice = juego.getElementsByClassName("game-price");
+      gamePrice[0].textContent = "$"+data.precio;
+      let gameImg = juego.getElementsByClassName('game-img');
+      gameImg[0].src = data.img_principal;
     })
     .catch(error => {
       // Manejar errores de la solicitud
@@ -56,9 +59,25 @@ function AsignarImagenAElemento(idImg, tituloDelJuego) {
     });
 }
 
-AsignarImagenAElemento("slider-img1", "Elden-Ring");
-AsignarImagenAElemento("slider-img2", "Assassin's-Creed-Mirage");
-AsignarImagenAElemento("slider-img3", "Hogwarts-Legacy");
+function AsignarImagenACarrusel(idImg, tituloDelJuego) {
+  tituloDelJuego = tituloDelJuego.split('-').join(' ');
+  let juego = document.getElementById(idImg);
+  fetch("https://lucianodavezac.pythonanywhere.com/api/juegos/titulo/" + tituloDelJuego)
+    .then(response => response.json())
+    .then(data => {
+      let sliderTitle = juego.getElementsByClassName("title");
+      sliderTitle[0].textContent = data.titulo;
+      let sliderImg = juego.getElementsByClassName("slider-img")
+      sliderImg[0].src = data.img_principal;
+    })
+    .catch(error => {
+      // Manejar errores de la solicitud
+      console.log('Error:', error);
+    });
+}
+AsignarImagenACarrusel("slider-img1", "Elden-Ring");
+AsignarImagenACarrusel("slider-img2", "Assassin's-Creed-Mirage");
+AsignarImagenACarrusel("slider-img3", "Hogwarts-Legacy");
 AsignarImagenAElemento("game-img1", "Resident-Evil-4-2023");
 AsignarImagenAElemento("game-img2", "Don't-Starve-Together");
 AsignarImagenAElemento("game-img3", "Assassin's-Creed-Mirage");
