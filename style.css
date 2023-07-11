@@ -534,7 +534,7 @@ body {
 
 .game-img {
   width: 100%;
-  height: 96px;
+  height: 128px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
@@ -542,7 +542,7 @@ body {
 .game-title {
 
   margin: 8px;
-  height: 28px;
+  height: 2px;
 }
 
 .game-title .title {
@@ -1054,7 +1054,7 @@ body {
   padding: 0;
   border-radius: 25px;
   width: 100%;
-  height: 449.28px;
+  height: 504px;
 }
 
 .buy-card .game-price {
@@ -1106,9 +1106,9 @@ body {
 .form-container {
   background: #fff;
   position: relative;
-  margin: 12vh auto;
-  width: 95%;
-  height: 90vh;
+  margin: 12vh auto 0 auto;
+  width: 100%;
+  height: 85vh;
   border-radius: 6px;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
 }
@@ -1173,7 +1173,7 @@ form {
 .btn-form {
   background: #ff4e00;
   color: #fff;
-  padding: 1vh 1vh;
+  padding: 1vh 10%;
   border: none;
   cursor: pointer;
   width: 30%;
@@ -1225,6 +1225,7 @@ form {
 
 /*Estilos del HTML "ERROR" O SITIO EN CONSTRUCCION*/
 #contruction-message-container {
+  height: 90vh;
   border: #ccc 1px solid;
   text-align: center;
   border-radius: 8px;

@@ -108,7 +108,7 @@
                         
                         <td>
                             <button @click="cargarEditarUsuario(usuario)" class="btn btn-primary col-md-12 mb-3">Editar</button>
-                            <button @click="eliminarUsuario(usuario.id)" class="btn btn-danger col-md-12">Eliminar</button>
+                            <button @click="eliminarUsuario(usuario)" class="btn btn-danger col-md-12">Eliminar</button>
                         </td>
                 
                     </tr>
@@ -210,6 +210,18 @@
                                 // Lógica en caso de error al guardar los cambios
                                 alert('Error al guardar los cambios:', error);
                             });
+                    },
+                     eliminarUsuario(usuario) {
+                        if (confirm('¿Estás seguro de qué deseas eliminar este usuario?')) {
+                            fetch(`https://lucianodavezac.pythonanywhere.com/api/usuarios/` + usuario.ID, {
+                                method: 'DELETE'
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    alert(data.mensaje);
+                                    this.obtenerListado();
+                                });
+                        }
                     },
                 }
             }).mount('#main-container');

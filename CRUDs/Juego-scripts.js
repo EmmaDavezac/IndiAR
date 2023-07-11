@@ -98,5 +98,17 @@ createApp({
                     alert('Error al guardar los cambios:', error);
                 });
         },
+        eliminarJuego(juego) {
+            if (confirm('¿Estás seguro de qué deseas eliminar este juego?')) {
+                fetch(`https://lucianodavezac.pythonanywhere.com/api/juegos/` + juego.ID, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.mensaje);
+                        this.obtenerListado();
+                    });
+            }
+        },
     }
 }).mount('#main-container');

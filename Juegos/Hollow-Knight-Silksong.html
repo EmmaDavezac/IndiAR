@@ -8,7 +8,7 @@
   <title>Bienvenidos a IndiAR</title>
   <link rel="stylesheet" href="..\style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-  <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
+  <link rel="shortcut icon" href="../icon.svg" type="image/x-icon" />
 </head>
 
 <body>
@@ -18,11 +18,11 @@
       <div class="container-flex">
         <div class="main-header-container">
           <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
-          <a class="main-header-title" href="."><span class="word1">Indi</span><span class="word2">AR</span></a>
+          <a class="main-header-title" href="../"><span class="word1">Indi</span><span class="word2">AR</span></a>
           <nav class="main-nav" id="main-nav">
             <ul class="nav">
               <li class="nav-item">
-                <a href="." class="nav-link ">TIENDA</a>
+                <a href="../" class="nav-link ">TIENDA</a>
               </li>
               <li class="nav-item">
                 <a href="../contacto.html" class="nav-link">CONTACTO</a>
@@ -54,26 +54,20 @@
       <div class="game-page-container">
         <div class="game-page">
           <div class="game-images">
-            <div class="game-images">
-              <div class="main-picture">
-                <img src="" id="main-game-img" alt="" />
-                <iframe src="https://cdn.akamai.steamstatic.com/steam/apps/256742997/movie480.webm?t=1550167436"
-                  frameborder="0" id="main-game-video"></iframe>
+            <div class="main-picture">
+              <img src="" id="main-game-img" alt="" />
+              <iframe src="https://cdn.akamai.steamstatic.com/steam/apps/256864390/movie480_vp9.webm?t=1646817712"
+                frameborder="0" id="main-game-video"></iframe>
+            </div>
+            <div class="game-thumbs" id="game-thumbs">
+              <div id="movie-play-button-container">
+                <img class="game-thumb" id="game-thumb-6"
+                  src="https://cdn.akamai.steamstatic.com/steam/apps/256864390/movie.184x123.jpg?t=1646817712" alt="" />
+                <img src="https://store.cloudflare.steamstatic.com/public/images/v5/ico_game_highlight_video.png"
+                  id="movie-play-button" alt="" />
+
               </div>
-              <div class="game-thumbs">
-                <div id="movie-play-button-container">
-                  <img class="game-thumb" id="game-thumb-6"
-                    src="https://cdn.akamai.steamstatic.com/steam/apps/256742997/movie.184x123.jpg?t=1550167436"
-                    alt="" />
-                  <img src="https://store.cloudflare.steamstatic.com/public/images/v5/ico_game_highlight_video.png"
-                    id="movie-play-button" alt="" />
-                </div>
-                <img class="game-thumb" id="game-thumb-1" src="" alt="" />
-                <img class="game-thumb" id="game-thumb-2" src="" alt="" />
-                <img class="game-thumb" id="game-thumb-3" src="" alt="" />
-                <img class="game-thumb" id="game-thumb-4" src="" alt="" />
-                <img class="game-thumb" id="game-thumb-5" src="" alt="" />
-              </div>
+              <div id="img-thumbs-container"></div>
             </div>
           </div>
           <div class="game-section">
@@ -129,13 +123,14 @@
                 <p class="category-title">Desarrollador:</p>
                 <p id="game-developer"></p>
               </div>
+
               <div class="game-info-category">
                 <p class="category-title">Lanzamiento:</p>
                 <p id="release-date"></p>
               </div>
             </div>
             <div class="buy-button-container">
-              <a class="buy-button" href="Error.html">Comprar</a>
+              <a class="buy-button" href="../Error.html">Comprar</a>
             </div>
           </div>
         </div>

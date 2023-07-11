@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-6 mx-auto" id="crear-div" v-if="formCrear">
                 <h2>Crear Imagen</h2>
-                <form id="crear-form-imagen" @submit.prevent="crearJuego">
+                <form id="crear-form-imagen" @submit.prevent="crearImagen">
                     <div class="mb-3">
                         <label for="url" class="form-label">URL:</label>
                         <input type="url" id="url" name="url" class="form-control" v-model="imagenNueva.url" required>
@@ -38,7 +38,7 @@
             <!-- Formulario para editar una imagen  -->
             <div class="col-md-6 mx-auto" id="editar-div" v-if="imagenSeleccionada">
                 <h2>Editar Imagen</h2>
-                <form id="editar-form-imagen" @submit.prevent="actualizarJuego">
+                <form id="editar-form-imagen" @submit.prevent="actualizarImagen">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
                         <input type="number" id="id" name="id" class="form-control" v-model="imagenSeleccionada.ID" readonly>
@@ -85,7 +85,7 @@
                         <td>{{ imagen.juego_ID }}</td>
                         <td>
                             <button @click="cargarEditarImagen(imagen)" class="btn btn-primary col-md-12 mb-3">Editar</button>
-                            <button @click="eliminarimagen(imagen.id)" class="btn btn-danger col-md-12">Eliminar</button>
+                            <button @click="eliminarImagen(imagen)" class="btn btn-danger col-md-12">Eliminar</button>
                         </td>
                 
                     </tr>
@@ -132,7 +132,7 @@
                             console.error(error);
                         });
                 },
-                crearJuego() {
+                crearImagen() {
                     {
                         fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes', {
                             method: 'POST',
@@ -160,7 +160,7 @@
                             });
                     }
                 },
-                actualizarJuego() {
+                actualizarImagen() {
                     fetch('https://lucianodavezac.pythonanywhere.com/api/imagenes/' + this.imagenSeleccionada.ID, {
                         method: 'PUT',
                         headers: {
@@ -186,7 +186,20 @@
                             alert('Error al guardar los cambios:', error);
                         });
                 },
-            }
+                eliminarImagen(imagen)
+                {
+                    if(confirm('¿Estás seguro de qué deseas eliminar esta imagen?')) {
+                        fetch(`https://lucianodavezac.pythonanywhere.com/api/imagenes/` +imagen.ID, {
+                            method: 'DELETE'
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert(data.mensaje);
+                                this.obtenerListado();
+                            });
+                    }
+            },
+        }
         }).mount('#main-container');
 
     </script>

@@ -23,7 +23,7 @@ window.addEventListener("load", (e) => {
       gamePrice.textContent = "$" + data.precio;
       let buyCardThumb = document.getElementById("buy-card-thumb");
       buyCardThumb.src = data.img_principal;
-      //cargarImagenes(juego_ID);
+      cargarImagenes(juego_ID);
 
     })
     .catch((error) => {
@@ -65,9 +65,7 @@ function cargarImagenes(juego_ID) {
         }
         i = i + 1;
 
-
       });
-      //imgChange.src = container.
     })
     .catch((error) => {
       // Manejar errores de la solicitud
@@ -90,14 +88,14 @@ function eliminarBordes() {
   }
 }
 
-/*
+
 playButton.onclick = function () {
   eliminarBordes();
   gameThumb6.style.borderColor = colorBorde;
   imgChange.style.display = "none";
   videoChange.style.display = "block";
 };
-*/
+
 
 //Eliminamos el resaltado de todas las imagenes y resaltamos la primera imagen
 
