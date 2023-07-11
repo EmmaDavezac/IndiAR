@@ -55,7 +55,7 @@ def get_usuario_en_db_por_email(email):
     try:
         connection = create_connection()
         if connection.is_connected():
-            cursor = connection.cursor(dictionary=True)
+            cursor = connection.cursor()
             sql_query = "SELECT * FROM Usuarios WHERE Email = %s"
             cursor.execute(sql_query, (email,))
             usuario = cursor.fetchone()

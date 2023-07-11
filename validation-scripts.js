@@ -122,19 +122,21 @@ if (AdminLogin) {
     e.preventDefault();
     const email = document.getElementById("email").value;
     const psw = document.getElementById("password").value;
+
     fetch("https://lucianodavezac.pythonanywhere.com/api/admin-auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         "Email": email,
-        "Password": psw,
+        "Password": psw
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data.mensaje);
-        document.getElementById("password").value = "";
+      
+
         if (data.mensaje == "Acceso exitoso") {
+          console.log('correcto2');
           window.location.href = "index-admin.html";
         }
       })
