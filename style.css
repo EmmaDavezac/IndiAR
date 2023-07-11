@@ -146,6 +146,18 @@ body {
   margin: auto;
 }
 
+.drop-btn {
+  font-family: "Poppins";
+  padding: 0 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  font-weight: 400;
+  transition: all 0.3s;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
 .nav-link {
   font-family: "Poppins";
   padding: 0 20px;
@@ -265,8 +277,48 @@ body {
     display: block;
     font-size: 20px;
   }
+
+  .drop-btn {
+    font-size: 24px;
+  }
 }
 
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.drop-link {
+  font-family: "Poppins";
+  padding: 0 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  font-weight: 200;
+  transition: all 0.3s;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.nav-icon {
+  margin-right: 10px;
+}
 /*Estilos Menu*/
 
 #menu-container {
@@ -1123,12 +1175,12 @@ form {
   padding: 1vh 1vh;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 30%;
   border-radius: 10px;
   font-size: 1em;
   margin: 0 auto;
   display: block;
-  height: 7vh;
+  height: 5vh;
   font-size: 1.4rem;
 }
 
@@ -1166,7 +1218,7 @@ form {
 
 @media screen and (min-width: 1800px) {
   .form-container {
-    width: 75%
+    width: 50%
   }
 }
 
@@ -1229,40 +1281,3 @@ form {
   color: #333;
 }
 
-/*Estilos de CRUD */
-.crud-index {
-  background: #fff;
-  position: relative;
-  margin: 12vh auto;
-  width: 95%;
-  height: 90vh;
-  border-radius: 6px;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.crud-index-title {
-  color: #ff4e00;
-  padding-top: 10vh;
-  margin-bottom: 2vh;
-  height: 8vh;
-  display: flex;
-  text-align: center;
-}
-
-@media screen and (min-width: 1200px) {
-  .crud-index {
-    margin-bottom: 188px;
-    width: 60%
-  }
-
-  .bottom-footer {
-    bottom: 0;
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 1800px) {
-  .crud-index {
-    width: 75%
-  }
-}
