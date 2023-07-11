@@ -227,7 +227,7 @@
                     }
                 },
                 actualizarUsuario() {
-                    if (this.checkedEditar) { this.usuarioSeleccionado.es_Admin = '1'; } else { this.usuarioSeleccionado.es_Admin = '1'; }
+                    if (this.checkedEditar) { this.usuarioSeleccionado.es_Admin = '1'; } else { this.usuarioSeleccionado.es_Admin = 0; }
 
                     fetch('https://lucianodavezac.pythonanywhere.com/api/usuarios/' + this.usuarioSeleccionado.ID, {
                         method: 'PUT',
