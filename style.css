@@ -289,7 +289,7 @@ body {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -317,8 +317,9 @@ body {
 }
 
 .nav-icon {
-  margin-right: 10px;
+  margin-right: 20%;
 }
+
 /*Estilos Menu*/
 
 #menu-container {
@@ -1169,7 +1170,7 @@ form {
 }
 
 /*Estilo de boton de formulario*/
-.btn {
+.btn-form {
   background: #ff4e00;
   color: #fff;
   padding: 1vh 1vh;
@@ -1184,7 +1185,7 @@ form {
   font-size: 1.4rem;
 }
 
-.btn:hover {
+.btn-form:hover {
   opacity: 1;
 }
 
@@ -1281,3 +1282,35 @@ form {
   color: #333;
 }
 
+.centered {
+  line-height: 92px;
+  text-align: center;
+}
+
+.index-admin-container {
+  background: #fff;
+  position: relative;
+  margin: 12vw auto;
+  width: 95%;
+  height: 42.1vh;
+  border-radius: 6px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 -2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (min-width: 1800px) {
+  .index-admin-container {
+    width: 75%
+  }
+}
+
+.fade-in-text {
+  animation: fadeIn 5s;
+  text-align: center;
+  padding-top: 19vh;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
