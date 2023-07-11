@@ -148,8 +148,8 @@
                             <td class="centered">{{ usuario.nombre }}</td>
                             <td class="centered">{{ usuario.Email }}</td>
                             <td class="centered">{{ usuario.Password }}</td>
-                            <td v-if="usuario.es_Admin">SÍ</td>
-                            <td v-else="usuario.es_Admin">No</td>
+                            <td v-if="usuario.es_Admin" class="centered">SÍ</td>
+                            <td v-else="usuario.es_Admin" class="centered">No</td>
                             <td>
                                 <button @click="cargarEditarUsuario(usuario)" class="btn btn-primary col-md-12 mb-3"><i
                                         class="fa-solid fa-pen-to-square"></i></button>
