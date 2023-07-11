@@ -15,9 +15,9 @@
 
         <!-- Formulario para crear un nuevo requisito -->
 
-        <div class="mb-5" id="crear-div" v-if="formCrear">
+        <div class="mb-5" id="crear-div" v-if="formCrear" >
             <h2>Crear requisito</h2>
-            <form id="crear-form-requisito">
+            <form id="crear-form-requisito" @submit.prevent="crearRequisito">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="so_min" class="form-label">SO Mínimo:</label>
@@ -78,7 +78,7 @@
         <!-- Formulario para editar un requisito  -->
         <div class="mb-5" id="editar-div" v-if="requisitoSeleccionado">
             <h2>Editar requisito</h2>
-            <form id="editar-form-requisito">
+            <form id="editar-form-requisito" @submit.prevent="actualizarRequisito">
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="id" class="form-label">ID:</label>
@@ -230,7 +230,7 @@
                             console.error(error);
                         });
                 },
-                crearJuego() {
+                crearRequisito() {
                     {
                         fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos', {
                             method: 'POST',
@@ -238,15 +238,23 @@
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                url: this.requisitoNuevo.url,
-                                juego_ID: this.requisitoNuevo.juego_ID
+                                so_min: this.requisitoNuevo.so_min,
+                                procesador_min: this.requisitoNuevo.procesador_min,
+                                ram_min: this.requisitoNuevo.ram_min,
+                                GPU_min: this.requisitoNuevo.gpu_min,
+                                directx_min: this.requisitoNuevo.directx_min,
+                                so_rec: this.requisitoNuevo.so_rec,
+                                procesador_rec: this.requisitoNuevo.procesador_rec,
+                                ram_rec: this.requisitoNuevo.ram_rec,
+                                GPU_rec: this.requisitoNuevo.gpu_rec,
+                                directx_rec: this.requisitoNuevo.directx_rec,
                             }),
                         })
                             .then(response => response.json())
                             .then(data => {
                                 // Lógica después de guardar los cambios exitosamente
                                 alert(data.mensaje);
-                                this.requisitoNuevo = { url: '', juego_ID: '' };
+                                this.requisitoNuevo = {  so_min: '', procesador_min: '', ram_min: '', gpu_min: '', directx_min: '', so_rec: '', procesador_rec: '', ram_rec: '', gpu_rec: '', directx_rec: '' };
                                 this.formCrear = null;
                                 this.obtenerListado();
 
@@ -258,15 +266,23 @@
                             });
                     }
                 },
-                actualizarJuego() {
+                actualizarRequisito() {
                     fetch('https://lucianodavezac.pythonanywhere.com/api/requisitos/' + this.requisitoSeleccionado.ID, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            url: this.requisitoSeleccionado.url,
-                            juego_ID: this.requisitoSeleccionado.juego_ID
+                            so_min: this.requisitoSeleccionado.so_min,
+                            procesador_min: this.requisitoSeleccionado.procesador_min,
+                            ram_min: this.requisitoSeleccionado.ram_min,
+                            GPU_min: this.requisitoSeleccionado.gpu_min,
+                            directx_min: this.requisitoSeleccionado.directx_min,
+                            so_rec: this.requisitoSeleccionado.so_rec,
+                            procesador_rec: this.requisitoSeleccionado.procesador_rec,
+                            ram_rec: this.requisitoSeleccionado.ram_rec,
+                            GPU_rec: this.requisitoSeleccionado.gpu_rec,
+                            directx_rec: this.requisitoSeleccionado.directx_rec
                         }),
                     })
                         .then(response => response.json())
