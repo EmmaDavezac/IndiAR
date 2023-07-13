@@ -613,7 +613,7 @@ body {
   }
 
   .game-price {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 24px;
   }
 }
@@ -639,6 +639,11 @@ body {
     height: 48px;
   }
 
+  .game-title .title {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
   .game-plataforms-price {
     margin: 32px 18px;
   }
@@ -651,6 +656,7 @@ body {
   .game-price {
     font-size: 24px;
     line-height: 24px;
+    font-weight: 700;
   }
 }
 
@@ -1074,12 +1080,12 @@ body {
 
 .game-info p {
   margin: 0;
+  font-size: 16px;
 }
 
 .category-title {
   color: #333;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 600;
 }
 
 .buy-button-container {
@@ -1153,7 +1159,7 @@ form {
   border-radius: 0 10px 10px 0;
   border: 1px solid #ccc;
   font-family: "Roboto-regular", sans-serif;
-  font-size: 1rem;
+  font-size: 1.4rem;
 }
 
 .input-field:focus {
