@@ -707,7 +707,10 @@ def login_admin():
             if (usuario[3] == password and usuario[4] == True):
                 return jsonify({'mensaje': 'Acceso exitoso'})
             else:
-                return jsonify({'mensaje': 'Credenciales incorrectas'})
+                if (usuario[3] == password):
+                    return jsonify({'mensaje': 'Contraseña o Email incorrecto'})
+                else:
+                    return jsonify({'mensaje': 'El Email no corresponde a un administrador'})
         else:
             return jsonify({'mensaje': 'No existe usuario con el email ingresado'})
     else:
