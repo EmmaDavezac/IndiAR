@@ -1152,7 +1152,7 @@ form {
 }
 
 .input-field {
-  height: 6vh;
+  height: 4.5vh;
   width: 100%;
   padding: 5px;
   outline: none;
@@ -1167,7 +1167,7 @@ form {
 }
 
 .icon-form-input {
-  height: 6vh;
+  height: 4.5vh;
   padding: 10px;
   background: #ff4e00;
   color: #fff;
@@ -1176,6 +1176,9 @@ form {
   border-radius: 10px 0 0 10px;
 }
 
+.fa-user {
+  padding: 11px;
+}
 /*Estilo de boton de formulario*/
 .btn-form {
   background: #ff4e00;
