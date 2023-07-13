@@ -1001,14 +1001,14 @@ body {
 .main-game-page .section-title {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   font-family: "Poppins";
 }
 
 .main-game-page .game-description {
   margin: 12px 0;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   font-weight: 400;
   color: #333;
@@ -1079,6 +1079,7 @@ body {
 .category-title {
   color: #333;
   font-weight: 400;
+  font-size: 16px;
 }
 
 .buy-button-container {
@@ -1307,11 +1308,15 @@ form {
 .fade-in-text {
   animation: fadeIn 5s;
   text-align: center;
-  padding-top: 19vh;
+  padding-top: 19vh; 
   font-weight: 600;
 }
 
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
+}
+
+#p {
+  font-size: 25px;
 }
