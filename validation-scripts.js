@@ -137,7 +137,7 @@ if (AdminLogin) {
 
         if (data.mensaje == "Acceso exitoso") {
           alert(data.mensaje);
-          window.location.href = "./CRUDs/index.hmtl";
+          window.location.href = "./cruds/index.hmtl";
         }
         else {alert(data.mensaje);}
       })
