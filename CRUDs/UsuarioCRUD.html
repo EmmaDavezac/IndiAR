@@ -69,11 +69,6 @@
                         <input type="text" id="password" name="password" class="form-control"
                             v-model="usuarioNuevo.Password" required />
                     </div>
-                    <div class="mb-3 form-check form-switch">
-                        <label for="admin" class="form-check-label">Administrador</label>
-                        <input type="checkbox" id="admin" name="admin" class="form-check-input"
-                            v-model="checkedCrear" />
-                    </div>
                     <div class="mb-3">
                         <button type="submit" id="btn-crear" class="btn btn-primary me-3" value="crear-usuario">
                             Crear
@@ -166,7 +161,7 @@
         createApp({
             data() {
                 return {
-                    usuarios: [], usuarioSeleccionado: null, formCrear: null, usuarioNuevo: { nombre: '', Email: '', es_Admin: '0', Password: '' }, checkedEditar: false, checkedCrear: false,
+                    usuarios: [], usuarioSeleccionado: null, formCrear: null, usuarioNuevo: { nombre: '', Email: '', es_Admin: '0', Password: '' }, checkedEditar: false,
                 };
             },
             mounted() {
@@ -200,7 +195,6 @@
                 },
                 crearUsuario() {
                     {
-                        if (!this.checkedCrear) { this.usuarioNuevo.es_Admin = '0'; }  else { this.usuarioNuevo.es_Admin = 1; }
                         fetch("https://lucianodavezac.pythonanywhere.com/api/usuarios", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -208,7 +202,7 @@
                                 Nombre: this.usuarioNuevo.nombre,
                                 Email: this.usuarioNuevo.Email,
                                 Password: this.usuarioNuevo.Password,
-                                es_Admin: this.usuarioNuevo.es_Admin
+                                es_Admin: '0'
                             }),
                         })
                             .then(response => response.json())
@@ -218,7 +212,6 @@
 
                                 this.usuarioNuevo = { nombre: '', Email: '', es_Admin: false, Password: '' }; // Reinicia el usuario seleccionado después de guardar los cambios
                                 this.formCrear = null;
-                                this.checkedCrear = false;
                                 this.obtenerListado();
                             })
                             .catch(error => {
