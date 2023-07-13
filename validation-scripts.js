@@ -136,7 +136,7 @@ if (AdminLogin) {
       
 
         if (data.mensaje == "Acceso exitoso") {
-          console.log('correcto2');
+          alert(data.mensaje);
           window.location.href = "/cruds";
         }
         else {alert(data.mensaje);}
