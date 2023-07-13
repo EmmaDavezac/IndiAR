@@ -1001,14 +1001,14 @@ body {
 .main-game-page .section-title {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   font-family: "Poppins";
 }
 
 .main-game-page .game-description {
   margin: 12px 0;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.5;
   font-weight: 400;
   color: #333;
@@ -1024,7 +1024,7 @@ body {
 .main-game-page .requirements-list {
   padding: 0 12px;
   margin: 12px 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
   color: #333;

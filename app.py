@@ -8,7 +8,7 @@ CORS(app)
 
 def create_connection():
     try:
-        return  mysql.connector.connect(
+        return mysql.connector.connect(
             host='lucianodavezac.mysql.pythonanywhere-services.com',
             database='lucianodavezac$IndiARDB',
             user='lucianodavezac',
@@ -149,7 +149,7 @@ def get_requisito_en_db(id):
 
 def crear_requisito_en_db(so_min, procesador_min, ram_min, GPU_min, directx_min, so_rec, procesador_rec, ram_rec, GPU_rec, directx_rec):
     try:
-        connection=create_connection()
+        connection = create_connection()
         connection = create_connection()
         if connection.is_connected():
             cursor = connection.cursor()
@@ -231,7 +231,7 @@ def get_imagenes_en_db_por_juego(juego_ID):
 
 def get_imagen_en_db(id):
     try:
-        connection=create_connection()
+        connection = create_connection()
         if connection.is_connected():
             cursor = connection.cursor(dictionary=True)
             sql_query = "SELECT * FROM Imagenes WHERE ID = %s"
