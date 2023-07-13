@@ -234,6 +234,8 @@ body {
   text-decoration: none;
   text-align: left;
   color: #333;
+  background-color: #000;
+
 }
 
 .game-plataforms-price {
@@ -281,6 +283,7 @@ body {
   }
 
   .game-title {
+    
     margin: 12px;
     height: 36px;
   }
@@ -624,6 +627,7 @@ body {
   padding: 0;
   font-size: 32px;
   font-family: "Poppins";
+  margin-top: 128px;
   margin-bottom: 40px;
 }
 
