@@ -121,7 +121,7 @@
                 <tbody id="tbody">
                     <tr v-for="imagen in imagenes" :key="imagen.ID">
                         <td class="centered">{{ imagen.ID }}</td>
-                        <td class="centered">{{ imagen.url }}</td>
+                        <td class="centered"><a v-bind:href="imagen.url">{{imagen.url}}</a></td>
                         <td class="centered"> <img v-bind:src="imagen.url" style="height:92px; border-radius: 5%;">
                         </td>
                         <td class="centered">{{ imagen.juego_ID }}</td>
