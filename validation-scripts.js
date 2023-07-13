@@ -139,6 +139,7 @@ if (AdminLogin) {
           console.log('correcto2');
           window.location.href = "/cruds";
         }
+        else {alert(data.mensaje);}
       })
   })
 }
