@@ -626,11 +626,11 @@ body {
   .game {
     border-radius: 10px;
     width: 100%;
-    height: 240px;
+    height: 32vh;
   }
 
   .game-img {
-    height: 112px;
+    height: 16vh;
     border-radius: 10px 10px 0 0;
   }
 
@@ -640,7 +640,7 @@ body {
   }
 
   .game-plataforms-price {
-    margin: 20px 18px;
+    margin: 32px 18px;
   }
 
   .game-plataforms i {

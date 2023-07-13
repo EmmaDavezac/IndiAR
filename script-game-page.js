@@ -9,6 +9,7 @@ window.addEventListener("load", (e) => {
     .then((response) => response.json())
     .then((data) => {
       let juego_ID = data.ID;
+      let requisitosID = data.requisitosID;
       let gameTitle = document.getElementById("game-title");
       gameTitle.textContent = data.titulo;
       let gamePublisher = document.getElementById("game-publisher");
@@ -24,6 +25,7 @@ window.addEventListener("load", (e) => {
       let buyCardThumb = document.getElementById("buy-card-thumb");
       buyCardThumb.src = data.img_principal;
       cargarImagenes(juego_ID);
+      cargarDescripcion(requisitosID);
 
     })
     .catch((error) => {
@@ -73,6 +75,36 @@ function cargarImagenes(juego_ID) {
     });
 }
 
+function cargarDescripcion (requisitoID) {
+  fetch("https://lucianodavezac.pythonanywhere.com/api/requisitos/" + requisitoID)
+    .then((response) => response.json())
+    .then((data) => {
+      let soMin = document.getElementById("so-min");
+      soMin.textContent = "Sistema Operativo: "+data.so_min;
+      let processorMin = document.getElementById("processor-min");
+      processorMin.textContent = "Procesador: " + data.procesador_min;
+      let ramMin = document.getElementById("ram-min");
+      ramMin.textContent = "Memoria RAM: " + data.ram_min;
+      let gpuMin = document.getElementById("gpu-min");
+      gpuMin.textContent = "Tarjeta Gráfica: " + data.gpu_min;
+      let directxMin = document.getElementById("directx-min");
+      directxMin.textContent = "DirectX: " + data.directx_min;
+      let soRec = document.getElementById("so-rec");
+      soRec.textContent = "Sistema Operativo: "+data.so_rec;
+      let processorRec = document.getElementById("processor-rec");
+      processorRec.textContent = "Procesador: " + data.procesador_rec;
+      let ramRec = document.getElementById("ram-rec");
+      ramRec.textContent = "Memoria RAM: " + data.ram_rec;
+      let gpuRec = document.getElementById("gpu-rec");
+      gpuRec.textContent = "Tarjeta Gráfica: " + data.gpu_rec;
+      let directxRec = document.getElementById("directx-rec");
+      directxRec.textContent = "DirectX: " + data.directx_rec;
+    })
+    .catch((error) => {
+      // Manejar errores de la solicitud
+      console.log("Error:", error);
+    });
+}
 //Interacciones para cambiar de imagen
 
 let gameThumb6 = document.getElementById("game-thumb-6");
