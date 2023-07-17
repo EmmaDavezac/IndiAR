@@ -9,7 +9,6 @@ createApp({
         this.obtenerListado();
     },
     methods: {
-
         cargarEditarJuego(juego) {
             this.juegoSeleccionado = { ...juego }; // Copia los datos del juego seleccionado
         },
@@ -57,8 +56,6 @@ createApp({
                         this.juegoNuevo = { titulo: '', distribuidor: '', desarrollador: '', lanzamiento: '', descripcion: '', precio: '', requisitosID: '', img_principal: '' }; // Reinicia el usuario seleccionado después de guardar los cambios
                         this.formCrear = null;
                         this.obtenerListado();
-
-
                     })
                     .catch(error => {
                         // Lógica en caso de error al guardar los cambios
@@ -89,9 +86,6 @@ createApp({
                     alert('Cambio guardado', data);
                     this.juegoSeleccionado = null; // Reinicia el usuario seleccionado después de guardar los cambios
                     this.obtenerListado();
-
-
-
                 })
                 .catch(error => {
                     // Lógica en caso de error al guardar los cambios

@@ -37,7 +37,6 @@ btnLeft.addEventListener('click', function () {
 
 setInterval(function () { Next(); }, 5000);
 
-
 //Funcionalidades para cargar todas las imagenes desde la API
 
 function AsignarImagenAElemento(idImg, tituloDelJuego) {
@@ -49,7 +48,7 @@ function AsignarImagenAElemento(idImg, tituloDelJuego) {
       let gameTitle = juego.getElementsByClassName("title");
       gameTitle[0].textContent = data.titulo;
       let gamePrice = juego.getElementsByClassName("game-price");
-      gamePrice[0].textContent = "$"+data.precio;
+      gamePrice[0].textContent = "$" + data.precio;
       let gameImg = juego.getElementsByClassName('game-img');
       gameImg[0].src = data.img_principal;
     })

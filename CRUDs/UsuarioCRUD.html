@@ -7,9 +7,9 @@
     <title>crud de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-    <link rel="stylesheet" href="../navbar.css">
-    <link rel="stylesheet" href="../crud.css">
-    <link rel="shortcut icon" href="../icon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="../Estilos/navbar.css">
+    <link rel="stylesheet" href="../Estilos/crud.css">
+    <link rel="shortcut icon" href="../Estilos/icon.svg" type="image/x-icon" />
 </head>
 
 <body>
@@ -17,12 +17,12 @@
         <div class="container-flex">
             <div class="main-header-container">
                 <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
-                <a class="main-header-title" href="../index.html"><span class="word1">Indi</span><span class="word2">AR</span></a>
+                <a class="main-header-title" href="../index.html"><span class="word1">Indi</span><span
+                        class="word2">AR</span></a>
                 <nav class="main-nav" id="main-nav">
                     <ul class="nav">
-
                         <li class="dropdown">
-                            <a href="./" class="drop-btn">CRUD</a>
+                            <a href="" class="drop-btn">CRUD</a>
                             <div class="dropdown-content" drop>
                                 <a href="./UsuarioCRUD.html" class="drop-link"><i
                                         class="fa-solid fa-user  nav-icon"></i>Usuarios</a>
@@ -38,16 +38,15 @@
                     </ul>
                 </nav>
             </div>
-
         </div>
         <div id="menu-container" class="menu-oculto">
             <ul class="menu">
                 <li class="menu-item">
-                    <a href="../" class="menu-link ">TIENDA</a>
-
+                    <a href="../index.html" class="menu-link ">TIENDA</a>
             </ul>
         </div>
     </header>
+
     <div class="mx-5 px-5" id="main-container">
         <!-- Formulario para crear un nuevo usuario -->
         <div class="row mx-auto ">
@@ -112,7 +111,6 @@
                             Guardar
                         </button>
                         <button @click="cancelarEdicion" class="btn btn-danger">Cancelar</button>
-
                     </div>
                 </form>
             </div>
@@ -154,8 +152,9 @@
             </table>
         </div>
     </div>
+
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="Usuario-scripts.js"></script>
+    <script src="./Usuario-scripts.js"></script>
     <script>
         const { createApp } = Vue
         createApp({
@@ -168,8 +167,6 @@
                 this.obtenerListado();
             },
             methods: {
-
-
                 cargarEditarUsuario(usuario) {
                     this.usuarioSeleccionado = { ...usuario }; // Copia los datos del usuario seleccionado
                     if (this.usuarioSeleccionado.es_Admin == 1) { this.checkedEditar = true } else this.checkedEditar = false;
@@ -263,6 +260,6 @@
             }
         }).mount('#main-container');
     </script>
-</body>
 
+</body>
 </html>

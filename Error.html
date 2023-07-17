@@ -1,135 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <title>Bienvenidos a IndiAR</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="navbar.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    />
-    <link rel="shortcut icon" href="icon.svg" type="image/x-icon" />
-  </head>
 
-  <body>
-     <header class="main-header">
-      <div class="container-flex">
-        <div class="main-header-container">
-          <span class="icon-menu" id="btn-menu"
-            ><i class="fas fa-bars"></i
-          ></span>
-          <a class="main-header-title" href="."
-            ><span class="word1">Indi</span><span class="word2">AR</span></a
-          >
-          <nav class="main-nav" id="main-nav">
-            <ul class="nav">
-              <li class="nav-item">
-                <a href="." class="nav-link ">TIENDA</a>
-              </li>
-              <li class="nav-item">
-                <a href="contacto.html" class="nav-link">CONTACTO</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="main-header-container">
-          <a href="login.html" class="main-header-btn"
-            ><i class="fas fa-user icon-header"></i
-          ></a>
-          <a href="#" class="main-header-btn"
-            ><i class="fa-solid fa-cart-shopping icon-header"></i
-          ></a>
-          <input
-            type="search"
-            class="main-header-input"
-            placeholder="Buscar juegos"
-            id=""
-          />
-          <a href="Error.html" class="main-header-btn"
-            ><i class="fas fa-search icon-search"></i
-          ></a>
-        </div>
-      </div>
-      <div id="menu-container" class="menu-oculto">
-        <ul class="menu">
-          <li class="menu-item">
-            <a href="." class="menu-link ">TIENDA</a>
-          </li>
-          <li class="menu-item">
-            <a href="contacto.html" class="menu-link">CONTACTO</a>
-          </li>
-        </ul>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <title>Bienvenidos a IndiAR</title>
+  <link rel="stylesheet" href="./Estilos/style.css" />
+  <link rel="stylesheet" href="./Estilos/navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <link rel="shortcut icon" href="./Estilos/icon.svg" type="image/x-icon" />
+</head>
 
-
-    <!--Inicio del Main-->
-    <main class="main">
-      <div id="contruction-message-container">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="contruction-message-icon"
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M12 15c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4M8 9a4 4 0 0 0 4 4a4 4 0 0 0 4-4m-4.5-7c-.3 0-.5.21-.5.5v3h-1V3s-2.25.86-2.25 3.75c0 0-.75.14-.75 1.25h10c-.05-1.11-.75-1.25-.75-1.25C16.25 3.86 14 3 14 3v2.5h-1v-3c0-.29-.19-.5-.5-.5h-1Z"
-          />
-        </svg>
-        <p id="contruction-message">
-          <b>¡Error! </b><br />
-          Sitio En Construccion
-        </p>
+<body>
+  <header class="main-header">
+    <div class="container-flex">
+      <div class="main-header-container">
+        <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+        <a class="main-header-title" href="./index.html"><span class="word1">Indi</span><span
+            class="word2">AR</span></a>
+        <nav class="main-nav" id="main-nav">
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link ">TIENDA</a>
+            </li>
+            <li class="nav-item">
+              <a href="./contacto.html" class="nav-link">CONTACTO</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </main>
-
-    <!--Aquí comienza el Footer-->
-    <footer class="main-footer bottom-footer">
-      <div class="link-sections">
-        <ul class="footer-link-container">
-          <li class="footer-link-container-item">
-            <a class="footer-link" href="">Compañía</a>
-          </li>
-          <li class="footer-link-container-item">
-            <a class="footer-link" href="">Ayuda</a>
-          </li>
-          <li class="footer-link-container-item">
-            <a class="footer-link" href="">Terminos de servicio</a>
-          </li>
-          <li class="footer-link-container-item">
-            <a class="footer-link" href="">Politicas de privacidad</a>
-          </li>
-        </ul>
-        <ul class="footer-social-link-container">
-          <li class="footer-social-link-container-item">
-            <a href="" class="footer-social-link"
-              ><i class="fa-brands fa-square-youtube"></i
-            ></a>
-          </li>
-          <li class="footer-social-link-container-item">
-            <a href="" class="footer-social-link"
-              ><i class="fa-brands fa-square-facebook"></i
-            ></a>
-          </li>
-          <li class="footer-social-link-container-item">
-            <a href="" class="footer-social-link"
-              ><i class="fa-brands fa-square-twitter"></i
-            ></a>
-          </li>
-          <li class="footer-social-link-container-item">
-            <a href="" class="footer-social-link"
-              ><i class="fa-brands fa-square-steam"></i
-            ></a>
-          </li>
-        </ul>
+      <div class="main-header-container">
+        <a href="./login.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+        <a href="#" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
+        <input type="search" class="main-header-input" placeholder="Buscar juegos" id="" />
+        <a href="./Error.html" class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
       </div>
-      <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
-    </footer>
-  </body>
-  <script src="menu-scripts.js"></script>
+    </div>
+    <div id="menu-container" class="menu-oculto">
+      <ul class="menu">
+        <li class="menu-item">
+          <a href="./index.html" class="menu-link ">TIENDA</a>
+        </li>
+        <li class="menu-item">
+          <a href="./contacto.html" class="menu-link">CONTACTO</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!--Inicio del Main-->
+  <main class="main">
+    <div id="contruction-message-container">
+      <svg xmlns="http://www.w3.org/2000/svg" class="contruction-message-icon" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M12 15c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4M8 9a4 4 0 0 0 4 4a4 4 0 0 0 4-4m-4.5-7c-.3 0-.5.21-.5.5v3h-1V3s-2.25.86-2.25 3.75c0 0-.75.14-.75 1.25h10c-.05-1.11-.75-1.25-.75-1.25C16.25 3.86 14 3 14 3v2.5h-1v-3c0-.29-.19-.5-.5-.5h-1Z" />
+      </svg>
+      <p id="contruction-message">
+        <b>¡Error! </b><br />
+        Sitio En Construccion
+      </p>
+    </div>
+  </main>
+
+  <!--Aquí comienza el Footer-->
+  <footer class="main-footer bottom-footer">
+    <div class="link-sections">
+      <ul class="footer-link-container">
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Compañía</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Ayuda</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Terminos de servicio</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Politicas de privacidad</a>
+        </li>
+      </ul>
+      <ul class="footer-social-link-container">
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-youtube"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-facebook"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-twitter"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-steam"></i></a>
+        </li>
+      </ul>
+    </div>
+    <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+  </footer>
+
+  <script src="./Scripts/menu-scripts.js"></script>
+
+</body>
 </html>

@@ -282,7 +282,7 @@ body {
   }
 
   .game-title {
-    
+
     margin: 12px;
     height: 36px;
   }
@@ -995,13 +995,18 @@ form {
 .fade-in-text {
   animation: fadeIn 5s;
   text-align: center;
-  padding-top: 19vh; 
+  padding-top: 19vh;
   font-weight: 600;
 }
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 #p {
