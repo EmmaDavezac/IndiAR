@@ -27,11 +27,18 @@
             <li class="nav-item">
               <a href="./contacto.html" class="nav-link">CONTACTO</a>
             </li>
+            <li class="nav-item" id="nav-admin-desktop" style="display:none;">
+              <a href="./partials/admin.html" class="nav-link">ADMINISTRACIÓN</a>
+            </li>
+            <li class="nav-item" id="nav-logout-desktop" style="display:none;">
+              <a href="#" class="nav-link" style="color:#e53935;">CERRAR SESIÓN</a>
+            </li>
           </ul>
         </nav>
       </div>
       <div class="main-header-container">
-        <a href="" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+        <a id="navbar-user-btn" href="./partials/login.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+        <span id="navbar-user-info" class="main-header-btn" style="display:none; color:#333; font-weight:500;"></span>
         <a href="./Error.html" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
         <input type="search" class="main-header-input" placeholder="Buscar juegos" id="" />
         <a href="./Error.html" class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
@@ -44,6 +51,12 @@
         </li>
         <li class="menu-item">
           <a href="./contacto.html" class="menu-link">CONTACTO</a>
+        </li>
+        <li class="menu-item" id="nav-admin-mobile" style="display:none;">
+          <a href="./partials/admin.html" class="menu-link">ADMINISTRACIÓN</a>
+        </li>
+        <li class="menu-item" id="nav-logout-mobile" style="display:none;">
+          <a href="#" class="menu-link" style="color:#e53935;">CERRAR SESIÓN</a>
         </li>
       </ul>
     </div>
@@ -112,8 +125,20 @@
     <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
   </footer>
 
-  <script src="./Scripts/validation-scripts.js"></script>
-  <script src="./Scripts/menu-scripts.js"></script>
+  <script src="./Frontend/assets/js/validation-scripts.js"></script>
+  <script src="./Frontend/assets/js/menu-scripts.js"></script>
+  <script src="./Frontend/assets/js/auth-navbar.js"></script>
+  <script>
+    // Si ya hay sesión activa, redirigir según rol
+    const user = JSON.parse(localStorage.getItem('indiAR_user') || 'null');
+    if (user && localStorage.getItem('indiAR_token')) {
+      if (user.es_Admin) {
+        window.location.href = '/partials/admin.html';
+      } else {
+        window.location.href = '/index.html';
+      }
+    }
+  </script>
 
 </body>
 </html>

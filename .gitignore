@@ -1,0 +1,36 @@
+# IndiAR Gitignore
+# Environment files should not be committed to version control
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.envrc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+virtualenv/
+venv/
+.venv/
+node_modules/
+
+# Docker
+db_data/
+*.pid
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Referencias Visuales
+/referencias_visuales

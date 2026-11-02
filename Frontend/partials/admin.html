@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <title>Administración - IndiAR</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/fontawesome.min.css" />
+  <link rel="shortcut icon" href="../Estilos/icon.svg" type="image/x-icon" />
+  <style>
+    .admin-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .admin-section {
+      margin-bottom: 32px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .admin-section h3 {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.4rem;
+      color: #ff4e00;
+      margin-bottom: 16px;
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 24px;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .btn-back:hover {
+      background: #ff4e00;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="main-header">
+    <div class="container-flex">
+      <div class="main-header-container">
+        <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+        <a class="main-header-title" href="../index.html"><span class="word1">Indi</span><span class="word2">AR</span></a>
+        <nav class="main-nav" id="main-nav">
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">TIENDA</a>
+            </li>
+            <li class="nav-item">
+              <a href="./contacto.html" class="nav-link">CONTACTO</a>
+            </li>
+            <li class="nav-item" id="nav-admin-desktop" style="display:none;">
+              <a href="./admin.html" class="nav-link">ADMINISTRACIÓN</a>
+            </li>
+            <li class="nav-item" id="nav-logout-desktop" style="display:none;">
+              <a href="#" class="nav-link" style="color:#e53935;">CERRAR SESIÓN</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="main-header-container">
+        <a id="navbar-user-btn" href="./login.html" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+        <span id="navbar-user-info" class="main-header-btn" style="display:none; color:#333; font-weight:500;"></span>
+        <a href="./Error.html" class="main-header-btn"><i class="fa-solid fa-cart-shopping icon-header"></i></a>
+        <input type="search" class="main-header-input" placeholder="Buscar juegos" id="" />
+        <a href="./Error.html" class="main-header-btn"><i class="fas fa-search icon-search"></i></a>
+      </div>
+    </div>
+    <div id="menu-container" class="menu-oculto">
+      <ul class="menu">
+        <li class="menu-item">
+          <a href="" class="menu-link menu-link-active">TIENDA</a>
+        </li>
+        <li class="menu-item">
+          <a href="./contacto.html" class="menu-link">CONTACTO</a>
+        </li>
+        <li class="menu-item" id="nav-admin-mobile" style="display:none;">
+          <a href="./admin.html" class="menu-link">ADMINISTRACIÓN</a>
+        </li>
+        <li class="menu-item" id="nav-logout-mobile" style="display:none;">
+          <a href="#" class="menu-link" style="color:#e53935;">CERRAR SESIÓN</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <main class="main">
+    <div class="admin-container">
+      <h1 class="admin-title">Panel de Administración</h1>
+
+      <div class="admin-section">
+        <h3>Gestión de Usuarios</h3>
+        <p>Desde aquí podrás administrar los usuarios registrados en la plataforma.</p>
+        <a href="./CRUDs/UsuarioCRUD.html" class="btn-back">Ir a CRUD de Usuarios</a>
+      </div>
+
+      <div class="admin-section">
+        <h3>Gestión de Juegos</h3>
+        <p>Administra el catálogo de juegos disponibles en la tienda.</p>
+        <a href="./CRUDs/JuegoCRUD.html" class="btn-back">Ir a CRUD de Juegos</a>
+      </div>
+
+      <div class="admin-section">
+        <h3>Gestión de Imágenes</h3>
+        <p>Administra las imágenes asociadas a los juegos.</p>
+        <a href="./CRUDs/ImagenCRUD.html" class="btn-back">Ir a CRUD de Imágenes</a>
+      </div>
+
+      <div class="admin-section">
+        <h3>Gestión de Requisitos</h3>
+        <p>Administra los requisitos técnicos de los juegos.</p>
+        <a href="./CRUDs/RequisitoCRUD.html" class="btn-back">Ir a CRUD de Requisitos</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="main-footer bottom-footer">
+    <div class="link-sections">
+      <ul class="footer-link-container">
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Compañía</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Ayuda</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Terminos de servicio</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Politicas de privacidad</a>
+        </li>
+      </ul>
+      <ul class="footer-social-link-container">
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-youtube"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-facebook"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-twitter"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-steam"></i></a>
+        </li>
+      </ul>
+    </div>
+    <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+  </footer>
+
+  <script src="../assets/js/menu-scripts.js"></script>
+  <script src="../assets/js/auth-navbar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+mysql-connector-python
+Flask
+flask-cors
+itsdangerous
+Flask-RESTX
+sqlalchemy
+Flask-sqlalchemy
+Pillow
