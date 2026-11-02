@@ -1,4 +1,4 @@
-import { computed, ref } from '../../assets/js/lib/vue-esm.js';
+import { computed, onBeforeUnmount, ref } from '../../assets/js/lib/vue-esm.js';
 import router from '../router.js';
 import { cartCount } from '../services/cart.js';
 import { API_BASE, getJuegos } from '../services/api.js';
@@ -13,16 +13,39 @@ export default {
     const isAdmin = ref(isLoggedIn.value && user.value && (user.value.es_Admin === true || user.value.es_Admin === 1 || user.value.es_Admin === '1'));
     const cartItemsCount = ref(cartCount());
     const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
+    const searchTerm = ref('');
+    const searchPending = ref(false);
+    const searchGamesLoading = ref(true);
+    let searchDebounceTimer;
     const searchGames = ref([]);
     const imageUrl = game => game.img_principal?.startsWith('http') ? game.img_principal : `${API_BASE.replace('/api', '')}${game.img_principal || ''}`;
+    const searchLoading = computed(() => searchPending.value || searchGamesLoading.value);
     const searchResults = computed(() => {
-      const query = searchQuery.value.trim().toLocaleLowerCase('es');
+      const query = searchTerm.value.trim().toLocaleLowerCase('es');
       if (!query) return [];
       return searchGames.value.filter(game =>
         [game.titulo, game.desarrollador, game.distribuidor, game.descripcion]
           .some(value => String(value || '').toLocaleLowerCase('es').includes(query))
       ).slice(0, 6);
     });
+    function updateSearchTerm(query) {
+      clearTimeout(searchDebounceTimer);
+      const normalizedQuery = query.trim();
+      if (!normalizedQuery) {
+        searchTerm.value = '';
+        searchPending.value = false;
+        return;
+      }
+      searchPending.value = true;
+      searchDebounceTimer = setTimeout(() => {
+        searchTerm.value = normalizedQuery;
+        searchPending.value = false;
+      }, 250);
+    }
+
+    function handleSearchInput() {
+      updateSearchTerm(searchQuery.value);
+    }
     const isAuthPage = computed(() => ['/login', '/registro'].includes(router.currentRoute.value.path));
     const isAdminPage = computed(() => router.currentRoute.value.path.startsWith('/admin'));
     const activeAdminSection = computed(() => router.currentRoute.value.path);
@@ -64,16 +87,22 @@ export default {
 
     function openSearchResult(game) {
       searchQuery.value = '';
+      updateSearchTerm('');
       router.push('/juegos/' + game.ID);
     }
 
     function handleSearchKeydown(event) {
-      if (event.key === 'Escape') searchQuery.value = '';
+      if (event.key === 'Escape') {
+        searchQuery.value = '';
+        updateSearchTerm('');
+      }
     }
 
     router.afterEach(() => {
       searchQuery.value = String(router.currentRoute.value.query.buscar || '');
+      updateSearchTerm(searchQuery.value);
     });
+    onBeforeUnmount(() => clearTimeout(searchDebounceTimer));
 
     async function logout() {
       const confirmed = await confirmAction('¿Seguro que querés cerrar sesión?', 'Cerrar sesión', 'Cerrar sesión', 'danger');
@@ -91,9 +120,10 @@ export default {
     window.addEventListener('cart-changed', () => { cartItemsCount.value = cartCount(); });
     getJuegos()
       .then(items => { searchGames.value = items; })
-      .catch(error => console.error('No se pudieron cargar los juegos para la búsqueda:', error));
+      .catch(error => console.error('No se pudieron cargar los juegos para la búsqueda:', error))
+      .finally(() => { searchGamesLoading.value = false; });
 
-    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchResults, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, navigateToGames, submitSearch, openSearchResult, handleSearchKeydown, toggleTheme, logout, refreshAuthState };
+    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchResults, searchLoading, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, navigateToGames, submitSearch, openSearchResult, handleSearchInput, handleSearchKeydown, toggleTheme, logout, refreshAuthState };
   },  
   template: `
     <header class="spa-header" :class="{ 'spa-header--landing': !isAuthPage && !isAdminPage }">
@@ -111,20 +141,24 @@ export default {
         <div v-if="!isAuthPage && !isAdminPage" class="navbar-tools d-flex align-items-center gap-2">
           <form class="d-flex navbar-search" role="search" @submit.prevent="submitSearch">
             <label class="visually-hidden" for="navbar-game-search">Buscar juegos</label>
-            <input id="navbar-game-search" v-model="searchQuery" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="searchQuery.trim().length > 0" />
+            <input id="navbar-game-search" v-model="searchQuery" @input="handleSearchInput" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="searchQuery.trim().length > 0" />
             <button class="btn" type="submit" aria-label="Buscar"><i class="fas fa-search icon-search"></i></button>
-            <ul v-if="searchQuery.trim()" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda">
-              <li v-for="game in searchResults" :key="game.ID" role="option">
-                <button class="navbar-search-result" type="button" @click="openSearchResult(game)">
-                  <img v-if="game.img_principal" class="navbar-search-result-image" :src="imageUrl(game)" alt="" />
-                  <span v-else class="navbar-search-result-image navbar-search-result-placeholder" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></span>
-                  <span class="navbar-search-result-copy">
-                    <span class="navbar-search-result-title">{{ game.titulo }}</span>
-                    <span class="navbar-search-result-meta">{{ game.desarrollador || 'Desarrollador indie' }}</span>
-                  </span>
-                </button>
-              </li>
-              <li v-if="!searchResults.length" class="navbar-search-empty">No se encontraron juegos.</li>
+            <ul v-if="searchQuery.trim()" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
+              <template v-if="searchLoading"><li v-for="row in 3" :key="'search-skeleton-' + row" class="navbar-search-skeleton" aria-hidden="true"><span class="navbar-search-skeleton-image"></span><span class="navbar-search-skeleton-copy"><span></span><span></span><span></span></span></li></template>
+              <template v-if="!searchLoading">
+                <li v-for="game in searchResults" :key="game.ID" role="option">
+                  <button class="navbar-search-result" type="button" @click="openSearchResult(game)">
+                    <img v-if="game.img_principal" class="navbar-search-result-image" :src="imageUrl(game)" alt="" />
+                    <span v-else class="navbar-search-result-image navbar-search-result-placeholder" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></span>
+                    <span class="navbar-search-result-copy">
+                      <span class="navbar-search-result-title">{{ game.titulo }}</span>
+                      <span class="navbar-search-result-meta">{{ game.desarrollador || 'Desarrollador indie' }}</span>
+                      <span class="navbar-search-result-price"><del v-if="game.oferta_activa">\${{ Number(game.precio || 0).toFixed(2) }}</del> \${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</span>
+                    </span>
+                  </button>
+                </li>
+                <li v-if="!searchResults.length" class="navbar-search-empty">No se encontraron juegos.</li>
+              </template>
             </ul>
           </form>
           <a v-if="isLoggedIn && !isAdmin" href="/carrito" class="btn navbar-cart-button position-relative" aria-label="Carrito" @click.prevent="navigate('/carrito')"><i class="fa-solid fa-cart-shopping icon-header"></i><span v-if="cartItemsCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ cartItemsCount }}</span></a>

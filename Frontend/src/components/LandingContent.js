@@ -1,4 +1,4 @@
-import { computed } from '../../assets/js/lib/vue-esm.js';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from '../../assets/js/lib/vue-esm.js';
 import { API_BASE } from '../services/api.js';
 
 const defaultCarouselSlides = [
@@ -18,6 +18,9 @@ export default {
   },
   emits: ['open-game', 'add-game', 'clear-search'],
   setup(props) {
+    const cardsTrack = ref(null);
+    const cardsAtStart = ref(true);
+    const cardsAtEnd = ref(false);
     const imageUrl = game => game.img_principal?.startsWith('http') ? game.img_principal : `${API_BASE.replace('/api', '')}${game.img_principal || ''}`;
     const carouselSlides = computed(() => {
       const selectedIds = props.config.carouselGameIds || [];
@@ -49,7 +52,29 @@ export default {
       }
       return selected.slice(0, Number(props.config.limit) || 8);
     });
-    return { imageUrl, carouselSlides, displayedGames };
+    function updateCardsPosition() {
+      const track = cardsTrack.value;
+      if (!track) return;
+      cardsAtStart.value = track.scrollLeft <= 1;
+      cardsAtEnd.value = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+    }
+    function scrollCards(direction) {
+      const track = cardsTrack.value;
+      if (!track) return;
+      const distance = direction * track.clientWidth * 0.85;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        track.scrollLeft += distance;
+        return;
+      }
+      track.scrollBy({ left: distance, behavior: 'smooth' });
+    }
+    onMounted(() => {
+      updateCardsPosition();
+      window.addEventListener('resize', updateCardsPosition);
+    });
+    onBeforeUnmount(() => window.removeEventListener('resize', updateCardsPosition));
+    watch(displayedGames, () => nextTick(updateCardsPosition));
+    return { imageUrl, carouselSlides, displayedGames, cardsTrack, cardsAtStart, cardsAtEnd, updateCardsPosition, scrollCards };
   },
   template: `
     <div>
@@ -81,10 +106,16 @@ export default {
         <section id="juegos" class="home-section mb-5">
           <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3">
             <h2 class="main-title mb-0">{{ searchTerm ? 'Resultados para “' + searchTerm + '”' : config.title }}</h2>
-            <button v-if="interactive && searchTerm" type="button" class="btn btn-link text-decoration-none" @click="$emit('clear-search')">Limpiar búsqueda</button>
+            <div class="d-flex align-items-center gap-2">
+              <button v-if="interactive && searchTerm" type="button" class="btn btn-link text-decoration-none" @click="$emit('clear-search')">Limpiar búsqueda</button>
+              <div v-if="displayedGames.length > 1" class="home-cards-controls btn-group" role="group" :aria-label="'Controles de ' + (searchTerm ? 'resultados de búsqueda' : config.title)">
+                <button class="btn btn-outline-secondary" type="button" :disabled="cardsAtStart" :aria-label="'Ver tarjetas anteriores de ' + (searchTerm ? 'resultados' : config.title)" @click="scrollCards(-1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                <button class="btn btn-outline-secondary" type="button" :disabled="cardsAtEnd" :aria-label="'Ver más tarjetas de ' + (searchTerm ? 'resultados' : config.title)" @click="scrollCards(1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
           </div>
-          <div v-if="displayedGames.length" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-            <div class="col" v-for="game in displayedGames" :key="game.ID">
+          <div v-if="displayedGames.length" ref="cardsTrack" class="home-cards-track" role="region" :aria-label="searchTerm ? 'Resultados de búsqueda' : config.title" tabindex="0" @scroll.passive="updateCardsPosition">
+            <div class="home-cards-item" v-for="game in displayedGames" :key="game.ID">
               <article class="card h-100 shadow-sm game-card" :role="interactive ? 'link' : undefined" :tabindex="interactive ? 0 : undefined" @click="interactive && $emit('open-game', game)" @keydown.enter.prevent="interactive && $emit('open-game', game)" @keydown.space.prevent="interactive && $emit('open-game', game)">
                 <img v-if="game.img_principal" class="game-card-cover-image" :src="imageUrl(game)" :alt="game.titulo">
                 <div v-else class="game-card-cover"><i class="fas fa-gamepad"></i></div>

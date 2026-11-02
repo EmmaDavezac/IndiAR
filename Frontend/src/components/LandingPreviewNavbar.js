@@ -1,4 +1,4 @@
-import { computed, ref } from '../../assets/js/lib/vue-esm.js';
+import { computed, onBeforeUnmount, ref } from '../../assets/js/lib/vue-esm.js';
 import { API_BASE } from '../services/api.js';
 
 export default {
@@ -12,16 +12,35 @@ export default {
   emits: ['toggle-menu', 'toggle-theme'],
   setup(props) {
     const searchQuery = ref('');
+    const searchTerm = ref('');
+    const searchPending = ref(false);
+    let searchDebounceTimer;
     const imageUrl = game => game.img_principal?.startsWith('http') ? game.img_principal : `${API_BASE.replace('/api', '')}${game.img_principal || ''}`;
+    const searchLoading = computed(() => searchPending.value);
     const searchResults = computed(() => {
-      const query = searchQuery.value.trim().toLocaleLowerCase('es');
+      const query = searchTerm.value.trim().toLocaleLowerCase('es');
       if (!query) return [];
       return props.games.filter(game =>
         [game.titulo, game.desarrollador, game.distribuidor, game.descripcion]
           .some(value => String(value || '').toLocaleLowerCase('es').includes(query))
       ).slice(0, 6);
     });
-    return { searchQuery, searchResults, imageUrl };
+    function handleSearchInput() {
+      clearTimeout(searchDebounceTimer);
+      const query = searchQuery.value.trim();
+      if (!query) {
+        searchTerm.value = '';
+        searchPending.value = false;
+        return;
+      }
+      searchPending.value = true;
+      searchDebounceTimer = setTimeout(() => {
+        searchTerm.value = query;
+        searchPending.value = false;
+      }, 250);
+    }
+    onBeforeUnmount(() => clearTimeout(searchDebounceTimer));
+    return { searchQuery, searchResults, searchLoading, imageUrl, handleSearchInput };
   },
   template: `
     <header class="spa-header spa-header--landing landing-preview-navbar" aria-label="Vista previa de navegación">
@@ -39,20 +58,24 @@ export default {
         <div class="navbar-tools d-flex align-items-center gap-2">
           <form class="d-flex navbar-search" role="search" @submit.prevent>
             <label class="visually-hidden" for="landing-preview-search">Buscar juegos</label>
-            <input id="landing-preview-search" v-model="searchQuery" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="landing-preview-search-results" :aria-expanded="searchQuery.trim().length > 0">
+            <input id="landing-preview-search" v-model="searchQuery" @input="handleSearchInput" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="landing-preview-search-results" :aria-expanded="searchQuery.trim().length > 0">
             <button class="btn" type="submit" aria-label="Buscar"><i class="fas fa-search icon-search" aria-hidden="true"></i></button>
-            <ul v-if="searchQuery.trim()" id="landing-preview-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda">
-              <li v-for="game in searchResults" :key="game.ID" role="option">
-                <button class="navbar-search-result" type="button">
-                  <img v-if="game.img_principal" class="navbar-search-result-image" :src="imageUrl(game)" alt="">
-                  <span v-else class="navbar-search-result-image navbar-search-result-placeholder" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></span>
-                  <span class="navbar-search-result-copy">
-                    <span class="navbar-search-result-title">{{ game.titulo }}</span>
-                    <span class="navbar-search-result-meta">{{ game.desarrollador || 'Desarrollador indie' }}</span>
-                  </span>
-                </button>
-              </li>
-              <li v-if="!searchResults.length" class="navbar-search-empty">No se encontraron juegos.</li>
+            <ul v-if="searchQuery.trim()" id="landing-preview-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
+              <template v-if="searchLoading"><li v-for="row in 3" :key="'preview-search-skeleton-' + row" class="navbar-search-skeleton" aria-hidden="true"><span class="navbar-search-skeleton-image"></span><span class="navbar-search-skeleton-copy"><span></span><span></span><span></span></span></li></template>
+              <template v-if="!searchLoading">
+                <li v-for="game in searchResults" :key="game.ID" role="option">
+                  <button class="navbar-search-result" type="button">
+                    <img v-if="game.img_principal" class="navbar-search-result-image" :src="imageUrl(game)" alt="">
+                    <span v-else class="navbar-search-result-image navbar-search-result-placeholder" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></span>
+                    <span class="navbar-search-result-copy">
+                      <span class="navbar-search-result-title">{{ game.titulo }}</span>
+                      <span class="navbar-search-result-meta">{{ game.desarrollador || 'Desarrollador indie' }}</span>
+                      <span class="navbar-search-result-price"><del v-if="game.oferta_activa">\${{ Number(game.precio || 0).toFixed(2) }}</del> \${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</span>
+                    </span>
+                  </button>
+                </li>
+                <li v-if="!searchResults.length" class="navbar-search-empty">No se encontraron juegos.</li>
+              </template>
             </ul>
           </form>
         </div>
