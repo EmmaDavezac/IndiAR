@@ -829,6 +829,10 @@ body {
   flex: 0 0 calc((100% - 4.5rem) / 4);
   min-width: 0;
   scroll-snap-align: start;
+  height: 420px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-card-cover-media {
@@ -945,40 +949,34 @@ body {
 .home-card-skeleton-copy i:nth-child(3) { width: 55%; }
 
 .home-cards-side-control {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0.5rem;
-  color: var(--bs-white);
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
+  width: auto;
+  height: auto;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0.25rem;
+  border: none;
+  background: transparent;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000;
 }
 
 .home-cards-side-control:hover {
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--bs-white);
+  background: transparent;
+  color: #000;
+  opacity: 0.8;
 }
 
-/* Light mode: botones oscuros, iconos claros */
+/* Light mode: flechas negras */
 [data-bs-theme="light"] .home-cards-side-control {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.2);
-}
-[data-bs-theme="light"] .home-cards-side-control:hover {
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
+  color: #000;
 }
 
-/* Dark mode: botones claros, iconos oscuros */
+/* Dark mode: flechas blancas */
 [data-bs-theme="dark"] .home-cards-side-control {
-  color: #000;
-  background: rgba(255, 255, 255, 0.2);
-}
-[data-bs-theme="dark"] .home-cards-side-control:hover {
-  background: rgba(255, 255, 255, 0.3);
-  color: #000;
+  color: #fff;
 }
 
 .home-cards-side-control.is-hidden,
@@ -1034,6 +1032,10 @@ body {
 @media (min-width: 768px) and (max-width: 1199.98px) {
   .home-cards-item {
     flex-basis: calc((100% - 3rem) / 3);
+    height: 380px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .home-card-skeleton {
@@ -1044,6 +1046,10 @@ body {
 @media (min-width: 576px) and (max-width: 767.98px) {
   .home-cards-item {
     flex-basis: calc((100% - 1.5rem) / 2);
+    height: 340px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .home-card-skeleton {
@@ -1066,6 +1072,10 @@ body {
 
   .home-cards-item {
     flex-basis: calc((100% - 0.5rem) / 2);
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .home-card-skeleton {
@@ -1073,8 +1083,8 @@ body {
   }
 
   .home-cards-side-control {
-    width: 1.75rem;
-    height: 2.25rem;
+    min-width: 1.75rem;
+    min-height: 2.25rem;
     font-size: 0.75rem;
   }
 }
