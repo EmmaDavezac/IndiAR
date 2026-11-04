@@ -1000,7 +1000,7 @@ body {
 }
 
 .home-section-more {
-  color: #fff;
+  color: #fff !important;
   font-size: var(--font-size-sm, .875rem);
   font-weight: 600;
   text-decoration: none;
@@ -1012,20 +1012,20 @@ body {
 
 .home-section-more:hover,
 .home-section-more:focus-visible {
-  color: #fff;
+  color: #fff !important;
   background: #1a1a1a;
   text-decoration: none;
 }
 
 /* Dark mode: fondo blanco, texto negro */
 [data-bs-theme="dark"] .home-section-more {
-  color: #000;
-  background: #fff;
+  color: #000 !important;
+  background: #fff !important;
 }
 [data-bs-theme="dark"] .home-section-more:hover,
 [data-bs-theme="dark"] .home-section-more:focus-visible {
-  color: #000;
-  background: #f0f0f0;
+  color: #000 !important;
+  background: #f0f0f0 !important;
   text-decoration: none;
 }
 
