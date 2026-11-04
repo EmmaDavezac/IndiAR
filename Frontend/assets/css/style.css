@@ -414,7 +414,7 @@ body {
   min-height: 560px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  border: 8px solid var(--bs-secondary-bg);
+  border: none;
   border-radius: 1.75rem;
   box-shadow: 0 0 0 1px var(--bs-border-color), var(--shadow-md, 0 0.5rem 1rem rgba(0, 0, 0, 0.15));
 }
@@ -795,10 +795,10 @@ body {
 }
 
 .game-card-description {
-  min-height: 3rem;
-  margin-bottom: 1rem;
+  min-height: 2.4rem;
+  margin-bottom: 0.5rem;
   color: #555;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   line-height: 1.4;
 }
 
@@ -851,7 +851,7 @@ body {
 
 .game-card .card-title {
   display: -webkit-box;
-  min-height: 2.6em;
+  min-height: 2.2em;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -860,7 +860,7 @@ body {
 
 .game-card-description {
   display: -webkit-box;
-  min-height: 4.2em;
+  min-height: 3.2em;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;

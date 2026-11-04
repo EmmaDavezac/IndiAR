@@ -178,7 +178,7 @@ export default {
     });
     onBeforeUnmount(() => window.removeEventListener('resize', updateAllCardPositions));
     watch([displayedSections, () => props.games], () => nextTick(updateAllCardPositions));
-    return { imageUrl, imageKey, imageLoaded, imageFailed, setImageState, carouselSlides, displayedSections, sectionGames, setSectionTrack, cardsAtStart, cardsAtEnd, updateCardsPosition, scrollCards };
+    return { imageUrl, imageKey, imageLoaded, imageFailed, setImageState, carouselSlides, displayedSections, sectionGames, setSectionTrack, sectionScrollStates, cardsAtStart, cardsAtEnd, updateCardsPosition, scrollCards };
   },
   template: `
     <div>
@@ -230,7 +230,7 @@ export default {
             </div>
           </div>
           <div v-else-if="sectionGames(section).length" class="home-cards-carousel">
-            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtStart(section.id) }" type="button" :disabled="cardsAtStart(section.id)" :aria-label="'Ver tarjetas anteriores de ' + section.title" @click="scrollCards(section.id, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': sectionScrollStates[section.id]?.atStart ?? true }" type="button" :disabled="sectionScrollStates[section.id]?.atStart ?? true" :aria-label="'Ver tarjetas anteriores de ' + section.title" @click="scrollCards(section.id, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
             <div :ref="track => setSectionTrack(section.id, track)" class="home-cards-track" role="region" :aria-label="section.title" tabindex="0" @scroll.passive="updateCardsPosition(section.id)">
               <div class="home-cards-item" v-for="game in sectionGames(section)" :key="game.ID">
                 <article class="card h-100 shadow-sm game-card" :role="interactive ? 'link' : undefined" :tabindex="interactive ? 0 : undefined" @click="interactive && $emit('open-game', game)" @keydown.enter.prevent="interactive && $emit('open-game', game)" @keydown.space.prevent="interactive && $emit('open-game', game)">
@@ -243,7 +243,7 @@ export default {
                 </article>
               </div>
             </div>
-            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtEnd(section.id) }" type="button" :disabled="cardsAtEnd(section.id)" :aria-label="'Ver más tarjetas de ' + section.title" @click="scrollCards(section.id, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': sectionScrollStates[section.id]?.atEnd ?? false }" type="button" :disabled="sectionScrollStates[section.id]?.atEnd ?? false" :aria-label="'Ver más tarjetas de ' + section.title" @click="scrollCards(section.id, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
           </div>
           <div v-else class="alert alert-info">No hay juegos activos que coincidan con esta selección.</div>
         </section>
