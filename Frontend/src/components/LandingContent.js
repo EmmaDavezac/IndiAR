@@ -179,11 +179,17 @@ export default {
     onBeforeUnmount(() => window.removeEventListener('resize', updateAllCardPositions));
     // Inicializar estados por defecto antes del primer render
     const initSectionStates = () => {
+      const next = { ...sectionScrollStates.value };
+      let changed = false;
       displayedSections.value.forEach(section => {
-        if (!sectionScrollStates.value[section.id]) {
-          sectionScrollStates.value[section.id] = { atStart: true, atEnd: false };
+        if (!next[section.id]) {
+          next[section.id] = { atStart: true, atEnd: false };
+          changed = true;
         }
       });
+      if (changed) {
+        sectionScrollStates.value = next;
+      }
     };
     initSectionStates();
     watch([displayedSections, () => props.games], () => nextTick(() => {
