@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Juego - IndiAR</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="../Estilos/styles.css">
+    <link rel="shortcut icon" href="../Estilos/con.svg" type="image/x-icon">
+    <script src="../assets/js/vue.global.js"></script>
+    <link rel="stylesheet" href="../assets/css/fontawesome.min.css" />
+    <style>
+        .game-not-found { text-align: center; padding: 60px 20px; }
+        .game-not-found h1 { color: #e53935; margin-bottom: 16px; }
+        .game-not-found p { color: #666; font-size: 1.2rem; margin-bottom: 24px; }
+        .game-not-found a { display: inline-block; padding: 10px 20px; background: #6c5ce7; color: #fff; text-decoration: none; border-radius: 6px; }
+        .game-not-found a:hover { background: #5649c6; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container nav-container">
+        <a href="../index.html" class="logo">IndiAR</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../index.html#juegos">Juegos</a></li>
+                <li><a href="../partials/login.html">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+<div id="app" v-if="juego">
+    <section class="game-header">
+        <div class="game-image"><img :src="juego.img_principal" :alt="juego.titulo"></div>
+        <div class="game-info">
+            <h1>{{ juego.titulo }}</h1>
+            <p><strong>Distribuidor:</strong> {{ juego.distribuidor }}</p>
+            <p><strong>Desarrollador:</strong> {{ juego.desarrollador }}</p>
+            <p><strong>Lanzamiento:</strong> {{ juego.lanzamiento }}</p>
+            <p><strong>Precio:</strong> ${{ juego.precio }}</p>
+        </div>
+    </section>
+    <section class="game-description">
+        <h2>Descripción</h2>
+        <p v-html="juego.descripcion"></p>
+    </section>
+    <section class="game-requirements" v-if="juego.requisitosID">
+        <h2>Requisitos del Sistema</h2>
+        <ul>
+            <li><strong>SO Mínimo:</strong> {{ juego.so_min || 'N/D' }}</li>
+            <li><strong>Procesador Mínimo:</strong> {{ juego.procesador_min || 'N/D' }}</li>
+            <li><strong>RAM Mínima:</strong> {{ juego.ram_min || 'N/D' }}</li>
+            <li><strong>GPU Mínima:</strong> {{ juego.gpu_min || 'N/D' }}</li>
+            <li><strong>DirectX Mínimo:</strong> {{ juego.directx_min || 'N/D' }}</li>
+            <li><strong>SO Recomendado:</strong> {{ juego.so_rec || 'N/D' }}</li>
+            <li><strong>Procesador Recomendado:</strong> {{ juego.procesador_rec || 'N/D' }}</li>
+            <li><strong>RAM Recomendada:</strong> {{ juego.ram_rec || 'N/D' }}</li>
+            <li><strong>GPU Recomendada:</strong> {{ juego.gpu_rec || 'N/D' }}</li>
+            <li><strong>DirectX Recomendado:</strong> {{ juego.directx_rec || 'N/D' }}</li>
+        </ul>
+    </section>
+</div>
+<div v-if="!juego && error" class="game-not-found">
+    <h1>Juego no encontrado</h1>
+    <p>{{ error }}</p>
+    <a href="../index.html">Volver al inicio</a>
+</div>
+<div v-if="loading" style="text-align:center; padding: 40px 20px;">Cargando juego...</div>
+</main>
+<footer>
+    <div class="container footer-content">
+        <div class="footer-links"><ul>
+            <li><a href="#">Sobre nosotros</a></li>
+            <li><a href="#">Contacto</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+            <li><a href="#">Políticas de privacidad</a></li>
+        </ul></div>
+        <div class="footer-social"><ul class="footer-social-link-container">
+            <li class="footer-social-link-container-item"><a href="#" class="footer-social-link"><i class="fa-brands fa-square-youtube"></i></a></li>
+            <li class="footer-social-link-container-item"><a href="#" class="footer-social-link"><i class="fa-brands fa-square-facebook"></i></a></li>
+            <li class="footer-social-link-container-item"><a href="#" class="footer-social-link"><i class="fa-brands fa-square-twitter"></i></a></li>
+            <li class="footer-social-link-container-item"><a href="#" class="footer-social-link"><i class="fa-brands fa-square-steam"></i></a></li>
+        </ul></div>
+    </div>
+    <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+</footer>
+<script src="./assets/js/menu-scripts.js"></script>
+<script>
+const { createApp, ref, onMounted } = Vue;
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+createApp({
+    setup() {
+        const juego = ref(null);
+        const error = ref(null);
+        const loading = ref(true);
+        const fetchJuego = async () => {
+            if (!id) { error.value = 'No se especificó un juego'; loading.value = false; return; }
+            try {
+                const res = await fetch(`http://localhost:5000/api/juegos/${id}`, {
+                  credentials: "include"
+                });
+                const data = await res.json();
+                if (res.ok && data.ID) {
+                    juego.value = data;
+                    document.title = data.titulo + ' - IndiAR';
+                    if (data.requisitosID) {
+                        try {
+                            const resReq = await fetch(`http://localhost:5000/api/requisitos/${data.requisitosID}`, {
+                              credentials: "include"
+                            });
+                            if (resReq.ok) { Object.assign(juego.value, await resReq.json()); }
+                        } catch (e) { console.error(e); }
+                    }
+                } else {
+                    error.value = data.mensaje || 'Juego no encontrado';
+                }
+            } catch (err) {
+                error.value = 'Error al cargar el juego';
+                console.error(err);
+            } finally { loading.value = false; }
+        };
+        onMounted(fetchJuego);
+        return { juego, error, loading };
+    }
+}).mount('#app');
+</script>
+</body>
+</html>

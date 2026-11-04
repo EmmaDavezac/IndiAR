@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=none, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+  <title>Bienvenidos a IndiAR</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/navbar.css">
+  <link rel="stylesheet" href="../assets/css/fontawesome.min.css" />
+  <link rel="shortcut icon" href="../Estilos/icon.svg" type="image/x-icon" />
+  <script src="../assets/js/vue.global.js"></script>
+  <style></style>
+</head>
+
+<body>
+  <header class="main-header">
+    <div class="container-flex">
+      <div class="main-header-container">
+        <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+        <a class="main-header-title" href="../index.html"><span class="word1">Indi</span><span class="word2">AR</span></a>
+        <nav class="main-nav" id="main-nav">
+          <ul class="nav">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link">TIENDA</a>
+            </li>
+            <li class="nav-item">
+              <a href="../contacto.html" class="nav-link">CONTACTO</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="main-header-container">
+        <a href="#" class="main-header-btn"><i class="fas fa-user icon-header"></i></a>
+      </div>
+    </div>
+    <div id="menu-container" class="menu-oculto">
+      <ul class="menu">
+        <li class="menu-item">
+          <a href="../index.html" class="menu-link ">TIENDA</a>
+        </li>
+        <li class="menu-item">
+          <a href="../contacto.html" class="menu-link">CONTACTO</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!--Inicio del Main-->
+  <main class="main">
+    <div class="form-container">
+      <form id="form-login-user" @submit.prevent="handleLogin">
+        <div class="form-title-container">
+          <p class="form-title">Iniciar Sesión</p>
+        </div>
+        <!--Este es el campo "Email"-->
+        <div class="input-container">
+          <i class="fa fa-envelope icon-form-input"> </i>
+          <input class="input-field" type="text" id="email" name="email" placeholder="Email" required v-model="email" />
+        </div>
+        <!--Este es el campo "Contraseña"-->
+        <div class="input-container">
+          <i class="fa fa-lock icon-form-input"> </i>
+          <input class="input-field" type="password" id="password" name="password" placeholder="Contraseña" required v-model="password" />
+        </div>
+        <div>
+          <input class="btn-form" type="submit" value="Entrar" />
+
+        </div>
+        <div v-if="warning">
+          <p class="warningSection" id="warningSection" style="color:#e53935;">{{ warning }}</p>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!--Aquí comienza el Footer-->
+  <footer class="main-footer bottom-footer">
+    <div class="link-sections">
+      <ul class="footer-link-container">
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Compañía</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Ayuda</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Terminos de servicio</a>
+        </li>
+        <li class="footer-link-container-item">
+          <a class="footer-link" href="">Politicas de privacidad</a>
+        </li>
+      </ul>
+      <ul class="footer-social-link-container">
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-youtube"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-facebook"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-twitter"></i></a>
+        </li>
+        <li class="footer-social-link-container-item">
+          <a href="" class="footer-social-link"><i class="fa-brands fa-square-steam"></i></a>
+        </li>
+      </ul>
+    </div>
+    <p class="copy">© 2023 IndiAR. All Rights Reserved</p>
+  </footer>
+
+  <script src="../assets/js/validation-scripts.js"></script>
+  <script src="../assets/js/menu-scripts.js"></script>
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const email = ref('');
+        const password = ref('');
+        const warning = ref('');
+
+        const handleLogin = async (e) => {
+          e.preventDefault();
+          warning.value = '';
+
+          try {
+            const response = await fetch('http://localhost:5000/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: "include",
+              body: JSON.stringify({ email: email.value, password: password.value })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.token) {
+              localStorage.setItem('indiAR_token', data.token);
+              localStorage.setItem('indiAR_user', JSON.stringify(data.usuario));
+              const usuario = data.usuario;
+              if (usuario && usuario.es_Admin) {
+                window.location.href = './admin.html';
+              } else {
+                window.location.href = '../index.html';
+              }
+            } else {
+              warning.value = data.mensaje || 'Error al iniciar sesión';
+            }
+          } catch (err) {
+            warning.value = 'No se pudo conectar con el servidor';
+            console.error(err);
+          }
+        };
+
+        return { email, password, warning, handleLogin };
+      }
+    }).mount('#form-login-user');
+  </script>
+
+  <script src="../assets/js/auth-navbar.js"></script>
+  <script>
+    // Si ya hay sesión activa, redirigir según rol
+    const user = JSON.parse(localStorage.getItem('indiAR_user') || 'null');
+    if (user && localStorage.getItem('indiAR_token')) {
+      if (user.es_Admin) {
+        window.location.href = './admin.html';
+      } else {
+        window.location.href = '../index.html';
+      }
+    }
+  </script>
+</body>
+</html>
