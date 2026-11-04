@@ -278,8 +278,9 @@ body {
 
 .home-carousel .carousel-control-prev,
 .home-carousel .carousel-control-next {
-  opacity: 1;
+  opacity: 1 !important;
   background: transparent !important;
+  background-image: none !important;
   border: none !important;
   box-shadow: none !important;
   width: 3rem;
@@ -290,7 +291,8 @@ body {
 .home-carousel .carousel-control-prev:focus-visible,
 .home-carousel .carousel-control-next:hover,
 .home-carousel .carousel-control-next:focus-visible {
-  opacity: 1;
+  opacity: 1 !important;
+  background: transparent !important;
 }
 
 .home-carousel .carousel-indicators [data-bs-target] {
@@ -855,7 +857,7 @@ body {
 }
 
 .game-card .card-body {
-  padding: 0.6rem 0.75rem;
+  padding: 0.6rem 0.75rem !important;
 }
 
 .game-card .card-title {
@@ -1097,6 +1099,26 @@ body {
     min-width: 1.75rem;
     min-height: 2.25rem;
     font-size: 0.75rem;
+  }
+
+  /* Carrusel principal mobile: quitar barras negras de los controles */
+  .home-carousel .carousel-control-prev,
+  .home-carousel .carousel-control-next {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    opacity: 1 !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  /* Flechas de sección mobile: ocultar izquierda al inicio */
+  .home-cards-side-control.is-hidden,
+  .home-cards-side-control:disabled {
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
   }
 }
 

@@ -177,12 +177,17 @@ export default {
       window.addEventListener('resize', updateAllCardPositions);
     });
     onBeforeUnmount(() => window.removeEventListener('resize', updateAllCardPositions));
-    watch([displayedSections, () => props.games], () => nextTick(() => {
+    // Inicializar estados por defecto antes del primer render
+    const initSectionStates = () => {
       displayedSections.value.forEach(section => {
         if (!sectionScrollStates.value[section.id]) {
           sectionScrollStates.value[section.id] = { atStart: true, atEnd: false };
         }
       });
+    };
+    initSectionStates();
+    watch([displayedSections, () => props.games], () => nextTick(() => {
+      initSectionStates();
       updateAllCardPositions();
     }));
     return { imageUrl, imageKey, imageLoaded, imageFailed, setImageState, carouselSlides, displayedSections, sectionGames, setSectionTrack, sectionScrollStates, cardsAtStart, cardsAtEnd, updateCardsPosition, scrollCards };
