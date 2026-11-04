@@ -272,7 +272,8 @@ body {
 
 .home-carousel .carousel-control-prev-icon,
 .home-carousel .carousel-control-next-icon {
-  filter: brightness(0) invert(1);
+  filter: brightness(0) !important;
+  -webkit-filter: invert(1) !important;
 }
 
 .home-carousel .carousel-control-prev,
@@ -946,7 +947,38 @@ body {
 .home-cards-side-control {
   width: 2.5rem;
   height: 2.5rem;
-  padding: 0;
+  padding: 0.5rem;
+  color: var(--bs-white);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-cards-side-control:hover {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--bs-white);
+}
+
+/* Light mode: botones oscuros, iconos claros */
+[data-bs-theme="light"] .home-cards-side-control {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+}
+[data-bs-theme="light"] .home-cards-side-control:hover {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Dark mode: botones claros, iconos oscuros */
+[data-bs-theme="dark"] .home-cards-side-control {
+  color: #000;
+  background: rgba(255, 255, 255, 0.2);
+}
+[data-bs-theme="dark"] .home-cards-side-control:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
 }
 
 .home-cards-side-control.is-hidden,
@@ -970,17 +1002,33 @@ body {
 }
 
 .home-section-more {
-  color: var(--color-primary, #4A9DCE);
+  color: #fff;
   font-size: var(--font-size-sm, .875rem);
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  background: #000;
 }
 
 .home-section-more:hover,
 .home-section-more:focus-visible {
-  color: var(--bs-primary-text-emphasis);
-  text-decoration: underline;
+  color: #fff;
+  background: #1a1a1a;
+  text-decoration: none;
+}
+
+/* Dark mode: fondo blanco, texto negro */
+[data-bs-theme="dark"] .home-section-more {
+  color: #000;
+  background: #fff;
+}
+[data-bs-theme="dark"] .home-section-more:hover,
+[data-bs-theme="dark"] .home-section-more:focus-visible {
+  color: #000;
+  background: #f0f0f0;
+  text-decoration: none;
 }
 
 @media (min-width: 768px) and (max-width: 1199.98px) {
