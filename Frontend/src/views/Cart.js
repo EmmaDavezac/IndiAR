@@ -93,10 +93,10 @@ export default {
                     </select>
                   </label>
                   <span v-if="!(item.plataformas || []).length" class="small text-danger mt-1">Sin plataformas configuradas.</span>
-                  <span class="cart-item-unit-price"><del v-if="item.oferta_activa">\${{ Number(item.precio_original || 0).toFixed(2) }}</del> <strong>\${{ Number(item.precio || 0).toFixed(2) }}</strong><span v-if="item.oferta_activa" class="badge text-bg-danger ms-1">Oferta</span></span>
+                  <span class="cart-item-unit-price"><del v-if="item.oferta_activa && Number(item.precio_original || 0) > 0">\${{ Number(item.precio_original || 0).toFixed(2) }}</del><strong v-if="Number(item.precio || 0) === 0" class="game-price-free">Gratis</strong><strong v-else>\${{ Number(item.precio || 0).toFixed(2) }}</strong><span v-if="item.oferta_activa" class="badge text-bg-danger ms-1">Oferta</span></span>
                 </div>
                 <div class="cart-item-actions">
-                  <strong class="cart-item-price"><del v-if="item.oferta_activa" class="cart-item-original-price">\${{ Number(item.precio_original || 0).toFixed(2) }}</del>\${{ Number(item.precio || 0).toFixed(2) }}</strong>
+                  <strong class="cart-item-price"><del v-if="item.oferta_activa && Number(item.precio_original || 0) > 0" class="cart-item-original-price">\${{ Number(item.precio_original || 0).toFixed(2) }}</del><span v-if="Number(item.precio || 0) === 0" class="game-price-free">Gratis</span><template v-else>\${{ Number(item.precio || 0).toFixed(2) }}</template></strong>
                   <button class="btn btn-link cart-remove" type="button" aria-label="Eliminar del carrito" @click="remove(item)"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
                 </div>
               </div>
@@ -109,9 +109,9 @@ export default {
         <section class="cart-summary card border-0 sticky-lg-top">
           <div class="card-body p-4">
             <h2>Resumen de compra</h2>
-            <div class="cart-summary-row"><span>Subtotal</span><strong>\${{ Number(total).toFixed(2) }}</strong></div>
+            <div class="cart-summary-row"><span>Subtotal</span><strong v-if="items.length && total === 0" class="game-price-free">Gratis</strong><strong v-else>\${{ Number(total).toFixed(2) }}</strong></div>
             <hr>
-            <div class="cart-total"><span>Total</span><strong>\${{ Number(total).toFixed(2) }}</strong></div>
+            <div class="cart-total"><span>Total</span><strong v-if="items.length && total === 0" class="game-price-free">Gratis</strong><strong v-else>\${{ Number(total).toFixed(2) }}</strong></div>
             <button class="btn btn-success w-100 mt-3" type="button" @click="openCheckout">Finalizar compra</button>
           </div>
         </section>
@@ -128,7 +128,7 @@ export default {
     <div v-if="showCheckout" class="cart-checkout-backdrop" role="presentation" @click.self="closeCheckout">
       <section class="cart-checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
         <div class="cart-checkout-header"><div><span>Pago seguro de demostración</span><h2 id="checkout-title">Finalizar compra</h2></div><button class="btn-close" type="button" aria-label="Cerrar" :disabled="processingPayment" @click="closeCheckout"></button></div>
-        <div class="cart-checkout-total"><span>Total a pagar</span><strong>\${{ Number(total).toFixed(2) }}</strong></div>
+        <div class="cart-checkout-total"><span>Total a pagar</span><strong v-if="items.length && total === 0" class="game-price-free">Gratis</strong><strong v-else>\${{ Number(total).toFixed(2) }}</strong></div>
         <form @submit.prevent="simulatePayment">
           <label class="form-label" for="checkout-name">Nombre en la tarjeta</label><input id="checkout-name" class="form-control mb-3" value="Usuario de prueba" required>
           <label class="form-label" for="checkout-card">Número de tarjeta</label><input id="checkout-card" class="form-control mb-3" inputmode="numeric" value="4242 4242 4242 4242" required>

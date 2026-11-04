@@ -4,6 +4,7 @@ services:
     build: ./Frontend
     ports:
       - "8080:80"
+      - "8765:80"
     depends_on:
       - api
 
@@ -27,6 +28,7 @@ services:
       - db
     volumes:
       - game_images:/app/uploads
+      - ./migration_data:/app/migration_data
 
   db:
     container_name: indiar-db

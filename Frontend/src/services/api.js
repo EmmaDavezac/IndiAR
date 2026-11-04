@@ -76,6 +76,11 @@ async function getJuegoImagenes(id) {
   return { response, data: await response.json() };
 }
 
+async function setJuegoImagenPrincipal(imageId) {
+  const response = await request(`/imagenes/${imageId}`, { method: 'PATCH' });
+  return { response, data: await response.json() };
+}
+
 async function getCategorias() {
   const response = await request('/categorias');
   return response.json();
@@ -112,4 +117,4 @@ async function saveLandingConfig(config) {
   return { response, data: await response.json() };
 }
 
-export { request, login, register, getJuegos, saveJuego, uploadJuegoImagen, getJuegoImagenes, setJuegoEstado, getCategorias, getColecciones, saveTaxonomy, deleteResource, getLandingConfig, saveLandingConfig, API_BASE };
+export { request, login, register, getJuegos, saveJuego, uploadJuegoImagen, getJuegoImagenes, setJuegoImagenPrincipal, setJuegoEstado, getCategorias, getColecciones, saveTaxonomy, deleteResource, getLandingConfig, saveLandingConfig, API_BASE };

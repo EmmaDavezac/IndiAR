@@ -516,7 +516,7 @@
 }
 
 .nav-link-logout:hover {
-  color: #b91c1c !important;
+  color: var(--bs-link-hover-color, #246987) !important;
 }
 
 /* ---- Buttons ---- */
@@ -663,7 +663,7 @@
 }
 
 .btn-login:hover {
-  color: #d94200 !important;
+  color: var(--bs-link-hover-color, #246987) !important;
 }
 
 /* Mobile menu button */
@@ -680,8 +680,8 @@
 }
 
 .btn-login-mobile:hover {
-  background: #fdecea;
-  color: #b91c1c;
+  background: var(--bs-primary-bg-subtle);
+  color: var(--bs-link-hover-color, #246987);
 }
 
 /* ---- Search Input ---- */

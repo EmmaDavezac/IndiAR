@@ -28,7 +28,7 @@ from werkzeug.exceptions import BadRequest
 # ---------------------------------------------------------------------------
 app = Flask(__name__)
 CORS(app,
-     origins=["http://localhost:8080", "http://127.0.0.1:8080"],
+     origins=["http://localhost:8080", "http://127.0.0.1:8080", "http://localhost:8765", "http://127.0.0.1:8765"],
      supports_credentials=True)
 
 
@@ -172,6 +172,9 @@ class Juego(db.Model):
     activo = db.Column(db.Boolean, nullable=False, default=True)
     plataformas = db.Column(db.JSON, nullable=False, default=list)
     idiomas = db.Column(db.JSON, nullable=False, default=list)
+    steam_appid = db.Column(db.String(20), unique=True, nullable=True)
+    steam_url = db.Column(db.String(500), nullable=True)
+    steam_metadata = db.Column(db.JSON, nullable=True)
     fecha_subida = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     categorias = db.relationship('Categoria', secondary=juego_categorias, backref='juegos', lazy='joined')
     colecciones = db.relationship('Coleccion', secondary=juego_colecciones, backref='juegos', lazy='joined')
@@ -238,6 +241,40 @@ with app.app_context():
         if nombre not in columnas_juegos:
             db.session.execute(sa.text(f'ALTER TABLE Juegos ADD COLUMN {nombre} {definicion}'))
     if any(nombre not in columnas_juegos for nombre in columnas_oferta):
+        db.session.commit()
+
+    columnas_juegos = {columna['name'] for columna in db.inspect(db.engine).get_columns('Juegos')}
+    columnas_steam = {
+        'steam_appid': 'VARCHAR(20) NULL',
+        'steam_url': 'VARCHAR(500) NULL',
+        'steam_metadata': 'JSON NULL',
+    }
+    for nombre, definicion in columnas_steam.items():
+        if nombre not in columnas_juegos:
+            db.session.execute(sa.text(f'ALTER TABLE Juegos ADD COLUMN {nombre} {definicion}'))
+    if any(nombre not in columnas_juegos for nombre in columnas_steam):
+        db.session.commit()
+
+    charset_juegos = db.session.execute(sa.text(
+        "SELECT CHARACTER_SET_NAME FROM information_schema.COLUMNS "
+        "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'Juegos' "
+        "AND CHARACTER_SET_NAME IS NOT NULL LIMIT 1"
+    )).scalar()
+    if charset_juegos != 'utf8mb4':
+        db.session.execute(sa.text(
+            "ALTER TABLE Juegos CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
+        ))
+        db.session.commit()
+
+    indices_juegos = db.inspect(db.engine).get_indexes('Juegos')
+    if not any(
+        indice.get('unique')
+        and indice.get('column_names') == ['steam_appid']
+        for indice in indices_juegos
+    ):
+        db.session.execute(sa.text(
+            'CREATE UNIQUE INDEX uq_juegos_steam_appid ON Juegos (steam_appid)'
+        ))
         db.session.commit()
 
     if 'activo' not in columnas_juegos:
@@ -462,6 +499,8 @@ juego_in = api.model('JuegoEntrada', {
     'colecciones': fields.List(fields.Integer, description='IDs de colecciones'),
     'plataformas': fields.List(fields.String, description='Windows, Linux, macOS, Android, iOS'),
     'idiomas': fields.List(fields.String, description='Idiomas disponibles'),
+    'steam_appid': fields.String(required=False, max_length=20, description='Steam App ID'),
+    'steam_url': fields.String(required=False, max_length=500, description='URL de Steam'),
 })
 
 juego_out = api.model('Juego', {
@@ -485,6 +524,8 @@ juego_out = api.model('Juego', {
     'colecciones': fields.List(fields.Nested(coleccion_out)),
     'plataformas': fields.Raw,
     'idiomas': fields.Raw,
+    'steam_appid': fields.String,
+    'steam_url': fields.String,
     'fecha_subida': fields.DateTime(dt_format='iso8601'),
 })
 
@@ -783,6 +824,23 @@ def aplicar_datos_juego(juego, data):
         juego.oferta_hasta = oferta_hasta
 
     juego.img_principal = data['img_principal']
+    if 'steam_appid' in data:
+        steam_appid = str(data.get('steam_appid') or '').strip() or None
+        if steam_appid and (not steam_appid.isdigit() or len(steam_appid) > 20):
+            raise ValueError('El Steam App ID debe contener solo números.')
+        if steam_appid:
+            consulta_steam = Juego.query.filter(Juego.steam_appid == steam_appid)
+            if juego.id is not None:
+                consulta_steam = consulta_steam.filter(Juego.id != juego.id)
+            existente = consulta_steam.first()
+            if existente:
+                raise ValueError('Ya existe otro juego asociado a ese Steam App ID.')
+        juego.steam_appid = steam_appid
+    if 'steam_url' in data:
+        steam_url = str(data.get('steam_url') or '').strip() or None
+        if steam_url and len(steam_url) > 500:
+            raise ValueError('La URL de Steam no puede superar los 500 caracteres.')
+        juego.steam_url = steam_url
     if 'activo' in data:
         juego.activo = bool(data['activo'])
     elif juego.activo is None:
@@ -957,6 +1015,19 @@ class JuegoImagenesResource(Resource):
 @ns_juegos.route('/imagenes/<int:id>')
 class JuegoImagenResource(Resource):
     @admin_only(ns_juegos)
+    def patch(self, id):
+        imagen = db.session.get(JuegoImagen, id)
+        if not imagen:
+            return {'mensaje': 'No se encontró la imagen'}, 404
+        juego = db.session.get(Juego, imagen.juego_id)
+        if not juego:
+            return {'mensaje': 'No se encontró el juego de la imagen'}, 404
+        juego.img_principal = imagen.url
+        if not guardar():
+            return {'mensaje': 'No se pudo actualizar la imagen principal'}, 500
+        return {'mensaje': 'Imagen principal actualizada correctamente', 'img_principal': imagen.url}, 200
+
+    @admin_only(ns_juegos)
     def delete(self, id):
         imagen = db.session.get(JuegoImagen, id)
         if not imagen:
@@ -1096,6 +1167,18 @@ DEFAULT_LANDING_CONFIG = {
     'limit': 8,
     'featuredIds': [],
     'carouselGameIds': [],
+    'taxonomySectionsEnabled': True,
+    'hiddenCategoryIds': [],
+    'hiddenCollectionIds': [],
+    'sections': [{
+        'id': 'section-1',
+        'title': 'Novedades para ti',
+        'mode': 'todos',
+        'categoryIds': [],
+        'collectionIds': [],
+        'featuredIds': [],
+        'limit': 8,
+    }],
 }
 
 
@@ -1106,7 +1189,19 @@ class LandingConfigResource(Resource):
         if not stored:
             return DEFAULT_LANDING_CONFIG, 200
         try:
-            return {**DEFAULT_LANDING_CONFIG, **json.loads(stored.config)}, 200
+            saved_config = json.loads(stored.config)
+            config = {**DEFAULT_LANDING_CONFIG, **saved_config}
+            if 'sections' not in saved_config:
+                config['sections'] = [{
+                    'id': 'section-1',
+                    'title': config['title'],
+                    'mode': config['mode'],
+                    'categoryIds': config['categoryIds'] or ([config['categoryId']] if config['categoryId'] else []),
+                    'collectionIds': config['collectionIds'] or ([config['collectionId']] if config['collectionId'] else []),
+                    'featuredIds': config['featuredIds'],
+                    'limit': config['limit'],
+                }]
+            return config, 200
         except (TypeError, json.JSONDecodeError):
             return DEFAULT_LANDING_CONFIG, 200
 
@@ -1114,6 +1209,54 @@ class LandingConfigResource(Resource):
     def put(self):
         data = request.get_json() or {}
         allowed_modes = {'todos', 'categoria', 'coleccion', 'destacados'}
+        raw_sections = data.get('sections')
+        if raw_sections is None:
+            raw_sections = [{
+                'id': 'section-1',
+                'title': data.get('title', DEFAULT_LANDING_CONFIG['title']),
+                'mode': data.get('mode', 'todos'),
+                'categoryIds': data.get('categoryIds') or ([data.get('categoryId')] if data.get('categoryId') else []),
+                'collectionIds': data.get('collectionIds') or ([data.get('collectionId')] if data.get('collectionId') else []),
+                'featuredIds': data.get('featuredIds', []),
+                'limit': data.get('limit', 8),
+            }]
+        if not isinstance(raw_sections, list) or not raw_sections:
+            return {'mensaje': 'La landing debe incluir al menos un carrusel válido'}, 400
+        if len(raw_sections) > 24:
+            return {'mensaje': 'No se pueden configurar más de 24 carruseles'}, 400
+        sections = []
+        section_ids = set()
+        for index, section in enumerate(raw_sections, start=1):
+            if not isinstance(section, dict):
+                return {'mensaje': f'La configuración del carrusel {index} no es válida'}, 400
+            title = str(section.get('title') or '').strip()
+            if not title or len(title) > 80:
+                return {'mensaje': f'El carrusel {index} debe tener un título de hasta 80 caracteres'}, 400
+            mode = section.get('mode', 'todos')
+            if mode not in allowed_modes:
+                return {'mensaje': f'El tipo de contenido del carrusel {index} no es válido'}, 400
+            section_id = str(section.get('id') or f'section-{index}').strip()[:80]
+            if not section_id or section_id in section_ids:
+                return {'mensaje': 'Cada carrusel debe tener un identificador único'}, 400
+            section_ids.add(section_id)
+            try:
+                section_limit = int(section.get('limit', 8) or 8)
+            except (TypeError, ValueError):
+                return {'mensaje': f'El límite de juegos del carrusel {index} no es válido'}, 400
+            section_categories = section.get('categoryIds') or []
+            section_collections = section.get('collectionIds') or []
+            section_featured = section.get('featuredIds') or []
+            if not all(isinstance(values, list) for values in (section_categories, section_collections, section_featured)):
+                return {'mensaje': f'Las selecciones del carrusel {index} no son válidas'}, 400
+            sections.append({
+                'id': section_id,
+                'title': title,
+                'mode': mode,
+                'categoryIds': [str(value) for value in section_categories][:24],
+                'collectionIds': [str(value) for value in section_collections][:24],
+                'featuredIds': [str(value) for value in section_featured][:100],
+                'limit': max(1, min(24, section_limit)),
+            })
         try:
             landing_limit = int(data.get('limit', 8) or 8)
         except (TypeError, ValueError):
@@ -1122,6 +1265,12 @@ class LandingConfigResource(Resource):
         if not isinstance(carousel_game_ids, list):
             carousel_game_ids = []
         carousel_game_ids = list(dict.fromkeys(str(game_id) for game_id in carousel_game_ids))[:24]
+        hidden_category_ids = data.get('hiddenCategoryIds', [])
+        hidden_collection_ids = data.get('hiddenCollectionIds', [])
+        if not isinstance(hidden_category_ids, list) or not isinstance(hidden_collection_ids, list):
+            return {'mensaje': 'La visibilidad de las secciones no es válida'}, 400
+        if not isinstance(data.get('taxonomySectionsEnabled', True), bool):
+            return {'mensaje': 'La opción de secciones por género y colección no es válida'}, 400
         config = {
             'title': str(data.get('title', DEFAULT_LANDING_CONFIG['title']))[:80],
             'mode': data.get('mode', 'todos') if data.get('mode', 'todos') in allowed_modes else 'todos',
@@ -1132,6 +1281,10 @@ class LandingConfigResource(Resource):
             'limit': max(1, min(24, landing_limit)),
             'featuredIds': [str(game_id) for game_id in (data.get('featuredIds') or [])],
             'carouselGameIds': carousel_game_ids,
+            'taxonomySectionsEnabled': data.get('taxonomySectionsEnabled', True),
+            'hiddenCategoryIds': list(dict.fromkeys(str(value) for value in hidden_category_ids))[:500],
+            'hiddenCollectionIds': list(dict.fromkeys(str(value) for value in hidden_collection_ids))[:500],
+            'sections': sections,
         }
         stored = db.session.execute(db.select(LandingConfig).order_by(LandingConfig.id)).scalars().first()
         if stored:

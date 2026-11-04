@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from '../assets/js/lib/vue-router-esm.js';
 
-import Home from './views/Home.js';
+import Home from './views/Home.js?v=20261103a';
 import Login from './views/Login.js';
 import Register from './views/Register.js';
 import Admin from './views/Admin.js';
 import Contacto from './views/Contacto.js';
 import ErrorView from './views/Error.js';
 import Account from './views/Account.js';
-import AdminGames from './views/AdminGames.js?v=20261101e';
+import AdminGames from './views/AdminGames.js?v=20261102e';
 import AdminCatalog from './views/AdminCatalog.js?v=20261101t';
 import AdminUsers from './views/AdminUsers.js';
-import AdminLanding from './views/AdminLanding.js';
-import GameDetail from './views/GameDetail.js?v=20261101e';
-import Cart from './views/Cart.js';
+import AdminLanding from './views/AdminLanding.js?v=20261103c';
+import GameDetail from './views/GameDetail.js?v=20261103a';
+import Cart from './views/Cart.js?v=20261103a';
 
 const routes = [
   { path: '/', component: Home },

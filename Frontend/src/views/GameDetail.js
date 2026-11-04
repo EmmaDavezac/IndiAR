@@ -87,7 +87,7 @@ export default {
             <span v-for="collection in game.colecciones || []" :key="'collection-' + collection.ID">{{ collection.nombre }}</span>
           </div>
           <div class="game-detail-purchase">
-            <div><span>Precio</span><del v-if="game.oferta_activa" class="game-detail-original-price">\${{ Number(game.precio || 0).toFixed(2) }}</del><strong class="game-detail-price">\${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</strong><span v-if="game.oferta_activa" class="badge text-bg-danger align-self-start">Oferta vigente</span></div>
+            <div><span>Precio</span><del v-if="game.oferta_activa && Number(game.precio || 0) > 0" class="game-detail-original-price">\${{ Number(game.precio || 0).toFixed(2) }}</del><strong v-if="Number(game.precio_final ?? game.precio ?? 0) === 0" class="game-detail-price game-price-free">Gratis</strong><strong v-else class="game-detail-price">\${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</strong><span v-if="game.oferta_activa" class="badge text-bg-danger align-self-start">Oferta vigente</span></div>
             <label class="game-detail-platform-select"><span>Plataforma</span><select v-model="selectedPlatform" class="form-select" :disabled="!(game.plataformas || []).length"><option value="" disabled>Elegí una plataforma</option><option v-for="platform in game.plataformas || []" :key="platform" :value="platform">{{ platform }}</option></select></label>
             <button class="btn btn-primary btn-lg" type="button" @click="addGame"><i class="fa-solid fa-cart-plus"></i>Añadir al carrito</button>
           </div>

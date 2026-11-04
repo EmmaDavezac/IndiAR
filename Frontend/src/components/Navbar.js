@@ -153,7 +153,7 @@ export default {
                     <span class="navbar-search-result-copy">
                       <span class="navbar-search-result-title">{{ game.titulo }}</span>
                       <span class="navbar-search-result-meta">{{ game.desarrollador || 'Desarrollador indie' }}</span>
-                      <span class="navbar-search-result-price"><del v-if="game.oferta_activa">\${{ Number(game.precio || 0).toFixed(2) }}</del> \${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</span>
+                      <span class="navbar-search-result-price"><del v-if="game.oferta_activa && Number(game.precio || 0) > 0">\${{ Number(game.precio || 0).toFixed(2) }}</del><strong v-if="Number(game.precio_final ?? game.precio ?? 0) === 0" class="game-price-free">Gratis</strong><template v-else>\${{ Number(game.precio_final ?? game.precio ?? 0).toFixed(2) }}</template></span>
                     </span>
                   </button>
                 </li>

@@ -52,6 +52,25 @@ en `GOOGLE_CLIENT_ID` dentro de `.env` (la variable también está en `.env.exam
 No agregues un Client Secret al frontend. Definir esta variable por sí sola no
 habilita el acceso con Google.
 
+### Importación inicial de juegos desde Steam
+La importación usa los archivos de `migration_data/` y guarda el Steam App ID para
+evitar duplicados. Reconstruí la API para incluir `requests` y montar los datos:
+
+```bash
+docker compose up -d --build api
+docker compose exec api python migration_data/enriquecer_steam.py
+docker compose exec api python migration_data/importar_steam.py
+```
+
+El último comando solo previsualiza. Revisá el resultado antes de ejecutar
+`docker compose exec api python migration_data/importar_steam.py --apply`.
+Los juegos nuevos se crean inactivos; los precios se guardan en USD y los datos
+sin precio quedan en cero. Las fechas ausentes usan la fecha del día como valor
+provisional. Las filas con `revisar` se omiten, salvo que se indique
+`--include-review`. Para refrescar los metadatos de juegos ya vinculados a Steam,
+usá `--update-existing`; esa opción conserva estado activo, precio, ofertas y
+categorías administradas en IndiAR.
+
 ---
 
 ## 🛠️ Ejecución Local (sin Docker)

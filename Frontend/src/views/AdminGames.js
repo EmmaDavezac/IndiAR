@@ -1,5 +1,5 @@
 import { ref, computed } from '../../assets/js/lib/vue-esm.js';
-import { request, getJuegos, saveJuego, uploadJuegoImagen, getJuegoImagenes, setJuegoEstado, deleteResource, getCategorias, getColecciones } from '../services/api.js?v=20261101h';
+import { request, getJuegos, saveJuego, uploadJuegoImagen, getJuegoImagenes, setJuegoImagenPrincipal, setJuegoEstado, deleteResource, getCategorias, getColecciones } from '../services/api.js?v=20261102d';
 import router from '../router.js';
 import { confirmAction } from '../services/confirm.js';
 
@@ -12,8 +12,17 @@ export default {
     const games = ref([]); const categorias = ref([]); const colecciones = ref([]); const requisitos = ref([]);
     const game = ref(emptyGame()); const gameOriginal = ref(emptyGame()); const editingId = ref(null); const showGameForm = ref(false); const gameStep = ref(1); const warning = ref(''); const loading = ref(true);
     const selectedGame = ref(null); const imageWarning = ref(''); const activeTab = ref('juegos'); const detailTab = ref('informacion'); const requirement = ref({}); const requirementOriginal = ref({}); const requirementsEditing = ref(false); const editingRequirementId = ref(null);
-    const gameImages = ref([]); const selectedImageIndex = ref(0); const imagePreviews = ref([]); const pendingImageFiles = ref([]);
-    const searchText = ref(''); const statusFilter = ref('todos'); const currentPage = ref(1); const pageSize = 10;
+    const gameImages = ref([]); const selectedImageIndex = ref(0); const imageLoading = ref(false); const galleryLoading = ref(false); const galleryLoadedForGame = ref(null); const galleryRequestId = ref(0); const imageEditing = ref(false); const imageUploadLoading = ref(false); const showImagePreviewModal = ref(false); const imagePreviews = ref([]); const pendingImageFiles = ref([]);
+    const searchText = ref(''); const statusFilter = ref('activos'); const currentPage = ref(1); const pageSize = 10;
+    const genreSearch = ref('');
+    const filteredGameCategories = computed(() => {
+      const query = genreSearch.value.trim().toLocaleLowerCase('es');
+      return categorias.value.filter(category => String(category.nombre || '').toLocaleLowerCase('es').includes(query));
+    });
+    const selectedGameCategories = computed(() => {
+      const selectedIds = new Set((game.value.categorias || []).map(String));
+      return categorias.value.filter(category => selectedIds.has(String(category.ID)));
+    });
     const filteredGames = computed(() => {
       const search = searchText.value.trim().toLowerCase();
       return games.value.filter(item => {
@@ -32,6 +41,9 @@ export default {
     function resetPagination() { currentPage.value = 1; }
     function changePage(page) {
       if (page >= 1 && page <= totalPages.value) currentPage.value = page;
+    }
+    function removeGameCategory(categoryId) {
+      game.value.categorias = game.value.categorias.filter(id => String(id) !== String(categoryId));
     }
     const requirementFields = computed(() => {
       const fields = requisitos.value.length
@@ -59,10 +71,18 @@ export default {
       }
       loading.value = false;
     }
+    function syncSelectedGame() {
+      if (!selectedGame.value) return;
+      const current = games.value.find(item => String(item.ID) === String(selectedGame.value.ID));
+      if (current) selectedGame.value = { ...selectedGame.value, img_principal: current.img_principal };
+    }
     function clearDetailChanges() {
       imagePreviews.value.forEach(url => URL.revokeObjectURL(url));
       imagePreviews.value = [];
       pendingImageFiles.value = [];
+      imageEditing.value = false;
+      imageUploadLoading.value = false;
+      showImagePreviewModal.value = false;
       requirement.value = { ...requirementOriginal.value };
       requirementsEditing.value = false;
       game.value = emptyGame();
@@ -73,11 +93,20 @@ export default {
     function hasUnsavedChanges() {
       const gameDirty = showGameForm.value && JSON.stringify(game.value) !== JSON.stringify(gameOriginal.value);
       const requirementsDirty = requirementsEditing.value && JSON.stringify(requirement.value) !== JSON.stringify(requirementOriginal.value);
-      return gameDirty || requirementsDirty || pendingImageFiles.value.length > 0;
+      return gameDirty || requirementsDirty || imageEditing.value || pendingImageFiles.value.length > 0;
     }
 
     window.__indiarNavigationDirtyCheck = async function confirmNavigation() {
       if (!hasUnsavedChanges()) return true;
+      if (imageEditing.value && !showGameForm.value && !requirementsEditing.value) {
+        const hasPendingUploads = pendingImageFiles.value.length > 0;
+        const message = hasPendingUploads
+          ? 'Hay imágenes seleccionadas sin subir. ¿Descartarlas y salir del modo de edición? Los cambios ya confirmados se conservarán.'
+          : 'Estás editando imágenes. ¿Salir del modo de edición? Los cambios ya confirmados se conservarán.';
+        const leave = await confirmAction(message, 'Salir de la edición', 'Salir y finalizar', 'warning');
+        if (leave) clearDetailChanges();
+        return leave;
+      }
       const discard = await confirmAction('Hay cambios sin guardar. ¿Descartar los cambios y cambiar de sección?', 'Cambiar de sección', 'Descartar y continuar', 'danger');
       if (discard) clearDetailChanges();
       return discard;
@@ -94,6 +123,27 @@ export default {
       if (placeholder?.classList.contains('admin-image-placeholder')) placeholder.hidden = false;
     }
 
+    async function loadGameImages(gameId) {
+      const requestId = ++galleryRequestId.value;
+      galleryLoading.value = true;
+      imageWarning.value = '';
+      try {
+        const { response, data } = await getJuegoImagenes(gameId);
+        if (!response.ok) throw new Error(data.mensaje || 'No se pudieron cargar las imágenes');
+        if (requestId !== galleryRequestId.value || selectedGame.value?.ID !== gameId) return;
+        gameImages.value = data;
+        galleryLoadedForGame.value = gameId;
+        imageLoading.value = Boolean(data.length);
+      } catch (error) {
+        if (requestId !== galleryRequestId.value || selectedGame.value?.ID !== gameId) return;
+        console.error('No se pudieron cargar las imágenes del juego:', error);
+        gameImages.value = [];
+        imageWarning.value = 'No se pudieron cargar las imágenes del juego.';
+      } finally {
+        if (requestId === galleryRequestId.value) galleryLoading.value = false;
+      }
+    }
+
     async function openGameDetails(item) {
       selectedGame.value = item;
       detailTab.value = 'informacion';
@@ -107,52 +157,164 @@ export default {
       imageWarning.value = '';
       imagePreviews.value = [];
       pendingImageFiles.value = [];
+      imageEditing.value = false;
+      imageUploadLoading.value = false;
+      showImagePreviewModal.value = false;
       selectedImageIndex.value = 0;
-      const { response, data } = await getJuegoImagenes(item.ID);
-      gameImages.value = response.ok ? data : [];
+      imageLoading.value = false;
+      gameImages.value = [];
+      galleryLoadedForGame.value = null;
+      galleryRequestId.value++;
+      galleryLoading.value = false;
       document.body.classList.add('indiar-detail-open');
     }
 
+    function selectGameImage(index) {
+      if (index < 0 || index >= gameImages.value.length || index === selectedImageIndex.value) return;
+      selectedImageIndex.value = index;
+      imageLoading.value = true;
+    }
+
+    function moveGameImage(direction) {
+      if (gameImages.value.length < 2) return;
+      const next = (selectedImageIndex.value + direction + gameImages.value.length) % gameImages.value.length;
+      selectGameImage(next);
+    }
+
+    function onGameImageLoaded() {
+      imageLoading.value = false;
+    }
+
+    function onGameImageFailed() {
+      imageLoading.value = false;
+      imageWarning.value = 'No se pudo cargar esta imagen.';
+    }
+
     function previewImages(event) {
-      setImageFiles(Array.from(event.target.files || []));
+      const files = Array.from(event.target.files || []).filter(file => file.type.startsWith('image/'));
+      event.target.value = '';
+      if (!files.length) {
+        imageWarning.value = 'Seleccioná al menos un archivo de imagen válido.';
+        return;
+      }
+      setImageFiles(files);
     }
 
     function setImageFiles(files) {
+      if (!imageEditing.value) return;
       pendingImageFiles.value = files;
       imagePreviews.value.forEach(url => URL.revokeObjectURL(url));
       imagePreviews.value = files.map(file => URL.createObjectURL(file));
+      showImagePreviewModal.value = files.length > 0;
+      imageWarning.value = '';
     }
 
     function dropImages(event) {
+      if (!imageEditing.value) return;
       const files = Array.from(event.dataTransfer?.files || []).filter(file => file.type.startsWith('image/'));
       setImageFiles(files);
     }
 
-    async function confirmImageUpload() {
-      if (!pendingImageFiles.value.length || !selectedGame.value) return;
-      if (!await confirmAction(`¿Subir ${pendingImageFiles.value.length} imagen${pendingImageFiles.value.length === 1 ? '' : 'es'} al juego?`, 'Confirmar imágenes', 'Subir imágenes')) return;
-      imageWarning.value = '';
-      for (const file of pendingImageFiles.value) {
-        const { response, data } = await uploadJuegoImagen(selectedGame.value.ID, file);
-        if (!response.ok) { imageWarning.value = data.mensaje || 'No se pudo subir una imagen'; return; }
-      }
-      const { response, data } = await getJuegoImagenes(selectedGame.value.ID);
-      gameImages.value = response.ok ? data : [];
+    function discardPendingImageUploads() {
       imagePreviews.value.forEach(url => URL.revokeObjectURL(url));
-      imagePreviews.value = []; pendingImageFiles.value = [];
+      imagePreviews.value = [];
+      pendingImageFiles.value = [];
+      showImagePreviewModal.value = false;
+      imageWarning.value = '';
       const imageInput = document.querySelector('#game-detail-images-input');
       if (imageInput) imageInput.value = '';
-      await load();
+    }
+
+    async function confirmImageUpload() {
+      if (!imageEditing.value || imageUploadLoading.value || !pendingImageFiles.value.length || !selectedGame.value) return;
+      imageUploadLoading.value = true;
+      imageWarning.value = '';
+      let uploadedCount = 0;
+      try {
+        for (const file of pendingImageFiles.value) {
+          const { response, data } = await uploadJuegoImagen(selectedGame.value.ID, file);
+          if (!response.ok) {
+            imageWarning.value = data.mensaje || `No se pudo subir ${file.name}.`;
+            break;
+          }
+          uploadedCount++;
+        }
+        if (uploadedCount) {
+          await loadGameImages(selectedGame.value.ID);
+          selectedImageIndex.value = Math.max(gameImages.value.length - uploadedCount, 0);
+          await load();
+          syncSelectedGame();
+        }
+        if (uploadedCount === pendingImageFiles.value.length) {
+          discardPendingImageUploads();
+        } else if (uploadedCount) {
+          const remainingFiles = pendingImageFiles.value.slice(uploadedCount);
+          const remainingPreviews = imagePreviews.value.slice(uploadedCount);
+          imagePreviews.value.slice(0, uploadedCount).forEach(url => URL.revokeObjectURL(url));
+          pendingImageFiles.value = remainingFiles;
+          imagePreviews.value = remainingPreviews;
+        }
+      } catch (error) {
+        console.error('No se pudieron subir las imágenes del juego:', error);
+        imageWarning.value = 'Ocurrió un error al subir las imágenes. Revisá la conexión e intentá nuevamente.';
+      } finally {
+        imageUploadLoading.value = false;
+      }
     }
 
     async function removeGameImage(image) {
+      if (!imageEditing.value) return;
       if (!await confirmAction('¿Eliminar esta imagen? Esta acción no se puede deshacer.', 'Eliminar imagen', 'Eliminar', 'danger')) return;
+      const removedIndex = gameImages.value.findIndex(item => item.ID === image.ID);
+      const previousIndex = selectedImageIndex.value;
       const { response, data } = await deleteResource('/imagenes', image.ID);
       if (!response.ok) return imageWarning.value = data.mensaje || 'No se pudo eliminar la imagen';
-      const gallery = await getJuegoImagenes(selectedGame.value.ID);
-      gameImages.value = gallery.response.ok ? gallery.data : [];
-      selectedImageIndex.value = Math.min(selectedImageIndex.value, Math.max(gameImages.value.length - 1, 0));
+      await loadGameImages(selectedGame.value.ID);
+      selectedImageIndex.value = Math.min(
+        removedIndex < previousIndex ? previousIndex - 1 : previousIndex,
+        Math.max(gameImages.value.length - 1, 0)
+      );
       await load();
+      syncSelectedGame();
+    }
+
+    async function setPrincipalImage(image) {
+      if (!imageEditing.value || selectedGame.value?.img_principal === image.url) return;
+      try {
+        const { response, data } = await setJuegoImagenPrincipal(image.ID);
+        if (!response.ok) {
+          imageWarning.value = data.mensaje || 'No se pudo actualizar la imagen principal.';
+          return;
+        }
+        selectedGame.value = { ...selectedGame.value, img_principal: data.img_principal };
+        const gameIndex = games.value.findIndex(game => String(game.ID) === String(selectedGame.value.ID));
+        if (gameIndex !== -1) games.value[gameIndex] = { ...games.value[gameIndex], img_principal: data.img_principal };
+        imageWarning.value = '';
+      } catch (error) {
+        console.error('No se pudo actualizar la imagen principal del juego:', error);
+        imageWarning.value = 'Ocurrió un error al actualizar la imagen principal.';
+      }
+    }
+
+    function startImageEditing() {
+      imageEditing.value = true;
+      imageWarning.value = '';
+    }
+
+    async function finishImageEditing() {
+      if (imageUploadLoading.value) {
+        await confirmAction('Esperá a que termine la subida antes de finalizar la edición.', 'Subida en curso', 'Entendido');
+        return false;
+      }
+      if (!imageEditing.value) return true;
+      const hasPendingUploads = pendingImageFiles.value.length > 0;
+      const message = hasPendingUploads
+        ? `Hay ${pendingImageFiles.value.length} imagen${pendingImageFiles.value.length === 1 ? '' : 'es'} pendiente${pendingImageFiles.value.length === 1 ? '' : 's'} sin subir. ¿Descartarlas y finalizar la edición? Los cambios ya confirmados se conservarán.`
+        : '¿Finalizar la edición de imágenes? Los cambios ya confirmados se conservarán.';
+      if (!await confirmAction(message, 'Finalizar edición', 'Finalizar', 'warning')) return false;
+      discardPendingImageUploads();
+      imageEditing.value = false;
+      return true;
     }
 
     function edit(item) {
@@ -266,6 +428,7 @@ export default {
     }
     function editDetailContent() {
       if (detailTab.value === 'requisitos') return editRequirement();
+      if (detailTab.value === 'imagenes') return startImageEditing();
       editSelectedGame();
     }
     async function removeSelectedGame() {
@@ -294,6 +457,10 @@ export default {
 
     async function changeDetailTab(tab) {
       if (tab === detailTab.value) return;
+      if (imageUploadLoading.value) {
+        await confirmAction('Esperá a que termine la subida antes de cambiar de pestaña.', 'Subida en curso', 'Entendido');
+        return;
+      }
       if (requirementsEditing.value) {
         await confirmAction('Guardá o descartá los cambios antes de cambiar de pestaña.', 'Edición en curso', 'Entendido');
         return;
@@ -303,16 +470,27 @@ export default {
         requirement.value = { ...requirementOriginal.value };
         requirementsEditing.value = false;
       }
-      if (pendingImageFiles.value.length && !await confirmAction('Hay imágenes seleccionadas sin subir. ¿Descartar y cambiar de sección?', 'Cambiar de sección', 'Cambiar y descartar', 'danger')) return;
-      imagePreviews.value.forEach(url => URL.revokeObjectURL(url)); imagePreviews.value = []; pendingImageFiles.value = [];
+      if (imageEditing.value && !await finishImageEditing()) return;
+      if (pendingImageFiles.value.length) discardPendingImageUploads();
       detailTab.value = tab;
+      if (tab === 'imagenes' && galleryLoadedForGame.value !== selectedGame.value?.ID) {
+        await loadGameImages(selectedGame.value.ID);
+      }
     }
 
     async function closeGameDetails() {
+      if (imageUploadLoading.value) {
+        await confirmAction('Esperá a que termine la subida antes de cerrar el detalle.', 'Subida en curso', 'Entendido');
+        return;
+      }
       const dirtyRequirements = requirementsEditing.value && JSON.stringify(requirement.value) !== JSON.stringify(requirementOriginal.value);
-      if ((dirtyRequirements || pendingImageFiles.value.length) && !await confirmAction('Hay cambios pendientes. ¿Cerrar y descartarlos?', 'Cerrar detalle', 'Cerrar y descartar', 'danger')) return;
-      imagePreviews.value.forEach(url => URL.revokeObjectURL(url)); imagePreviews.value = []; pendingImageFiles.value = [];
+      if (dirtyRequirements && !await confirmAction('Hay cambios pendientes en los requisitos. ¿Cerrar y descartarlos?', 'Cerrar detalle', 'Cerrar y descartar', 'danger')) return;
+      if (imageEditing.value && !await finishImageEditing()) return;
+      if (pendingImageFiles.value.length) discardPendingImageUploads();
       requirementsEditing.value = false; selectedGame.value = null;
+      galleryRequestId.value++;
+      galleryLoadedForGame.value = null;
+      galleryLoading.value = false;
       document.body.classList.remove('indiar-detail-open');
     }
 
@@ -343,7 +521,7 @@ export default {
     }
 
     load();
-    return { games, filteredGames, paginatedGames, emptyGameRows, totalPages, currentPage, resetPagination, changePage, searchText, statusFilter, categorias, colecciones, requisitos, requirementFields, requirementLabel, game, editingId, showGameForm, gameStep, selectedGame, imageWarning, warning, loading, activeTab, detailTab, requirement, requirementsEditing, editingRequirementId, gameImages, selectedImageIndex, imagePreviews, pendingImageFiles, imageUrl, hideMissingImage, openGameDetails, previewImages, dropImages, confirmImageUpload, removeGameImage, changeDetailTab, closeGameDetails, save, edit, cancel, confirmCancelGame, openNewGame, nextGameStep, previousGameStep, saveImage, remove, editSelectedGame, editDetailContent, removeSelectedGame, editRequirement, cancelRequirement, saveRequirement, removeRequirement, router };
+    return { games, filteredGames, paginatedGames, emptyGameRows, totalPages, currentPage, resetPagination, changePage, searchText, statusFilter, categorias, colecciones, filteredGameCategories, selectedGameCategories, genreSearch, removeGameCategory, requisitos, requirementFields, requirementLabel, game, editingId, showGameForm, gameStep, selectedGame, imageWarning, warning, loading, activeTab, detailTab, requirement, requirementsEditing, editingRequirementId, gameImages, selectedImageIndex, imageLoading, galleryLoading, imageEditing, imageUploadLoading, showImagePreviewModal, imagePreviews, pendingImageFiles, imageUrl, hideMissingImage, openGameDetails, selectGameImage, moveGameImage, onGameImageLoaded, onGameImageFailed, previewImages, dropImages, confirmImageUpload, discardPendingImageUploads, removeGameImage, setPrincipalImage, changeDetailTab, closeGameDetails, save, edit, cancel, confirmCancelGame, openNewGame, nextGameStep, previousGameStep, saveImage, remove, editSelectedGame, editDetailContent, removeSelectedGame, editRequirement, cancelRequirement, saveRequirement, removeRequirement, finishImageEditing, router };
   },
   template: `
     <main class="admin-page"><div class="container-fluid px-3 px-lg-4 py-4 py-lg-5">
@@ -369,9 +547,9 @@ export default {
               <div class="admin-game-field"><label class="form-label" for="game-publisher">Distribuidor <span class="text-danger">*</span></label><input id="game-publisher" class="form-control" placeholder="Ej. Team Cherry" v-model="game.distribuidor" required></div>
               <div class="admin-game-field"><label class="form-label" for="game-dev">Desarrollador <span class="text-danger">*</span></label><input id="game-dev" class="form-control" placeholder="Ej. Team Cherry" v-model="game.desarrollador" required></div>
               <div class="admin-game-field-full"><label class="form-label" for="game-description">Descripción <span class="text-danger">*</span></label><textarea id="game-description" rows="5" class="form-control admin-game-description" placeholder="Escribe una descripción breve del juego" v-model="game.descripcion" required></textarea></div>
-              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Géneros</legend><div class="admin-taxonomy-options"><label v-for="genre in categorias" :key="genre.ID" class="form-check"><input v-model="game.categorias" class="form-check-input" type="checkbox" :value="String(genre.ID)"><span class="form-check-label">{{ genre.nombre }}</span></label></div></fieldset>
-              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Colecciones</legend><div class="admin-taxonomy-options"><label v-for="collection in colecciones" :key="collection.ID" class="form-check"><input v-model="game.colecciones" class="form-check-input" type="checkbox" :value="String(collection.ID)"><span class="form-check-label">{{ collection.nombre }}</span></label></div></fieldset>
-              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Plataformas</legend><div class="d-flex flex-wrap gap-3"><label v-for="platform in ['Windows', 'Linux', 'macOS', 'Android', 'iOS']" :key="platform" class="form-check"><input v-model="game.plataformas" class="form-check-input" type="checkbox" :value="platform"><span class="form-check-label">{{ platform }}</span></label></div></fieldset>
+              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Géneros <span class="badge text-bg-primary ms-1">{{ selectedGameCategories.length }} seleccionados</span></legend><label class="visually-hidden" for="game-genre-search">Buscar géneros</label><input id="game-genre-search" v-model="genreSearch" type="search" class="form-control mb-2" placeholder="Buscar género por nombre"><div v-if="selectedGameCategories.length" class="admin-selected-taxonomies mb-2" aria-label="Géneros seleccionados"><button v-for="genre in selectedGameCategories" :key="genre.ID" class="admin-selected-taxonomy" type="button" :aria-label="'Quitar género ' + genre.nombre" @click="removeGameCategory(genre.ID)">{{ genre.nombre }}<i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div><div class="admin-taxonomy-options admin-game-taxonomy-list"><label v-for="genre in filteredGameCategories" :key="genre.ID" class="admin-game-taxonomy-option" :class="{ 'is-selected': game.categorias.includes(String(genre.ID)) }"><input v-model="game.categorias" class="form-check-input" type="checkbox" :value="String(genre.ID)"><span class="form-check-label">{{ genre.nombre }}</span></label><p v-if="!filteredGameCategories.length" class="small text-secondary mb-0">No hay géneros que coincidan con la búsqueda.</p></div></fieldset>
+              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Colecciones <span class="badge text-bg-primary ms-1">{{ game.colecciones.length }} seleccionadas</span></legend><div class="admin-taxonomy-options"><label v-for="collection in colecciones" :key="collection.ID" class="admin-game-taxonomy-option" :class="{ 'is-selected': game.colecciones.includes(String(collection.ID)) }"><input v-model="game.colecciones" class="form-check-input" type="checkbox" :value="String(collection.ID)"><span class="form-check-label">{{ collection.nombre }}</span></label></div></fieldset>
+              <fieldset class="admin-game-field-full border-0 p-0"><legend class="form-label">Plataformas <span class="badge text-bg-primary ms-1">{{ game.plataformas.length }} seleccionadas</span></legend><div class="admin-platform-options"><label v-for="platform in ['Windows', 'Linux', 'macOS', 'Android', 'iOS']" :key="platform" class="admin-platform-option" :class="{ 'is-selected': game.plataformas.includes(platform) }"><input v-model="game.plataformas" class="form-check-input" type="checkbox" :value="platform"><span>{{ platform }}</span></label></div></fieldset>
               <div class="admin-game-field-full"><label class="form-label" for="game-languages">Idiomas disponibles</label><input id="game-languages" class="form-control" v-model="game.idiomas" placeholder="Español, Inglés, Portugués">
                 <div class="form-text">Separá los idiomas con comas. Se mostrarán en la página del juego.</div>
               </div>
@@ -400,20 +578,21 @@ export default {
         </div>
         <div class="admin-games-table-card card border-0">
           <div class="table-responsive">
-            <table class="table admin-games-table align-middle mb-0">
-              <thead><tr><th>Juego</th><th>Precio</th><th>Géneros</th><th>Colecciones</th><th>Estado</th><th class="text-end">Acciones</th></tr></thead>
+            <table class="table admin-games-table align-middle mb-0" :class="{ 'admin-games-table-all-statuses': statusFilter === 'todos' }">
+              <colgroup><col class="admin-games-column-game"><col class="admin-games-column-price"><col class="admin-games-column-categories"><col class="admin-games-column-collections"><col v-if="statusFilter === 'todos'" class="admin-games-column-status"><col class="admin-games-column-actions"></colgroup>
+              <thead><tr><th>Juego</th><th>Precio</th><th>Géneros</th><th>Colecciones</th><th v-if="statusFilter === 'todos'">Estado</th><th class="text-end">Acciones</th></tr></thead>
               <tbody>
-                <tr v-if="loading"><td colspan="6" class="text-center py-5">Cargando juegos...</td></tr>
+                <tr v-if="loading"><td :colspan="statusFilter === 'todos' ? 6 : 5" class="text-center py-5">Cargando juegos...</td></tr>
                 <tr v-for="item in paginatedGames" :key="item.ID">
-                  <td><strong class="admin-game-name">{{ item.titulo }}</strong><div class="small text-secondary mt-1">{{ item.desarrollador }}</div></td>
-                  <td class="admin-game-price"><template v-if="item.oferta_activa"><span class="text-decoration-line-through text-secondary small">\${{ Number(item.precio).toFixed(2) }}</span><br><strong class="text-danger">\${{ Number(item.precio_final).toFixed(2) }}</strong></template><template v-else>\${{ Number(item.precio).toFixed(2) }}</template></td>
-                  <td><span v-for="cat in item.categorias" :key="cat.ID" class="badge admin-filter-badge me-1 mb-1">{{ cat.nombre }}</span></td>
-                  <td><span v-for="col in item.colecciones" :key="col.ID" class="badge admin-collection-badge me-1 mb-1">{{ col.nombre }}</span></td>
-                  <td><span class="badge" :class="item.activo === false ? 'text-bg-secondary' : 'text-bg-success'">{{ item.activo === false ? 'Desactivado' : 'Activo' }}</span></td>
-                  <td class="text-end text-nowrap"><button class="btn btn-sm btn-outline-primary" type="button" @click="openGameDetails(item)"><i class="fa-solid fa-eye me-1" aria-hidden="true"></i>Ver</button></td>
+                  <td class="admin-games-cell-game"><strong class="admin-game-name">{{ item.titulo }}</strong><div class="admin-game-developer small text-secondary mt-1">{{ item.desarrollador }}</div></td>
+                  <td class="admin-games-cell-price admin-game-price"><template v-if="item.oferta_activa"><span class="text-decoration-line-through text-secondary small">\${{ Number(item.precio).toFixed(2) }}</span><br><strong class="text-danger">\${{ Number(item.precio_final).toFixed(2) }}</strong></template><template v-else>\${{ Number(item.precio).toFixed(2) }}</template></td>
+                  <td class="admin-games-cell-categories"><span class="admin-games-cell-label">Géneros</span><div class="admin-games-table-tags"><span v-for="cat in item.categorias" :key="cat.ID" class="badge admin-filter-badge me-1 mb-1">{{ cat.nombre }}</span><span v-if="!item.categorias?.length" class="text-secondary small">Sin géneros</span></div></td>
+                  <td class="admin-games-cell-collections"><span class="admin-games-cell-label">Colecciones</span><div class="admin-games-table-tags"><span v-for="col in item.colecciones" :key="col.ID" class="badge admin-collection-badge me-1 mb-1">{{ col.nombre }}</span><span v-if="!item.colecciones?.length" class="text-secondary small">Sin colecciones</span></div></td>
+                  <td v-if="statusFilter === 'todos'" class="admin-games-cell-status"><span class="badge" :class="item.activo === false ? 'text-bg-secondary' : 'text-bg-success'">{{ item.activo === false ? 'Desactivado' : 'Activo' }}</span></td>
+                  <td class="admin-games-cell-actions text-end text-nowrap"><button class="btn btn-sm btn-outline-primary" type="button" @click="openGameDetails(item)"><i class="fa-solid fa-eye me-1" aria-hidden="true"></i>Ver</button></td>
                 </tr>
-                <tr v-if="!loading && !filteredGames.length"><td colspan="6" class="text-center text-secondary py-5">No hay juegos que coincidan con los filtros.</td></tr>
-                <template v-if="!loading && filteredGames.length"><tr v-for="row in emptyGameRows" :key="'empty-game-'+row" class="admin-table-empty-row" aria-hidden="true"><td colspan="6"></td></tr></template>
+                <tr v-if="!loading && !filteredGames.length"><td :colspan="statusFilter === 'todos' ? 6 : 5" class="text-center text-secondary py-5">No hay juegos que coincidan con los filtros.</td></tr>
+                <template v-if="!loading && filteredGames.length"><tr v-for="row in emptyGameRows" :key="'empty-game-'+row" class="admin-table-empty-row" aria-hidden="true"><td :colspan="statusFilter === 'todos' ? 6 : 5"></td></tr></template>
               </tbody>
             </table>
           </div>
@@ -451,28 +630,65 @@ export default {
             <div class="admin-game-field-full"><span>Descripción</span><p class="mb-0">{{ selectedGame.descripcion }}</p></div>
           </section>
           <section v-if="detailTab === 'imagenes'">
-            <div v-if="gameImages.length" class="admin-game-gallery mb-4">
-              <img :src="imageUrl(gameImages[selectedImageIndex]?.url)" class="admin-game-gallery-main" :alt="selectedGame.titulo">
-              <div class="admin-game-gallery-thumbnails">
-                <button v-for="(image, index) in gameImages" :key="image.ID" type="button" :class="{ active: selectedImageIndex === index }" @click="selectedImageIndex = index">
-                  <img :src="imageUrl(image.url)" :alt="'Miniatura ' + (index + 1)">
-                </button>
+            <div v-if="imageWarning && !showImagePreviewModal" class="alert alert-danger py-2" role="alert">{{ imageWarning }}</div>
+            <div v-if="galleryLoading" class="admin-game-gallery-skeleton mb-4" role="status" aria-label="Cargando imágenes del juego">
+              <span class="admin-game-gallery-skeleton-main"></span><span class="admin-game-gallery-skeleton-thumbnails"><i v-for="row in 4" :key="row"></i></span>
+            </div>
+            <div v-else-if="gameImages.length" class="admin-game-gallery mb-4">
+              <div class="admin-game-gallery-stage">
+                <span v-if="imageLoading" class="admin-game-image-skeleton" aria-hidden="true"></span>
+                <img :src="imageUrl(gameImages[selectedImageIndex]?.url)" class="admin-game-gallery-main" :class="{ 'is-loading': imageLoading }" :alt="selectedGame.titulo" decoding="async" fetchpriority="high" @load="onGameImageLoaded" @error="onGameImageFailed">
+                <template v-if="gameImages.length > 1">
+                  <button type="button" class="admin-game-gallery-control admin-game-gallery-control-prev" aria-label="Imagen anterior" @click="moveGameImage(-1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                  <button type="button" class="admin-game-gallery-control admin-game-gallery-control-next" aria-label="Imagen siguiente" @click="moveGameImage(1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                  <span class="admin-game-gallery-counter">{{ selectedImageIndex + 1 }} / {{ gameImages.length }}</span>
+                </template>
               </div>
-              <button v-if="gameImages[selectedImageIndex]" type="button" class="btn btn-outline-danger btn-sm mt-3" @click="removeGameImage(gameImages[selectedImageIndex])">Eliminar imagen seleccionada</button>
+              <div class="admin-game-gallery-thumbnails">
+                <div v-for="(image, index) in gameImages" :key="image.ID" class="admin-game-gallery-thumbnail" :class="{ active: selectedImageIndex === index }">
+                  <button type="button" :aria-label="'Mostrar imagen ' + (index + 1)" @click="selectGameImage(index)"><img :src="imageUrl(image.url)" :alt="'Miniatura ' + (index + 1)" loading="lazy" decoding="async"></button>
+                  <button v-if="imageEditing" type="button" class="admin-game-gallery-thumbnail-primary" :class="{ active: selectedGame.img_principal === image.url }" :disabled="selectedGame.img_principal === image.url" :aria-label="selectedGame.img_principal === image.url ? 'Imagen principal' : 'Usar imagen ' + (index + 1) + ' como principal'" :aria-pressed="selectedGame.img_principal === image.url" :title="selectedGame.img_principal === image.url ? 'Imagen principal' : 'Usar como principal'" @click.stop="setPrincipalImage(image)"><i class="fa-solid fa-star" aria-hidden="true"></i></button>
+                  <button v-if="imageEditing" type="button" class="admin-game-gallery-thumbnail-delete" :aria-label="'Eliminar imagen ' + (index + 1)" @click="removeGameImage(image)"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+                </div>
+              </div>
             </div>
             <div v-else class="admin-empty-gallery mb-4">Este juego todavía no tiene imágenes.</div>
-            <label class="admin-image-dropzone" for="game-detail-images-input" @dragover.prevent @drop.prevent="dropImages">
-              <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
-              <strong>Arrastrá imágenes aquí</strong>
-              <span>o hacé clic para seleccionar archivos</span>
-              <input id="game-detail-images-input" class="visually-hidden" type="file" accept="image/*" multiple @change="previewImages">
-            </label>
-            <div class="form-text">Las imágenes se convierten y comprimen automáticamente a WebP.</div>
-            <div v-if="imagePreviews.length" class="admin-image-previews mt-3">
-              <figure v-for="(preview, index) in imagePreviews" :key="preview"><img :src="preview" :alt="'Vista previa ' + (index + 1)"></figure>
-              <div class="w-100"><button type="button" class="btn btn-primary" @click="confirmImageUpload">Confirmar subida</button></div>
+            <template v-if="imageEditing">
+              <label class="admin-image-dropzone" for="game-detail-images-input" @dragover.prevent @drop.prevent="dropImages">
+                <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+                <strong>Arrastrá imágenes aquí</strong>
+                <span>o hacé clic para seleccionar archivos</span>
+                <input id="game-detail-images-input" class="visually-hidden" type="file" accept="image/*" multiple @change="previewImages">
+              </label>
+              <div class="form-text">Las imágenes se convierten y comprimen automáticamente a WebP.</div>
+            </template>
+            <p v-else class="small text-secondary mb-0">Seleccioná Editar para agregar o eliminar imágenes.</p>
+            <Teleport to="body">
+            <div v-if="showImagePreviewModal" class="admin-image-preview-backdrop" role="presentation" @click.self="discardPendingImageUploads">
+              <section class="admin-image-preview-modal card border-0 shadow-lg" role="dialog" aria-modal="true" aria-labelledby="admin-image-preview-title">
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                    <div><span class="text-secondary small">Vista previa de subida</span><h3 id="admin-image-preview-title" class="h5 mb-0">Confirmá las imágenes</h3></div>
+                    <button type="button" class="btn-close" aria-label="Cancelar vista previa" :disabled="imageUploadLoading" @click="discardPendingImageUploads"></button>
+                  </div>
+                  <div class="admin-image-preview-grid">
+                    <figure v-for="(preview, index) in imagePreviews" :key="preview">
+                      <img :src="preview" :alt="'Vista previa de ' + pendingImageFiles[index]?.name">
+                      <figcaption class="small text-secondary text-truncate">{{ pendingImageFiles[index]?.name }}</figcaption>
+                    </figure>
+                  </div>
+                  <div v-if="imageWarning" class="alert alert-danger mt-3 mb-0 py-2" role="alert">{{ imageWarning }}</div>
+                  <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button type="button" class="btn btn-outline-secondary" :disabled="imageUploadLoading" @click="discardPendingImageUploads">Cancelar</button>
+                    <button type="button" class="btn btn-primary" :disabled="imageUploadLoading || !pendingImageFiles.length" @click="confirmImageUpload">
+                      <span v-if="imageUploadLoading" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                      {{ imageUploadLoading ? 'Subiendo…' : 'Confirmar subida' }}
+                    </button>
+                  </div>
+                </div>
+              </section>
             </div>
-            <div v-if="imageWarning" class="alert alert-danger mt-3 mb-0 py-2">{{ imageWarning }}</div>
+            </Teleport>
           </section>
           <section v-if="detailTab === 'requisitos'">
             <form v-if="requirementFields.length" id="requirements-detail-form" @submit.prevent="saveRequirement" class="row g-3">
@@ -483,7 +699,7 @@ export default {
               <div v-if="warning" class="col-12"><div class="alert alert-danger mb-0 py-2">{{ warning }}</div></div>
             </form>
           </section>
-          <div class="admin-game-detail-actions mt-4"><button v-if="!requirementsEditing" type="button" class="btn btn-outline-primary" @click="editDetailContent">Editar</button><button v-if="requirementsEditing && detailTab === 'requisitos'" type="submit" class="btn btn-primary" form="requirements-detail-form">Guardar requisitos</button><button v-if="requirementsEditing && detailTab === 'requisitos'" type="button" class="btn btn-outline-secondary" @click="cancelRequirement">Descartar</button><button type="button" class="btn" :class="selectedGame.activo === false ? 'btn-outline-success' : 'btn-outline-danger'" @click="removeSelectedGame">{{ selectedGame.activo === false ? 'Activar' : 'Dar de baja' }}</button><button type="button" class="btn btn-secondary" @click="closeGameDetails">Cerrar</button></div>
+          <div class="admin-game-detail-actions mt-4"><button v-if="detailTab !== 'imagenes' && !requirementsEditing" type="button" class="btn btn-outline-primary" @click="editDetailContent">Editar</button><button v-if="detailTab === 'imagenes' && !imageEditing" type="button" class="btn btn-outline-primary" @click="editDetailContent">Editar</button><button v-if="imageEditing" type="button" class="btn btn-primary" @click="finishImageEditing">Finalizar edición</button><button v-if="requirementsEditing && detailTab === 'requisitos'" type="submit" class="btn btn-primary" form="requirements-detail-form">Guardar requisitos</button><button v-if="requirementsEditing && detailTab === 'requisitos'" type="button" class="btn btn-outline-secondary" @click="cancelRequirement">Descartar</button><button type="button" class="btn" :class="selectedGame.activo === false ? 'btn-outline-success' : 'btn-outline-danger'" @click="removeSelectedGame">{{ selectedGame.activo === false ? 'Activar' : 'Dar de baja' }}</button><button type="button" class="btn btn-secondary" @click="closeGameDetails">Cerrar</button></div>
         </div>
       </section>
       </div>

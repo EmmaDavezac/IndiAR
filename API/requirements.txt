@@ -6,3 +6,4 @@ Flask-RESTX
 sqlalchemy
 Flask-sqlalchemy
 Pillow
+requests
