@@ -3,7 +3,7 @@ import router from '../router.js';
 import { getJuegos, getLandingConfig } from '../services/api.js?v=20261102d';
 import { addToCart, isInCart } from '../services/cart.js';
 import { showToast } from '../services/confirm.js';
-import LandingContent from '../components/LandingContent.js?v=20261103b';
+import LandingContent from '../components/LandingContent.js?v=20261104d';
 
 export default {
   name: 'Home',

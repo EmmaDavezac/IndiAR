@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from '../assets/js/lib/vue-router-esm.js';
 
-import Home from './views/Home.js?v=20261103a';
+import Home from './views/Home.js?v=20261104d';
 import Login from './views/Login.js';
 import Register from './views/Register.js';
 import Admin from './views/Admin.js';
@@ -10,12 +10,14 @@ import Account from './views/Account.js';
 import AdminGames from './views/AdminGames.js?v=20261102e';
 import AdminCatalog from './views/AdminCatalog.js?v=20261101t';
 import AdminUsers from './views/AdminUsers.js';
+import Store from './views/Store.js?v=20261104d';
 import AdminLanding from './views/AdminLanding.js?v=20261103c';
 import GameDetail from './views/GameDetail.js?v=20261103a';
 import Cart from './views/Cart.js?v=20261103a';
 
 const routes = [
   { path: '/', component: Home },
+  { path: '/tienda', name: 'Store', component: Store },
   { path: '/login', component: Login },
   { path: '/registro', component: Register },
   { path: '/mi-cuenta', component: Account, meta: { requiresAuth: true } },

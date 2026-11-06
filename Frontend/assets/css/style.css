@@ -245,46 +245,127 @@ body {
 }
 
 .home-carousel .carousel-caption {
-  bottom: 42%;
+  position: absolute;
+  bottom: clamp(1.75rem, 5vw, 3.5rem) !important;
+  top: auto !important;
+  left: clamp(1.25rem, 6vw, 4.5rem) !important;
+  right: auto !important;
+  transform: none !important;
+  text-align: left !important;
+  max-width: min(90%, 580px);
+  padding: 0 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   color: #fff !important;
+  z-index: 2;
 }
 
-.home-carousel .carousel-caption h2,
-.home-carousel .carousel-caption p,
+.home-carousel .carousel-caption h2 {
+  font-size: clamp(1.4rem, 2.8vw, 2.3rem);
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+  line-height: 1.2;
+}
+
+.home-carousel .carousel-caption .home-slide-description,
+.home-carousel .carousel-caption p {
+  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+  line-height: 1.4;
+  margin-bottom: 0.85rem;
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 .home-carousel .carousel-caption strong,
 .home-carousel .carousel-caption .home-slide-price,
 .home-carousel .carousel-caption .home-slide-original-price {
   color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95);
 }
 
 .home-carousel .carousel-caption .btn-light {
-  border: 1px solid #fff;
-  background: transparent;
+  font-weight: 600;
+  padding: 0.45rem 1.4rem;
+  border-radius: 2rem;
+  border: 1.5px solid #fff;
+  background: rgba(255, 255, 255, 0.2);
   color: #fff;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
 }
 
 .home-carousel .carousel-caption .btn-light:hover,
 .home-carousel .carousel-caption .btn-light:focus-visible {
   border-color: #fff;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Controles carrusel principal: siempre flechas blancas en circulo negro */
+.home-carousel .carousel-control-prev,
+.home-carousel .carousel-control-next {
+  position: absolute !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  z-index: 5 !important;
+  opacity: 0.95 !important;
+  filter: none !important;
+  --bs-carousel-control-icon-filter: none !important;
+  background: #000 !important;
+  color: #fff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.15rem !important;
+  transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease !important;
+  cursor: pointer;
+}
+
+.home-carousel .carousel-control-prev {
+  left: 1.5rem !important;
+  right: auto !important;
+}
+
+.home-carousel .carousel-control-next {
+  right: 1.5rem !important;
+  left: auto !important;
+}
+
+.home-carousel .carousel-control-prev i,
+.home-carousel .carousel-control-next i {
+  color: #fff !important;
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+  display: block;
 }
 
 .home-carousel .carousel-control-prev-icon,
 .home-carousel .carousel-control-next-icon {
-  filter: brightness(0) !important;
-  -webkit-filter: invert(1) !important;
-}
-
-.home-carousel .carousel-control-prev,
-.home-carousel .carousel-control-next {
-  opacity: 1 !important;
-  background: transparent !important;
-  background-image: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: 3rem;
-  height: 3rem;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  filter: brightness(0) invert(1) !important;
+  -webkit-filter: brightness(0) invert(1) !important;
 }
 
 .home-carousel .carousel-control-prev:hover,
@@ -292,7 +373,10 @@ body {
 .home-carousel .carousel-control-next:hover,
 .home-carousel .carousel-control-next:focus-visible {
   opacity: 1 !important;
-  background: transparent !important;
+  background: #222 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  transform: translateY(-50%) scale(1.08) !important;
 }
 
 .home-carousel .carousel-indicators [data-bs-target] {
@@ -329,16 +413,7 @@ body {
   pointer-events: none;
 }
 
-.home-slide-game .carousel-caption {
-  z-index: 1;
-}
 
-.home-slide-game .carousel-caption {
-  right: 12%;
-  bottom: clamp(1.5rem, 8%, 4rem);
-  left: 12%;
-  text-align: left;
-}
 
 .home-slide-description {
   max-width: 48rem;
@@ -836,7 +911,7 @@ body {
   flex: 0 0 calc((100% - 4.5rem) / 4);
   min-width: 0;
   scroll-snap-align: start;
-  height: 420px;
+  height: 360px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -844,9 +919,11 @@ body {
 
 .game-card-cover-media {
   position: relative;
-  aspect-ratio: 1;
+  width: 100%;
+  height: 190px;
   overflow: hidden;
   background: var(--bs-tertiary-bg);
+  flex-shrink: 0;
 }
 
 .game-card-cover-media .game-card-cover-image {
@@ -857,26 +934,57 @@ body {
 }
 
 .game-card .card-body {
-  padding: 0.6rem 0.75rem !important;
+  padding: 0.5rem 0.65rem !important;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .game-card .card-title {
   display: -webkit-box;
-  min-height: 2.2em;
+  min-height: 0 !important;
+  max-height: 2.3em;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  line-height: 1.3;
-  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  line-height: 1.15 !important;
+  margin-bottom: 0.1rem !important;
+}
+
+.game-card .card-title a {
+  line-height: 1.15 !important;
 }
 
 .game-card-description {
   display: -webkit-box;
-  min-height: 2.6em;
+  min-height: 0 !important;
+  max-height: 2.5em;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  margin-top: 0.2rem;
+  -webkit-line-clamp: 2;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  margin-top: 0 !important;
+  margin-bottom: 0.25rem;
+}
+
+.game-card .mt-auto > div:first-child {
+  margin-bottom: 0.35rem !important;
+}
+
+.game-card .small.text-secondary {
+  font-size: 0.75rem !important;
+}
+
+.game-card .game-price {
+  font-size: 0.95rem !important;
+  line-height: 1.1 !important;
+}
+
+.game-card .btn {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.8rem !important;
 }
 
 .game-card-image-skeleton {
@@ -962,40 +1070,56 @@ body {
 .home-card-skeleton-copy i:nth-child(3) { width: 55%; }
 
 .home-cards-side-control {
-  width: auto;
-  height: auto;
-  min-width: 2rem;
-  min-height: 2rem;
-  padding: 0.25rem;
-  border: none;
-  background: transparent;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000;
+  width: auto !important;
+  height: auto !important;
+  min-width: 2rem !important;
+  min-height: 2rem !important;
+  padding: 0.25rem !important;
+  font-size: 1.25rem !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
 }
 
 .home-cards-side-control:hover {
-  background: transparent;
-  color: #000;
-  opacity: 0.8;
+  background: transparent !important;
+  opacity: 0.7 !important;
+  transform: scale(1.1);
 }
 
-/* Light mode: flechas negras */
+/* Light mode: flechas negras sin circulo */
 [data-bs-theme="light"] .home-cards-side-control {
-  color: #000;
+  background: transparent !important;
+  color: #000 !important;
 }
 
-/* Dark mode: flechas blancas */
+[data-bs-theme="light"] .home-cards-side-control:hover {
+  background: transparent !important;
+  color: #000 !important;
+}
+
+/* Dark mode: flechas blancas sin circulo */
 [data-bs-theme="dark"] .home-cards-side-control {
-  color: #fff;
+  background: transparent !important;
+  color: #fff !important;
+}
+
+[data-bs-theme="dark"] .home-cards-side-control:hover {
+  background: transparent !important;
+  color: #fff !important;
 }
 
 .home-cards-side-control.is-hidden,
 .home-cards-side-control:disabled {
-  visibility: hidden;
-  pointer-events: none;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
 .game-price-free {
@@ -1083,12 +1207,105 @@ body {
     gap: 0.5rem;
   }
 
+  /* Carrusel principal mobile: sin barras negras arriba ni abajo */
+  .home-carousel .carousel-item {
+    height: clamp(190px, 56.25vw, 250px) !important;
+  }
+
+  .home-slide-game {
+    background: transparent !important;
+  }
+
+  .home-slide-image {
+    object-fit: cover !important;
+  }
+
+  .home-carousel-skeleton {
+    height: clamp(190px, 56.25vw, 250px) !important;
+  }
+
+  .home-carousel .carousel-caption {
+    bottom: 0.75rem !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    max-width: 100% !important;
+  }
+
+  .home-carousel .carousel-caption h2 {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .home-carousel .carousel-caption .home-slide-description,
+  .home-carousel .carousel-caption p {
+    font-size: 0.75rem !important;
+    margin-bottom: 0.45rem !important;
+    -webkit-line-clamp: 1 !important;
+  }
+
+  .home-carousel .carousel-caption .btn-light {
+    padding: 0.25rem 0.85rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Carrusel principal mobile: controles de flechas blancas en circulo negro */
+  .home-carousel .carousel-control-prev,
+  .home-carousel .carousel-control-next {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    filter: none !important;
+    --bs-carousel-control-icon-filter: none !important;
+    background: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    color: #fff !important;
+    opacity: 0.95 !important;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 0.85rem !important;
+  }
+
+  .home-carousel .carousel-control-prev {
+    left: 0.5rem !important;
+    right: auto !important;
+  }
+
+  .home-carousel .carousel-control-next {
+    right: 0.5rem !important;
+    left: auto !important;
+  }
+
+  .home-carousel .carousel-control-prev i,
+  .home-carousel .carousel-control-next i {
+    color: #fff !important;
+    font-size: 0.85rem !important;
+    line-height: 1 !important;
+    display: block;
+  }
+
+  /* Cards mobile: altura adaptativa y botones siempre visibles */
   .home-cards-item {
     flex-basis: calc((100% - 0.5rem) / 2);
-    height: 300px;
+    height: 310px !important;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+
+  .game-card-cover-media {
+    height: 125px !important;
+  }
+
+  .game-card .card-body {
+    padding: 0.35rem 0.45rem !important;
+  }
+
+  .game-card .btn {
+    padding: 0.2rem 0.4rem !important;
+    font-size: 0.75rem !important;
   }
 
   .home-card-skeleton {
@@ -1096,21 +1313,12 @@ body {
   }
 
   .home-cards-side-control {
-    min-width: 1.75rem;
-    min-height: 2.25rem;
-    font-size: 0.75rem;
-  }
-
-  /* Carrusel principal mobile: quitar barras negras de los controles */
-  .home-carousel .carousel-control-prev,
-  .home-carousel .carousel-control-next {
+    width: auto !important;
+    height: auto !important;
+    min-width: 1.5rem !important;
+    min-height: 1.5rem !important;
+    font-size: 1rem !important;
     background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: #fff !important;
-    opacity: 1 !important;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
   }
 
   /* Flechas de sección mobile: ocultar izquierda al inicio */
@@ -3495,4 +3703,39 @@ body.checkout-open { overflow: hidden; }
 .cart-total strong.game-price-free,
 .cart-checkout-total strong.game-price-free {
   color: var(--bs-success, #198754);
+}
+
+/* Skeleton de tarjetas de juego en tienda */
+.skeleton-game {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--bs-tertiary-bg);
+  overflow: hidden;
+}
+.skeleton-img {
+  width: 100%;
+  aspect-ratio: 1;
+  display: block;
+  background: linear-gradient(90deg, var(--bs-secondary-bg) 25%, var(--bs-body-bg) 50%, var(--bs-secondary-bg) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+.skeleton-text {
+  height: 0.85rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(90deg, var(--bs-secondary-bg) 25%, var(--bs-body-bg) 50%, var(--bs-secondary-bg) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+.skeleton-btn {
+  height: 2.6rem;
+  border-radius: 0.375rem;
+  background: linear-gradient(90deg, var(--bs-secondary-bg) 25%, var(--bs-body-bg) 50%, var(--bs-secondary-bg) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+@keyframes skeleton-pulse { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-img,
+  .skeleton-text,
+  .skeleton-btn { animation: none; }
 }

@@ -143,8 +143,8 @@ export default {
     function updateCardsPosition(id) {
       const track = sectionTracks.get(id);
       if (!track) return;
-      const atStart = track.scrollLeft <= 1;
-      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+      const atStart = track.scrollLeft <= 16;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 16;
       const currentState = sectionScrollStates.value[id];
       if (currentState?.atStart === atStart && currentState?.atEnd === atEnd) return;
       sectionScrollStates.value = {
@@ -155,8 +155,16 @@ export default {
     function updateAllCardPositions() {
       sectionTracks.forEach((track, id) => updateCardsPosition(id));
     }
-    const cardsAtStart = computed(() => (id) => sectionScrollStates.value[id]?.atStart ?? true);
-    const cardsAtEnd = computed(() => (id) => sectionScrollStates.value[id]?.atEnd ?? false);
+    function cardsAtStart(id) {
+      const track = sectionTracks.get(id);
+      if (track && track.scrollLeft <= 16) return true;
+      return sectionScrollStates.value[id]?.atStart ?? true;
+    }
+    function cardsAtEnd(id) {
+      const track = sectionTracks.get(id);
+      if (track && track.scrollLeft + track.clientWidth >= track.scrollWidth - 16) return true;
+      return sectionScrollStates.value[id]?.atEnd ?? false;
+    }
     function scrollCards(id, direction) {
       const track = sectionTracks.get(id);
       if (!track) return;
@@ -210,8 +218,8 @@ export default {
               <img v-if="slide.game?.img_principal && !imageFailed(imageKey('hero', slide.game))" class="home-slide-image" :src="imageUrl(slide.game)" :alt="slide.game.titulo" :loading="index === 0 ? 'eager' : 'lazy'" :fetchpriority="index === 0 ? 'high' : 'auto'" decoding="async" @load="setImageState(imageKey('hero', slide.game), 'loaded')" @error="setImageState(imageKey('hero', slide.game), 'failed')">
               <div class="carousel-caption">
                 <template v-if="slide.game">
-                  <h2>Juegos destacados</h2>
-                  <p class="home-slide-description">Descubrí juegos independientes de Argentina.</p>
+                  <h2>{{ slide.game.titulo }}</h2>
+                  <p class="home-slide-description">{{ slide.game.descripcion || 'Descubrí juegos independientes de Argentina.' }}</p>
                   <button v-if="interactive" class="btn btn-light" type="button" @click="$emit('open-game', slide.game)">Ver juego</button>
                   <span v-else class="btn btn-light">Ver juego</span>
                 </template>
@@ -221,8 +229,8 @@ export default {
               </div>
             </div>
           </div>
-          <button v-if="carouselSlides.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#' + carouselId" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Anterior</span></button>
-          <button v-if="carouselSlides.length > 1" class="carousel-control-next" type="button" :data-bs-target="'#' + carouselId" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Siguiente</span></button>
+          <button v-if="carouselSlides.length > 1" class="carousel-control-prev" type="button" :data-bs-target="'#' + carouselId" data-bs-slide="prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i><span class="visually-hidden">Anterior</span></button>
+          <button v-if="carouselSlides.length > 1" class="carousel-control-next" type="button" :data-bs-target="'#' + carouselId" data-bs-slide="next" aria-label="Siguiente"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span class="visually-hidden">Siguiente</span></button>
         </div>
       </section>
       <div class="container-fluid home-content py-4">
@@ -244,7 +252,7 @@ export default {
             </div>
           </div>
           <div v-else-if="sectionGames(section).length" class="home-cards-carousel">
-            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtStart.value(section.id) }" type="button" :disabled="cardsAtStart.value(section.id)" :aria-label="'Ver tarjetas anteriores de ' + section.title" @click="scrollCards(section.id, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtStart(section.id) }" type="button" :disabled="cardsAtStart(section.id)" :aria-label="'Ver tarjetas anteriores de ' + section.title" @click="scrollCards(section.id, -1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
             <div :ref="track => setSectionTrack(section.id, track)" class="home-cards-track" role="region" :aria-label="section.title" tabindex="0" @scroll.passive="updateCardsPosition(section.id)">
               <div class="home-cards-item" v-for="game in sectionGames(section)" :key="game.ID">
                 <article class="card h-100 shadow-sm game-card" :role="interactive ? 'link' : undefined" :tabindex="interactive ? 0 : undefined" @click="interactive && $emit('open-game', game)" @keydown.enter.prevent="interactive && $emit('open-game', game)" @keydown.space.prevent="interactive && $emit('open-game', game)">
@@ -257,7 +265,7 @@ export default {
                 </article>
               </div>
             </div>
-            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtEnd.value(section.id) }" type="button" :disabled="cardsAtEnd.value(section.id)" :aria-label="'Ver más tarjetas de ' + section.title" @click="scrollCards(section.id, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <button v-if="sectionGames(section).length > 1" class="home-cards-side-control btn btn-outline-secondary" :class="{ 'is-hidden': cardsAtEnd(section.id) }" type="button" :disabled="cardsAtEnd(section.id)" :aria-label="'Ver más tarjetas de ' + section.title" @click="scrollCards(section.id, 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
           </div>
           <div v-else class="alert alert-info">No hay juegos activos que coincidan con esta selección.</div>
         </section>

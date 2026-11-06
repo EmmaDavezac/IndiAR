@@ -1,7 +1,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from '../../assets/js/lib/vue-esm.js';
 import { API_BASE, getCategorias, getColecciones, getJuegos, getLandingConfig, saveLandingConfig } from '../services/api.js?v=20261102d';
 import { confirmAction, showToast } from '../services/confirm.js';
-import LandingContent from '../components/LandingContent.js?v=20261103b';
+import LandingContent from '../components/LandingContent.js?v=20261104d';
 import LandingPreviewNavbar from '../components/LandingPreviewNavbar.js?v=20261103a';
 
 const STORAGE_KEY = 'indiAR_landing_config';
