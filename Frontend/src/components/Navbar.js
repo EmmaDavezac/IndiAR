@@ -12,7 +12,9 @@ export default {
     const isLoggedIn = ref(!!token.value);
     const isAdmin = ref(isLoggedIn.value && user.value && (user.value.es_Admin === true || user.value.es_Admin === 1 || user.value.es_Admin === '1'));
     const cartItemsCount = ref(cartCount());
-    const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
+    
+const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
+
     const searchTerm = ref('');
     const searchPending = ref(false);
     const searchGamesLoading = ref(true);
@@ -28,6 +30,13 @@ export default {
           .some(value => String(value || '').toLocaleLowerCase('es').includes(query))
       ).slice(0, 6);
     });
+    function navigateSearch(query) {
+      const path = router.currentRoute.value.path === '/tienda' ? '/tienda' : '/';
+      const current = String(router.currentRoute.value.query.buscar || '');
+      if (query === current && router.currentRoute.value.path === path) return;
+      router.push({ path, query: query ? { buscar: query } : {} });
+    }
+
     function updateSearchTerm(query) {
       clearTimeout(searchDebounceTimer);
       const normalizedQuery = query.trim();
@@ -40,7 +49,7 @@ export default {
       searchDebounceTimer = setTimeout(() => {
         searchTerm.value = normalizedQuery;
         searchPending.value = false;
-      }, 250);
+      }, 1000);
     }
 
     function handleSearchInput() {
@@ -48,7 +57,7 @@ export default {
     }
     const isAuthPage = computed(() => ['/login', '/registro'].includes(router.currentRoute.value.path));
     const isAdminPage = computed(() => router.currentRoute.value.path.startsWith('/admin'));
-    const activeAdminSection = computed(() => router.currentRoute.value.path);
+    const showNavbarSearch = computed(() => router.currentRoute.value.path !== '/tienda');    const activeAdminSection = computed(() => router.currentRoute.value.path);
     const displayName = computed(() => user.value?.nombre || user.value?.Nombre || user.value?.email || user.value?.Email || 'Usuario');
     const userEmail = computed(() => user.value?.email || user.value?.Email || '');
     const userInitial = computed(() => displayName.value.trim().charAt(0).toUpperCase());
@@ -75,32 +84,36 @@ export default {
       if (router.currentRoute.value.path !== path) router.push(path);
     }
 
-    async function navigateToGames() {
-      await router.push('/');
-      window.requestAnimationFrame(() => document.getElementById('juegos')?.scrollIntoView({ behavior: 'smooth' }));
-    }
+
 
     function submitSearch() {
-      const query = searchQuery.value.trim();
-      router.push({ path: '/', query: query ? { buscar: query } : {} });
+      clearTimeout(searchDebounceTimer);
+      searchPending.value = false;
+      searchTerm.value = '';
+      navigateSearch(searchQuery.value.trim());
     }
 
     function openSearchResult(game) {
       searchQuery.value = '';
-      updateSearchTerm('');
+      searchTerm.value = '';
+      searchPending.value = false;
+      clearTimeout(searchDebounceTimer);
       router.push('/juegos/' + game.ID);
     }
 
     function handleSearchKeydown(event) {
       if (event.key === 'Escape') {
         searchQuery.value = '';
-        updateSearchTerm('');
+        searchTerm.value = '';
+        searchPending.value = false;
+        clearTimeout(searchDebounceTimer);
       }
     }
 
     router.afterEach(() => {
       searchQuery.value = String(router.currentRoute.value.query.buscar || '');
-      updateSearchTerm(searchQuery.value);
+      searchTerm.value = '';
+      searchPending.value = false;
     });
     onBeforeUnmount(() => clearTimeout(searchDebounceTimer));
 
@@ -123,7 +136,7 @@ export default {
       .catch(error => console.error('No se pudieron cargar los juegos para la búsqueda:', error))
       .finally(() => { searchGamesLoading.value = false; });
 
-    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchResults, searchLoading, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, navigateToGames, submitSearch, openSearchResult, handleSearchInput, handleSearchKeydown, toggleTheme, logout, refreshAuthState };
+    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchTerm, searchResults, searchLoading, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, submitSearch, openSearchResult, handleSearchInput, handleSearchKeydown, toggleTheme, logout, refreshAuthState, showNavbarSearch };
   },  
   template: `
     <header class="spa-header" :class="{ 'spa-header--landing': !isAuthPage && !isAdminPage }">
@@ -135,15 +148,15 @@ export default {
           <a class="spa-logo navbar-brand" href="/" @click.prevent="navigate('/')"><span class="word1">Indi</span><span class="word2">AR</span></a>
           <ul v-if="!isAuthPage && !isAdminPage" class="navbar-nav navbar-desktop-links d-none d-lg-flex" aria-label="Navegación principal">
             <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.path === '/' && !router.currentRoute.value.hash }" :aria-current="router.currentRoute.value.path === '/' && !router.currentRoute.value.hash ? 'page' : undefined" href="/" @click.prevent="navigate('/')">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.hash === '#juegos' }" :aria-current="router.currentRoute.value.hash === '#juegos' ? 'page' : undefined" href="/#juegos" @click.prevent="navigateToGames">Juegos</a></li>
+            <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.path === '/tienda' }" :aria-current="router.currentRoute.value.path === '/tienda' ? 'page' : undefined" href="/tienda" @click.prevent="navigate('/tienda')">Tienda</a></li>
           </ul>
         </div>
         <div v-if="!isAuthPage && !isAdminPage" class="navbar-tools d-flex align-items-center gap-2">
-          <form class="d-flex navbar-search" role="search" @submit.prevent="submitSearch">
+          <form v-if="showNavbarSearch" class="d-flex navbar-search" role="search" @submit.prevent="submitSearch">
             <label class="visually-hidden" for="navbar-game-search">Buscar juegos</label>
-            <input id="navbar-game-search" v-model="searchQuery" @input="handleSearchInput" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="searchQuery.trim().length > 0" />
+                        <input id="navbar-game-search" v-model="searchQuery" @input="handleSearchInput" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="router.currentRoute.value.path !== '/tienda' && (searchTerm || '').trim().length > 0" />
             <button class="btn" type="submit" aria-label="Buscar"><i class="fas fa-search icon-search"></i></button>
-            <ul v-if="searchQuery.trim()" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
+            <ul v-if="(searchTerm || '').trim() && router.currentRoute.value.path !== '/tienda'" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
               <template v-if="searchLoading"><li v-for="row in 3" :key="'search-skeleton-' + row" class="navbar-search-skeleton" aria-hidden="true"><span class="navbar-search-skeleton-image"></span><span class="navbar-search-skeleton-copy"><span></span><span></span><span></span></span></li></template>
               <template v-if="!searchLoading">
                 <li v-for="game in searchResults" :key="game.ID" role="option">
@@ -186,7 +199,7 @@ export default {
           </ul>
           <ul v-else-if="!isAuthPage" class="navbar-nav me-auto align-items-lg-center d-lg-none">
             <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.path === '/' && !router.currentRoute.value.hash }" :aria-current="router.currentRoute.value.path === '/' && !router.currentRoute.value.hash ? 'page' : undefined" href="/" @click.prevent="navigate('/')">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.hash === '#juegos' }" :aria-current="router.currentRoute.value.hash === '#juegos' ? 'page' : undefined" href="/#juegos" @click.prevent="navigateToGames">Juegos</a></li>
+            <li class="nav-item"><a class="nav-link" :class="{ active: router.currentRoute.value.path === '/tienda' }" :aria-current="router.currentRoute.value.path === '/tienda' ? 'page' : undefined" href="/tienda" @click.prevent="navigate('/tienda')">Tienda</a></li>
             <li v-if="!isLoggedIn" class="nav-item d-lg-none"><a class="nav-link" href="/login" @click.prevent="navigate('/login')">Ingresar</a></li>
             <li v-if="!isLoggedIn" class="nav-item d-lg-none"><a class="nav-link" href="/registro" @click.prevent="navigate('/registro')">Registrarse</a></li>
           </ul>
