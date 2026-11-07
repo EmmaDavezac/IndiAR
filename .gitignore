@@ -34,3 +34,7 @@ Thumbs.db
 
 # Referencias Visuales
 /referencias_visuales
+
+# Build
+dist/
+Frontend/dist/

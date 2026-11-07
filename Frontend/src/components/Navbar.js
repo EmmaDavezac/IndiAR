@@ -33,19 +33,23 @@ const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
     function navigateSearch(query) {
       const path = router.currentRoute.value.path === '/tienda' ? '/tienda' : '/';
       const current = String(router.currentRoute.value.query.buscar || '');
-      if (query === current) return;
+      if (query === current && router.currentRoute.value.path === path) return;
       router.push({ path, query: query ? { buscar: query } : {} });
     }
 
     function updateSearchTerm(query) {
       clearTimeout(searchDebounceTimer);
       const normalizedQuery = query.trim();
-      searchPending.value = !!normalizedQuery;
+      if (!normalizedQuery) {
+        searchTerm.value = '';
+        searchPending.value = false;
+        return;
+      }
+      searchPending.value = true;
       searchDebounceTimer = setTimeout(() => {
         searchTerm.value = normalizedQuery;
         searchPending.value = false;
-        navigateSearch(normalizedQuery);
-      }, 250);
+      }, 1000);
     }
 
     function handleSearchInput() {
@@ -83,25 +87,33 @@ const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
 
 
     function submitSearch() {
+      clearTimeout(searchDebounceTimer);
+      searchPending.value = false;
+      searchTerm.value = '';
       navigateSearch(searchQuery.value.trim());
     }
 
     function openSearchResult(game) {
       searchQuery.value = '';
-      updateSearchTerm('');
+      searchTerm.value = '';
+      searchPending.value = false;
+      clearTimeout(searchDebounceTimer);
       router.push('/juegos/' + game.ID);
     }
 
     function handleSearchKeydown(event) {
       if (event.key === 'Escape') {
         searchQuery.value = '';
-        updateSearchTerm('');
+        searchTerm.value = '';
+        searchPending.value = false;
+        clearTimeout(searchDebounceTimer);
       }
     }
 
     router.afterEach(() => {
       searchQuery.value = String(router.currentRoute.value.query.buscar || '');
-      updateSearchTerm(searchQuery.value);
+      searchTerm.value = '';
+      searchPending.value = false;
     });
     onBeforeUnmount(() => clearTimeout(searchDebounceTimer));
 
@@ -124,7 +136,7 @@ const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
       .catch(error => console.error('No se pudieron cargar los juegos para la búsqueda:', error))
       .finally(() => { searchGamesLoading.value = false; });
 
-    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchResults, searchLoading, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, submitSearch, openSearchResult, handleSearchInput, handleSearchKeydown, toggleTheme, logout, refreshAuthState, showNavbarSearch };
+    return { router, isLoggedIn, isAdmin, cartItemsCount, searchQuery, searchTerm, searchResults, searchLoading, imageUrl, isAuthPage, isAdminPage, activeAdminSection, displayName, userEmail, userInitial, user, theme, navigate, submitSearch, openSearchResult, handleSearchInput, handleSearchKeydown, toggleTheme, logout, refreshAuthState, showNavbarSearch };
   },  
   template: `
     <header class="spa-header" :class="{ 'spa-header--landing': !isAuthPage && !isAdminPage }">
@@ -142,9 +154,9 @@ const searchQuery = ref(String(router.currentRoute.value.query.buscar || ''));
         <div v-if="!isAuthPage && !isAdminPage" class="navbar-tools d-flex align-items-center gap-2">
           <form v-if="showNavbarSearch" class="d-flex navbar-search" role="search" @submit.prevent="submitSearch">
             <label class="visually-hidden" for="navbar-game-search">Buscar juegos</label>
-                        <input id="navbar-game-search" v-model="searchQuery" @input="handleSearchInput" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="router.currentRoute.value.path !== '/tienda' && searchQuery.trim().length > 0" />
+                        <input id="navbar-game-search" v-model="searchQuery" @input="handleSearchInput" @keydown="handleSearchKeydown" type="search" class="form-control" placeholder="Buscar juegos" aria-label="Buscar juegos" aria-autocomplete="list" aria-controls="navbar-search-results" :aria-expanded="router.currentRoute.value.path !== '/tienda' && (searchTerm || '').trim().length > 0" />
             <button class="btn" type="submit" aria-label="Buscar"><i class="fas fa-search icon-search"></i></button>
-            <ul v-if="searchQuery.trim() && router.currentRoute.value.path !== '/tienda'" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
+            <ul v-if="(searchTerm || '').trim() && router.currentRoute.value.path !== '/tienda'" id="navbar-search-results" class="navbar-search-results" role="listbox" aria-label="Resultados de búsqueda" :aria-busy="searchLoading">
               <template v-if="searchLoading"><li v-for="row in 3" :key="'search-skeleton-' + row" class="navbar-search-skeleton" aria-hidden="true"><span class="navbar-search-skeleton-image"></span><span class="navbar-search-skeleton-copy"><span></span><span></span><span></span></span></li></template>
               <template v-if="!searchLoading">
                 <li v-for="game in searchResults" :key="game.ID" role="option">

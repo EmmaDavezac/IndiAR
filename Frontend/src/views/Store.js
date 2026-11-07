@@ -79,31 +79,59 @@ export default {
     <main class="container py-4">
       <h1 class="mb-4">Tienda de Juegos</h1>
 
-      <!-- Filter bar -->
+      <!-- Filtros y navegación -->
+      <div class="row g-3 mb-3 align-items-center">
+        <!-- Sección de navegación/links -->
+        <div class="col-12 col-lg-auto">
+          <div class="d-flex align-items-center flex-wrap gap-2">
+            <a href="/" class="btn btn-outline-primary me-2">Inicio</a>
+            <a href="/tienda" class="btn btn-outline-secondary me-2">Tienda</a>
+            <a href="/contacto" class="btn btn-outline-secondary">Contacto</a>
+          </div>
+        </div>
+
+        <!-- Barra de búsqueda -->
+        <div class="col-12 col-lg">
+          <div class="input-group">
+            <input 
+              class="form-control" 
+              type="text" 
+              placeholder="Buscar juego..."
+              v-model="searchTerm"
+            >
+            <button class="btn btn-outline-secondary" type="button" @click="clearFilters">X</button>
+          </div>
+        </div>
+
+        <!-- Sección de botones -->
+        <div class="col-12 col-lg-auto">
+          <div class="d-flex align-items-center flex-wrap gap-2">
+            <a href="/login" class="btn btn-outline-secondary me-2">Ingresar</a>
+            <a href="/registro" class="btn btn-outline-secondary">Registrarse</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de opciones de filtro -->
       <div class="row g-3 mb-4 align-items-center">
-        <div class="col-sm-4">
-          <input class="form-control" type="search" placeholder="Buscar juego..." v-model="searchTerm" />
-        </div>
-        <div class="col-sm-3">
-          <select class="form-select" v-model="selectedCategory">
-            <option value="">Todas las categorías</option>
-            <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
-          </select>
-        </div>
-        <div class="col-sm-3">
-          <select class="form-select" v-model="priceFilter">
-            <option value="all">Todos los precios</option>
-            <option value="free">Gratis</option>
-            <option value="paid">De pago</option>
-          </select>
-        </div>
-        <div class="col-sm-2 text-end">
-          <select class="form-select mb-2" v-model="sortOption" aria-label="Ordenar">
-            <option value="name">Ordenar por nombre</option>
-            <option value="price">Ordenar por precio</option>
-            <option value="date">Ordenar por fecha</option>
-          </select>
-          <button class="btn btn-outline-secondary w-100" @click="clearFilters">Limpiar</button>
+        <div class="col-12">
+          <div class="d-flex align-items-center flex-wrap gap-2">
+            <select class="form-select me-2" v-model="selectedCategory" style="width: auto;">
+              <option value="">Todas las categorías</option>
+              <option v-for="cat in categories" :key="cat" :value="cat">{{ cat }}</option>
+            </select>
+            <select class="form-select me-2" v-model="priceFilter" style="width: auto;">
+              <option value="all">Todos los precios</option>
+              <option value="free">Gratis</option>
+              <option value="paid">De pago</option>
+            </select>
+            <select class="form-select me-2" v-model="sortOption" style="width: auto;">
+              <option value="name">Ordenar por nombre</option>
+              <option value="price">Ordenar por precio</option>
+              <option value="date">Ordenar por fecha</option>
+            </select>
+            <button class="btn btn-outline-secondary" @click="clearFilters">Limpiar</button>
+          </div>
         </div>
       </div>
 
@@ -111,7 +139,9 @@ export default {
         <div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div>
       </div>
 
-      <div v-else-if="filteredGames.length === 0" class="alert alert-info">No se encontraron juegos con los criterios seleccionados.</div>
+      <div v-else-if="filteredGames.length === 0" class="alert alert-info">
+        No se encontraron juegos con los criterios seleccionados.
+      </div>
 
       <div v-else class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
         <div class="col" v-for="game in filteredGames" :key="game.ID">

@@ -2662,6 +2662,55 @@ box-shadow: var(--shadow-sm, 0 0.125rem 0.75rem rgba(0, 0, 0, .08));
 [data-bs-theme="dark"] .admin-users-shell { background: var(--bs-tertiary-bg) !important; }
 .auth-google { font-weight: 500 !important; }
 
+/* ---- Admin Taxonomy (Géneros y Colecciones) ---- */
+.admin-taxonomy-table {
+  --bs-table-bg: var(--bs-body-bg);
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.admin-taxonomy-table thead th {
+  background: var(--bs-tertiary-bg);
+  color: var(--bs-secondary-color);
+  padding: 0.875rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.admin-taxonomy-table tbody td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.admin-taxonomy-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-taxonomy-name {
+  color: var(--bs-body-color);
+  font-weight: 600;
+}
+
+.admin-taxonomy-dialog {
+  width: min(520px, 100%) !important;
+  height: auto !important;
+  max-height: calc(100dvh - 120px) !important;
+  margin-inline: auto;
+}
+
+.admin-taxonomy-dialog > .card-body {
+  overflow-y: auto;
+}
+
+.admin-taxonomy-summary-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+[data-bs-theme="dark"] .admin-taxonomy-table thead th {
+  background: var(--bs-tertiary-bg);
+  color: var(--bs-secondary-color);
+}
+
 /*BUY CARD */
 .buy-card-container {
   width: 30%;
@@ -2682,7 +2731,6 @@ box-shadow: var(--shadow-sm, 0 0.125rem 0.75rem rgba(0, 0, 0, .08));
   height: 504px;
 }
 
-	text-align: justify;
 .buy-card .game-price {
   color: #333;
 }

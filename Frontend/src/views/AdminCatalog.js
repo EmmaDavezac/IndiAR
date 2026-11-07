@@ -1,4 +1,4 @@
-import { computed, onUnmounted, ref } from '../../assets/js/lib/vue-esm.js';
+import { computed, onUnmounted, ref, watch } from '../../assets/js/lib/vue-esm.js';
 import { getCategorias, getColecciones, saveTaxonomy, deleteResource } from '../services/api.js';
 import { confirmAction } from '../services/confirm.js';
 
@@ -87,33 +87,56 @@ export default {
     };
     window.__indiarNavigationDirtyCheck = navigationCheck;
     onUnmounted(() => { if (window.__indiarNavigationDirtyCheck === navigationCheck) delete window.__indiarNavigationDirtyCheck; setModalScroll(false); });
+    watch(() => props.type, () => {
+      clearForm();
+      selectedItem.value = null;
+      searchText.value = '';
+      resetPage();
+      load();
+    });
     load();
-    return { items, nombre, editingId, showForm, selectedItem, warning, loading, searchText, page, pages, paginatedItems, filteredItems, singular, title, type: props.type, newLabel, itemNoun, openNew, openDetails, closeDetails, edit, cancel, save, remove, resetPage, changePage };
+    return { items, nombre, editingId, showForm, selectedItem, warning, loading, searchText, page, pages, pageSize, paginatedItems, filteredItems, singular, title, type: props.type, newLabel, itemNoun, openNew, openDetails, closeDetails, edit, cancel, save, remove, resetPage, changePage };
   },
   template: `
     <main class="admin-page"><div class="container-fluid px-3 px-lg-4 py-4 py-lg-5">
       <div class="admin-games-shell">
         <div class="admin-games-page-header"><div><h1 class="h2 mb-1">Gestión de {{ title.toLowerCase() }}</h1><p class="text-secondary mb-0">Buscá, consultá y administrá {{ title.toLowerCase() }} desde un solo lugar.</p></div><button v-if="!showForm" type="button" class="btn btn-primary" @click="openNew"><i class="fa-solid fa-plus me-2" aria-hidden="true"></i>{{ newLabel }}</button></div>
         <div class="admin-games-toolbar card border-0 mb-3"><div class="card-body"><div class="w-100"><label class="visually-hidden" for="taxonomy-search">Buscar {{ title.toLowerCase() }}</label><input id="taxonomy-search" v-model="searchText" @input="resetPage" class="form-control" type="search" :placeholder="'Buscar ' + title.toLowerCase()"></div></div></div>
-        <div class="admin-taxonomy-listing card border-0">
-          <div v-if="loading" class="admin-taxonomy-empty text-secondary">Cargando {{ title.toLowerCase() }}...</div>
-          <div v-else-if="!filteredItems.length" class="admin-taxonomy-empty text-secondary">{{ searchText ? 'No hay resultados para esa búsqueda.' : 'Todavía no hay ' + title.toLowerCase() + '.' }}</div>
-          <div v-else class="admin-taxonomy-grid">
-            <article v-for="item in paginatedItems" :key="item.ID" class="admin-taxonomy-card">
-              <div class="admin-taxonomy-card-icon" aria-hidden="true"><i :class="type === 'categorias' ? 'fa-solid fa-shapes' : 'fa-solid fa-layer-group'"></i></div>
-              <div class="admin-taxonomy-card-copy"><h2>{{ item.nombre }}</h2><span>#{{ item.ID }}</span></div>
-              <div class="admin-taxonomy-card-actions">
-                <button class="btn btn-sm btn-outline-primary" type="button" :aria-label="'Ver ' + itemNoun + ' ' + item.nombre" @click="openDetails(item)"><i class="fa-regular fa-eye me-sm-1" aria-hidden="true"></i><span>Ver</span></button>
-                <button class="btn btn-sm btn-outline-secondary" type="button" :aria-label="'Editar ' + itemNoun + ' ' + item.nombre" @click="edit(item)"><i class="fa-solid fa-pen" aria-hidden="true"></i><span class="d-none d-sm-inline ms-sm-1">Editar</span></button>
-                <button class="btn btn-sm btn-outline-danger" type="button" :aria-label="'Eliminar ' + itemNoun + ' ' + item.nombre" @click="remove(item)"><i class="fa-regular fa-trash-can" aria-hidden="true"></i><span class="d-none d-sm-inline ms-sm-1">Eliminar</span></button>
-              </div>
-            </article>
+        <div class="admin-games-table-card card border-0">
+          <div class="table-responsive">
+            <table class="table admin-taxonomy-table align-middle mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">ID</th>
+                  <th>{{ singular }}</th>
+                  <th class="text-end" style="width: 260px;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-if="loading"><td colspan="3" class="text-center py-5 text-secondary"><div class="spinner-border spinner-border-sm me-2" role="status"></div>Cargando {{ title.toLowerCase() }}...</td></tr>
+                <tr v-else-if="!filteredItems.length"><td colspan="3" class="text-center text-secondary py-5">{{ searchText ? 'No hay resultados para esa búsqueda.' : 'Todavía no hay ' + title.toLowerCase() + '.' }}</td></tr>
+                <tr v-else v-for="item in paginatedItems" :key="item.ID">
+                  <td><span class="badge text-bg-secondary">#{{ item.ID }}</span></td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2">
+                      <i :class="type === 'categorias' ? 'fa-solid fa-shapes text-primary' : 'fa-solid fa-layer-group text-primary'" aria-hidden="true"></i>
+                      <strong class="admin-taxonomy-name">{{ item.nombre }}</strong>
+                    </div>
+                  </td>
+                  <td class="text-end text-nowrap">
+                    <button class="btn btn-sm btn-outline-primary me-1" type="button" :aria-label="'Ver ' + itemNoun + ' ' + item.nombre" @click="openDetails(item)"><i class="fa-regular fa-eye me-1" aria-hidden="true"></i><span>Ver</span></button>
+                    <button class="btn btn-sm btn-outline-secondary me-1" type="button" :aria-label="'Editar ' + itemNoun + ' ' + item.nombre" @click="edit(item)"><i class="fa-solid fa-pen me-1" aria-hidden="true"></i><span>Editar</span></button>
+                    <button class="btn btn-sm btn-outline-danger" type="button" :aria-label="'Eliminar ' + itemNoun + ' ' + item.nombre" @click="remove(item)"><i class="fa-regular fa-trash-can me-1" aria-hidden="true"></i><span>Eliminar</span></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div v-if="filteredItems.length" class="admin-games-pagination d-flex flex-wrap align-items-center justify-content-between gap-3"><span class="small text-secondary">Mostrando {{ (page - 1) * 10 + 1 }}–{{ Math.min(page * 10, filteredItems.length) }} de {{ filteredItems.length }}</span><nav :aria-label="'Paginación de ' + title"><ul class="pagination pagination-sm mb-0"><li class="page-item" :class="{disabled: page === 1}"><button class="page-link" type="button" :disabled="page === 1" @click="changePage(page - 1)">Anterior</button></li><li v-for="p in pages" :key="p" class="page-item" :class="{active: page === p}"><button class="page-link" type="button" @click="changePage(p)">{{ p }}</button></li><li class="page-item" :class="{disabled: page === pages}"><button class="page-link" type="button" :disabled="page === pages" @click="changePage(page + 1)">Siguiente</button></li></ul></nav></div>
+          <div v-if="filteredItems.length" class="admin-games-pagination d-flex flex-wrap align-items-center justify-content-between gap-3"><span class="small text-secondary">Mostrando {{ (page - 1) * pageSize + 1 }}–{{ Math.min(page * pageSize, filteredItems.length) }} de {{ filteredItems.length }}</span><nav :aria-label="'Paginación de ' + title"><ul class="pagination pagination-sm mb-0"><li class="page-item" :class="{disabled: page === 1}"><button class="page-link" type="button" :disabled="page === 1" @click="changePage(page - 1)">Anterior</button></li><li v-for="p in pages" :key="p" class="page-item" :class="{active: page === p}"><button class="page-link" type="button" @click="changePage(p)">{{ p }}</button></li><li class="page-item" :class="{disabled: page === pages}"><button class="page-link" type="button" :disabled="page === pages" @click="changePage(page + 1)">Siguiente</button></li></ul></nav></div>
         </div>
       </div>
-      <div v-if="showForm" class="admin-game-detail-backdrop" @click.self="cancel"><section class="admin-game-detail-window card border-0 shadow-lg" role="dialog" aria-modal="true" :aria-label="'Formulario de ' + itemNoun"><div class="card-body p-4"><div class="d-flex justify-content-between align-items-start gap-3 mb-4"><div><span class="text-secondary small">Gestión de {{ title.toLowerCase() }}</span><h2 class="h4 mb-0">{{ editingId ? 'Editar ' + itemNoun : newLabel }}</h2></div><button type="button" class="btn-close" aria-label="Cerrar" @click="cancel"></button></div><form @submit.prevent="save"><div class="admin-game-field-full"><label class="form-label" for="taxonomy-name">Nombre *</label><input id="taxonomy-name" v-model="nombre" class="form-control" required maxlength="100" :placeholder="'Nombre del ' + itemNoun"></div><div v-if="warning" class="alert alert-danger mt-3 mb-0 py-2">{{ warning }}</div><div class="admin-game-form-actions mt-4"><button class="btn btn-primary ms-auto" type="submit">{{ editingId ? 'Guardar cambios' : 'Crear ' + itemNoun }}</button><button class="btn btn-outline-secondary" type="button" @click="cancel">Cancelar</button></div></form></div></section></div>
-      <div v-if="selectedItem" class="admin-game-detail-backdrop" @click.self="closeDetails"><section class="admin-game-detail-window admin-user-detail-window card border-0 shadow-lg" role="dialog" aria-modal="true" :aria-label="'Detalles de ' + singular.toLowerCase()"><div class="card-body p-4"><div class="d-flex justify-content-between align-items-start gap-3 mb-4"><div><span class="text-secondary small">Detalles de {{ singular.toLowerCase() }}</span><h2 class="h4 mb-0">{{ selectedItem.nombre }}</h2></div><button type="button" class="btn-close" aria-label="Cerrar" @click="closeDetails"></button></div><section class="admin-game-summary-grid mb-0"><div><span>Nombre</span><strong>{{ selectedItem.nombre }}</strong></div><div><span>ID</span><strong>{{ selectedItem.ID }}</strong></div></section><div v-if="warning" class="alert alert-info mt-3 mb-0">{{ warning }}</div><div class="admin-game-detail-actions mt-4"><button class="btn btn-outline-primary" type="button" @click="edit(selectedItem)">Editar</button><button class="btn btn-outline-danger" type="button" @click="remove(selectedItem)">Eliminar</button></div></div></section></div>
+      <div v-if="showForm" class="admin-game-detail-backdrop" @click.self="cancel"><section class="admin-game-detail-window admin-taxonomy-dialog card border-0 shadow-lg" role="dialog" aria-modal="true" :aria-label="'Formulario de ' + itemNoun"><div class="card-body p-4"><div class="d-flex justify-content-between align-items-start gap-3 mb-4"><div><span class="text-secondary small">Gestión de {{ title.toLowerCase() }}</span><h2 class="h4 mb-0">{{ editingId ? 'Editar ' + itemNoun : newLabel }}</h2></div><button type="button" class="btn-close" aria-label="Cerrar" @click="cancel"></button></div><form @submit.prevent="save"><div class="admin-game-field-full"><label class="form-label" for="taxonomy-name">Nombre *</label><input id="taxonomy-name" v-model="nombre" class="form-control" required maxlength="100" :placeholder="'Nombre del ' + itemNoun"></div><div v-if="warning" class="alert alert-danger mt-3 mb-0 py-2">{{ warning }}</div><div class="admin-game-form-actions mt-4"><button class="btn btn-primary ms-auto" type="submit">{{ editingId ? 'Guardar cambios' : 'Crear ' + itemNoun }}</button><button class="btn btn-outline-secondary" type="button" @click="cancel">Cancelar</button></div></form></div></section></div>
+      <div v-if="selectedItem" class="admin-game-detail-backdrop" @click.self="closeDetails"><section class="admin-game-detail-window admin-taxonomy-dialog card border-0 shadow-lg" role="dialog" aria-modal="true" :aria-label="'Detalles de ' + singular.toLowerCase()"><div class="card-body p-4"><div class="d-flex justify-content-between align-items-start gap-3 mb-4"><div><span class="text-secondary small">Detalles de {{ singular.toLowerCase() }}</span><h2 class="h4 mb-0">{{ selectedItem.nombre }}</h2></div><button type="button" class="btn-close" aria-label="Cerrar" @click="closeDetails"></button></div><section class="admin-game-summary-grid admin-taxonomy-summary-grid mb-0"><div><span>Nombre</span><strong>{{ selectedItem.nombre }}</strong></div><div><span>ID</span><strong>{{ selectedItem.ID }}</strong></div></section><div v-if="warning" class="alert alert-info mt-3 mb-0">{{ warning }}</div><div class="admin-game-detail-actions mt-4"><button class="btn btn-outline-primary" type="button" @click="edit(selectedItem)">Editar</button><button class="btn btn-outline-danger" type="button" @click="remove(selectedItem)">Eliminar</button></div></div></section></div>
     </div></main>
   `
 };
